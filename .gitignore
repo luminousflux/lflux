@@ -1,0 +1,7 @@
+*.pyc
+~*
+*.swp
+.pbundle
+lfluxproject/localsettings.py
+lfluxproject/test.db
+
