@@ -4,9 +4,8 @@ from taggit.managers import TaggableManager
 import reversion
 
 class Story(models.Model):
-    title = models.TextField()
+    title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
-
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -14,11 +13,21 @@ class Story(models.Model):
     authors = models.ManyToManyField(User)
 
     timeframe_start = models.DateField(null=True)
-    timeframe_end = models.DateField(null=True)
+    timeframe_end = models.DateField(null=True, blank=True)
 
-    region = models.TextField(null=True)
+    region = models.CharField(max_length=255)
 
-    tags = TaggableManager()
+    body = models.TextField()
+
+
+
+    tags = TaggableManager(blank=True)
+
+    def __unicode__(self):
+        return "%s%s" % (self.title, ' /unpublished' if not self.published else '')
+
+    class Meta:
+        verbose_name_plural = 'Stories'
 
 reversion.register(Story)
 
