@@ -137,6 +137,7 @@ INSTALLED_APPS = (
     'taggit',
     'reversion',
     'lstory',
+    'lhighlight',
 )
 
 # A sample logging configuration. The only tangible logging

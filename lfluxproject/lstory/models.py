@@ -29,5 +29,9 @@ class Story(models.Model):
     class Meta:
         verbose_name_plural = 'Stories'
 
-reversion.register(Story)
+try:
+    reversion.register(Story)
+except reversion.revisions.RegistrationError, e:
+    if not unicode(e).endswith('has already been registered with django-reversion'):
+        raise
 
