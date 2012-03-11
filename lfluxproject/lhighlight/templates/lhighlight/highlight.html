@@ -1,4 +1,13 @@
 {% load markup %}
+<style>
+    .ins, ins {
+        background-color: yellow;
+    }
+</style>
+
+{% for date,changed in versiondates %}
+{% if changed %}<b><a href="?since={{date.isoformat}}">|</a></b>{% else %}.{% endif %}
+{% endfor %}<br />
 
 {{current.title}}
 

@@ -13,7 +13,7 @@ class InsParagraphProcessor(Treeprocessor):
         for child in root:
             if (child.text or '').strip().startswith('.ins'):
                 child.set('class', 'ins')
-                child.text.replace('.ins','')
+                child.text = child.text.strip()[5:]
             else:
                 self.run(child)
         return root

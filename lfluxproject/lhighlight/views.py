@@ -3,6 +3,7 @@ from django.template import RequestContext
 import reversion
 import overdiff
 from datetime import datetime, timedelta
+from reversion.models import Version
 
 import pdb
 import markdown
@@ -21,8 +22,12 @@ def serve_highlighted_text(request, slug, model, field_to_diff, sessionvar, temp
     if not hasattr(obj, field_to_diff):
         raise Exception("the selected object does not have a %s field" % field_to_diff)
 
-    fromdate = _parse_iso_datetime(request.session.get(sessionvar, unicode(datetime.now().isoformat())))
-    fromdate = fromdate - timedelta(days=10)
+    fromdate = None
+    fromdate = request.GET.get('since', None)
+    fromdate = request.session.get(sessionvar, None) if not fromdate else fromdate
+    fromdate = unicode(datetime.now().isoformat()) if not fromdate else fromdate
+    fromdate = _parse_iso_datetime(fromdate) if fromdate else None
+
 
     todate = datetime.now()
 
@@ -42,11 +47,26 @@ def serve_highlighted_text(request, slug, model, field_to_diff, sessionvar, temp
         field_diffs.append(overdiff.selection_to_s(current_field_pars[i], field_diff_data[i]))
     field_diff = '\n\n'.join(field_diffs)
 
+    dates = []
+    tmpdate = obj.published
+    tmpversion = None
+    while tmpdate < datetime.now():
+        tmpversion2 = None
+        try:
+            tmpversion2 = reversion.get_for_date(obj, tmpdate)
+        except Version.DoesNotExist:
+            pass
+        changed = (tmpversion != tmpversion2)
+        dates.append((tmpversion2.revision.date_created if tmpversion2 else tmpdate, changed,))
+        tmpdate += timedelta(days=1)
+        tmpversion = tmpversion2
+
     return render_to_response(template, {
         'current': current,
         'previous': previous,
         'field_diff': field_diff,
         'fromdate': fromdate,
         'todate': todate,
+        'versiondates': dates,
         }, context_instance=RequestContext(request))
 
