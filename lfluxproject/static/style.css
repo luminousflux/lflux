@@ -1,0 +1,19 @@
+body {
+    font-size: 16px;
+    line-height: 1.5em;
+    color: #0e0e0e;
+    font-family: Georgia;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+}
+section#footer {
+    margin-top: 2em;
+    border-top: 1px solid black;
+    padding-top: 1em;
+}
+
+ins, .ins {
+    background-color: #ffb;
+}

@@ -1,9 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
 {% load markup %}
-<style>
-    .ins, ins {
-        background-color: yellow;
-    }
-</style>
 
 {% for date,changed in versiondates %}
 {% if changed %}<b><a href="?since={{date.isoformat}}">|</a></b>{% else %}.{% endif %}
@@ -16,5 +13,8 @@ between {{fromdate}} and {{todate}}
 
 <hr/>
 
-{{ field_diff|markdown:"extra,insparagraph" }}
+<pre>{{field_diff}}</pre>
+-----
 
+{{ field_diff|markdown:"extra,insparagraph" }}
+{% endblock %}
