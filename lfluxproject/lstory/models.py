@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
+from ltools.managers import VersionManagerAccessor
 import reversion
 
 class Story(models.Model):
@@ -22,6 +23,8 @@ class Story(models.Model):
 
 
     tags = TaggableManager(blank=True)
+
+    versions = VersionManagerAccessor()
 
     def __unicode__(self):
         return "%s%s" % (self.title, ' /unpublished' if not self.published else '')
