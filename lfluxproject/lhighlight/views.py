@@ -1,7 +1,6 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 import reversion
-import overdiff
 from datetime import datetime, timedelta
 from reversion.models import Version
 
@@ -31,32 +30,23 @@ def serve_highlighted_text(request, slug, model, field_to_diff, sessionvar, temp
 
     todate = datetime.now()
 
-    current = reversion.get_for_date(obj, todate).field_dict
-    previous = reversion.get_for_date(obj, fromdate).field_dict
+    current = obj.versions.for_date(todate)
+    previous = obj.versions.for_date(fromdate)
 
-    current_field = current[field_to_diff].replace('\r','')
-    previous_field = previous[field_to_diff].replace('\r','')
-
-    current_field_pars = current_field.split('\n\n')
-    previous_field_pars = previous_field.split('\n\n')
-
-    field_diff_data = list(overdiff.overdiff(previous_field_pars, current_field_pars))
-    field_diffs = []
-
-    for i in xrange(0,len(field_diff_data)):
-        field_diffs.append(overdiff.selection_to_s(current_field_pars[i], field_diff_data[i]))
-    field_diff = '\n\n'.join(field_diffs)
+    field_diff = current.diff_to_older(previous)
 
     dates = []
     tmpdate = obj.published
     tmpversion = None
     while tmpdate < datetime.now():
-        tmpversion2 = None
+        tmpobj2 = None
         try:
-            tmpversion2 = reversion.get_for_date(obj, tmpdate)
+            tmpobj2 = obj.versions.for_date(tmpdate)
         except Version.DoesNotExist:
-            pass
-        changed = (tmpversion != tmpversion2)
+            tmpdate += timedelta(days=1)
+            continue
+        tmpversion2 = tmpobj2._version
+        changed = tmpversion != tmpversion2
         dates.append((tmpversion2.revision.date_created if tmpversion2 else tmpdate, changed,))
         tmpdate += timedelta(days=1)
         tmpversion = tmpversion2

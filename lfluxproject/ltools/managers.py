@@ -35,6 +35,14 @@ class VersionManagerAccessor(object):
                 ret = self._proxify_object(retval)
             return  ret
 
+        def _generate_accessor(self, name, methodname):
+            setattr(self, name,
+                    lambda *args, **kwargs:
+                    self._proxify_object_s(
+                        getattr(reversion, methodname)(self.obj, *args, **kwargs)
+                        )
+                    )
+
 
         def __init__(self, obj, cls):
             self.obj = obj
@@ -43,12 +51,8 @@ class VersionManagerAccessor(object):
             methods = {'list': 'get_for_object',
                        'for_date': 'get_for_date',
                       }
-            for key,value in methods.iteritems():
-                setattr(self, key,
-                        lambda *args, **kwargs: self._proxify_object_s(
-                            getattr(reversion, value)(self.obj, *args, **kwargs)
-                            )
-                        )
+            for name,methodname in methods.iteritems():
+                self._generate_accessor(name, methodname)
 
     def __get__(self, instance, owner):
         if not instance:
