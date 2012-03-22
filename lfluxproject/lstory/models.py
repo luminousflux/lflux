@@ -29,6 +29,9 @@ class Story(models.Model):
     class Meta:
         verbose_name_plural = 'Stories'
 
+    def get_absolute_url(self):
+        return 'bullshit!'
+
 try:
     reversion.register(Story)
 except reversion.revisions.RegistrationError, e:
