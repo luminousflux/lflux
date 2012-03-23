@@ -45,7 +45,7 @@ class Story(models.Model):
         field_diffs = []
 
         for i in xrange(0,len(field_diff_data)):
-            field_diffs.append(overdiff.selection_to_s(self.body_pars[i], field_diff_data[i]))
+            field_diffs.append(overdiff.selection_to_s(self.body_pars[i], field_diff_data[i], markdown=True))
         field_diff = '\n\n'.join(field_diffs)
         return field_diff
 
