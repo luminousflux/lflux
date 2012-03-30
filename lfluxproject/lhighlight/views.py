@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 import reversion
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from reversion.models import Version
 
 import pdb
@@ -38,6 +38,9 @@ def serve_highlighted_text(request, slug, model, field_to_diff, sessionvar, temp
     dates = []
     tmpdate = obj.published
     tmpversion = None
+
+    request.session[sessionvar] = datetime.now().isoformat()
+
     while tmpdate < datetime.now():
         tmpobj2 = None
         try:
