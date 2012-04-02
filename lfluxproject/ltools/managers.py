@@ -23,6 +23,7 @@ class VersionManagerAccessor(object):
             ret = self.cls()
             ret.__dict__.update(version.field_dict)
             ret._version = version
+            ret.ltools_versiondate = version.revision.date_created
             return ret
 
         def _proxify_object_s(self, retval):

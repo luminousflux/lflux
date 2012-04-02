@@ -2,8 +2,14 @@
 {% block content %}
 {% load markup %}
 
-{% for date,changed in versiondates %}
-{% if changed %}<b><a href="?since={{date.isoformat}}">|</a></b>{% else %}.{% endif %}
+{% for date,changeddates in versiondates %}
+{% if not changeddates %}
+.
+{% else %}
+{% for story in changeddates %}
+    <a href="?since={{story.ltools_versiondate.isoformat}}">|</a>
+{% endfor %}
+{% endif %}
 {% endfor %}<br />
 
 {{current.title}}
@@ -13,8 +19,6 @@ between {{fromdate}} and {{todate}}
 
 <hr/>
 
-<pre>{{field_diff}}</pre>
------
 
 {{ field_diff|markdown:"extra,insparagraph" }}
 {% endblock %}
