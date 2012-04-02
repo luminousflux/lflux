@@ -24,7 +24,6 @@ class InsParagraphPreprocessor(Preprocessor):
     def run(self, lines):
         BLOCKCHARS = ('=','>','*','+','-','#',)
         newlines = []
-        print lines
         
         for line in lines:
             if line.startswith('.ins ') and len(line)>6 and (line[4] in BLOCKCHARS or line[5] in BLOCKCHARS):
@@ -32,11 +31,9 @@ class InsParagraphPreprocessor(Preprocessor):
                 while len(line) > idx+1 and line[idx] in BLOCKCHARS:
                     idx+=1
                 newline = line[5:idx] + ' .ins ' + line[idx:]
-                print newline
                 newlines.append(newline)
             else:
                 newlines.append(line)
-        print newlines
         return newlines
 
         
