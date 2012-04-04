@@ -9,6 +9,6 @@ urlpatterns = patterns('',
         'model':Story,
         'field_to_diff': 'body',
         'sessionvar': 'lstory_%s',
-        }, name='home'),
+        }, name='story'),
 )
 

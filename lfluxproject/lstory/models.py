@@ -33,8 +33,9 @@ class Story(models.Model):
     class Meta:
         verbose_name_plural = 'Stories'
 
+    @models.permalink
     def get_absolute_url(self):
-        return 'bullshit!'
+        return ('story', [self.slug],)
 
     @property
     def body_pars(self):
