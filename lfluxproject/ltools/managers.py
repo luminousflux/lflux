@@ -1,5 +1,6 @@
-import reversion
 from django.db.models import signals
+from datetime import datetime, timedelta, date
+import reversion
 
 
 ''' convenience methods for reversion-backed models '''
@@ -54,6 +55,25 @@ class VersionManagerAccessor(object):
                       }
             for name,methodname in methods.iteritems():
                 self._generate_accessor(name, methodname)
+
+        def by_date(self):
+            dates = []
+            lastdate = None
+            vs = self.obj.versions.list()
+            vs.sort(key=lambda x: x.ltools_versiondate)
+            for versionstory in vs:
+                revision = versionstory._version.revision
+                if lastdate:
+                    while lastdate < revision.date_created.date():
+                        lastdate += timedelta(days=1)
+                        dates.append((lastdate, [],))
+                lastdate = revision.date_created.date()
+                if not dates or dates[-1] != lastdate:
+                    dates.append((lastdate,[],))
+                dates[-1][1].append(versionstory)
+            return dates
+
+
 
     def __get__(self, instance, owner):
         if not instance:

@@ -22,6 +22,10 @@ def index(request, template='lstory/index.html'):
         'stories': stories,
         }, context_instance=RequestContext(request))
 
+def story(request, slug):
+    pass
+
+
 
 def serve_highlighted_text(request, slug, model, field_to_diff, sessionvar, template='lstory/highlight.html'):
     obj = get_object_or_404(model, slug=slug)
@@ -48,21 +52,8 @@ def serve_highlighted_text(request, slug, model, field_to_diff, sessionvar, temp
     request.session[sessionvar] = datetime.now().isoformat()
 
 
-    
-    dates = []
-    lastdate = None
-    vs = obj.versions.list()
-    vs.sort(key=lambda x: x.ltools_versiondate)
-    for versionstory in vs:
-        revision = versionstory._version.revision
-        if lastdate:
-            while lastdate < revision.date_created.date():
-                lastdate += timedelta(days=1)
-                dates.append((lastdate, [],))
-        lastdate = revision.date_created.date()
-        if not dates or dates[-1] != lastdate:
-            dates.append((lastdate,[],))
-        dates[-1][1].append(versionstory)
+
+    dates = obj.versions.by_date()
 
     return render_to_response(template, {
         'current': current,
