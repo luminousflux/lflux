@@ -17,6 +17,5 @@ urlpatterns = patterns('',
 
     url('^markdown/', include( 'django_markdown.urls')),
     
-    url('^story/', include('lfluxproject.lhighlight.urls')),
-    url('^feed/', include('lfluxproject.lstory.urls')),
+    url('^story/', include('lfluxproject.lstory.urls')),
 )
