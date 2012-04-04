@@ -3,6 +3,7 @@ from django.template import RequestContext
 import reversion
 from datetime import datetime, timedelta, date
 from reversion.models import Version
+from models import Story
 
 import pdb
 import markdown
@@ -14,6 +15,13 @@ def _parse_iso_datetime(s) :
         return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S")
     except ValueError :
         return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%f")
+
+def index(request, template='lstory/index.html'):
+    stories = Story.objects.filter(published__isnull=False)
+    return render_to_response(template, {
+        'stories': stories,
+        }, context_instance=RequestContext(request))
+
 
 def serve_highlighted_text(request, slug, model, field_to_diff, sessionvar, template='lstory/highlight.html'):
     obj = get_object_or_404(model, slug=slug)

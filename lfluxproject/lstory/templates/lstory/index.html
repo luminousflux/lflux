@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for story in stories %}
+ <hr />
+ <h1><a href="{{story.get_absolute_url}}">{{story.title}}</a></h1>
+{% endfor %}
+{% endblock %}

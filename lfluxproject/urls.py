@@ -18,4 +18,5 @@ urlpatterns = patterns('',
     url('^markdown/', include( 'django_markdown.urls')),
     
     url('^story/', include('lfluxproject.lstory.urls')),
+    url('^$', 'lstory.views.index'),
 )
