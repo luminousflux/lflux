@@ -22,8 +22,15 @@ def index(request, template='lstory/index.html'):
         'stories': stories,
         }, context_instance=RequestContext(request))
 
-def story(request, slug):
-    pass
+def version(request, slug, date, template='lstory/version.html'):
+    obj = Story.objects.get(slug=slug)
+    date = _parse_iso_datetime(date)
+    version = obj.versions.for_date(date)
+
+    return render_to_response(template, {
+        'current': version,
+        'date': date,
+        }, context_instance=RequestContext(request))
 
 
 
@@ -53,14 +60,11 @@ def serve_highlighted_text(request, slug, model, field_to_diff, sessionvar, temp
 
 
 
-    dates = obj.versions.by_date()
-
     return render_to_response(template, {
         'current': current,
         'previous': previous,
         'field_diff': field_diff,
         'fromdate': fromdate,
         'todate': todate,
-        'versiondates': dates,
         }, context_instance=RequestContext(request))
 

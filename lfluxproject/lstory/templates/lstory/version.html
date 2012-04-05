@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load markup %}
+
+<h1>{{current.title}}</h1>
+at {{ date }}
+
+<hr />
+{{ current.body|markdown:"extra,insparagraph" }}
+{% endblock %}
