@@ -37,6 +37,12 @@ class Story(models.Model):
     def get_absolute_url(self):
         return ('story', [self.slug],)
 
+    @models.permalink
+    def get_version_url(self):
+        if not hasattr(self, '_version'):
+            return ('story', [self.slug],)
+        return ('storyversion', [self.slug, self.ltools_versiondate.isoformat()],)
+
     @property
     def body_pars(self):
         return self.body.replace('\r','').split('\n\n')
