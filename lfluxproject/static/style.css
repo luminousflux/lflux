@@ -17,3 +17,7 @@ section#footer {
 ins, .ins {
     background-color: #ffb;
 }
+
+div.history {
+    font-size: .25em;
+}
