@@ -13,7 +13,10 @@ class InsParagraphProcessor(Treeprocessor):
     def run(self, root):
         for child in root:
             if (child.text or '').strip().startswith('.ins'):
-                child.set('class', 'ins')
+                if root.tag == 'blockquote':  # nested pars. this might apply to more tags.
+                    root.set('class','ins')
+                else:
+                    child.set('class', 'ins')
                 child.text = child.text.strip()[5:]
             else:
                 self.run(child)
@@ -24,7 +27,6 @@ class InsParagraphPreprocessor(Preprocessor):
     def run(self, lines):
         BLOCKCHARS = ('=','>','*','+','-','#',)
         newlines = []
-        
         for line in lines:
             if line.startswith('.ins ') and len(line)>6 and (line[4] in BLOCKCHARS or line[5] in BLOCKCHARS):
                 idx = 5
@@ -37,7 +39,6 @@ class InsParagraphPreprocessor(Preprocessor):
         return newlines
 
         
-
 
 class InsParagraphExtension(Extension):
     def extendMarkdown(self, md, md_globals):
