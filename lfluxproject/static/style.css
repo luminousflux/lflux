@@ -21,3 +21,6 @@ ins, .ins {
 div.history {
     font-size: .25em;
 }
+div.history a {
+    font-size: 4em;
+}
