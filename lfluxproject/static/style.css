@@ -16,6 +16,7 @@ section#footer {
 
 ins, .ins {
     background-color: #ffb;
+    text-decoration: inherit;
 }
 
 div.history {
