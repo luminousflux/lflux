@@ -4,6 +4,7 @@ from taggit.managers import TaggableManager
 from ltools.managers import VersionManagerAccessor
 import reversion
 import overdiff
+from ltools.markdowntools import pars_to_blocks
 
 class Story(models.Model):
     title = models.CharField(max_length=255)
@@ -45,7 +46,9 @@ class Story(models.Model):
 
     @property
     def body_pars(self):
-        return self.body.replace('\r','').split('\n\n')
+        tmp = self.body.replace('\r','').split('\n\n')
+        tmp2 = pars_to_blocks(tmp)
+        return tmp2
 
     def diff_to_older(self, older):
         field_diff_data = list(overdiff.overdiff(older.body_pars, self.body_pars))

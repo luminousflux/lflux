@@ -12,12 +12,12 @@ class InsParagraphProcessor(Treeprocessor):
 
     def run(self, root):
         for child in root:
-            if (child.text or '').strip().startswith('.ins'):
+            if (child.text or '').lstrip().startswith('.ins'):
                 if root.tag == 'blockquote':  # nested pars. this might apply to more tags.
                     root.set('class','ins')
                 else:
                     child.set('class', 'ins')
-                child.text = child.text.strip()[5:]
+                child.text = child.text.lstrip()[5:]
             else:
                 self.run(child)
         return root
