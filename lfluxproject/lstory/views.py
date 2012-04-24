@@ -1,4 +1,5 @@
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import get_object_or_404
+from django.views.generic.simple import direct_to_template
 from django.template import RequestContext
 import reversion
 from datetime import datetime, timedelta, date
@@ -18,19 +19,19 @@ def _parse_iso_datetime(s) :
 
 def index(request, template='lstory/index.html'):
     stories = Story.objects.filter(published__isnull=False)
-    return render_to_response(template, {
+    return direct_to_template(request, template, {
         'stories': stories,
-        }, context_instance=RequestContext(request))
+        })
 
 def version(request, slug, date, template='lstory/version.html'):
     obj = Story.objects.get(slug=slug)
     date = _parse_iso_datetime(date)
     version = obj.versions.for_date(date)
 
-    return render_to_response(template, {
+    return direct_to_template(request, template, {
         'current': version,
         'date': date,
-        }, context_instance=RequestContext(request))
+        })
 
 
 
@@ -60,11 +61,11 @@ def serve_highlighted_text(request, slug, model, field_to_diff, sessionvar, temp
 
 
 
-    return render_to_response(template, {
+    return direct_to_template(request, template, {
         'current': current,
         'previous': previous,
         'field_diff': field_diff,
         'fromdate': fromdate,
         'todate': todate,
-        }, context_instance=RequestContext(request))
+        })
 
