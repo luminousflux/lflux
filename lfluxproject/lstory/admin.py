@@ -1,16 +1,17 @@
 from django.contrib import admin
 from django.db import models
 import reversion
-from django_markdown.widgets import MarkdownWidget
 
 from models import Story
+
+from pagedown.widgets import AdminPagedownWidget
 
 class StoryAdmin(reversion.VersionAdmin):
     prepopulated_fields = {"slug": ("title",)}
     exclude = ('authors',)
 
     formfield_overrides = {
-            models.TextField: {'widget': MarkdownWidget}
+            models.TextField: {'widget': AdminPagedownWidget },
             }
 
     def save_model(self, request, obj, form, change):

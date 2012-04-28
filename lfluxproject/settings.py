@@ -131,11 +131,12 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'django.contrib.markup',
-    'django_markdown',
+    'pagedown',
     'south',
     'taggit',
     'reversion',
     'lstory',
+    'limage',
 )
 
 # A sample logging configuration. The only tangible logging
