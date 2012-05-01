@@ -2,6 +2,7 @@ from django.conf.urls.defaults import patterns, include, url
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -19,3 +20,10 @@ urlpatterns = patterns('',
     url('^image/', include('lfluxproject.limage.urls')),
     url('^$', 'lstory.views.index'),
 )
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT,
+        }),
+   )

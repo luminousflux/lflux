@@ -4,7 +4,8 @@ import reversion
 
 from models import Story
 
-from pagedown.widgets import AdminPagedownWidget
+from limage.widgets import AdminPagedownWidget
+
 
 class StoryAdmin(reversion.VersionAdmin):
     prepopulated_fields = {"slug": ("title",)}
