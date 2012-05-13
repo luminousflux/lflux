@@ -1,6 +1,9 @@
 <div class="history">
-    {% for date,changeddates in current.versions.by_date %}
-    {% if not changeddates %}.{% else %}{% for story in changeddates %}<a href="{{story.get_absolute_url}}?since={{story.ltools_versiondate.isoformat}}">|</a>{% endfor %}
+    {% for date,changeddates in current.versions.by_date %}{%spaceless%}
+    {% if not changeddates %}
+        .
+    {% else %}
+        {% for story in changeddates %}<a href="{{story.get_absolute_url}}?since={{story.ltools_versiondate.isoformat}}">|</a>{% endfor %}
     {% endif %}
-    {% endfor %}
+    {%endspaceless%}{% endfor %}
 </div>
