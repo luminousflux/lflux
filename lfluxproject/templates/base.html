@@ -6,10 +6,12 @@
         <script src="/static/js/jquery-1.7.2.min.js"></script>
     </head>
     <body>
-        {% block content %}
-        {% endblock %}
-        <section id="footer">
+        <div id="page">
+            {% block content %}
+            {% endblock %}
+            <section id="footer">
             luminous flux preview
-        </section>
+            </section>
+        </div>
     </body>
 </html>

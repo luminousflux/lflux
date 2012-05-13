@@ -3,14 +3,16 @@
 {% load markup %}
 
 {% include 'lstory/history.inc.html' %}<br />
-
+<div id="header">
 <h1>{{current.title}}</h1>
+</div>
+<div id="article">
 
 between <a href="{{previous.get_version_url}}">{{fromdate}}</a> and <a href="{{current.get_version_url}}">{{todate}}</a>
 
+<div class="inner">
+    {{ field_diff|markdown:"extra,insparagraph" }}
+</div>
+</div>
 
-<hr/>
-
-
-{{ field_diff|markdown:"extra,insparagraph" }}
 {% endblock %}
