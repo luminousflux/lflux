@@ -34,6 +34,7 @@ def version(request, slug, date, template='lstory/highlight.html'):
     return direct_to_template(request, template, {
         'current': version,
         'date': date,
+        'mode': 'version',
         })
 
 
@@ -73,5 +74,6 @@ def serve_highlighted_text(request, slug, model, field_to_diff, sessionvar, temp
         'field_diff': field_diff,
         'fromdate': fromdate,
         'todate': todate,
+        'mode': 'highlight',
         })
 

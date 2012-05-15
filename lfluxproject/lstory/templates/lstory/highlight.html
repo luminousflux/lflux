@@ -2,17 +2,11 @@
 {% block content %}
 {% load markup %}
 
-{% include 'lstory/history.inc.html' %}<br />
 <div id="header">
 <h1>{{current.title}}</h1>
+{% include 'lstory/history.inc.html' %}<br />
 </div>
 <div id="article">
-
-{% if date %}
-    at {{date}}
-{% else %}
-    between <a href="{{previous.get_version_url}}">{{fromdate}}</a> and <a href="{{current.get_version_url}}">{{todate}}</a>
-{% endif %}
 
 <div class="inner">
     {% if field_diff %}

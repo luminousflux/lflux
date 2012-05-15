@@ -835,9 +835,19 @@
     }
     #footer a { color: #444; }
     .history { display: none; }
-    .historyform input {
+    .historyform input[type=text] {
         border: none;
         display: inline;
+        cursor: pointer;
+        border-bottom: 1px dotted black;
+    }
+    .historyform.highlight .version {
+        display: none;
+    }
+    .historyform.version .highlight {
+        display: none;
+    }
+    .historyform a[rel=switch] {
         cursor: pointer;
     }
     /* #history.active { display: block; } */
