@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.simple import direct_to_template
 from django.template import RequestContext
 import reversion
@@ -15,7 +15,10 @@ def _parse_iso_datetime(s) :
     try :
         return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S")
     except ValueError :
-        return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%f")
+        try:
+            return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%f")
+        except ValueError:
+            return datetime.strptime(s, "%Y-%m-%d")
 
 def index(request, template='lstory/index.html'):
     stories = Story.objects.filter(published__isnull=False)
@@ -23,7 +26,7 @@ def index(request, template='lstory/index.html'):
         'stories': stories,
         })
 
-def version(request, slug, date, template='lstory/version.html'):
+def version(request, slug, date, template='lstory/highlight.html'):
     obj = Story.objects.get(slug=slug)
     date = _parse_iso_datetime(date)
     version = obj.versions.for_date(date)
@@ -43,6 +46,9 @@ def serve_highlighted_text(request, slug, model, field_to_diff, sessionvar, temp
     if not hasattr(obj, field_to_diff):
         raise Exception("the selected object does not have a %s field" % field_to_diff)
 
+    if request.GET.get('date'):
+        return redirect(obj.versions.for_date(_parse_iso_datetime(request.GET['date'])).get_version_url())
+
     fromdate = None
     fromdate = request.GET.get('since', None)
     fromdate = request.session.get(sessionvar, None) if not fromdate else fromdate
@@ -50,7 +56,7 @@ def serve_highlighted_text(request, slug, model, field_to_diff, sessionvar, temp
     fromdate = _parse_iso_datetime(fromdate) if fromdate else None
 
 
-    todate = datetime.now()
+    todate = _parse_iso_datetime(request.GET['until']) if request.GET.get('until') else datetime.now()
 
     current = obj.versions.for_date(todate)
     previous = obj.versions.for_date(fromdate)

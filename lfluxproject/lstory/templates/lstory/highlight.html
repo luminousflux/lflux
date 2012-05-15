@@ -8,10 +8,18 @@
 </div>
 <div id="article">
 
-between <a href="{{previous.get_version_url}}">{{fromdate}}</a> and <a href="{{current.get_version_url}}">{{todate}}</a>
+{% if date %}
+    at {{date}}
+{% else %}
+    between <a href="{{previous.get_version_url}}">{{fromdate}}</a> and <a href="{{current.get_version_url}}">{{todate}}</a>
+{% endif %}
 
 <div class="inner">
+    {% if field_diff %}
     {{ field_diff|markdown:"extra,insparagraph" }}
+    {% else %}
+    {{current.body|markdown:"extra,insparagraph"}}
+    {% endif %}
 </div>
 </div>
 

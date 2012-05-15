@@ -66,7 +66,6 @@ class VersionManagerAccessor(object):
                 if lastdate:
                     while lastdate < revision.date_created.date():
                         lastdate += timedelta(days=1)
-                        dates.append((lastdate, [],))
                 lastdate = revision.date_created.date()
                 if not dates or dates[-1] != lastdate:
                     dates.append((lastdate,[],))

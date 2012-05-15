@@ -1,9 +1,23 @@
 <div class="history">
     {% for date,changeddates in current.versions.by_date %}{%spaceless%}
-    {% if not changeddates %}
-        .
-    {% else %}
-        {% for story in changeddates %}<a href="{{story.get_absolute_url}}?since={{story.ltools_versiondate.isoformat}}">|</a>{% endfor %}
-    {% endif %}
+        {% for story in changeddates %}<a href="{{story.get_absolute_url}}?since={{story.ltools_versiondate.isoformat}}" data-date="{{story.ltools_versiondate.isoformat}}">|</a>{% endfor %}
     {%endspaceless%}{% endfor %}
+</div>
+<div class="historyform">
+    <div class="fromto">
+        <form method="get" action="{{ current.get_absolute_url }}">
+            From 
+            <input name="since" class="since" type="text" value="{% if fromdate%}{{fromdate.date.isoformat}}{% endif %}" />
+            until
+            <input name="until" class="until" type="text" value="{% if todate %}{{todate.date.isoformat}}{% endif %}" />
+            <input type="submit" value="go" />
+        </form>
+    </div>
+    <div class="snapshot">
+        <form method="get" action="{{current.get_absolute_url}}">
+            At
+            <input name="date" class="date" type="text" value="{% if date %}{{date.date.isoformat}}{%endif%}" />
+            <input type="submit" value="go" />
+        </form>
+    </div>
 </div>

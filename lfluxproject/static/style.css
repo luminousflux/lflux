@@ -287,6 +287,7 @@
     
     ins, .ins, #meta a.ins {
       background-color: #ffb;  
+      text-decoration: inherit;
     }
     blockquote.ins, p.ins , ul.ins {
       background-color: inherit;
@@ -833,5 +834,10 @@
       padding-bottom: 7px;
     }
     #footer a { color: #444; }
-    #history { display: none; }
-    #history.active { display: block; }
+    .history { display: none; }
+    .historyform input {
+        border: none;
+        display: inline;
+        cursor: pointer;
+    }
+    /* #history.active { display: block; } */
