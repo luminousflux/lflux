@@ -3,8 +3,11 @@
 {% load markup %}
 
 <div id="header">
-<h1>{{current.title}}</h1>
-{% include 'lstory/history.inc.html' %}<br />
+    <h1>{{current.title}}</h1>
+    <div id="meta">
+        <span class="icon">⌚</span>
+        {% include 'lstory/history.inc.html' %}<br />
+    </div>
 </div>
 <div id="article">
 
