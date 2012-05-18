@@ -16,8 +16,9 @@
             {% if settings.DEMO_MODE %}
                 <div style="color: white; text-align: right; float: right;">
                 demo mode:
-                <a href="{{ settings.LOGIN_URL }}">login</a>
-                <a href="{% url userena.views.signup %}">sign up</a>
+                <a href="{{ settings.LOGIN_URL }}">login</a> | 
+                <a href="{% url userena.views.signup %}">sign up</a> | 
+                <a href="/admin/">admin backend</a>
                 </div>
             {% endif %}
             luminous flux preview
