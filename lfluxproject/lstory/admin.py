@@ -20,3 +20,8 @@ class StoryAdmin(reversion.VersionAdmin):
             obj.authors.add(request.user)
         obj.save()
 admin.site.register(Story, StoryAdmin)
+
+
+class StoryUserAdmin(StoryAdmin):
+    exclude = ('authors','last_update','created','published','timeframe_start','timeframe_end','region',)
+

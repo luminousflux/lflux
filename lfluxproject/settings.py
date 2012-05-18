@@ -135,8 +135,14 @@ INSTALLED_APPS = (
     'south',
     'taggit',
     'reversion',
+
+    'userena',
+    'guardian',  # for userena
+    'easy_thumbnails', # for userena
+
     'lstory',
     'limage',
+    'lprofile',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -162,3 +168,25 @@ LOGGING = {
     }
 }
 
+AUTHENTICATION_BACKENDS = (
+    'userena.backends.UserenaAuthenticationBackend',
+    'guardian.backends.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'lfluxproject.context_processors.settings_processor',
+)
+
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend' # you should change this in your local settings.
+
+
+ANONYMOUS_USER_ID = -1 # required by guardian?
+
+AUTH_PROFILE_MODULE = 'lprofile.Profile'
+LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
+LOGIN_URL = '/accounts/signin/'
+LOGOUT_URL = '/accounts/signout/'
+
+DEMO_MODE = False # make all users admin per default

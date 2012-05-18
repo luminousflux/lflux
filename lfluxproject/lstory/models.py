@@ -7,8 +7,8 @@ import overdiff
 from ltools.markdowntools import pars_to_blocks
 
 class Story(models.Model):
-    title = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True)
+    title = models.CharField(max_length=255, help_text='story title')
+    slug = models.SlugField(unique=True, help_text='named for the story')
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -20,7 +20,7 @@ class Story(models.Model):
 
     region = models.CharField(max_length=255)
 
-    body = models.TextField()
+    body = models.TextField(help_text='markdown-formatted story text')
 
 
 

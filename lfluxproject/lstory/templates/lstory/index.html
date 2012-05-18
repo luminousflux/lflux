@@ -2,6 +2,6 @@
 {% block content %}
 {% for story in stories %}
  <hr />
- <h1><a href="{{story.get_absolute_url}}">{{story.title}}</a></h1>
+ <h1><a href="{{story.get_absolute_url}}">{{story.title}}</a> <span style="font-size: .5em;">by {% for u in story.authors.all %}{{u.username}}{% endfor %}</span></h1>
 {% endfor %}
 {% endblock %}

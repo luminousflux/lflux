@@ -6,4 +6,5 @@ django-taggit
 markdown
 -e git+git://github.com/fin/django-pagedown.git#egg=django-pagedown
 PIL
+django-userena
 
