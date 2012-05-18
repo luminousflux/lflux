@@ -18,9 +18,11 @@ urlpatterns = patterns('',
     
     url('^story/', include('lfluxproject.lstory.urls')),
     url('^image/', include('lfluxproject.limage.urls')),
-    url(r'^accounts/', include('userena.urls')),
     url('^$', 'lstory.views.index'),
 )
+
+if settings.DEMO_MODE:
+    urlpatterns+=patterns('',url(r'^accounts/', include('userena.urls')),)
 
 if settings.DEBUG:
     urlpatterns += patterns('',
