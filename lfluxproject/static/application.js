@@ -25,6 +25,8 @@ function initHistoryView() {
     since.datepicker(options);
     until.datepicker(options);
 
+    $('input.date').datepicker(options);
+
     $('.historyform a[rel=switch]').click(function() {
         $(this).closest('.historyform').each(function(i,e){ $(e).toggleClass('highlight'); $(e).toggleClass('version'); });
     });
