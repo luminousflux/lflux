@@ -4,9 +4,8 @@ lImage_pagedown = {
             $.getJSON(imageurl, function(data, textStatus, jqXHR) {
                 $('#'+dialogdiv).empty();
                 $('#'+dialogdiv).append('<p>to upload images, go to the <a href="/admin/limage/image/">image admin</a> interface. we will fix this soon.</p>')
-                for(var i=0;i<data.length;i++) {
-                    var x =data[i];
-                    console.log(x);
+                for(var i=0;i<data['images'].length;i++) {
+                    var x =data['images'][i];
                     var el = document.createElement('img');
                     $(el).attr('src', x['url']);
                     $(el).attr('style', 'max-width: 100px; max-height: 100px; cursor: pointer;');
@@ -16,9 +15,8 @@ lImage_pagedown = {
                     };
                     $('#'+dialogdiv).append(el);
                 }
-                $(dialogdiv).dialog
             });
-            $('#'+dialogdiv).dialog();
+            $('#'+dialogdiv).dialog({close: function() { $('.wmd-prompt-background').hide(); }});
             return true;
         };
     }

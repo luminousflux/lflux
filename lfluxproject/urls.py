@@ -3,17 +3,15 @@ from django.conf.urls.defaults import patterns, include, url
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 from django.conf import settings
+from lstory.models import Story
+from django.contrib.auth.decorators import login_required
+from limage.views import browse
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'lfluxproject.views.home', name='home'),
-    # url(r'^lfluxproject/', include('lfluxproject.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-    # Uncomment the next line to enable the admin:
+    url(r'^admin/lstory/story/(?P<id>[^/]+)/images/', login_required(browse), {'model': Story},),
     url(r'^admin/', include(admin.site.urls)),
     
     url('^story/', include('lfluxproject.lstory.urls')),

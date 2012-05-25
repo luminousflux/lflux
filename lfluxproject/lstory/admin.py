@@ -5,7 +5,12 @@ import reversion
 from models import Story
 
 from limage.widgets import AdminPagedownWidget
+from limage.models import Image
+from django.contrib.contenttypes import generic
 
+
+class ImageInline(generic.GenericStackedInline):
+    model = Image
 
 class StoryAdmin(reversion.VersionAdmin):
     prepopulated_fields = {"slug": ("title",)}
@@ -14,6 +19,8 @@ class StoryAdmin(reversion.VersionAdmin):
     formfield_overrides = {
             models.TextField: {'widget': AdminPagedownWidget },
             }
+
+    inlines = (ImageInline,)
 
     def save_model(self, request, obj, form, change):
         if obj.pk and request.user not in obj.authors.all():

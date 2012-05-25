@@ -45,13 +45,12 @@ class AdminPagedownWidget(OriginalAPW):
                     editor.run();
                     editors.push(editor);
 
-                    lImage_pagedown.extend("%(limage_browse)s", "%(id)s_wmd_dialog", editor);
+                    lImage_pagedown.extend("./images/", "%(id)s_wmd_dialog", editor);
                 })();
             </script>
             """ % {
                 'attrs' : flatatt(final_attrs),
                 'body' : conditional_escape(force_unicode(value)),
                 'id' : attrs['id'],
-                'limage_browse': reverse('limage-browse'),
             }
         return mark_safe(html)
