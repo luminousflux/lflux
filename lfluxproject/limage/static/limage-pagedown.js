@@ -3,28 +3,36 @@ lImage_pagedown = {
         editor.hooks['insertImageDialog'] = function(callback) {
             var buildForm = function(data, textStatus, jqXHR) {
                 $('#'+dialogdiv).empty();
-                $('#'+dialogdiv).append('<p>to upload images, go to the <a href="/admin/limage/image/">image admin</a> interface. we will fix this soon.</p>')
+                var imagecontainer = document.createElement('div');
                 for(var i=0;i<data['images'].length;i++) {
                     var x =data['images'][i];
                     var el = document.createElement('img');
                     $(el).attr('src', x['url']);
-                    $(el).attr('style', 'max-width: 100px; max-height: 100px; cursor: pointer;');
                     el.onclick = function() {
                         callback(x['url']);
                         $('#'+dialogdiv).dialog('close');
                     };
-                    $('#'+dialogdiv).append(el);
+                    var cnt = document.createElement('div');
+                    $(cnt).addClass('image');
+                    $(cnt).append(el);
+                    $(imagecontainer).append(cnt);
                 }
+                $('#'+dialogdiv).append(imagecontainer);
+                $(imagecontainer).addClass('imagegrid');
                 var form = document.createElement('form');
+                $(form).append('<h3>Upload new picture:</h3>');
                 $(form).attr('action', imageurl);
                 $(form).attr('method', 'post');
+                $(form).addClass('imageuploadform');
                 $(form).ajaxForm();
                 $(form).append(data['form']);
+                $(form).append('<p><input type="submit" value="Upload" /></p>');
+                $('#'+dialogdiv).append('<hr />');
                 $('#'+dialogdiv).append(form);
                 $(form).ajaxForm({success: buildForm});
             };
             $.getJSON(imageurl, buildForm);
-            $('#'+dialogdiv).dialog({close: function() { $('.wmd-prompt-background').hide(); }});
+            $('#'+dialogdiv).dialog({close: function() { $('.wmd-prompt-background').hide(); }, width: '700px'});
             return true;
         };
     }

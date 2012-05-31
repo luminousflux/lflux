@@ -11,7 +11,8 @@ from pagedown.widgets import AdminPagedownWidget as OriginalAPW
 
 class AdminPagedownWidget(OriginalAPW):
     class Media:
-        css = {'all': ('%s/css/overcast/jquery-ui-1.8.20.custom.css' % settings.STATIC_URL,)
+        css = {'all': ('%s/css/overcast/jquery-ui-1.8.20.custom.css' % settings.STATIC_URL,
+                       '%s/limage-customizations.css' % settings.STATIC_URL,)
                 }
         js = ('%s/js/jquery-1.7.2.min.js' % settings.STATIC_URL,
                 '%s/js/jquery-ui-1.8.20.custom.min.js' % settings.STATIC_URL,
