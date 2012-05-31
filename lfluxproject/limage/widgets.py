@@ -15,6 +15,7 @@ class AdminPagedownWidget(OriginalAPW):
                 }
         js = ('%s/js/jquery-1.7.2.min.js' % settings.STATIC_URL,
                 '%s/js/jquery-ui-1.8.20.custom.min.js' % settings.STATIC_URL,
+                '%s/js/jquery.form.js' % settings.STATIC_URL,
                 '%s/limage-pagedown.js' % settings.STATIC_URL,)
 
     def render(self, name, value, attrs=None):

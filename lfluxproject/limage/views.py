@@ -3,17 +3,33 @@ from django.views.generic.simple import direct_to_template
 from django.template import RequestContext
 from django.http import HttpResponse
 from django.contrib.contenttypes.models import ContentType
+from django.views.decorators.csrf import csrf_exempt
 from forms import ImageForm
 
 import json
 
+@csrf_exempt
 def browse(request, id=None, tag=None, model=None, template='limage/browse.html'):
     imgs = Image.objects.all()
+    o = None
+    formargs = {}
     if model:
         o = model.objects.get(id=id)
-        imgs = imgs.filter(content_type=ContentType.objects.get_for_model(model), object_id=o.pk)
+        formargs = dict(content_type=ContentType.objects.get_for_model(model), object_id=o.pk)
+        imgs = imgs.filter(**formargs)
     if tag:
         imgs = imgs.filter(tags__name=tag)
-    imgs = {'images': [{'url': x.img.url, 'id': x.pk,} for x in imgs], 'form': ImageForm().as_p()}
+
+    if formargs.get('content_type'):
+        formargs['content_type'] = formargs['content_type'].pk
+    
+    form = ImageForm(initial=formargs)
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES, initial=formargs)
+
+        if form.is_valid():
+            form.save()
+
+    imgs = {'images': [{'url': x.img.url, 'id': x.pk,} for x in imgs], 'form': form.as_p()}
     return HttpResponse(json.dumps(imgs), mimetype="application/json")
 
