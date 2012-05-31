@@ -23,3 +23,7 @@
 .ui-dialog-content .imageuploadform p {
     display: inline;
 }
+
+.ui-dialog-content input.loading {
+    color: red;
+}

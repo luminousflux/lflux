@@ -29,7 +29,7 @@ lImage_pagedown = {
                 $(form).append('<p><input type="submit" value="Upload" /></p>');
                 $('#'+dialogdiv).append('<hr />');
                 $('#'+dialogdiv).append(form);
-                $(form).ajaxForm({success: buildForm});
+                $(form).ajaxForm({beforeSubmit: function() {$('#'+dialogdiv+' input[type=submit]').addClass('loading');}, success: buildForm});
             };
             $.getJSON(imageurl, buildForm);
             $('#'+dialogdiv).dialog({close: function() { $('.wmd-prompt-background').hide(); }, width: '700px'});
