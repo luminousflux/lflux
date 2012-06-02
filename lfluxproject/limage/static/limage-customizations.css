@@ -25,5 +25,6 @@
 }
 
 .ui-dialog-content input.loading {
-    color: red;
+    background: url('/static/img/spinner.gif') no-repeat 50% 50%;
+    color: transparent;
 }
