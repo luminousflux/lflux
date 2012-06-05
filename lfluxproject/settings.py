@@ -115,17 +115,23 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'admin_tools',
+    'admin_tools.dashboard',
+
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'django.contrib.markup',
+
     'pagedown',
     'south',
     'taggit',
@@ -135,9 +141,11 @@ INSTALLED_APPS = (
     'guardian',  # for userena
     'easy_thumbnails', # for userena
 
+    'ltools',
     'lstory',
     'limage',
     'lprofile',
+    'ladmin', # admin overrides & extensions.
 )
 
 # A sample logging configuration. The only tangible logging
@@ -171,8 +179,12 @@ AUTHENTICATION_BACKENDS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.request', # required by django-admin-tools
+
     'lfluxproject.context_processors.settings_processor',
 )
+
+ADMIN_TOOLS_INDEX_DASHBOARD = 'lfluxproject.dashboard.CustomIndexDashboard'
 
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend' # you should change this in your local settings.
 
@@ -185,3 +197,5 @@ LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'
 
 DEMO_MODE = False # make all users admin per default
+
+

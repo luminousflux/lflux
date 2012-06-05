@@ -1,0 +1,11 @@
+{% extends "admin_tools/dashboard/module.html" %}
+{% load i18n %}
+{% block module_content %}
+    {% for instance in module.children %}
+    {% spaceless %}
+    <h2>
+        <a href="{{ instance.add_url }}">{{ instance.title }}</a>
+    </h2>
+    {% endspaceless %}
+    {% endfor %}
+{% endblock %}

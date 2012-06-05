@@ -1,0 +1,2 @@
+def ladmin(request):
+    pass
