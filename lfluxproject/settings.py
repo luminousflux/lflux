@@ -184,7 +184,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'lfluxproject.context_processors.settings_processor',
 )
 
-ADMIN_TOOLS_INDEX_DASHBOARD = 'lfluxproject.dashboard.CustomIndexDashboard'
+ADMIN_TOOLS_INDEX_DASHBOARD = {'ladmin.admin.admin': 'lfluxproject.dashboard.CustomIndexDashboard',
+        'django.contrib.admin.site': 'admin_tools.dashboard.DefaultIndexDashboard'}
 
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend' # you should change this in your local settings.
 

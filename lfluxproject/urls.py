@@ -6,8 +6,8 @@ from lstory.models import Story
 from django.contrib.auth.decorators import login_required
 from limage.views import browse
 from ladmin.admin import admin
-#from django.contrib import admin
-#admin = admin.site
+from django.contrib import admin as adminadmin
+adminadmin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
@@ -21,7 +21,8 @@ urlpatterns = patterns('',
 
 
     url(r'^admin/lstory/story/(?P<id>[^/]+)/images/$', login_required(browse), {'model': Story},),
-    url(r'^admin/', include(admin.urls)),
+    url(r'^backend/', include(admin.urls)),
+    url(r'^admin/', include(adminadmin.site.urls)),
 )
 
 if settings.DEMO_MODE:

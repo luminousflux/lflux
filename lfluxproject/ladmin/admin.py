@@ -1,7 +1,7 @@
 from django.contrib.admin import AdminSite
-from lstory.admin import Story, StoryAdmin
+from lstory.admin import Story, StoryUserAdmin
 
-class UserBasedStoryAdmin(StoryAdmin):
+class UserBasedStoryAdmin(StoryUserAdmin):
     def queryset(self, request):
         qs = super(UserBasedStoryAdmin, self).queryset(request)
         qs = qs.filter(authors=request.user)
@@ -11,6 +11,6 @@ class UserBasedStoryAdmin(StoryAdmin):
 class LAdminSite(AdminSite):
     pass
 
-admin = LAdminSite('admin')
+admin = LAdminSite('backend')
 admin.register(Story, UserBasedStoryAdmin)
 

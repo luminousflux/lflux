@@ -1,9 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group, Permission
 from userena.models import UserenaBaseProfile
-from django.db.models.signals import pre_save
+from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 
 
 class Profile(UserenaBaseProfile):
@@ -12,9 +13,19 @@ class Profile(UserenaBaseProfile):
                                 verbose_name=('user'),
                                 related_name='my_profile')
 
-@receiver(pre_save, sender=User)
-def demo_mode_set_superuser(sender, instance, raw, **kwargs):
-    if settings.DEMO_MODE:
-        instance.is_superuser = True
-        instance.is_staff = True
+@receiver(post_save, sender=User)
+def demo_mode_set_permission(sender, instance, created, raw, **kwargs):
+    if created:
+        Profile.objects.get_or_create(user=instance)
+    g, created = Group.objects.get_or_create(name='editor')
+    default_perms = [
+        Permission.objects.get_by_natural_key(app_label='lstory', model='story', codename='add_story'),
+        Permission.objects.get_by_natural_key(app_label='lstory', model='story', codename='change_story'),
+        Permission.objects.get_by_natural_key(app_label='lstory', model='story', codename='delete_story'),
+        ]
 
+    for p in default_perms:
+        if not p in g.permissions.all():
+            g.permissions.add(p)
+    if settings.DEMO_MODE:
+        instance.groups.add(g)
