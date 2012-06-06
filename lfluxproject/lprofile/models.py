@@ -18,14 +18,15 @@ def demo_mode_set_permission(sender, instance, created, raw, **kwargs):
     if created:
         Profile.objects.get_or_create(user=instance)
     g, created = Group.objects.get_or_create(name='editor')
-    default_perms = [
+    default_group_perms = [
         Permission.objects.get_by_natural_key(app_label='lstory', model='story', codename='add_story'),
         Permission.objects.get_by_natural_key(app_label='lstory', model='story', codename='change_story'),
         Permission.objects.get_by_natural_key(app_label='lstory', model='story', codename='delete_story'),
         ]
 
-    for p in default_perms:
+    for p in default_group_perms:
         if not p in g.permissions.all():
             g.permissions.add(p)
     if settings.DEMO_MODE:
         instance.groups.add(g)
+
