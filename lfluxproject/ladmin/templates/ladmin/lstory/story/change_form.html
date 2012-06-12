@@ -1,7 +1,9 @@
 {% extends 'admin/change_form.html' %}
 {% block object-tools %}
 <ul class="object-tools" style="position: absolute; right: 20em;">
+    {% if original.pk %}
     <li><a href="{% url admin:ladmin_sharestory id=original.pk%}">Add Author</a></li>
+    {% endif %}
 </ul>
     {{ block.super }}
 {% endblock %}
