@@ -4,7 +4,7 @@ git+git://github.com/luminousflux/overdiff.git#egg=overdiff
 south
 django-taggit
 markdown
--e git+git://github.com/fin/django-pagedown.git#egg=django-pagedown
+-e git+git://github.com/timmyomahony/django-pagedown.git
 PIL
 django-userena
 django-admin-tools
