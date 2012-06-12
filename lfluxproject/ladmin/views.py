@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.views.generic.simple import direct_to_template
 from django.template.response import TemplateResponse
 from django.http import Http404
+from admin_tools.utils import get_admin_site_name
+from django.template import RequestContext
 
 def ladmin(request):
     pass
@@ -32,5 +34,5 @@ def share(request, id, model, key='users', template='ladmin/share/share_object.h
         'form': form,
         }
 
-    return TemplateResponse(request, template, values)
+    return TemplateResponse(request, template, values, current_app=get_admin_site_name(RequestContext(request)))
 
