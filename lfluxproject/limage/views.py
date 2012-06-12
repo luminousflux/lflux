@@ -9,7 +9,7 @@ from forms import ImageForm
 import json
 
 @csrf_exempt
-def browse(request, id=None, tag=None, model=None, template='limage/browse.html'):
+def browse(request, id=None, tag=None, model=None, admin_instance=None, template='limage/browse.html'):
     imgs = Image.objects.all()
     o = None
     formargs = {}

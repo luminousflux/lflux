@@ -9,3 +9,5 @@ PIL
 django-userena
 django-admin-tools
 
+django-debug-toolbar
+
