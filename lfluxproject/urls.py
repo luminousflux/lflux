@@ -11,7 +11,6 @@ urlpatterns = patterns('',
 
     
     url('^story/', include('lfluxproject.lstory.urls')),
-    url('^image/', include('lfluxproject.limage.urls')),
     url('^$', 'lstory.views.index'),
     
 
