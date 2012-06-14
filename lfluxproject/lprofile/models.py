@@ -29,6 +29,6 @@ def demo_mode_set_permission(sender, instance, created, raw, **kwargs):
             g.permissions.add(p)
     if settings.DEMO_MODE and not instance.is_staff:
         instance.groups.add(g)
-        intance.is_staff = True
+        instance.is_staff = True
         instance.save()
 
