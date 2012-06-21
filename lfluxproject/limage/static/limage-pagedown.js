@@ -19,17 +19,23 @@ lImage_pagedown = {
                 }
                 $('#'+dialogdiv).append(imagecontainer);
                 $(imagecontainer).addClass('imagegrid');
-                var form = document.createElement('form');
-                $(form).append('<h3>Upload new picture:</h3>');
-                $(form).attr('action', imageurl);
-                $(form).attr('method', 'post');
-                $(form).addClass('imageuploadform');
-                $(form).ajaxForm();
-                $(form).append(data['form']);
-                $(form).append('<p><input type="submit" value="Upload" /></p>');
-                $('#'+dialogdiv).append('<hr />');
-                $('#'+dialogdiv).append(form);
-                $(form).ajaxForm({beforeSubmit: function() {$('#'+dialogdiv+' input[type=submit]').addClass('loading');}, success: buildForm});
+                if(data['enable_upload']) {
+                    var form = document.createElement('form');
+                    $(form).append('<h3>Upload new picture:</h3>');
+                    $(form).attr('action', imageurl);
+                    $(form).attr('method', 'post');
+                    $(form).addClass('imageuploadform');
+                    $(form).ajaxForm();
+                    $(form).append(data['form']);
+                    $(form).append('<p><input type="submit" value="Upload" /></p>');
+                    $('#'+dialogdiv).append('<hr />');
+                    $('#'+dialogdiv).append(form);
+                    $(form).ajaxForm({beforeSubmit: function() {$('#'+dialogdiv+' input[type=submit]').addClass('loading');}, success: buildForm});
+                } else {
+                    var form = document.createElement('form');
+                    $(form).append(data['form']);
+                    $('#'+dialogdiv).append(form);
+                }
             };
             $.getJSON(imageurl, buildForm);
             $('#'+dialogdiv).dialog({close: function() { $('.wmd-prompt-background').hide(); }, width: '700px'});
