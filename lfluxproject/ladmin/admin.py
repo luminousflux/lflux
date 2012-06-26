@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.admin import AdminSite
-from lstory.admin import Story, StoryUserAdmin
+from lstory.admin import Story, StoryUserAdmin, StorySummary, StorySummaryAdmin
 from urls import urlpatterns
 from django import forms
 
@@ -27,4 +27,5 @@ class LAdminSite(AdminSite):
 
 admin = LAdminSite('backend')
 admin.register(Story, UserBasedStoryAdmin)
+admin.register(StorySummary, StorySummaryAdmin)
 

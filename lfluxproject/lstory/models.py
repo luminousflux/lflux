@@ -66,3 +66,10 @@ except reversion.revisions.RegistrationError, e:
     if not unicode(e).endswith('has already been registered with django-reversion'):
         raise
 
+
+class StorySummary(models.Model):
+    story = models.ForeignKey(Story)
+    timeframe_start = models.DateTimeField()
+    timeframe_end = models.DateTimeField()
+    body = models.TextField(help_text='markdown-formatted summary text')
+

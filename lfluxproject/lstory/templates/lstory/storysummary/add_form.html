@@ -1,0 +1,33 @@
+{% extends 'admin/change_form.html' %}
+{% load url from future %}
+{% load markup %}
+{% block extrahead %}
+    {{block.super}}
+<style>
+    #content-main {
+        left: 40%;
+        width: 60%;
+    }
+    #content-additional {
+        float: left;
+        width: 35%;
+        padding: 2%;
+        padding-top: 0;
+    }
+    .ins, ins {
+        background-color: yellow;
+    }
+    .ins img {
+        border: 1px solid yellow;
+    }
+    #content-additional img {
+        max-width: 90%;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div id="content-additional">
+    {{diff|markdown:"extra,insparagraph"}}
+</div>
+{{ block.super }}
+{% endblock %}

@@ -1,9 +1,37 @@
 {% extends 'admin/change_form.html' %}
+{% load url from future %}
+{% block extrahead %}
+    {{block.super}}
+    <style>
+        #content-main {
+            margin-right: 200px;
+            width: auto;
+            position: relative;
+            float: none;
+        }
+        #content-additional {
+            width: 180px;
+            right: 0;
+            position: absolute;
+        }
+    </style>
+{% endblock %}
 {% block object-tools %}
 <ul class="object-tools" style="position: absolute; right: 20em;">
     {% if original.pk %}
-    <li><a href="{% url admin:ladmin_sharestory id=original.pk%}">Add Author</a></li>
+    <li><a href="{% url 'admin:ladmin_sharestory' id=original.pk%}">Add Author</a></li>
     {% endif %}
 </ul>
     {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div id="content-additional">
+    <h2>Summaries</h2>
+    <p>{% if versions_since %}{{versions_since}} Updates{% if last_summary_date %} since last summary from {{last_summary_date}}{%else%}, no summary yet{%endif%}
+    <a href="{%url 'admin:lstory_storysummary_add'%}?story={{original.pk}}">write one</a>
+       {%else%}No non-summaried updates
+       {% endif %}</p>
+</div>
+{{ block.super }}
 {% endblock %}
