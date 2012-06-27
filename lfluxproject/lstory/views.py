@@ -4,7 +4,7 @@ from django.template import RequestContext
 import reversion
 from datetime import datetime, timedelta, date
 from reversion.models import Version
-from models import Story
+from models import Story, StorySummary
 
 import pdb
 import markdown
@@ -75,5 +75,19 @@ def serve_highlighted_text(request, slug, model, field_to_diff, sessionvar, temp
         'fromdate': fromdate,
         'todate': todate,
         'mode': 'highlight',
+        })
+
+
+def summary(request, slug, date_end, template='lstory/highlight.html'):
+    story = get_object_or_404(Story, slug=slug)
+    summary = story.storysummary_set.get(timeframe_end=_parse_iso_datetime(date_end))
+    previous, current = summary.storyversions()
+    diff = current.diff_to_older(previous)
+    return direct_to_template(request, template, {
+        'story': story,
+        'summary': summary,
+        'field_diff': diff,
+        'current': current,
+        'previous': previous,
         })
 

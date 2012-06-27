@@ -72,4 +72,18 @@ class StorySummary(models.Model):
     timeframe_start = models.DateTimeField()
     timeframe_end = models.DateTimeField()
     body = models.TextField(help_text='markdown-formatted summary text')
+    author = models.ForeignKey(User)
+
+    class Meta:
+        unique_together = (('story', 'timeframe_end',),)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('storysummary', [self.story.slug, self.timeframe_end.isoformat()],)
+
+    def __unicode__(self):
+        return u'Summary for %s between %s and %s' % (self.story.slug, self.timeframe_start, self.timeframe_end,)
+
+    def storyversions(self):
+        return self.story.versions.for_date(self.timeframe_start), self.story.versions.for_date(self.timeframe_end)
 

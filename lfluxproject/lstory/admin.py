@@ -41,7 +41,7 @@ class StoryUserAdmin(StoryAdmin):
 
         versions_since = dict(s.versions.by_date()).keys()
         if last_summary_date:
-            versions_since = [x for x in versions_since if x > last_summary_date]
+            versions_since = [x for x in versions_since if x >= last_summary_date.date()]
 
         extra_context = {'versions_since': len(versions_since),
                 'last_summary_date': last_summary_date,
@@ -54,8 +54,13 @@ class StoryUserAdmin(StoryAdmin):
 class StorySummaryAdmin(admin.ModelAdmin):
     add_form_template = 'lstory/storysummary/add_form.html'
 
+    exclude = ('author',)
+
     def add_view(self, request, *args, **kwargs):
         templateresponse = super(StorySummaryAdmin, self).add_view(request, *args, **kwargs)
+
+        if not hasattr(templateresponse, 'context_data'):
+            return templateresponse
 
         form = templateresponse.context_data['adminform'].form
 
@@ -65,13 +70,18 @@ class StorySummaryAdmin(admin.ModelAdmin):
             story = Story.objects.get(pk=story_id)
             summaries = story.storysummary_set.all().order_by('-timeframe_end')
             last_summary = summaries[0].timeframe_end if summaries else story.published
-            if not form.data:
+            if not 'timeframe_start' in form.data:
                 form.initial['timeframe_start']=last_summary
                 form.initial['timeframe_end']=datetime.now()
 
             templateresponse.context_data['diff'] = story.diff_to_older(story.versions.for_date(last_summary))
 
-
         return templateresponse
 
+    def save_model(self, request, obj, form, change):
+        if not obj.pk:
+            obj.author = request.user
+        super(StorySummaryAdmin, self).save_model(request, obj, form, change)
+
 admin.site.register(StorySummary, StorySummaryAdmin)
+

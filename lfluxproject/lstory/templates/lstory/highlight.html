@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
+{% load url from future %}
+{% block head %}
+    {{ block.super }}
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url 'storyfeed' slug=current.slug %}" />
+{% endblock %}
 {% block content %}
 {% load markup %}
+
 
 <div id="header">
     <h1>{{current.title}}</h1>
@@ -9,6 +15,11 @@
         {% include 'lstory/history.inc.html' %}<br />
     </div>
 </div>
+{% if summary %}
+<hr />
+{{summary.body|markdown:"extra,insparagraph"}}
+<hr />
+{% endif %}
 <div id="article">
 
 <div class="inner">
