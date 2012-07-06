@@ -43,6 +43,7 @@
       border: 1px solid #e0e0e0;
       border-top: 4px solid #469;
       -webkit-box-shadow: rgba(0,0,0,.1) 1px 1px 5px;
+      overflow: hidden;
     }
    
     #brand {
@@ -224,7 +225,7 @@
     
     #article {
       width: 589px;
-      float: left;
+      /* float: left; */
       padding: 0;
       margin: 0;
       background: #fff;
@@ -859,3 +860,25 @@
         cursor: pointer;
     }
     /* #history.active { display: block; } */
+
+
+    #mark_as_read {
+        background-color: grey;
+        border-radius: 8px;
+        padding: 10px;
+        margin-left: 20px;
+        margin-right: 25px;
+        margin-bottom: 1em;
+        color: white;
+        opacity: 1;
+        -webkit-transition:opacity 700ms ease-in-out;
+        -moz-transition:opacity 700ms ease-in-out;
+        transition:opacity 700ms ease-in-out;
+    }
+    #mark_as_read a {
+        color: inherit;
+    }
+
+    #mark_as_read.hiding {
+        opacity: 0;
+    }

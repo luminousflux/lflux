@@ -15,8 +15,7 @@ class Profile(UserenaBaseProfile):
 
 @receiver(post_save, sender=User)
 def demo_mode_set_permission(sender, instance, created, raw, **kwargs):
-    if created:
-        Profile.objects.get_or_create(user=instance)
+    Profile.objects.get_or_create(user=instance)
     g, created = Group.objects.get_or_create(name='editor')
     default_group_perms = [
         Permission.objects.get_by_natural_key(app_label='lstory', model='story', codename='add_story'),

@@ -9,11 +9,8 @@ adminadmin.autodiscover()
 urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-    
     url('^story/', include('lfluxproject.lstory.urls')),
     url('^$', 'lstory.views.index'),
-    
-
 
     url(r'^admin_tools/', include('admin_tools.urls')),
     url(r'^backend/', include(admin.urls)),

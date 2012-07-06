@@ -186,6 +186,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request', # required by django-admin-tools
 
     'lfluxproject.context_processors.settings_processor',
+    'lfluxproject.context_processors.tracking_processor',
 )
 
 ADMIN_TOOLS_INDEX_DASHBOARD = {'ladmin.admin.admin': 'lfluxproject.dashboard.CustomIndexDashboard',

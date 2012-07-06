@@ -5,9 +5,12 @@ import reversion
 from datetime import datetime, timedelta, date
 from reversion.models import Version
 from models import Story, StorySummary
+from django.http import HttpResponse
 
 import pdb
 import markdown
+from functools import wraps
+
 
 # from http://dwiel.net/blog/python-parsing-the-output-of-datetime-isoformat/
 def _parse_iso_datetime(s) :
@@ -39,10 +42,8 @@ def version(request, slug, date, template='lstory/highlight.html'):
 
 
 
-def serve_highlighted_text(request, slug, model, field_to_diff, sessionvar, template='lstory/highlight.html'):
+def serve_highlighted_text(request, slug, model, field_to_diff, template='lstory/highlight.html'):
     obj = get_object_or_404(model, slug=slug)
-
-    sessionvar = sessionvar % slug
 
     if not hasattr(obj, field_to_diff):
         raise Exception("the selected object does not have a %s field" % field_to_diff)
@@ -52,7 +53,7 @@ def serve_highlighted_text(request, slug, model, field_to_diff, sessionvar, temp
 
     fromdate = None
     fromdate = request.GET.get('since', None)
-    fromdate = request.session.get(sessionvar, None) if not fromdate else fromdate
+    fromdate = request.session.get('last_read', {}).get(slug) if not fromdate else fromdate
     fromdate = unicode(datetime.now().isoformat()) if not fromdate else fromdate
     fromdate = _parse_iso_datetime(fromdate) if fromdate else None
 
@@ -64,7 +65,6 @@ def serve_highlighted_text(request, slug, model, field_to_diff, sessionvar, temp
 
     field_diff = current.diff_to_older(previous)
 
-    request.session[sessionvar] = datetime.now().isoformat()
 
 
 
@@ -89,5 +89,35 @@ def summary(request, slug, date_end, template='lstory/highlight.html'):
         'field_diff': diff,
         'current': current,
         'previous': previous,
+        })
+
+def toggle_tracking(request, set_track=False):
+    # fake the correct value for the context processor
+    if not set_track:
+        request.COOKIES['do_not_track'] = 'yup'
+    else:
+        if 'do_not_track' in request.COOKIES:
+            del request.COOKIES['do_not_track']
+
+    response = direct_to_template(request, 'lstory/mark_as_read_popup.inc', {
+        })
+
+    # actually change the cookie values
+    if set_track:
+        response.delete_cookie('do_not_track')
+    else:
+        response.set_cookie('do_not_track', 'yup')
+        request.session.clear()
+    return response
+
+def mark_as_read(request, slug):
+    x = request.session['last_read'] or {}
+    x[slug] = datetime.now().isoformat()
+    request.session['last_read'] = x
+    request.session.modified = True
+
+    s = Story.objects.get(slug)
+
+    return direct_to_template(request, 'lstory/mark_as_read_popup.inc', {
         })
 
