@@ -111,13 +111,20 @@ def toggle_tracking(request, set_track=False):
     return response
 
 def mark_as_read(request, slug):
-    x = request.session['last_read'] or {}
-    x[slug] = datetime.now().isoformat()
+    value = request.GET.get('to_value',datetime.now().isoformat())
+    x = request.session.get('last_read') or {}
+    print x
+    previous_value = x.get(slug,None)
+    x[slug] = value
     request.session['last_read'] = x
     request.session.modified = True
 
-    s = Story.objects.get(slug)
+    print x, previous_value
 
-    return direct_to_template(request, 'lstory/mark_as_read_popup.inc', {
+    s = Story.objects.get(slug=slug)
+
+    return direct_to_template(request, 'lstory/marked_as_read.inc', {
+        'previous_value': previous_value,
+        'current': s,
         })
 

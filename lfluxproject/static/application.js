@@ -35,18 +35,34 @@ function initHistoryView() {
 $(document).ready(initHistoryView);
 
 function initMarkAsRead() {
+
+    var mark_as_read_if_needed = function() {
+        $('#mark_as_read .tracking-status').each(function(){
+            if($(this).data('track') == 'yes') {
+                var element = $(this);
+                var f = function() {
+                    element.load($('#article').data('mark-as-read'), function() { });
+                };
+                setTimeout(f, 2500);
+            }
+        });
+    };
+
     $('#end_of_article').waypoint(function() {
         $('#mark_as_read').removeClass('hiding');
+        mark_as_read_if_needed();
     }, {'offset': '100%'});
-
-    $('#mark_as_read').on('click', 'a', function(event) {
-        if($(this).parents('.close').length>0) {
-            return; /* it's the close buttn */
-        }
+    var eh = function(event) {
         event.preventDefault();
         event.stopPropagation();
-        $('#mark_as_read').load($(this).attr('href'));
-    });
+        var element = $(this).parent('.reload-here');
+        $(this).parent('.reload-here').addClass('loading');
+        $(this).parent('.reload-here').load($(this).attr('href'), function() { mark_as_read_if_needed(); element.removeClass('loading'); } );
+    };
+    $('#mark_as_read .tracking-status').on('click', 'a', eh);
+
+    $('#mark_as_read').on('click', 'a', eh);
+
 }
 
 $(document).ready(initMarkAsRead);

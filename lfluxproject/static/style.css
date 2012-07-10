@@ -882,3 +882,10 @@ a.pillbtn.suggest .icon {
 #mark_as_read.hiding {
     opacity: 0;
 }
+
+.loading {
+    opacity: .5;
+    -webkit-transition:opacity 1000ms ease-in-out;
+    -moz-transition:opacity 1000ms ease-in-out;
+    transition:opacity 1000ms ease-in-out;
+}

@@ -20,7 +20,7 @@
 {{summary.body|markdown:"extra,insparagraph"}}
 <hr />
 {% endif %}
-<div id="article" data-article-id="{{current.slug}}">
+<div id="article" data-article-id="{{current.slug}}" data-mark-as-read="{% url "mark_as_read" slug=current.slug%}">
 
 <div class="inner">
     {% if field_diff %}
@@ -30,7 +30,7 @@
     {% endif %}
 </div>
 <div id="end_of_article"></div>
-<div id="mark_as_read" class="hiding">
+<div id="mark_as_read" class="hiding reload-here">
     {% include 'lstory/mark_as_read_popup.inc' %}
 </div>
 </div>
