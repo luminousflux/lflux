@@ -1,6 +1,7 @@
 from django.db.models import signals
 from datetime import datetime, timedelta, date
 import reversion
+from collections import namedtuple
 
 
 ''' convenience methods for reversion-backed models '''
@@ -27,7 +28,7 @@ class VersionManagerAccessor(object):
             ret.ltools_versiondate = version.revision.date_created
             return ret
 
-        def _proxify_object_s(self, retval):
+        def _proxify_objects(self, retval):
             ret = None
             try:
                 for x in retval:
@@ -40,7 +41,7 @@ class VersionManagerAccessor(object):
         def _generate_accessor(self, name, methodname):
             setattr(self, name,
                     lambda *args, **kwargs:
-                    self._proxify_object_s(
+                    self._proxify_objects(
                         getattr(reversion, methodname)(self.obj, *args, **kwargs)
                         )
                     )
@@ -56,6 +57,30 @@ class VersionManagerAccessor(object):
             for name,methodname in methods.iteritems():
                 self._generate_accessor(name, methodname)
 
+        def by_datetime(self):
+            vs = self.obj.versions.list()
+            return dict([(x._version.revision.date_created, x,) for x in vs])
+
+        def previous(self):
+            current_date = self.obj._version.revision.date_created if hasattr(self.obj, '_version') else None
+            versions_by_datetime = self.by_datetime()
+            datetimes = versions_by_datetime.keys() if not current_date else [x for x in versions_by_datetime.keys() if x<current_date]
+            datetimes.sort()
+            if not datetimes:
+                return None
+            return versions_by_datetime[datetimes[-1]]
+
+        def next(self):
+            current_date = self.obj._version.revision.date_created if hasattr(self.obj, '_version') else None
+            if not current_date:
+                return None
+            versions_by_datetime = self.by_datetime()
+            datetimes = [x for x in versions_by_datetime.keys() if x > current_date]
+            datetimes.sort()
+            if not datetimes:
+                return None
+            return versions_by_datetime[datetimes[0]]
+
         def by_date(self):
             dates = []
             lastdate = None
@@ -70,8 +95,31 @@ class VersionManagerAccessor(object):
                 if not dates or dates[-1] != lastdate:
                     dates.append((lastdate,[],))
                 dates[-1][1].append(versionstory)
-            return dates
+            return dict(dates)
 
+        def timeline(self):
+            x = self.by_datetime()
+            datetimes = sorted(x.keys())
+            dates = self.by_date()
+            beginning = x[datetimes[0]]._version.revision.date_created.date()
+            days = (x[datetimes[-1]]._version.revision.date_created.date() - beginning).days
+
+            Day = namedtuple('Day', ('date','events',),)
+
+            result = []
+
+            for i in xrange(days):
+                current = beginning + timedelta(days=i)
+                if current in dates:
+                    result.append(Day(current,dates[current]))
+                else:
+                    result.append(Day(current,[]))
+            return result
+
+        def is_current(self):
+            if not self.obj:
+                raise VersionManagerHelperException("sorry, this is only available for %s instances" % self.cls)
+            return not hasattr(self.obj, '_version') or self.for_date(datetime.now())._version == self.obj._version
 
 
     def __get__(self, instance, owner):

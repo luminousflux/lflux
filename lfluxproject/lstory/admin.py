@@ -11,7 +11,7 @@ from limage.models import Image
 from django.contrib.contenttypes import generic
 
 class StoryAdmin(reversion.VersionAdmin):
-    prepopulated_fields = {"slug": ("title",)}
+    prepopulated_fields = {"slug": ("name",)}
 
 admin.site.register(Story, StoryAdmin)
 
@@ -39,7 +39,7 @@ class StoryUserAdmin(StoryAdmin):
         if existing_summaries:
             last_summary_date = existing_summaries[0].timeframe_end
 
-        versions_since = dict(s.versions.by_date()).keys()
+        versions_since = s.versions.by_date().keys()
         if last_summary_date:
             versions_since = [x for x in versions_since if x >= last_summary_date.date()]
 

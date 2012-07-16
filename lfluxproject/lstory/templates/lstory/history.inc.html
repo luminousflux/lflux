@@ -21,3 +21,26 @@
         </form>
     </div>
 </div>
+<div class="switch">
+    {% if current.versions.previous %}
+    <a href="{{current.versions.previous.get_version_url}}">«</a>
+    {% endif %}
+    {% if current.versions.next %}
+    <a href="{{current.versions.next.get_version_url}}">»</a>
+    {% endif %}
+</div>
+
+<div class="newhistory" style="display: block">
+    <ul class="months">
+        {% spaceless %}
+        {% regroup current.versions.timeline by date|date:"F Y" as timeline %}
+        {% for month in timeline %}
+        <li><span class="month">{{ month.grouper }}</span><ul>
+        {% for day in month.list %}
+        <li data-date="{{day.date|date:'c'}}" {% if not day.events %}class="empty"{% endif %}><ul>{% for event in day.events %}<li><a href="{{event.get_version_url}}" data-date="{{event.ltools_versiondate.isoformat}}">{{event.ltools_versiondate|date:'d'}}</a></li>{%endfor%}</ul></li>
+        {% endfor %}
+        </ul></li>
+        {% endfor %}
+        {% endspaceless %}
+    </ul>
+</div>

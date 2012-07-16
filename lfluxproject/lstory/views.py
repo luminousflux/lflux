@@ -66,8 +66,6 @@ def serve_highlighted_text(request, slug, model, field_to_diff, template='lstory
     field_diff = current.diff_to_older(previous)
 
 
-
-
     return direct_to_template(request, template, {
         'current': current,
         'previous': previous,

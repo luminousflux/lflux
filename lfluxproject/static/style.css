@@ -889,3 +889,59 @@ a.pillbtn.suggest .icon {
     -moz-transition:opacity 1000ms ease-in-out;
     transition:opacity 1000ms ease-in-out;
 }
+
+.newhistory ul, .newhistory li {
+    display: block;
+}
+.newhistory ul {
+    position: relative;
+    height: 30px;
+    width: auto;
+    padding: 0;
+    margin: 0;
+}
+
+.newhistory ul li, .newhistory ul li ul {
+    float: left;
+    position: relative;
+}
+
+.newhistory ul.months li {
+    border-right: 1px solid grey;
+    min-width: 9em;
+    margin-bottom: 5px;
+}
+.newhistory ul.months li li {
+    border-right: none;
+    min-width: 2px;
+}
+
+.newhistory ul li .month {
+    position: absolute;
+    right: 0;
+    padding-right: 5px;
+}
+
+.newhistory ul li ul li {
+}
+
+.newhistory ul li a {
+    margin-top: 1em;
+}
+
+.newhistory {
+    margin-left: 0;
+    padding-left: 0;
+    clear: left;
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.newhistory ul.months {
+    width: 9999999px;
+}
+
+.newhistory li.empty {
+    width: 1px;
+}
+
