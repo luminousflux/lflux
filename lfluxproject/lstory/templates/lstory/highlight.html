@@ -24,7 +24,7 @@
 {{summary.body|markdown:"extra,insparagraph"}}
 <hr />
 {% endif %}
-<div id="article" data-article-id="{{current.slug}}" data-mark-as-read="{% url "mark_as_read" slug=current.slug%}" data-article-current="{{ current.versions.is_current}}" data-article-changed="{% ifequal current.ltools_versiondate previous.ltools_versiondate %}False{%else%}True{%endifequal%}">
+<div id="article" data-article-id="{{current.slug}}" data-mark-as-read="{% url "mark_as_read" slug=current.slug%}" data-article-current="{{ current.versions.is_current}}" data-article-changed="{% ifequal current.ltools_versiondate previous.ltools_versiondate %}False{%else%}True{%endifequal%}" {% if previous %}data-article-previous-date="{{previous.ltools_versiondate.isoformat}}"{% endif %} data-article-current-date="{{current.ltools_versiondate.isoformat}}">
 
 <div class="inner">
     {% if field_diff %}

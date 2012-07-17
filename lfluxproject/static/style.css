@@ -890,10 +890,10 @@ a.pillbtn.suggest .icon {
     transition:opacity 1000ms ease-in-out;
 }
 
-.newhistory ul, .newhistory li {
+.timeline ul, .timeline li {
     display: block;
 }
-.newhistory ul {
+.timeline ul {
     position: relative;
     height: 30px;
     width: auto;
@@ -901,35 +901,35 @@ a.pillbtn.suggest .icon {
     margin: 0;
 }
 
-.newhistory ul li, .newhistory ul li ul {
+.timeline ul li, .timeline ul li ul {
     float: left;
     position: relative;
 }
 
-.newhistory ul.months li {
+.timeline ul.months li {
     border-right: 1px solid grey;
     min-width: 9em;
     margin-bottom: 5px;
 }
-.newhistory ul.months li li {
+.timeline ul.months li li {
     border-right: none;
     min-width: 2px;
 }
 
-.newhistory ul li .month {
+.timeline ul li .month {
     position: absolute;
     right: 0;
     padding-right: 5px;
 }
 
-.newhistory ul li ul li {
+.timeline ul li ul li {
 }
 
-.newhistory ul li a {
+.timeline ul li a {
     margin-top: 1em;
 }
 
-.newhistory {
+.timeline {
     margin-left: 0;
     padding-left: 0;
     clear: left;
@@ -937,11 +937,15 @@ a.pillbtn.suggest .icon {
     overflow-x: scroll;
     overflow-y: hidden;
 }
-.newhistory ul.months {
+.timeline ul.months {
     width: 9999999px;
 }
 
-.newhistory li.empty {
+.timeline li.empty {
     width: 1px;
+}
+
+.timeline li .mark {
+    background-color: yellow;
 }
 
