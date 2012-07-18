@@ -1,0 +1,9 @@
+Hello.
+
+Thank you for trying to install Luminous Flux.
+
+Here's what you'll have to do:
+
+* install dependencies. they are given in requirements.txt; we recommend using pbundler for this: https://github.com/zeha/pbundler
+* add database settings in settings.py
+* add a SECRET_KEY in settings.py - you'll get a TypeError otherwise
