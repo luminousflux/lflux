@@ -145,6 +145,8 @@ INSTALLED_APPS = (
     'guardian',  # for userena
     'easy_thumbnails', # for userena
 
+    'django_nose',
+
     'ltools',
     'lstory',
     'limage',
@@ -188,6 +190,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'lfluxproject.context_processors.settings_processor',
     'lfluxproject.context_processors.tracking_processor',
 )
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+
 
 ADMIN_TOOLS_INDEX_DASHBOARD = {'ladmin.admin.admin': 'lfluxproject.dashboard.CustomIndexDashboard',
         'django.contrib.admin.site': 'admin_tools.dashboard.DefaultIndexDashboard'}
