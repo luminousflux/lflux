@@ -9,43 +9,6 @@ function scrollTimelineToAppropriateDate() {
     }
 }
 
-function initHistoryView() {
-    /* versions is an array of datetimes */
-
-    var versions = [];
-    $('.history a').each(function(i, e) {
-        versions.push(new Date($(e).data('date')));
-    });
-
-    var since = $('input.since');
-    var until = $('input.until');
-
-    var highlightDates = function(date) {
-        var result = null;
-        $(versions).each(function(i,e) {
-            if(e.toISOString().substring(0,10) == date.toISOString().substring(0,10))
-                result = e;
-        });
-        if(result)
-            return [true, 'selectable','asdf'];
-        return [false, '', 'asdfghjkloe'];
-    };
-
-    options = {beforeShowDay: highlightDates, dateFormat: 'yy-mm-dd', minDate: versions[0], maxDate: versions[versions.length-1]};
-
-    since.datepicker(options);
-    until.datepicker(options);
-
-    $('input.date').datepicker(options);
-
-    $('.historyform a[rel=switch]').click(function() {
-        $(this).closest('.historyform').each(function(i,e){ $(e).toggleClass('highlight'); $(e).toggleClass('version'); });
-
-        setTimeout(scrollTimelineToAppropriateDate, 0);
-    });
-}
-
-$(document).ready(initHistoryView);
 
 function initMarkAsRead() {
 
@@ -81,7 +44,11 @@ function initMarkAsRead() {
 
 $(document).ready(initMarkAsRead);
 
+initTimelines_done = false;
 function initTimelines() {
+    if(initTimelines_done)
+        return;
+    initTimelines_done = true;
     var width = $('.timeline li .month').parent().map(
             function() {
                 return $(this).offset()['left']+$(this).outerWidth() - $(this).parents('.timeline').offset()['left'] + 1;
@@ -101,5 +68,15 @@ function initTimelines() {
     }
     scrollTimelineToAppropriateDate();
 }
-$(document).ready(initTimelines);
 
+function initHistoryView() {
+    $('.historyform a.switch').click(function() {
+        var which = $(this).hasClass('version')?'version':'highlight';
+        $(this).closest('.historyform').each(function(i,e){
+            $(e).attr('class','historyform '+($(e).hasClass(which)?'':which));
+        });
+        setTimeout(initTimelines, 0);
+    });
+}
+
+$(document).ready(initHistoryView);

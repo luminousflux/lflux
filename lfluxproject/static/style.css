@@ -310,19 +310,19 @@ blockquote.ins, p.ins , ul.ins {
 #meta a { 
   color: #999;
   padding: .1em .7em;
-  display: block;
-  float: left;
   margin-right: .1em;
+  display: inline-block;
 }
 #meta a:hover {
   background: #f4f4f4;
 } 
-#meta .ins, #meta .newnohighlight {
+/* #meta .ins, #meta .newnohighlight {
   float: left;
   margin: .3em .5em 0 0;
   line-height: 1.4em;
   padding: 0 .2em;
 }
+    */
 
 #article #meta .icon {
   font-size: 1.5em;
@@ -847,18 +847,38 @@ a.pillbtn.suggest .icon {
 #meta .icon:first-child {
     float: left;
 }
+
+.historyform {
+    padding-left: 10px;
+}
+
 .historyform, .historyform div, .historyform form {
     display: inline;
 }
-.historyform.highlight .version {
+.historyform div.highlight, .historyform div.version {
     display: none;
 }
-.historyform.version .highlight {
-    display: none;
+.historyform.highlight div.highlight {
+    display: block;
 }
-.historyform a[rel=switch] {
+.historyform.version div.version {
+    display: block;
+}
+.historyform a.switch {
     cursor: pointer;
 }
+
+#meta .historyform.highlight a.switch.highlight,
+#meta .historyform.version a.switch.version,
+.historyform div.highlight, .historyform div.version {
+    background-color: rgb(245,245,245);
+}
+#meta .historyform.highlight a.switch.highlight,
+.historyform div.highlight,
+#meta .historyform a.switch.highlight:hover {
+    background-color: rgb(255,255,220);
+}
+
 /* #history.active { display: block; } */
 
 
@@ -892,6 +912,7 @@ a.pillbtn.suggest .icon {
 
 .timeline ul, .timeline li {
     display: block;
+    position: relative;
 }
 .timeline ul {
     position: relative;
@@ -904,6 +925,7 @@ a.pillbtn.suggest .icon {
 .timeline ul li, .timeline ul li ul {
     float: left;
     position: relative;
+    display: block;
 }
 
 .timeline ul.months li {
@@ -925,8 +947,10 @@ a.pillbtn.suggest .icon {
 .timeline ul li ul li {
 }
 
-.timeline ul li a {
-    margin-top: 1em;
+#meta .timeline ul li a {
+    top: 1em;
+    display: block;
+    position: relative;
 }
 
 .timeline {

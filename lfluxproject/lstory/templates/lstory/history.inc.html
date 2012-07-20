@@ -1,25 +1,24 @@
-<div class="history">
-    {% for date,changeddates in current.versions.by_date %}{%spaceless%}
-        {% for story in changeddates %}<a href="{{story.get_absolute_url}}?since={{story.ltools_versiondate.isoformat}}" data-date="{{story.ltools_versiondate.isoformat}}">|</a>{% endfor %}
-    {%endspaceless%}{% endfor %}
-</div>
-<div class="historyform {{mode}}">
+<div class="historyform">
+    Last updated {{current.ltools_versiondate|timesince}} ago
+    <a class="switch highlight ins">{% if not previous %}Highlight Changes{% else %}Changes since {{previous.ltools_versiondate|timesince}} ago{% endif %}</a> 
+    <a class="switch version">{% if previous %}Access History{% else %}Displaying content from {{current.ltools_versiondate|date}}{% endif %}
+        <span class="switch">
+            {% if current.versions.previous %}
+            <a href="{{current.versions.previous.get_version_url}}">«</a>
+            {% endif %}
+            {% if current.versions.next %}
+            <a href="{{current.versions.next.get_version_url}}">»</a>
+            {% endif %}
+        </span>
+    
+    
+    </a>
     <div class="highlight">
-        <a rel="switch">From</a> 
         {% include 'lstory/timeline.inc.html' with timeline_class='highlight' %}
     </div>
     <div class="version">
-        <a rel="switch">At</a>
         {% include 'lstory/timeline.inc.html' with tmode_version='yup' timeline_class='version' %}
     </div>
-</div>
-<div class="switch">
-    {% if current.versions.previous %}
-    <a href="{{current.versions.previous.get_version_url}}">«</a>
-    {% endif %}
-    {% if current.versions.next %}
-    <a href="{{current.versions.next.get_version_url}}">»</a>
-    {% endif %}
 </div>
 
 
