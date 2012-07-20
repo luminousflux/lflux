@@ -2,10 +2,10 @@ function scrollTimelineToAppropriateDate() {
     var highlight_el = $('.timeline.highlight a[data-date="'+$('#article').data('article-previous-date')+'"]');
     var version_el = $('.timeline.version a[data-date="'+$('#article').data('article-version-date')+'"]');
     if(version_el.length>0 && version_el.offset().left!=0) {
-        $('.timeline.version').scrollTo(version_el);
+        $('.timeline.version').scrollTo(version_el, {'over': -33});
     }
     if(highlight_el.length>0 && highlight_el.offset().left!=0) {
-        $('.timeline.highlight').scrollTo(highlight_el);
+        $('.timeline.highlight').scrollTo(highlight_el, {'over': -33});
     }
 }
 
