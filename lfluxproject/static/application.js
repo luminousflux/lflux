@@ -1,6 +1,6 @@
 function scrollTimelineToAppropriateDate() {
     var highlight_el = $('.timeline.highlight a[data-date="'+$('#article').data('article-previous-date')+'"]');
-    var version_el = $('.timeline.version a[data-date="'+$('#article').data('article-version-date')+'"]');
+    var version_el = $('.timeline.version a[data-date="'+$('#article').data('article-current-date')+'"]');
     if(version_el.length>0 && version_el.offset().left!=0) {
         $('.timeline.version').scrollTo(version_el, {'over': -33});
     }
