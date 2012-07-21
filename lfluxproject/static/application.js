@@ -25,7 +25,7 @@ function initMarkAsRead() {
     };
 
     $('#end_of_article').waypoint(function() {
-        if($('#article').data('article-current') == 'False' || $('#article').data('article-changed') == 'False')
+        if($('#article').data('allow-mark-as-read') != 'True')
             return;
         $('#mark_as_read').removeClass('hiding');
         mark_as_read_if_needed();
@@ -58,7 +58,7 @@ function initTimelines() {
     $('.timeline .months').attr('style', 'width: '+width+'px;');
 
     var highlight_scroll = $('#article').data('article-previous-date');
-    var version_scroll = $('#article').data('article-version-date');
+    var version_scroll = $('#article').data('article-current-date');
 
     if(highlight_scroll) {
         var highlight_el = $('.timeline.highlight a[data-date="'+highlight_scroll+'"]');

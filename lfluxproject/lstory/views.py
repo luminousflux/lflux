@@ -65,6 +65,10 @@ def serve_highlighted_text(request, slug, model, field_to_diff, template='lstory
 
     field_diff = current.diff_to_older(previous)
 
+    cookie_exists = slug in request.session.get('last_read', {})
+
+    allow_mark_as_read = (not cookie_exists and previous._version != current._version) or (
+            cookie_exists and previous._version != current._version and not 'since' in request.GET)
 
     return direct_to_template(request, template, {
         'current': current,
@@ -73,6 +77,7 @@ def serve_highlighted_text(request, slug, model, field_to_diff, template='lstory
         'fromdate': fromdate,
         'todate': todate,
         'mode': 'highlight',
+        'allow_mark_as_read': allow_mark_as_read,
         })
 
 

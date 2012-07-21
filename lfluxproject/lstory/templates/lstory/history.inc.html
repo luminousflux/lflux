@@ -1,6 +1,9 @@
 <div class="historyform">
     Last updated {{current.ltools_versiondate|timesince}} ago
-    <a class="switch highlight ins">{% if not previous %}Highlight Changes{% else %}Changes since {{previous.ltools_versiondate|timesince}} ago{% endif %}</a> 
+    <a class="switch highlight ins">{% if not previous %}Highlight Changes{% else %}
+        {% ifequal previous.ltools_versiondate current.ltools_versiondate %}
+        No changes to highlight{% else %}Changes since {{previous.ltools_versiondate|timesince}} ago
+        {% endifequal %}{% endif %}</a> 
     <a class="switch version">{% if previous %}Access History{% else %}Displaying content from {{current.ltools_versiondate|date}}{% endif %}
         <span class="switch">
             {% if current.versions.previous %}
