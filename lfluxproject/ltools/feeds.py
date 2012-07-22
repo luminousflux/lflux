@@ -3,16 +3,21 @@ from django.contrib.syndication.views import Feed
 import reversion
 from reversion.models import Version
 
+
+subscription_types = {
+    'weekly': lambda obj: _feed_datelist(obj.published - timedelta(days=obj.published.weekday,
+                                                                   hours=obj.published.hours),
+                                         timedelta(days=7)),
+    'daily': lambda obj: _feed_datelist(obj.published, timedelta(days=1)),
+}
+
+
 def _feed_datelist(date_to_start, date_inc):
     current_date = date_to_start
     while current_date < datetime.now():
         yield current_date
         current_date += date_inc
 
-subscription_types = {
-        'weekly': lambda obj: _feed_datelist(obj.published-timedelta(days=obj.published.weekday,hours=obj.published.hours), timedelta(days=7)),
-        'daily': lambda obj: _feed_datelist(obj.published, timedelta(days=1)),
-    }
 
 class RevisionFeed(Feed):
     ''' not a fully-implemented thing, you'll want to subclass it for different models '''
@@ -34,12 +39,11 @@ class RevisionFeed(Feed):
                 v = reversion.get_for_date(obj, date).field_dict
             except Version.DoesNotExist, e:
                 pass
-            if v and v!=last_version:
-                last_version=v
+            if v and v != last_version:
+                last_version = v
                 itemvalues.append(v)
         for iv in itemvalues:
             i = self.model()
             i.__dict__.update(iv)
             items.append(i)
         return items
-

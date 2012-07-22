@@ -4,7 +4,8 @@ import reversion
 from collections import namedtuple
 
 
-''' convenience methods for reversion-backed models '''
+# convenience methods for reversion-backed models
+
 
 class VersionManagerHelperException(Exception):
     pass
@@ -41,11 +42,8 @@ class VersionManagerAccessor(object):
         def _generate_accessor(self, name, methodname):
             setattr(self, name,
                     lambda *args, **kwargs:
-                    self._proxify_objects(
-                        getattr(reversion, methodname)(self.obj, *args, **kwargs)
-                        )
+                    self._proxify_objects(getattr(reversion, methodname)(self.obj, *args, **kwargs))
                     )
-
 
         def __init__(self, obj, cls):
             self.obj = obj
@@ -53,8 +51,8 @@ class VersionManagerAccessor(object):
 
             methods = {'list': 'get_for_object',
                        'for_date': 'get_for_date',
-                      }
-            for name,methodname in methods.iteritems():
+                       }
+            for name, methodname in methods.iteritems():
                 self._generate_accessor(name, methodname)
 
         def by_datetime(self):
@@ -64,7 +62,8 @@ class VersionManagerAccessor(object):
         def previous(self):
             current_date = self.obj._version.revision.date_created if hasattr(self.obj, '_version') else None
             versions_by_datetime = self.by_datetime()
-            datetimes = versions_by_datetime.keys() if not current_date else [x for x in versions_by_datetime.keys() if x<current_date]
+            datetimes = versions_by_datetime.keys() if not current_date else [x for x in versions_by_datetime.keys()
+                                                                              if x < current_date]
             datetimes.sort()
             if not datetimes:
                 return None
@@ -93,7 +92,7 @@ class VersionManagerAccessor(object):
                         lastdate += timedelta(days=1)
                 lastdate = revision.date_created.date()
                 if not dates or dates[-1] != lastdate:
-                    dates.append((lastdate,[],))
+                    dates.append((lastdate, [], ))
                 dates[-1][1].append(versionstory)
             return dict(dates)
 
@@ -104,23 +103,22 @@ class VersionManagerAccessor(object):
             beginning = x[datetimes[0]]._version.revision.date_created.date()
             days = (x[datetimes[-1]]._version.revision.date_created.date() - beginning).days
 
-            Day = namedtuple('Day', ('date','events',),)
+            Day = namedtuple('Day', ('date', 'events',),)
 
             result = []
 
             for i in xrange(days):
                 current = beginning + timedelta(days=i)
                 if current in dates:
-                    result.append(Day(current,dates[current]))
+                    result.append(Day(current, dates[current]))
                 else:
-                    result.append(Day(current,[]))
+                    result.append(Day(current, []))
             return result
 
         def is_current(self):
             if not self.obj:
                 raise VersionManagerHelperException("sorry, this is only available for %s instances" % self.cls)
             return not hasattr(self.obj, '_version') or self.for_date(datetime.now())._version == self.obj._version
-
 
     def __get__(self, instance, owner):
         if not instance:
@@ -130,10 +128,10 @@ class VersionManagerAccessor(object):
 
     def _ignore_versioned_modifications(self, instance, sender, **kwargs):
         if instance and hasattr(instance, '_version'):
-            raise VersionManagerHelperException("you're trying to overwrite a former version of this model. sorry, that will not work out")
-
+            raise VersionManagerHelperException(
+                "you're trying to overwrite a former version of this model. sorry, that will not work out")
 
     def contribute_to_class(self, cls, name):
-        setattr(cls,name, self)
+        setattr(cls, name, self)
         signals.pre_delete.connect(self._ignore_versioned_modifications, sender=cls)
         signals.pre_save.connect(self._ignore_versioned_modifications, sender=cls)

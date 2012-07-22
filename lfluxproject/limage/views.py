@@ -8,6 +8,7 @@ from forms import ImageForm
 
 import json
 
+
 @csrf_exempt
 def browse(request, id=None, tag=None, model=None, admin_instance=None, template='limage/browse.html'):
     imgs = Image.objects.all()
@@ -17,7 +18,11 @@ def browse(request, id=None, tag=None, model=None, admin_instance=None, template
     try:
         int(id)
     except ValueError:
-        return HttpResponse(json.dumps({'form': 'sorry, we can not upload images until you saved your Story at least once!', 'images': [], 'enable_upload': False}), mimetype='application/json')
+        return HttpResponse(json.dumps({
+            'form': 'sorry, we can not upload images until you saved your Story at least once!',
+            'images': [],
+            'enable_upload': False
+        }), mimetype='application/json')
 
     if model:
         o = model.objects.get(id=id)
@@ -28,7 +33,7 @@ def browse(request, id=None, tag=None, model=None, admin_instance=None, template
 
     if formargs.get('content_type'):
         formargs['content_type'] = formargs['content_type'].pk
-    
+
     form = ImageForm(initial=formargs)
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES, initial=formargs)
@@ -36,6 +41,5 @@ def browse(request, id=None, tag=None, model=None, admin_instance=None, template
         if form.is_valid():
             form.save()
 
-    imgs = {'images': [{'url': x.img.url, 'id': x.pk,} for x in imgs], 'form': form.as_p(), 'enable_upload': False}
+    imgs = {'images': [{'url': x.img.url, 'id': x.pk, } for x in imgs], 'form': form.as_p(), 'enable_upload': False}
     return HttpResponse(json.dumps(imgs), mimetype="application/json")
-

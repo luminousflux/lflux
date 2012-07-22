@@ -6,6 +6,7 @@ import reversion
 import overdiff
 from ltools.markdowntools import pars_to_blocks
 
+
 class Story(models.Model):
     name = models.CharField(max_length=255, help_text='this should not change during story development')
     title = models.CharField(max_length=255, help_text='this reflects our current understanding of the topic')
@@ -22,8 +23,6 @@ class Story(models.Model):
     region = models.CharField(max_length=255)
 
     body = models.TextField(help_text='markdown-formatted story text')
-
-
 
     tags = TaggableManager(blank=True)
 
@@ -47,7 +46,7 @@ class Story(models.Model):
 
     @property
     def body_pars(self):
-        tmp = self.body.replace('\r','').split('\n\n')
+        tmp = self.body.replace('\r', '').split('\n\n')
         tmp2 = pars_to_blocks(tmp)
         return tmp2
 
@@ -55,7 +54,7 @@ class Story(models.Model):
         field_diff_data = list(overdiff.overdiff(older.body_pars, self.body_pars))
         field_diffs = []
 
-        for i in xrange(0,len(field_diff_data)):
+        for i in xrange(0, len(field_diff_data)):
             field_diffs.append(overdiff.selection_to_s(self.body_pars[i], field_diff_data[i], markdown=True))
         field_diff = '\n\n'.join(field_diffs)
         return field_diff
@@ -87,4 +86,3 @@ class StorySummary(models.Model):
 
     def storyversions(self):
         return self.story.versions.for_date(self.timeframe_start), self.story.versions.for_date(self.timeframe_end)
-

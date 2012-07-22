@@ -6,9 +6,9 @@ from ladmin.admin import admin
 from django.contrib import admin as adminadmin
 adminadmin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
     url('^story/', include('lfluxproject.lstory.urls')),
     url('^$', 'lstory.views.index'),
 
@@ -19,11 +19,12 @@ urlpatterns = patterns('',
 )
 
 if settings.DEMO_MODE:
-    urlpatterns+=patterns('',url(r'^accounts/', include('userena.urls')),)
+    urlpatterns += patterns('', url(r'^accounts/', include('userena.urls')), )
 
 if settings.DEBUG:
-    urlpatterns += patterns('',
+    urlpatterns += patterns(
+        '',
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
             'document_root': settings.MEDIA_ROOT,
-        }),
-   )
+            }),
+    )

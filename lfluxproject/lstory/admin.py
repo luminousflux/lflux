@@ -10,18 +10,18 @@ from limage.widgets import AdminPagedownWidget
 from limage.models import Image
 from django.contrib.contenttypes import generic
 
+
 class StoryAdmin(reversion.VersionAdmin):
     prepopulated_fields = {"slug": ("name",)}
-
 admin.site.register(Story, StoryAdmin)
 
 
 class StoryUserAdmin(StoryAdmin):
-    exclude = ('authors','timeframe_start','timeframe_end','region','tags',)
+    exclude = ('authors', 'timeframe_start', 'timeframe_end', 'region', 'tags',)
 
     formfield_overrides = {
-            models.TextField: {'widget': AdminPagedownWidget },
-            }
+        models.TextField: {'widget': AdminPagedownWidget},
+    }
 
     def save_model(self, request, obj, form, change):
         obj.save()
@@ -44,12 +44,13 @@ class StoryUserAdmin(StoryAdmin):
             versions_since = [x for x in versions_since if x >= last_summary_date.date()]
 
         extra_context = {'versions_since': len(versions_since),
-                'last_summary_date': last_summary_date,
-                'summaries': existing_summaries,
-            }
+                         'last_summary_date': last_summary_date,
+                         'summaries': existing_summaries,
+                         }
 
         return super(StoryUserAdmin, self).change_view(request, object_id,
-                            extra_context=extra_context)
+                                                       extra_context=extra_context)
+
 
 class StorySummaryAdmin(admin.ModelAdmin):
     add_form_template = 'lstory/storysummary/add_form.html'
@@ -71,8 +72,8 @@ class StorySummaryAdmin(admin.ModelAdmin):
             summaries = story.storysummary_set.all().order_by('-timeframe_end')
             last_summary = summaries[0].timeframe_end if summaries else story.published
             if not 'timeframe_start' in form.data:
-                form.initial['timeframe_start']=last_summary
-                form.initial['timeframe_end']=datetime.now()
+                form.initial['timeframe_start'] = last_summary
+                form.initial['timeframe_end'] = datetime.now()
 
             templateresponse.context_data['diff'] = story.diff_to_older(story.versions.for_date(last_summary))
 
@@ -82,6 +83,4 @@ class StorySummaryAdmin(admin.ModelAdmin):
         if not obj.pk:
             obj.author = request.user
         super(StorySummaryAdmin, self).save_model(request, obj, form, change)
-
 admin.site.register(StorySummary, StorySummaryAdmin)
-

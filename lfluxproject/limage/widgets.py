@@ -9,18 +9,19 @@ from django.core.urlresolvers import reverse
 
 from pagedown.widgets import AdminPagedownWidget as OriginalAPW
 
+
 class AdminPagedownWidget(OriginalAPW):
     class Media:
         css = {'all': ('%s/css/overcast/jquery-ui-1.8.20.custom.css' % settings.STATIC_URL,
-                       '%s/limage-customizations.css' % settings.STATIC_URL,)
-                }
+                       '%s/limage-customizations.css' % settings.STATIC_URL,)}
         js = ('%s/js/jquery-1.7.2.min.js' % settings.STATIC_URL,
-                '%s/js/jquery-ui-1.8.20.custom.min.js' % settings.STATIC_URL,
-                '%s/js/jquery.form.js' % settings.STATIC_URL,
-                '%s/limage-pagedown.js' % settings.STATIC_URL,)
+              '%s/js/jquery-ui-1.8.20.custom.min.js' % settings.STATIC_URL,
+              '%s/js/jquery.form.js' % settings.STATIC_URL,
+              '%s/limage-pagedown.js' % settings.STATIC_URL,)
 
     def render(self, name, value, attrs=None):
-        if value is None: value = ''
+        if value is None:
+            value = ''
         if 'class' not in attrs:
             attrs['class'] = ""
         attrs['class'] += " wmd-input"
@@ -40,7 +41,7 @@ class AdminPagedownWidget(OriginalAPW):
                     var converter = Markdown.getSanitizingConverter();
                     selectors = {
                         input : "%(id)s",
-                        button : "%(id)s_wmd_button_bar", 
+                        button : "%(id)s_wmd_button_bar",
                         preview : "%(id)s_wmd_preview",
                     }
                     var editor = new Markdown.Editor(converter, selectors);
@@ -50,9 +51,7 @@ class AdminPagedownWidget(OriginalAPW):
                     lImage_pagedown.extend("./images/", "%(id)s_wmd_dialog", editor);
                 })();
             </script>
-            """ % {
-                'attrs' : flatatt(final_attrs),
-                'body' : conditional_escape(force_unicode(value)),
-                'id' : attrs['id'],
-            }
+            """ % {'attrs': flatatt(final_attrs),
+                   'body': conditional_escape(force_unicode(value)),
+                   'id': attrs['id'], }
         return mark_safe(html)

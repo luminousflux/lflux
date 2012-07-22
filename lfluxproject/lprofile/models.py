@@ -8,11 +8,13 @@ from django.contrib.contenttypes.models import ContentType
 from django.db.models import get_apps
 from django.contrib.auth.management import create_permissions
 
+
 class Profile(UserenaBaseProfile):
     user = models.OneToOneField(User,
                                 unique=True,
                                 verbose_name=('user'),
                                 related_name='my_profile')
+
 
 @receiver(post_save, sender=User)
 def demo_mode_set_permission(sender, instance, created, raw, **kwargs):
@@ -21,13 +23,13 @@ def demo_mode_set_permission(sender, instance, created, raw, **kwargs):
 
     # ensure that all Permissions exist. not doing it would break test environments & installation
     for app in get_apps():
-           create_permissions(app, None, 2)
+        create_permissions(app, None, 2)
 
     default_group_perms = [
         Permission.objects.get_by_natural_key(app_label='lstory', model='story', codename='add_story'),
         Permission.objects.get_by_natural_key(app_label='lstory', model='story', codename='change_story'),
         Permission.objects.get_by_natural_key(app_label='lstory', model='story', codename='delete_story'),
-        ]
+    ]
 
     for p in default_group_perms:
         if not p in g.permissions.all():
@@ -36,4 +38,3 @@ def demo_mode_set_permission(sender, instance, created, raw, **kwargs):
         instance.groups.add(g)
         instance.is_staff = True
         instance.save()
-

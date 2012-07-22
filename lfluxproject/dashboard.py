@@ -28,8 +28,8 @@ class CustomIndexDashboard(Dashboard):
         site_name = get_admin_site_name(context)
         # append a link list module for "quick links"
 
-        self.children.append(OwnInstancesList(_('My Stories'),model=Story, key='authors'))
-        self.children.append(ModelAdd(None,model=Story, text='Create new Story'))
+        self.children.append(OwnInstancesList(_('My Stories'), model=Story, key='authors'))
+        self.children.append(ModelAdd(None, model=Story, text='Create new Story'))
 
 
 class CustomAppIndexDashboard(AppIndexDashboard):

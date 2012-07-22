@@ -14,7 +14,7 @@ MANAGERS = ADMINS
 # you want to change this in localsettinsg
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': '',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
@@ -43,8 +43,12 @@ LANGUAGE_CODE = 'en-us'
 
 
 # from
-# http://morethanseven.net/2009/02/11/django-settings-tip-setting-relative-paths.html
-import os,django
+# http://morethanseven.net/2009/02/11/
+# django-settings-tip-setting-relative-paths.html
+
+import os
+import django
+
 DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
@@ -90,14 +94,14 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    #'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -142,8 +146,8 @@ INSTALLED_APPS = (
     'reversion',
 
     'userena',
-    'guardian',  # for userena
-    'easy_thumbnails', # for userena
+    'guardian',         # for userena
+    'easy_thumbnails',  # for userena
 
     'django_nose',
 
@@ -151,7 +155,7 @@ INSTALLED_APPS = (
     'lstory',
     'limage',
     'lprofile',
-    'ladmin', # admin overrides & extensions.
+    'ladmin',           # admin overrides & extensions.
 )
 
 # A sample logging configuration. The only tangible logging
@@ -185,7 +189,7 @@ AUTHENTICATION_BACKENDS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.request', # required by django-admin-tools
+    'django.core.context_processors.request',  # required by django-admin-tools
 
     'lfluxproject.context_processors.settings_processor',
     'lfluxproject.context_processors.tracking_processor',
@@ -194,20 +198,20 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 
+ADMIN_TOOLS_INDEX_DASHBOARD = {
+    'ladmin.admin.admin': 'lfluxproject.dashboard.CustomIndexDashboard',
+    'django.contrib.admin.site': 'admin_tools.dashboard.DefaultIndexDashboard'
+}
 
-ADMIN_TOOLS_INDEX_DASHBOARD = {'ladmin.admin.admin': 'lfluxproject.dashboard.CustomIndexDashboard',
-        'django.contrib.admin.site': 'admin_tools.dashboard.DefaultIndexDashboard'}
-
-EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend' # you should change this in your local settings.
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+# you should change this in your local settings.
 
 
-ANONYMOUS_USER_ID = -1 # required by guardian?
+ANONYMOUS_USER_ID = -1  # required by guardian?
 
 AUTH_PROFILE_MODULE = 'lprofile.Profile'
 LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
 LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'
 
-DEMO_MODE = False # make all users admin per default
-
-
+DEMO_MODE = False  # make all users admin per default
