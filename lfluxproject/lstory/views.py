@@ -6,6 +6,7 @@ from datetime import datetime, timedelta, date
 from reversion.models import Version
 from models import Story, StorySummary
 from django.http import HttpResponse
+from ltumble.models import LPost
 
 import pdb
 import markdown
@@ -78,6 +79,7 @@ def serve_highlighted_text(request, slug, model, field_to_diff, template='lstory
         'todate': todate,
         'mode': 'highlight',
         'allow_mark_as_read': allow_mark_as_read,
+        'tumbleposts': current.tumbleposts.all(),
     })
 
 

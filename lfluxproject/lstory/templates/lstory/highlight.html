@@ -39,5 +39,11 @@
 </div>
 </div>
 
+<div id="sidebar">
+    {% for post in tumbleposts %}
+        {% include 'tumblelog/post.html' %}
+    {% endfor %}
+</div>
+
 {% endblock %}
 

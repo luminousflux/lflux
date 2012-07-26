@@ -8,7 +8,7 @@ from taggit.managers import TaggableManager
 class Image(models.Model):
     img = models.ImageField(upload_to='limage')
 
-    tags = TaggableManager(blank=True)
+    tags = TaggableManager(blank=True, related_name='limages')
 
     object_id = models.PositiveIntegerField(null=True)
     content_type = models.ForeignKey(ContentType, null=True)

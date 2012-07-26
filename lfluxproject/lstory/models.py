@@ -5,6 +5,7 @@ from ltools.managers import VersionManagerAccessor
 import reversion
 import overdiff
 from ltools.markdowntools import pars_to_blocks
+from ltumble.models import LPost
 
 
 class Story(models.Model):
@@ -23,6 +24,9 @@ class Story(models.Model):
     region = models.CharField(max_length=255)
 
     body = models.TextField(help_text='markdown-formatted story text')
+
+    tumbleposts = models.ManyToManyField(LPost)
+
 
     tags = TaggableManager(blank=True)
 

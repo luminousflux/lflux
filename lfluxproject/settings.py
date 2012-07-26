@@ -145,6 +145,8 @@ INSTALLED_APPS = (
     'taggit',
     'reversion',
 
+    'tumblelog',
+
     'userena',
     'guardian',         # for userena
     'easy_thumbnails',  # for userena
@@ -156,6 +158,7 @@ INSTALLED_APPS = (
     'limage',
     'lprofile',
     'ladmin',           # admin overrides & extensions.
+    'ltumble',
 )
 
 # A sample logging configuration. The only tangible logging
