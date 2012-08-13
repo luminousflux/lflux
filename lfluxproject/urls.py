@@ -8,6 +8,7 @@ adminadmin.autodiscover()
 
 urlpatterns = patterns(
     '',
+    url(r'^tumblelog/', include('tumblelog.urls', namespace='tumblelog')),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url('^story/', include('lfluxproject.lstory.urls')),
     url('^$', 'lstory.views.index'),

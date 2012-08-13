@@ -6,7 +6,8 @@ from datetime import datetime, timedelta, date
 from reversion.models import Version
 from models import Story, StorySummary
 from django.http import HttpResponse
-from ltumble.models import LPost
+from tumblelog.models import Post
+from django.core.paginator import Paginator
 
 import pdb
 import markdown
@@ -71,6 +72,8 @@ def serve_highlighted_text(request, slug, model, field_to_diff, template='lstory
     allow_mark_as_read = (not cookie_exists and previous._version != current._version) or (
         cookie_exists and previous._version != current._version and not 'since' in request.GET)
 
+    tumblepage = Paginator(Post.objects.for_parent(obj).public(),10).page(request.GET.get('page', 1))
+
     return direct_to_template(request, template, {
         'current': current,
         'previous': previous,
@@ -79,7 +82,7 @@ def serve_highlighted_text(request, slug, model, field_to_diff, template='lstory
         'todate': todate,
         'mode': 'highlight',
         'allow_mark_as_read': allow_mark_as_read,
-        'tumbleposts': current.tumbleposts.all(),
+        'tumbleposts': tumblepage,
     })
 
 

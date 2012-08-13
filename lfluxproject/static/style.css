@@ -225,7 +225,7 @@ body.en #sidebar h2 {
 
 #article {
   width: 589px;
-  /* float: left; */
+  float: left;
   padding: 0;
   margin: 0;
   background: #fff;
@@ -433,6 +433,7 @@ body.en #article #summary ul li {
   border-left: 1px solid #ccc;
   margin-top: -2.5em;
   background: #eee;
+  right: 338px;
 }
 #sidebar.fixed {
   position: fixed;

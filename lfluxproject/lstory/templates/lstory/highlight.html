@@ -40,9 +40,11 @@
 </div>
 
 <div id="sidebar">
+    <div id="stream">
     {% for post in tumbleposts %}
-        {% include 'tumblelog/post.html' %}
+        {% include post.template %}
     {% endfor %}
+    </div>
 </div>
 
 {% endblock %}

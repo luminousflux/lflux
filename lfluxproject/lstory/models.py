@@ -5,7 +5,8 @@ from ltools.managers import VersionManagerAccessor
 import reversion
 import overdiff
 from ltools.markdowntools import pars_to_blocks
-from ltumble.models import LPost
+
+from lstory.managers import StoryManager
 
 
 class Story(models.Model):
@@ -25,12 +26,13 @@ class Story(models.Model):
 
     body = models.TextField(help_text='markdown-formatted story text')
 
-    tumbleposts = models.ManyToManyField(LPost)
 
 
     tags = TaggableManager(blank=True)
 
     versions = VersionManagerAccessor()
+
+    objects = StoryManager()
 
     def __unicode__(self):
         return "%s%s" % (self.title, ' /unpublished' if not self.published else '')

@@ -110,7 +110,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'reversion.middleware.RevisionMiddleware',
 )
 
@@ -152,13 +152,13 @@ INSTALLED_APPS = (
     'easy_thumbnails',  # for userena
 
     'django_nose',
+    'django_extensions',
 
     'ltools',
     'lstory',
     'limage',
     'lprofile',
     'ladmin',           # admin overrides & extensions.
-    'ltumble',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -209,6 +209,8 @@ ADMIN_TOOLS_INDEX_DASHBOARD = {
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 # you should change this in your local settings.
 
+TUMBLELOG_PARENT_MODEL = 'lstory.Story'
+
 
 ANONYMOUS_USER_ID = -1  # required by guardian?
 
@@ -218,3 +220,6 @@ LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'
 
 DEMO_MODE = False  # make all users admin per default
+
+EMBEDLY_KEY = None # OVERRIDE THIS
+EMBEDLY_MAXWIDTH = 300

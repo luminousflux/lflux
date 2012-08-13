@@ -3,6 +3,7 @@ from django.contrib.admin import AdminSite
 from lstory.admin import Story, StoryUserAdmin, StorySummary, StorySummaryAdmin
 from urls import urlpatterns
 from django import forms
+from tumblelog.admin import admin_classes
 
 
 class UserShareForm(forms.Form):
@@ -31,3 +32,8 @@ class LAdminSite(AdminSite):
 admin = LAdminSite('backend')
 admin.register(Story, UserBasedStoryAdmin)
 admin.register(StorySummary, StorySummaryAdmin)
+
+for admin_class in admin_classes:
+    admin.register(*admin_class)
+
+

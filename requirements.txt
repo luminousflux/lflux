@@ -10,5 +10,5 @@ django-userena
 django-admin-tools
 django-debug-toolbar
 django-nose
--e git+git://github.com/chuckharmston/django-tumblelog.git#egg=django-tumblelog
+-e git+git://github.com/fin/django-luminous-tumblelog.git#egg=django-luminous-tumblelog
 

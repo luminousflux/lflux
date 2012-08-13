@@ -8,23 +8,17 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'StoryPostRelation'
-        db.create_table('ltumble_storypostrelation', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('story', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['lstory.Story'])),
-            ('post', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['tumblelog.Post'], unique=True)),
-        ))
-        db.send_create_signal('ltumble', ['StoryPostRelation'])
-
-        # Adding unique constraint on 'StoryPostRelation', fields ['story', 'post']
-        db.create_unique('ltumble_storypostrelation', ['story_id', 'post_id'])
+        # Removing M2M table for field tumbleposts on 'Story'
+        db.delete_table('lstory_story_tumbleposts')
 
     def backwards(self, orm):
-        # Removing unique constraint on 'StoryPostRelation', fields ['story', 'post']
-        db.delete_unique('ltumble_storypostrelation', ['story_id', 'post_id'])
-
-        # Deleting model 'StoryPostRelation'
-        db.delete_table('ltumble_storypostrelation')
+        # Adding M2M table for field tumbleposts on 'Story'
+        db.create_table('lstory_story_tumbleposts', (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('story', models.ForeignKey(orm['lstory.story'], null=False)),
+            ('post', models.ForeignKey(orm['tumblelog.post'], null=False))
+        ))
+        db.create_unique('lstory_story_tumbleposts', ['story_id', 'post_id'])
 
     models = {
         'auth.group': {
@@ -78,11 +72,14 @@ class Migration(SchemaMigration):
             'timeframe_start': ('django.db.models.fields.DateField', [], {'null': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255'})
         },
-        'ltumble.storypostrelation': {
-            'Meta': {'unique_together': "(['story', 'post'],)", 'object_name': 'StoryPostRelation'},
+        'lstory.storysummary': {
+            'Meta': {'unique_together': "(('story', 'timeframe_end'),)", 'object_name': 'StorySummary'},
+            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
+            'body': ('django.db.models.fields.TextField', [], {}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'post': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['tumblelog.Post']", 'unique': 'True'}),
-            'story': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['lstory.Story']"})
+            'story': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['lstory.Story']"}),
+            'timeframe_end': ('django.db.models.fields.DateTimeField', [], {}),
+            'timeframe_start': ('django.db.models.fields.DateTimeField', [], {})
         },
         'taggit.tag': {
             'Meta': {'object_name': 'Tag'},
@@ -96,18 +93,7 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'object_id': ('django.db.models.fields.IntegerField', [], {'db_index': 'True'}),
             'tag': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'taggit_taggeditem_items'", 'to': "orm['taggit.Tag']"})
-        },
-        'tumblelog.post': {
-            'Meta': {'ordering': "['-date_published']", 'object_name': 'Post'},
-            'date_added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'date_modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'date_published': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'object_id': ('django.db.models.fields.PositiveIntegerField', [], {}),
-            'post_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']"}),
-            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '64'}),
-            'status': ('django.db.models.fields.CharField', [], {'default': "'d'", 'max_length': '1'})
         }
     }
 
-    complete_apps = ['ltumble']
+    complete_apps = ['lstory']
