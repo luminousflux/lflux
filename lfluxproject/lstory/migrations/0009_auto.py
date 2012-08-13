@@ -370,4 +370,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['tumblelog', 'ltumble', 'lstory']
+    complete_apps = ['tumblelog', 'lstory']
