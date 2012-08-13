@@ -140,6 +140,8 @@ INSTALLED_APPS = (
 
     'debug_toolbar',
 
+    'ltools', # overrides some imported templates
+
     'pagedown',
     'south',
     'taggit',
@@ -154,7 +156,6 @@ INSTALLED_APPS = (
     'django_nose',
     'django_extensions',
 
-    'ltools',
     'lstory',
     'limage',
     'lprofile',
