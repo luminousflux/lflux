@@ -37,11 +37,13 @@ def version(request, slug, date, template='lstory/highlight.html'):
     obj = Story.objects.get(slug=slug)
     date = _parse_iso_datetime(date)
     version = obj.versions.for_date(date)
+    tumblepage = Paginator(Post.objects.for_parent(obj).public().filter(published_at__lte=date),10).page(request.GET.get('page', 1))
 
     return direct_to_template(request, template, {
         'current': version,
         'date': date,
         'mode': 'version',
+        'tumbleposts': tumblepage,
     })
 
 
