@@ -5,6 +5,13 @@
         No changes to highlight{% else %}Changes since {{previous.ltools_versiondate|timesince}} ago
         {% endifequal %}{% endif %}</a> 
     <a class="switch version">{% if previous %}Access History{% else %}Displaying content from {{current.ltools_versiondate|date}}{% endif %}
+    
+    
+    </a>
+    <div class="highlight">
+        {% include 'lstory/timeline.inc.html' with timeline_class='highlight' %}
+    </div>
+    <div class="version">
         <span class="switch">
             {% if current.versions.previous %}
             <a href="{{current.versions.previous.get_version_url}}">«</a>
@@ -13,13 +20,6 @@
             <a href="{{current.versions.next.get_version_url}}">»</a>
             {% endif %}
         </span>
-    
-    
-    </a>
-    <div class="highlight">
-        {% include 'lstory/timeline.inc.html' with timeline_class='highlight' %}
-    </div>
-    <div class="version">
         {% include 'lstory/timeline.inc.html' with tmode_version='yup' timeline_class='version' %}
     </div>
 </div>

@@ -7,8 +7,8 @@
     {% block tumblecontent %}
     {% if post.data.provider_url %}<a href="{{post.data.provider_url}}">{{ post.data.body|markdown }}</a>{% else %}{{post.data.body|markdown}}{%endif%}
     {% endblock %}
-    {% block tumblemeta %}
     <div class="meta">
+        {% block tumblemeta %}
         {% if previous %}
         {% ifgt previous.ltools_versiondate post.published_at %}
         <span class="ins">{{ post.published_at|timesince }} ago</span>
@@ -19,6 +19,8 @@
         {{ post.published_at|timesince }} ago
         {% endif %}
         by {{post.author}}
+        {% endblock %}
+        {% block tumblevia %}{% if post.data.provider_url %}
+        via <a href="{{post.data.provider_url}}">{{post.data.provider_url|escape}}</a>{% endif %}{% endblock %}
     </div>
-    {% endblock %}
 </div>

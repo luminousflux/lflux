@@ -863,7 +863,7 @@ a.pillbtn.suggest .icon {
     display: block;
 }
 .historyform.version div.version {
-    display: block;
+    display: inline-block;
 }
 .historyform a.switch {
     cursor: pointer;
