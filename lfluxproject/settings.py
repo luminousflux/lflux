@@ -147,6 +147,7 @@ INSTALLED_APPS = (
     'taggit',
     'reversion',
 
+    'crispy_forms',     # for tumblelog
     'tumblelog',
 
     'userena',
@@ -206,6 +207,8 @@ ADMIN_TOOLS_INDEX_DASHBOARD = {
     'ladmin.admin.admin': 'lfluxproject.dashboard.CustomIndexDashboard',
     'django.contrib.admin.site': 'admin_tools.dashboard.DefaultIndexDashboard'
 }
+
+CRISPY_TEMPLATE_PACK = 'uni_form'
 
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 # you should change this in your local settings.
