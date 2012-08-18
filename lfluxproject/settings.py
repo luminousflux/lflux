@@ -219,9 +219,10 @@ TUMBLELOG_PARENT_MODEL = 'lstory.Story'
 ANONYMOUS_USER_ID = -1  # required by guardian?
 
 AUTH_PROFILE_MODULE = 'lprofile.Profile'
-LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
+LOGIN_REDIRECT_URL = USERENA_SIGNIN_REDIRECT_URL = '/backend'
 LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'
+USERENA_REDIRECT_ON_SIGNOUT = '/'
 
 DEMO_MODE = False  # make all users admin per default
 
