@@ -213,6 +213,7 @@ CRISPY_TEMPLATE_PACK = 'uni_form'
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 # you should change this in your local settings.
 
+TUMBLELOG_TYPEIMAGES = True
 TUMBLELOG_PARENT_MODEL = 'lstory.Story'
 
 
