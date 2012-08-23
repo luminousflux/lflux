@@ -56,10 +56,16 @@ def serve_highlighted_text(request, slug, model, field_to_diff, template='lstory
     if request.GET.get('date'):
         return redirect(obj.versions.for_date(_parse_iso_datetime(request.GET['date'])).get_version_url())
 
+    cookie_read_date = request.session.get('last_read', {}).get(slug, None)
+    may_track = not request.COOKIES.get('do_not_track')
+
     fromdate = None
-    fromdate = request.GET.get('since', None)
-    fromdate = request.session.get('last_read', {}).get(slug) if not fromdate else fromdate
+    fromdate = cookie_read_date
+    fromdate = request.GET.get('since', fromdate)
     fromdate = unicode(datetime.now().isoformat()) if not fromdate else fromdate
+
+    cookie_used = (fromdate == cookie_read_date)
+
     fromdate = _parse_iso_datetime(fromdate) if fromdate else None
 
     todate = _parse_iso_datetime(request.GET['until']) if request.GET.get('until') else datetime.now()
@@ -69,10 +75,9 @@ def serve_highlighted_text(request, slug, model, field_to_diff, template='lstory
 
     field_diff = current.diff_to_older(previous)
 
-    cookie_exists = slug in request.session.get('last_read', {})
-
-    allow_mark_as_read = (not cookie_exists and previous._version != current._version) or (
-        cookie_exists and previous._version != current._version and not 'since' in request.GET)
+    allow_mark_as_read = (cookie_used and previous._version != current._version) or (
+        may_track and not cookie_used and previous._version != current._version and not 'since' in request.GET) or (
+        may_track and not cookie_read_date and not 'since' in request.GET)
 
     tumblepage = Paginator(Post.objects.for_parent(obj).public(),10).page(request.GET.get('page', 1))
 
