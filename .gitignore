@@ -4,4 +4,6 @@
 .pbundle
 lfluxproject/localsettings.py
 lfluxproject/test.db
+db/*
+env/*
 

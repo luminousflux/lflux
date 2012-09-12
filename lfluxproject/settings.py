@@ -229,3 +229,5 @@ DEMO_MODE = False  # make all users admin per default
 
 EMBEDLY_KEY = None # OVERRIDE THIS
 EMBEDLY_MAXWIDTH = 300
+
+SOUTH_TESTS_MIGRATE = False

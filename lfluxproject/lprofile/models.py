@@ -1,3 +1,6 @@
+import hashlib
+from datetime import datetime
+
 from django.db import models
 from django.contrib.auth.models import User, Group, Permission
 from userena.models import UserenaBaseProfile
@@ -7,9 +10,10 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import get_apps
 from django.contrib.auth.management import create_permissions
+from tumblelog.models import ApiKeyProfileMixin
 
 
-class Profile(UserenaBaseProfile):
+class Profile(UserenaBaseProfile, ApiKeyProfileMixin):
     user = models.OneToOneField(User,
                                 unique=True,
                                 verbose_name=('user'),
@@ -18,7 +22,11 @@ class Profile(UserenaBaseProfile):
 
 @receiver(post_save, sender=User)
 def demo_mode_set_permission(sender, instance, created, raw, **kwargs):
-    Profile.objects.get_or_create(user=instance)
+    try:
+        Profile.objects.get_or_create(user=instance)
+    except Exception, e:
+        print e
+        return
     g, created = Group.objects.get_or_create(name='editor')
 
     # ensure that all Permissions exist. not doing it would break test environments & installation
