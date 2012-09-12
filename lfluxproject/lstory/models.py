@@ -16,7 +16,7 @@ class Story(models.Model):
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    published = models.DateTimeField(null=True)
+    published = models.DateTimeField(null=True, blank=True)
     authors = models.ManyToManyField(User)
 
     timeframe_start = models.DateField(null=True)
