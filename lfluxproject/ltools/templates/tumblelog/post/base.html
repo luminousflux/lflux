@@ -1,0 +1,17 @@
+{% extends 'tumblelog/post.html'%}
+{% load markup %}
+{% load ifgt %}
+        {% block tumblemeta %}
+        {% if previous %}
+        {% ifgt previous.ltools_versiondate post.published_at %}
+        <span class="ins">{{ post.published_at|timesince }} ago</span>
+        {% else %}
+        {{ post.published_at|timesince }} ago
+        {% endifgt %}
+        {% else %}
+        {{ post.published_at|timesince }} ago
+        {% endif %}
+        by {{post.author}}
+        {% endblock %}
+    </div>
+</div>

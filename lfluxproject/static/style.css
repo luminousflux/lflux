@@ -602,15 +602,6 @@ ul.tabs li.sel a,
   font-size: 1.2em;
 }
 
-#sidebar #stream {
-  line-height: 1.5em;
-}
-
-#sidebar #stream .btns {
-  overflow: hidden;  
-  margin-bottom: 1.5em;
-}
-
 #sidebar .breaking {
   background: #def;  
   border-bottom-color: #def;
@@ -624,115 +615,7 @@ ul.tabs li.sel a,
   font-weight: normal
 }      
 
-#sidebar #stream .notice.last {
-  margin-bottom: 1em;
-}
-#sidebar #stream .notice {
-  padding: 1em 2em 1.5em 1em;
-}
-#sidebar #stream .btnbox {
-  padding: 1em 2em 0 1em;
-}
 
-#sidebar #stream .notice .btns {
-  clear: both;
-}
-#sidebar #stream .notice .noticeicon {
-  float: left;
-  margin-right: 1em
-}
-#sidebar #stream #entries {
-  padding: 10px 20px 10px 10px;
-}
-
-#stream .pillbtn.subscribe {
-  float: right;
-}
-#react .pillbtn.subscribe {
-  float: left;
-  margin-right: .5em;
-}
-a.pillbtn {
-  margin: 0;
-  line-height: 1.2em;
-  -moz-border-radius: 1em;
-  -webkit-border-radius: .999em;
-  padding: .4em 1.2em;
-  text-decoration: none;
-  background-color: #999;
-  color: #fff !important; 
-}
-#sidebar #stream .pillbtn.repost {
-  font-size: .8em;
-  background-color: #999;
-  float: right;
-}
-#sidebar #stream .pillbtn.repost:hover {
-  background-color: #999;
-}
-a.pillbtn.subscribe {
-  background-color: #f90; /*#579;*/
-}
-a.pillbtn.suggest {
-  padding-left: .8em;
-  float: left;
-  background-color: #469;
-}
-a.pillbtn.suggest .icon {
-  font-family: Arial, Helvetica, sans-serif;
-  float: left;
-  font-size: 2em;
-  font-weight: bold;
-  line-height: 0;
-  padding: .35em .4em 0 .15em;
-}
-
-#sidebar #stream .date {
-  color: #aaa;
-  font-size: .9em;
-  margin-top:.3em;
-}
-
-#sidebar #stream .date a {
-  color: #999;
-}
-
-#sidebar #stream .entry {
-  background: url(types/icon_regular.png) left top no-repeat; 
-  padding-left: 40px;
-  margin-bottom: 30px;
-}    
-#sidebar #stream .tweet { background-image: url(http://t2.gstatic.com/images?q=tbn:ANd9GcQdTz8kNv_m2YXfn_tKSSMowLHBYrnCCZENc_cjyDgL88RwW66g); background-position: -3px -5px; }
-#sidebar #stream .link { background-image: url(types/icon_link.png); }
-#sidebar #stream .video { background-image: url(types/icon_video.png); }
-#sidebar #stream .image { background-image: url(types/icon_image.png); }
-#sidebar #stream .video embed, #sidebar #stream .image img { margin-bottom: 5px; }
-#sidebar #stream .quote { background-image: url(types/icon_quote.png); }
-#sidebar #stream .quote blockquote {
-  margin: 0; padding: 0;
-  font-size: 1.4em;
-  line-height: 1.2em;
-}
-#sidebar #stream .quote cite {
-  font-style: normal;
-  display: block;
-  line-height: 1.3em;
-  margin: 5px 0;
-}
-#sidebar #stream .tweet img.t {
-  margin-left: -6px;
-  position: relative;
-  top: 10px;
-}
-#sidebar #stream .tweet blockquote {
-  border: 1px solid #ccc;
-  background: #fff;
-  margin: 0; padding: .5em;
-  margin-top: -10px;
-}
-#sidebar #stream .tweet cite {
-  font-style: normal;
-}
 #next, #react .inner, #footer {
   clear: both;
   padding: 10px 20px 15px 30px;
