@@ -56,15 +56,15 @@ def serve_highlighted_text(request, slug, model, field_to_diff, template='lstory
     if request.GET.get('date'):
         return redirect(obj.versions.for_date(_parse_iso_datetime(request.GET['date'])).get_version_url())
 
-    cookie_read_date = request.session.get('last_read', {}).get(slug, None)
+    cookie_lastread = request.session.get('last_read', {}).get(slug, None)
     may_track = not request.COOKIES.get('do_not_track')
 
     fromdate = None
-    fromdate = cookie_read_date
+    fromdate = cookie_lastread
     fromdate = request.GET.get('since', fromdate)
     fromdate = unicode(datetime.now().isoformat()) if not fromdate else fromdate
 
-    cookie_used = (fromdate == cookie_read_date)
+    cookie_used = (fromdate == cookie_lastread)
 
     fromdate = _parse_iso_datetime(fromdate) if fromdate else None
 
@@ -75,11 +75,17 @@ def serve_highlighted_text(request, slug, model, field_to_diff, template='lstory
 
     field_diff = current.diff_to_older(previous)
 
-    allow_mark_as_read = (cookie_used and previous._version != current._version) or (
-        may_track and not cookie_used and previous._version != current._version and not 'since' in request.GET) or (
-        may_track and not cookie_read_date and not 'since' in request.GET)
-
     tumblepage = Paginator(Post.objects.for_parent(obj).public(),10).page(request.GET.get('page', 1))
+
+    body_changed = previous._version != current._version
+    tumblelog_changed = False if not Post.objects.for_parent(obj).count() else Post.objects.for_parent(obj)[0].published_at > fromdate
+    content_changed = body_changed or tumblelog_changed
+    from_specified = 'since' in request.GET
+    cookie_exists = cookie_lastread
+
+
+    allow_mark_as_read = not (may_track and cookie_exists and from_specified) # prevent popup only when specifying from_date while a cookie is already set
+
 
     return direct_to_template(request, template, {
         'current': current,
@@ -133,8 +139,6 @@ def mark_as_read(request, slug):
     x[slug] = value
     request.session['last_read'] = x
     request.session.modified = True
-
-    print x, previous_value
 
     s = Story.objects.get(slug=slug)
 
