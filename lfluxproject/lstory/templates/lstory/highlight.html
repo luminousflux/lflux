@@ -14,21 +14,28 @@
 
 <div id="header">
     <h1>{{current.title}}</h1>
-    <div id="meta">
-        <span class="icon">⌚</span>
-        {% include 'lstory/history.inc.html' %}<br />
-    </div>
+</div>
+<div id="summary">
+    {% if field_diff %}
+        {{field_diff.summary.0|markdown:"extra,insparagraph"}}
+    {% else %}
+        {{current.summary|markdown:"extra,insparagraph"}}
+    {% endif %}
 </div>
 {% if summary %}
 <hr />
 {{summary.body|markdown:"extra,insparagraph"}}
 <hr />
 {% endif %}
+<div id="meta">
+    <span class="icon">⌚</span>
+    {% include 'lstory/history.inc.html' %}<br />
+</div>
 <div id="article" data-article-id="{{current.slug}}" data-mark-as-read="{% url "mark_as_read" slug=current.slug%}" data-article-current="{{ current.versions.is_current}}" data-article-changed="{% if previous %}{% ifequal current.ltools_versiondate previous.ltools_versiondate %}False{%else%}True{%endifequal%}{% else %}False{% endif %}" {% if previous %}data-article-previous-date="{{previous.ltools_versiondate.isoformat}}"{% endif %} data-article-current-date="{{current.ltools_versiondate.isoformat}}" data-allow-mark-as-read="{% if allow_mark_as_read %}True{% else %}False{%endif%}">
 
 <div class="inner">
     {% if field_diff %}
-    {{ field_diff|markdown:"extra,insparagraph" }}
+    {{ field_diff.body.0|markdown:"extra,insparagraph" }}
     {% else %}
     {{current.body|markdown:"extra,insparagraph"}}
     {% endif %}

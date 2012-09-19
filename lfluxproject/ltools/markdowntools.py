@@ -5,6 +5,7 @@ import re
 
 
 # MONKEYPATCH!
+# markdown's element list includes ins and del as block-level elements, which caused issues with the tags we're inserting as highlights.
 def monkeypatch_markdown_ins_and_del_are_not_blocklevel_elements():
     BLOCK_LEVEL_ELEMENTS = re.compile("^(p|div|h[1-6]|blockquote|pre|table|dl|ol|ul"
                                       "|script|noscript|form|fieldset|iframe|math"
@@ -19,6 +20,8 @@ monkeypatch_markdown_ins_and_del_are_not_blocklevel_elements()
 
 
 def pars_to_blocks(pars):
+    """ this simulates one of the phases the markdown library goes through when parsing text and returns the paragraphs grouped as blocks, as markdown handles them
+    """
     pars = list(pars)
     m = markdown.Markdown()
     bp = markdown.blockprocessors.build_block_parser(m)
@@ -38,13 +41,13 @@ def pars_to_blocks(pars):
                     parsbefore = parsbefore[1:]
 
                 if pars and pars[0].strip('\n') != parsbefore[0].strip('\n'):
-                    pb0s = parsbefore[0].strip('\n')
-                    p0s = pars[0].strip('\n')
-                    if pb0s.endswith(p0s):
-                        lpb = len(pb0s)
-                        lp = len(p0s)
-                        b = pb0s[0:lpb - lp]
-                        blocks.append(b)
+                    strippedbefore = parsbefore[0].strip('\n')
+                    strippedcurrent = pars[0].strip('\n')
+                    if struppedbefore.endswith(strippedcurrent):
+                        beforelength = len(strippedbefore)
+                        currentlength = len(strippedcurrent)
+                        block = strippedbefore[0:beforelength - currentlength]
+                        blocks.append(block)
 
                     else:
                         raise Exception('unsupported change by blockprocessor. abort! abort!')

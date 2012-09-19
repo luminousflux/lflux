@@ -3,13 +3,12 @@ from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 from ltools.managers import VersionManagerAccessor
 import reversion
-import overdiff
-from ltools.markdowntools import pars_to_blocks
+from ltools.models import VersionedContentMixin
 
 from lstory.managers import StoryManager
 
 
-class Story(models.Model):
+class Story(VersionedContentMixin, models.Model):
     name = models.CharField(max_length=255, help_text='this should not change during story development')
     title = models.CharField(max_length=255, help_text='this reflects our current understanding of the topic')
     slug = models.SlugField(unique=True, help_text='based on story name')
@@ -24,6 +23,7 @@ class Story(models.Model):
 
     region = models.CharField(max_length=255)
 
+    summary = models.TextField(help_text='markdown-formatted summary text consistiong of 2 or 3 list items only!')
     body = models.TextField(help_text='markdown-formatted story text')
 
 
@@ -39,6 +39,7 @@ class Story(models.Model):
 
     class Meta:
         verbose_name_plural = 'Stories'
+        versioned_attributes = ['body:d', 'summary:d', 'region:=', 'title:=']
 
     @models.permalink
     def get_absolute_url(self):
@@ -49,21 +50,6 @@ class Story(models.Model):
         if not hasattr(self, '_version'):
             return ('story', [self.slug],)
         return ('storyversion', [self.slug, self.ltools_versiondate.isoformat()],)
-
-    @property
-    def body_pars(self):
-        tmp = self.body.replace('\r', '').split('\n\n')
-        tmp2 = pars_to_blocks(tmp)
-        return tmp2
-
-    def diff_to_older(self, older):
-        field_diff_data = list(overdiff.overdiff(older.body_pars, self.body_pars))
-        field_diffs = []
-
-        for i in xrange(0, len(field_diff_data)):
-            field_diffs.append(overdiff.selection_to_s(self.body_pars[i], field_diff_data[i], markdown=True))
-        field_diff = '\n\n'.join(field_diffs)
-        return field_diff
 
 
 try:
