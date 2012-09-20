@@ -111,8 +111,19 @@ abbr { border-bottom: 1px dotted #666; }
   min-width: 107px;
   border-left: 2px dotted #ccc;
 }
-#header #essentialals #place {
-  border-left: none; 
+#header #essentials #place {
+  border-left: none;
+  position: relative;
+}
+#header #essentials #place * {
+    z-index: 10;
+    position: absolute;
+}
+#header #essentials #place canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9;
 }
 
 #summary {

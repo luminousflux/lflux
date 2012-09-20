@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 {% load url from future %}
+{% load make_map %}
+{% load static %}
 {% block head %}
     {{ block.super }}
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url 'storyfeed' slug=current.slug %}" />
+    <script src="{% static 'js/worldmap.js' %}"></script>
 {% endblock %}
 {% block content %}
 {% load markup %}
@@ -13,6 +16,25 @@
 </div>
 
 <div id="header">
+    <div id="essentials">
+        <div id="place" class="essential">
+            <h3>Where</h3>
+            <canvas id="placemap" height="60px" width="125px"></canvas>
+        </div>
+        <div id="time" class="essential">
+            <h3>When</h3>
+            <div id="time_selection">
+                {% spaceless %}
+                {% if current.timeframe_start %}{{current.timeframe_start|date:"Y"}}{% endif %}{% spaceless %}
+                {% endspaceless %}{% if current.timeframe_start or current.timeframe_end %}—{% endif %}{% spaceless %}
+                {% endspaceless %}{% if current.timeframe_end %}{{current.timeframe_end|date:"Y"}}{% else %}<em>ongoing</em>{% endif %}
+                {% endspaceless %}
+            </div>
+        </div>
+        {% if current.region %}
+            {{current.get_region_data|make_map:"placemap"}}
+        {% endif %}
+    </div>
     <h1>{{current.title}}</h1>
 </div>
 <div id="summary">

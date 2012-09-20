@@ -4,6 +4,7 @@ from taggit.managers import TaggableManager
 from ltools.managers import VersionManagerAccessor
 import reversion
 from ltools.models import VersionedContentMixin
+from ltools.fields import CountryField
 
 from lstory.managers import StoryManager
 
@@ -21,7 +22,7 @@ class Story(VersionedContentMixin, models.Model):
     timeframe_start = models.DateField(null=True)
     timeframe_end = models.DateField(null=True, blank=True)
 
-    region = models.CharField(max_length=255)
+    region = CountryField(max_length=255)
 
     summary = models.TextField(help_text='markdown-formatted summary text consistiong of 2 or 3 list items only!')
     body = models.TextField(help_text='markdown-formatted story text')
