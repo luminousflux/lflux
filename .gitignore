@@ -6,4 +6,5 @@ lfluxproject/localsettings.py
 lfluxproject/test.db
 db/*
 env/*
-
+lfluxproject/data/countries.txt
+lfluxproject/media/

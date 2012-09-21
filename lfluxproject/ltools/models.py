@@ -28,11 +28,12 @@ class VersionedContentMixin(models.Model):
     class Meta:
         abstract = True
 
-    def diff_to_older(self, older):
+    def diff_to_older(self, older, override={}):
         results = {}
         for fielddescriptor in self._meta.versioned_attributes:
             extended = ':' in fielddescriptor
             field, difftype = (fielddescriptor,'=',) if not extended else fielddescriptor.split(':')
 
-            results[field] = DIFFTYPES[difftype](getattr(older,field), getattr(self,field))
+            fn = DIFFTYPES[difftype] if not difftype in override else override[difftype]
+            results[field] = fn(getattr(older,field), getattr(self,field))
         return results

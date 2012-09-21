@@ -6,6 +6,7 @@
     {{ block.super }}
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url 'storyfeed' slug=current.slug %}" />
     <script src="{% static 'js/worldmap.js' %}"></script>
+    <script src="{% static 'js/jquery.sparkline.min.js' %}"></script>
 {% endblock %}
 {% block content %}
 {% load markup %}
@@ -17,10 +18,13 @@
 
 <div id="header">
     <div id="essentials">
-        <div id="place" class="essential">
-            <h3>Where</h3>
-            <canvas id="placemap" height="60px" width="125px"></canvas>
-        </div>
+        {% if current.region %}
+            <div id="place" class="essential">
+                <h3>Where</h3>
+                <canvas id="placemap" height="60px" width="125px"></canvas>
+            </div>
+            {{current.get_region_data|make_map:"placemap"}}
+        {% endif %}
         <div id="time" class="essential">
             <h3>When</h3>
             <div id="time_selection">
@@ -31,9 +35,13 @@
                 {% endspaceless %}
             </div>
         </div>
-        {% if current.region %}
-            {{current.get_region_data|make_map:"placemap"}}
-        {% endif %}
+        <div id="freshness" class="essential" title="activity over the last month">
+            <h3>Active?</h3>
+            <span class="inlinesparkline">{{current.versions.activity|join:','}}</span>
+        </div>
+        <script>
+            $('.inlinesparkline').sparkline('html', {height: '35px', spotColor: false, minSpotColor: false, maxSpotColor: false, disableInteraction: true});
+        </script>
     </div>
     <h1>{{current.title}}</h1>
 </div>

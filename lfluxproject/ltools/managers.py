@@ -2,6 +2,7 @@ from django.db.models import signals
 from datetime import datetime, timedelta, date
 import reversion
 from collections import namedtuple
+from difflib import SequenceMatcher
 
 
 # convenience methods for reversion-backed models
@@ -101,7 +102,7 @@ class VersionManagerAccessor(object):
             datetimes = sorted(x.keys())
             dates = self.by_date()
             beginning = x[datetimes[0]]._version.revision.date_created.date()
-            days = (x[datetimes[-1]]._version.revision.date_created.date() - beginning).days
+            days = (x[datetimes[-1]]._version.revision.date_created.date() - beginning).days + 1
 
             Day = namedtuple('Day', ('date', 'events',),)
 
@@ -119,6 +120,35 @@ class VersionManagerAccessor(object):
             if not self.obj:
                 raise VersionManagerHelperException("sorry, this is only available for %s instances" % self.cls)
             return not hasattr(self.obj, '_version') or self.for_date(datetime.now())._version == self.obj._version
+
+        def activity(self):
+            diff_overrides = {'d': lambda x,y: SequenceMatcher(a=x,b=y).ratio(), '=': lambda x,y: 0}
+            by_date = self.by_date()
+            today = date.today()
+            activity = []
+            for i in xrange(0,-31,-1):
+                print i
+                day = today + timedelta(days=i)
+                print day
+                if day in by_date:
+                    print '---', day
+                    current_version = by_date[day][0]
+                    previous_version = current_version.versions.previous()
+                    amount = 0
+                    if not previous_version:
+                        continue
+
+                    diffs = current_version.diff_to_older(previous_version, override=diff_overrides)
+
+                    tmp = 0
+                    for key,value in diffs.iteritems():
+                        tmp+=value*len(getattr(current_version,key))
+                    activity.append(tmp)
+                else:
+                    activity.append(0)
+            return activity[::-1] # reverse
+
+
 
     def __get__(self, instance, owner):
         if not instance:
