@@ -46,7 +46,7 @@ def version(request, slug, date, template='lstory/highlight.html'):
     })
 
 
-def serve_highlighted_text(request, slug, model, template='lstory/highlight.html'):
+def diff(request, slug, model, template='lstory/highlight.html'):
     obj = get_object_or_404(model, slug=slug)
 
     if request.GET.get('date'):
@@ -55,13 +55,7 @@ def serve_highlighted_text(request, slug, model, template='lstory/highlight.html
     cookie_lastread = request.session.get('last_read', {}).get(slug, None)
     may_track = not request.COOKIES.get('do_not_track')
 
-    fromdate = None
-    fromdate = cookie_lastread
-    fromdate = request.GET.get('since', fromdate)
-    fromdate = unicode(datetime.now().isoformat()) if not fromdate else fromdate
-
-    cookie_used = (fromdate == cookie_lastread)
-
+    fromdate = request.GET.get('since', None) or cookie_lastread or unicode(datetime.now().isoformat()) 
     fromdate = _parse_iso_datetime(fromdate) if fromdate else None
 
     todate = _parse_iso_datetime(request.GET['until']) if request.GET.get('until') else datetime.now()
@@ -69,24 +63,19 @@ def serve_highlighted_text(request, slug, model, template='lstory/highlight.html
     current = obj.versions.for_date(todate)
     previous = obj.versions.for_date(fromdate)
 
-    field_diff = current.diff_to_older(previous)
-
     tumblepage = Paginator(Post.objects.for_parent(obj).public(),10).page(request.GET.get('page', 1))
 
-    body_changed = previous._version != current._version
-    tumblelog_changed = False if not Post.objects.for_parent(obj).count() else Post.objects.for_parent(obj)[0].published_at > fromdate
-    content_changed = body_changed or tumblelog_changed
     from_specified = 'since' in request.GET
     cookie_exists = cookie_lastread
 
 
-    allow_mark_as_read = not (may_track and cookie_exists and from_specified) # prevent popup only when specifying from_date while a cookie is already set
+    allow_mark_as_read = not request.GET.get('until') and not (may_track and cookie_exists and from_specified) # prevent popup only when specifying from_date while a cookie is already set
 
 
     return direct_to_template(request, template, {
         'current': current,
         'previous': previous,
-        'field_diff': field_diff,
+        'field_diff': current.diff_to_older(previous),
         'fromdate': fromdate,
         'todate': todate,
         'mode': 'highlight',
