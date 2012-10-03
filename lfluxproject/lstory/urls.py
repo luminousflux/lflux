@@ -13,6 +13,5 @@ urlpatterns = patterns(
     url(r'^(?P<slug>[^/]*)/s/(?P<date_end>[^/]*)/$', summary, name='storysummary'),
     url(r'^(?P<slug>[^/]*)/$', serve_highlighted_text, {
         'model': Story,
-        'field_to_diff': 'body',
         }, name='story'),
 )

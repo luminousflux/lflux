@@ -127,16 +127,16 @@ class VersionManagerAccessor(object):
             today = date.today()
             activity = []
             for i in xrange(0,-31,-1):
-                print i
                 day = today + timedelta(days=i)
-                print day
                 if day in by_date:
-                    print '---', day
                     current_version = by_date[day][0]
                     previous_version = current_version.versions.previous()
                     amount = 0
-                    if not previous_version:
-                        continue
+                    if not previous_version: # first version, just add a blip.
+                        activity.append(100)
+                        activity.append(0)
+                        activity.append(None)
+                        break
 
                     diffs = current_version.diff_to_older(previous_version, override=diff_overrides)
 

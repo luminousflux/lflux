@@ -32,7 +32,6 @@ def index(request, template='lstory/index.html'):
         'stories': stories,
     })
 
-
 def version(request, slug, date, template='lstory/highlight.html'):
     obj = Story.objects.get(slug=slug)
     date = _parse_iso_datetime(date)
@@ -47,11 +46,8 @@ def version(request, slug, date, template='lstory/highlight.html'):
     })
 
 
-def serve_highlighted_text(request, slug, model, field_to_diff, template='lstory/highlight.html'):
+def serve_highlighted_text(request, slug, model, template='lstory/highlight.html'):
     obj = get_object_or_404(model, slug=slug)
-
-    if not hasattr(obj, field_to_diff):
-        raise Exception("the selected object does not have a %s field" % field_to_diff)
 
     if request.GET.get('date'):
         return redirect(obj.versions.for_date(_parse_iso_datetime(request.GET['date'])).get_version_url())
