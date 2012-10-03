@@ -317,6 +317,7 @@ blockquote.ins, p.ins , ul.ins {
   padding-left: 20px;
   padding-bottom: .7em;
   overflow: hidden;
+  max-width: 580px;
 }
 #meta a { 
   color: #999;

@@ -60,6 +60,9 @@ class VersionManagerAccessor(object):
             vs = self.obj.versions.list()
             return dict([(x._version.revision.date_created, x,) for x in vs])
 
+        def this_date(self):
+            return self.obj._version.revision.date_created
+
         def previous(self):
             current_date = self.obj._version.revision.date_created if hasattr(self.obj, '_version') else None
             versions_by_datetime = self.by_datetime()

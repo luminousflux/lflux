@@ -8,9 +8,9 @@
         <li data-date="{{day.date|date:'c'}}" {% if not day.events %}class="empty"{% endif %}><ul>{% for event in day.events %}<li>
             <a href="{% spaceless %}
                 {% if tmode_version %}{{event.get_version_url}}
-                {% else %}{{event.get_absolute_url}}?since={{event.ltools_versiondate.isoformat}}
+                {% else %}{{event.get_absolute_url}}?since={{event.versions.this_date.isoformat}}
                 {% endif %}
-                     {% endspaceless %}" data-date="{{event.ltools_versiondate.isoformat}}">{{event.ltools_versiondate|date:'d'}}</a>
+                     {% endspaceless %}" data-date="{{event.versions.this_date.isoformat}}">{{event.versions.this_date|date:'d'}}</a>
         </li>{%endfor%}</ul></li>
         {% endfor %}
         </ul></li>
