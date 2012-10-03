@@ -1,17 +1,9 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.simple import direct_to_template
-from django.template import RequestContext
-import reversion
-from datetime import datetime, timedelta, date
-from reversion.models import Version
-from models import Story, StorySummary
-from django.http import HttpResponse
+from datetime import datetime
+from models import Story
 from tumblelog.models import Post
 from django.core.paginator import Paginator
-
-import pdb
-import markdown
-from functools import wraps
 
 
 # from http://dwiel.net/blog/python-parsing-the-output-of-datetime-isoformat/
@@ -53,7 +45,6 @@ def diff(request, slug, model, template='lstory/highlight.html'):
         return redirect(obj.versions.for_date(_parse_iso_datetime(request.GET['date'])).get_version_url())
 
     cookie_lastread = request.session.get('last_read', {}).get(slug, None)
-    may_track = not request.COOKIES.get('do_not_track')
 
     fromdate = request.GET.get('since', None) or cookie_lastread or unicode(datetime.now().isoformat()) 
     fromdate = _parse_iso_datetime(fromdate) if fromdate else None
@@ -65,6 +56,8 @@ def diff(request, slug, model, template='lstory/highlight.html'):
 
     tumblepage = Paginator(Post.objects.for_parent(obj).public(),10).page(request.GET.get('page', 1))
 
+
+    may_track = not request.COOKIES.get('do_not_track')
     from_specified = 'since' in request.GET
     cookie_exists = cookie_lastread
 
