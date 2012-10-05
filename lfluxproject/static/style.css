@@ -876,3 +876,14 @@ body.historyversion #history div.version {
     background-color: yellow;
 }
 
+#versionlink {
+    display: none;
+    position: absolute;
+    background-color: #f4f4f4;
+    padding: 10px;
+    right: 0;
+    width: 150px;
+}
+#versionlink input {
+    width: 100%;
+}

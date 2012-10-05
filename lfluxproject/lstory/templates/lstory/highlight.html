@@ -2,11 +2,17 @@
 {% load url from future %}
 {% load make_map %}
 {% load static %}
+{% load replace %}
 {% block head %}
     {{ block.super }}
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url 'storyfeed' slug=current.slug %}" />
     <script src="{% static 'js/worldmap.js' %}"></script>
     <script src="{% static 'js/jquery.sparkline.min.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#embed_value').val("{{embed_code|escapejs}}");
+        });
+    </script>
 {% endblock %}
 {% block content %}
 {% load markup %}
@@ -63,6 +69,14 @@
 
 
 <div id="history">
+    <div id="versionlink" style="">
+        link to this version:
+        <input type="text" value="http://{{request.get_host}}{{current.get_version_url}}" />
+        <br />
+        embed this article:
+        <br />
+        <input type="text" id="embed_value" />
+    </div>
     <div class="highlight">
         {% include 'lstory/timeline.inc.html' with timeline_class='highlight' %}
     </div>

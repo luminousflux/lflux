@@ -66,7 +66,7 @@ def diff(request, slug, model, template='lstory/highlight.html'):
 
     allow_mark_as_read = not request.GET.get('until') and not (may_track and cookie_exists and from_specified) # prevent popup only when specifying from_date while a cookie is already set
 
-    embed_url = render_to_string('lstory/embedcode.html', {'story': current}, context_instance=RequestContext(request))
+    embed_code = render_to_string('lstory/embedcode.html', {'story': current}, context_instance=RequestContext(request))
 
 
     return direct_to_template(request, template, {
@@ -78,7 +78,7 @@ def diff(request, slug, model, template='lstory/highlight.html'):
         'mode': 'highlight',
         'allow_mark_as_read': allow_mark_as_read,
         'tumbleposts': tumblepage,
-        'embed_url': embed_url,
+        'embed_code': embed_code,
     })
 
 

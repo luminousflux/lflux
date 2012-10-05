@@ -1,1 +1,1 @@
-<iframe src="http://{{request.get_host}}{{story.get_embed_url}}" onload="var iframe = this; window.addEventListener('message', function(e) {if(e.origin == '{{request.get_host}}' && !isNAN(e.data)) {iframe.height = (parseInt(e.data) + 32) + 'px';} });" />
+<iframe width="610px" style="border: none;" src="http://{{request.get_host}}{{story.get_embed_url}}" onload="var iframe = this; window.addEventListener('message', function(e) {if(e.origin == 'http://{{request.get_host}}' && !isNaN(e.data)) {iframe.height = (parseInt(e.data) + 32) + 'px';} });" />
