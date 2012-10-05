@@ -1,4 +1,4 @@
-<div class="timeline {{timeline_class|default_if_none:''}}" style="display: block">
+<div class="timeline {{timeline_class|default_if_none:''}}">
     <ul class="months">
         {% spaceless %}
         {% regroup current.versions.timeline by date|date:"F Y" as timeline %}

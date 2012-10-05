@@ -74,10 +74,17 @@ function initTimelines() {
 function initHistoryView() {
     $('.historyform a.switch').click(function() {
         var which = $(this).hasClass('version')?'version':'highlight';
-        $(this).closest('.historyform').each(function(i,e){
-            $(e).attr('class','historyform '+($(e).hasClass(which)?'':which));
+        var newclass = 'history'+which;
+
+        $(document.body).each(function(i,e){
+            var show = !$(this).hasClass(newclass);
+            $(this).removeClass('historyhighlight');
+            $(this).removeClass('historyversion');
+            if(show) {
+                $(this).addClass(newclass);
+            }
         });
-        setTimeout(initTimelines, 0);
+        setTimeout(initTimelines, 100);
     });
 }
 

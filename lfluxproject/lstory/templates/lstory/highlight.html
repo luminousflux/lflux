@@ -22,7 +22,7 @@
         {% if current.region %}
             <div id="place" class="essential">
                 <h3>Where</h3>
-                <canvas id="placemap" height="60px" width="125px"></canvas>
+                <canvas id="placemap"></canvas>
             </div>
             {{current.get_region_data|make_map:"placemap"}}
         {% endif %}
@@ -53,17 +53,31 @@
         {{current.summary|markdown:"extra,insparagraph"}}
     {% endif %}
 </div>
-{% if summary %}
-<hr />
-{{summary.body|markdown:"extra,insparagraph"}}
-<hr />
-{% endif %}
+{% block beforearticle %}
+{% endblock %}
 <div id="meta">
     <span class="icon">⌚</span>
     {% include 'lstory/history.inc.html' %}<br />
 </div>
 <div id="article" data-article-id="{{current.slug}}" data-mark-as-read="{% url "mark_as_read" slug=current.slug%}" data-article-current="{{ current.versions.is_current }}" data-article-changed="{% if previous %}{% ifequal current.versions.this_date previous.versions.this_date %}False{%else%}True{%endifequal%}{% else %}False{% endif %}" {% if previous %}data-article-previous-date="{{previous.versions.this_date.isoformat}}"{% endif %} data-article-current-date="{{current.versions.this_date.isoformat}}" data-allow-mark-as-read="{% if allow_mark_as_read %}True{% else %}False{%endif%}">
 
+
+<div id="history">
+    <div class="highlight">
+        {% include 'lstory/timeline.inc.html' with timeline_class='highlight' %}
+    </div>
+    <div class="version">
+        <span class="switch">
+            {% if current.versions.previous %}
+            <a href="{{current.versions.previous.get_version_url}}">«</a>
+            {% endif %}
+            {% if current.versions.next %}
+            <a href="{{current.versions.next.get_version_url}}">»</a>
+            {% endif %}
+        </span>
+        {% include 'lstory/timeline.inc.html' with tmode_version='yup' timeline_class='version' %}
+    </div>
+</div>
 <div class="inner">
     {% if field_diff %}
     {{ field_diff.body.0|markdown:"extra,insparagraph" }}

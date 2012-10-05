@@ -8,20 +8,6 @@
     
     
     </a>
-    <div class="highlight">
-        {% include 'lstory/timeline.inc.html' with timeline_class='highlight' %}
-    </div>
-    <div class="version">
-        <span class="switch">
-            {% if current.versions.previous %}
-            <a href="{{current.versions.previous.get_version_url}}">«</a>
-            {% endif %}
-            {% if current.versions.next %}
-            <a href="{{current.versions.next.get_version_url}}">»</a>
-            {% endif %}
-        </span>
-        {% include 'lstory/timeline.inc.html' with tmode_version='yup' timeline_class='version' %}
-    </div>
     {% if previous %}<div style="display: inline-block; "><a href="" onclick="$('#versionlink').toggle(); return false;" class="with_icon" title="Perpetual link to this version">∞<span>Cite this version</span></a><br />
         <div id="versionlink" style="display: none; position: absolute; background-color: white; padding: 10px;"><input type="text" value="http://{{request.get_host}}{{current.get_version_url}}" /></div>
     </div>{% endif %}

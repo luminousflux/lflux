@@ -1,0 +1,43 @@
+{% extends 'lstory/highlight.html' %}
+{% load static %}
+{% block head %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'embed.css' %}" />
+    <script src="{% static 'embed.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.view').live('click', function() {
+                var el = $(this);
+                var ids = [];
+                el.siblings('.view').each(function() {
+                    $($(this).data('view').split(',')).each(function() {
+                        ids.push(this);
+                        });
+                    $(this).removeClass('active');
+                });
+                $(ids).each(function() {
+                    $('#'+this).hide();
+                    });
+                $($(this).data('view').split(',')).each(function() {
+                    $('#'+this).show();
+                    });
+                $(this).addClass('active');
+            });
+        });
+        $(document).ready(function(){
+            window.parent.postMessage(document.body.scrollHeight, '*');
+        })
+    </script>
+{% endblock %}
+
+{% block beforearticle %}
+<div id="switch_view">
+    view 
+    <div class="view active" data-view="article,meta">
+        Main Article
+    </div>
+    <div class="view" data-view="sidebar">
+        Firehose
+    </div>
+</div>
+{% endblock %}

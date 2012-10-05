@@ -1,5 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.simple import direct_to_template
+from django.template import RequestContext
+from django.template.loader import render_to_string
 from datetime import datetime
 from models import Story
 from tumblelog.models import Post
@@ -64,6 +66,8 @@ def diff(request, slug, model, template='lstory/highlight.html'):
 
     allow_mark_as_read = not request.GET.get('until') and not (may_track and cookie_exists and from_specified) # prevent popup only when specifying from_date while a cookie is already set
 
+    embed_url = render_to_string('lstory/embedcode.html', {'story': current}, context_instance=RequestContext(request))
+
 
     return direct_to_template(request, template, {
         'current': current,
@@ -74,6 +78,7 @@ def diff(request, slug, model, template='lstory/highlight.html'):
         'mode': 'highlight',
         'allow_mark_as_read': allow_mark_as_read,
         'tumbleposts': tumblepage,
+        'embed_url': embed_url,
     })
 
 

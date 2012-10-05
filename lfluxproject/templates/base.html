@@ -14,7 +14,7 @@
         {% block head %}
         {% endblock %}
     </head>
-    <body>
+    <body {% block bodyargs %}{% endblock %}>
         <div id="page">
             {% block content %}
             {% endblock %}

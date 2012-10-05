@@ -11,6 +11,10 @@ urlpatterns = patterns(
     url(r'^(?P<slug>[^/]*)/daily/$', StoryFeed('daily'), name="storyfeed",),
     url(r'^(?P<slug>[^/]*)/v/(?P<date>[^/]*)/$', version, name='storyversion'),
     url(r'^(?P<slug>[^/]*)/s/(?P<date_end>[^/]*)/$', summary, name='storysummary'),
+    url(r'^(?P<slug>[^/]*)/embed/$', diff, {
+        'model': Story,
+        'template': 'lstory/embed.html',
+        }, name='storyembed'),
     url(r'^(?P<slug>[^/]*)/$', diff, {
         'model': Story,
         }, name='story'),

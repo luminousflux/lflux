@@ -124,6 +124,8 @@ abbr { border-bottom: 1px dotted #666; }
     left: 0;
     top: 0;
     z-index: 9;
+    width: 110px;
+    height: 60px;
 }
 
 #summary {
@@ -162,7 +164,6 @@ abbr { border-bottom: 1px dotted #666; }
 #header #related a { background-color: #ccc; color: #333; }
 
 #header #place {
-  width: 125px;
   background-position: center;
 }
 
@@ -171,9 +172,9 @@ abbr { border-bottom: 1px dotted #666; }
 }
 
 #header #time_selection {
-  position: absolute;
+  position: relative;
   left: 4px;
-  width: 100px;
+  width: 90%;
   padding: 0 5px;
 }
 
@@ -241,6 +242,7 @@ body.en #sidebar h2 {
   margin: 0;
   background: #fff;
   /*font-size: 1.1em;*/
+  position: relative;
 }
 
 #article .inner {
@@ -315,9 +317,10 @@ blockquote.ins, p.ins , ul.ins {
   font-size: .9em;
   color: #999;
   padding-left: 20px;
-  padding-bottom: .7em;
   overflow: hidden;
-  max-width: 580px;
+  width: 580px;
+  float: left;
+  position: relative;
 }
 #meta a { 
   color: #999;
@@ -731,12 +734,11 @@ ul.tabs li.sel a,
   padding-bottom: 7px;
 }
 #footer a { color: inherit; }
-.history { display: none; }
-.historyform input[type=text] {
+#history input[type=text] {
     cursor: pointer;
     border-bottom: 1px dotted black;
 }
-.historyform input {
+#history input {
     border: none;
     display: inline;
 }
@@ -744,34 +746,38 @@ ul.tabs li.sel a,
     float: left;
 }
 
-.historyform {
-    padding-left: 10px;
+#history {
+    font-size: .9em;
+    padding-left: 20px;
+    padding-right: 0;
+    position: relative;
+    color: #999;
 }
 
-.historyform, .historyform div, .historyform form {
+.historyform {
     display: inline;
 }
-.historyform div.highlight, .historyform div.version {
+#history div.highlight, #history div.version {
     display: none;
 }
-.historyform.highlight div.highlight {
+body.historyhighlight #history div.highlight {
     display: block;
 }
-.historyform.version div.version {
+body.historyversion #history div.version {
     display: block;
 }
 .historyform a.switch {
     cursor: pointer;
 }
 
-#meta .historyform.highlight a.switch.highlight,
-#meta .historyform.version a.switch.version,
-.historyform div.highlight, .historyform div.version {
+.historyform .highlight a.switch.highlight,
+.historyversion #meta .historyform a.switch.version,
+#history div.highlight, #history div.version {
     background-color: rgb(245,245,245);
 }
-#meta .historyform.highlight a.switch.highlight,
-.historyform div.highlight,
-#meta .historyform a.switch.highlight:hover {
+.historyhighlight #meta .historyform a.switch.highlight,
+#history div.highlight,
+#meta #history a.switch.highlight:hover {
     background-color: rgb(255,255,220);
 }
 
@@ -816,6 +822,7 @@ ul.tabs li.sel a,
     width: auto;
     padding: 0;
     margin: 0;
+    padding-left: 5px;
 }
 
 .timeline ul li, .timeline ul li ul {
@@ -843,8 +850,8 @@ ul.tabs li.sel a,
 .timeline ul li ul li {
 }
 
-#meta .timeline ul li a {
-    top: 1em;
+.timeline ul li a {
+    top: 1.5em;
     display: block;
     position: relative;
 }

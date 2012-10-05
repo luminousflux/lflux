@@ -1,0 +1,68 @@
+html, body {
+    background-color: transparent;
+}
+
+#page {
+    width: 600px;
+    border: none;
+    box-shadow: none;
+}
+
+#nav {
+    display: none;
+}
+
+#article {
+    float: none;
+}
+
+#sidebar {
+    float: none;
+    width: 100%;
+    display: none;
+    margin-top: 0;
+    background: none;
+    border: none;
+}
+
+#footer {
+    display: none;
+}
+
+#header #essentials div.essential {
+    min-width: 70px;
+    max-width: 70px;
+}
+
+#header #essentials #place canvas {
+    width: 70px;
+    height: 40px;
+    margin-top: 2em;
+}
+
+#summary {
+    padding-bottom: .25em;
+}
+
+#switch_view {
+    border-bottom: 1px solid #999;
+    font-size: .9em;
+    color: #999;
+    padding-left: 20px;
+    line-height: 1.2em;
+    margin-bottom: .5em;
+}
+
+#switch_view .view {
+    display: inline-block;
+    border: 1px solid #999;
+    margin-bottom: -1px;
+    padding: 0px 10px;
+    margin-left: 2em;
+    cursor: pointer;
+}
+
+#switch_view .view.active {
+    border-bottom: 1px solid white;
+}
+
