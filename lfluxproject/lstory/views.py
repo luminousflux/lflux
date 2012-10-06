@@ -69,7 +69,7 @@ def diff(request, slug, model, template='lstory/highlight.html'):
     embed_code = render_to_string('lstory/embedcode.html', {'story': current}, context_instance=RequestContext(request))
 
 
-    return direct_to_template(request, template, {
+    response = direct_to_template(request, template, {
         'current': current,
         'previous': previous,
         'field_diff': current.diff_to_older(previous),
@@ -80,6 +80,9 @@ def diff(request, slug, model, template='lstory/highlight.html'):
         'tumbleposts': tumblepage,
         'embed_code': embed_code,
     })
+
+    response.set_cookie('test', fromdate.isoformat(), httponly=False)
+    return response
 
 
 def summary(request, slug, date_end, template='lstory/highlight.html'):
