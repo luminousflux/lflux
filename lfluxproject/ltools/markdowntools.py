@@ -43,7 +43,7 @@ def pars_to_blocks(pars):
                 if pars and pars[0].strip('\n') != parsbefore[0].strip('\n'):
                     strippedbefore = parsbefore[0].strip('\n')
                     strippedcurrent = pars[0].strip('\n')
-                    if struppedbefore.endswith(strippedcurrent):
+                    if strippedbefore.endswith(strippedcurrent):
                         beforelength = len(strippedbefore)
                         currentlength = len(strippedcurrent)
                         block = strippedbefore[0:beforelength - currentlength]
