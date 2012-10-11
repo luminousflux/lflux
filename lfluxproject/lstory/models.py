@@ -24,8 +24,8 @@ class Story(VersionedContentMixin, models.Model):
 
     region = CountryField(max_length=255, blank=True)
 
-    summary = models.TextField(help_text='markdown-formatted summary text consistiong of 2 or 3 list items only!')
-    body = models.TextField(help_text='markdown-formatted story text')
+    summary = models.TextField(help_text='markdown-formatted summary text consistiong of 2 or 3 list items only!', blank=True)
+    body = models.TextField(help_text='markdown-formatted story text', blank=True)
 
 
 
