@@ -53,8 +53,10 @@ class Country(object):
 
     @classmethod
     def get(cls, iso):
-        data = cls.countries()[iso.upper()]
-        return cls(data)
+        name = iso.upper()
+        countries = cls.countries()
+        data = cls(countries[name]) if name in countries else None
+        return data
 
 class CountryField(CharField):
     def contribute_to_class(self, cls, name):
