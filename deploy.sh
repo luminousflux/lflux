@@ -4,4 +4,4 @@
 pbundle # update dependencies.
 pbundle run ./manage.py collectstatic --noinput
 pbundle run ./manage.py migrate
-pbundle run sudo supervisorctl restart `echo $SUPERVISOR_NAME`
+pbundle run sudo supervisorctl restart `printenv SUPERVISOR_NAME`
