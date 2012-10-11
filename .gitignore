@@ -8,3 +8,5 @@ db/*
 env/*
 lfluxproject/data/countries.txt
 lfluxproject/media/
+localsettings.py
+localstatic
