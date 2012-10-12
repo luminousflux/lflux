@@ -22,7 +22,7 @@ class Story(VersionedContentMixin, models.Model):
     timeframe_start = models.DateField(null=True)
     timeframe_end = models.DateField(null=True, blank=True)
 
-    region = CountryField(max_length=255, blank=True)
+    region = CountryField(max_length=255, blank=True, help_text='country code, if applicable (shows map in full view)')
 
     summary = models.TextField(help_text='markdown-formatted summary text consistiong of 2 or 3 list items only!', blank=True)
     body = models.TextField(help_text='markdown-formatted story text', blank=True)

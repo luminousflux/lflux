@@ -47,11 +47,8 @@ LANGUAGE_CODE = 'en-us'
 # django-settings-tip-setting-relative-paths.html
 
 import os
-import django
 
-DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
-
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
