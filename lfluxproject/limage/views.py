@@ -41,5 +41,5 @@ def browse(request, id=None, tag=None, model=None, admin_instance=None, template
         if form.is_valid():
             form.save()
 
-    imgs = {'images': [{'url': x.img.url, 'id': x.pk, } for x in imgs], 'form': form.as_p(), 'enable_upload': False}
+    imgs = {'images': [{'url': x.img.url, 'id': x.pk, } for x in imgs], 'form': form.as_p(), 'enable_upload': True}
     return HttpResponse(json.dumps(imgs), mimetype="application/json")
