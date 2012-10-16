@@ -397,6 +397,7 @@ body.en #article #summary ul li {
 #article img {
   z-index: 1;      
   width: 589px;
+  margin-left: -31px;
 }
 
 #article #leadimage div.label {
