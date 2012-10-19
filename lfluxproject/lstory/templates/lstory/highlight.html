@@ -92,6 +92,11 @@
         {% include 'lstory/timeline.inc.html' with tmode_version='yup' timeline_class='version' %}
     </div>
 </div>
+{% if current.cover_image %}
+<div id="leadimage" class="{% if field_diff.cover_image.1 %}ins{% endif %}">
+    <img src="{{current.cover_image.url}}" />
+</div>
+{% endif %}
 <div class="inner">
     {% if field_diff %}
     {{ field_diff.body.0|markdown:"extra,insparagraph" }}

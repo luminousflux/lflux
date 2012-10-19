@@ -64,3 +64,10 @@ class CountryField(CharField):
         if not self.null:
             setattr(cls, 'get_%s_data' % self.name, lambda modelself: Country.get(getattr(modelself, self.attname)))
 
+try:
+    import south
+    import south.modelsinspector
+    south.modelsinspector.add_introspection_rules([], ["^ltools\.fields\.CountryField"])
+except ImportError, e:
+    pass
+

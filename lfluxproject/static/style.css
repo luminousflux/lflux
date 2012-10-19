@@ -392,12 +392,21 @@ body.en #article #summary ul li {
   position: relative;
   height: 260px;
   margin-bottom: 3em;
+  overflow: hidden;
+}
+
+#article #leadimage img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 589px;
 }
 
 #article img {
   z-index: 1;      
-  width: 589px;
-  margin-left: -31px;
+  width: 250px;
+  float: right;
 }
 
 #article #leadimage div.label {

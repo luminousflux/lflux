@@ -145,7 +145,12 @@ class VersionManagerAccessor(object):
 
                     tmp = 0
                     for key,value in diffs.iteritems():
-                        tmp+=value*len(getattr(current_version,key))
+                        length = 0
+                        try:
+                            length = len(getattr(current_version,key))
+                        except ValueError, e:
+                            pass # allow for nullable elements
+                        tmp+=value*length
                     activity.append(tmp)
                 else:
                     activity.append(0)

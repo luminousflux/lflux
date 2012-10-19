@@ -22,6 +22,8 @@ class Story(VersionedContentMixin, models.Model):
     timeframe_start = models.DateField(null=True)
     timeframe_end = models.DateField(null=True, blank=True)
 
+    cover_image = models.ImageField(null=True, upload_to='lstory')
+
     region = CountryField(max_length=255, blank=True, help_text='country code, if applicable (shows map in full view)')
 
     summary = models.TextField(help_text='markdown-formatted summary text consistiong of 2 or 3 list items only!', blank=True)
@@ -40,7 +42,7 @@ class Story(VersionedContentMixin, models.Model):
 
     class Meta:
         verbose_name_plural = 'Stories'
-        versioned_attributes = ['body:d', 'summary:d', 'region:=', 'title:=']
+        versioned_attributes = ['body:d', 'summary:d', 'region:=', 'title:=', 'cover_image:=']
 
     @models.permalink
     def get_absolute_url(self):
