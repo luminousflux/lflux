@@ -1,5 +1,7 @@
+{% load humanize_timesince %}
+
 <div class="historyform">
-    Last updated {{current.versions.this_date|timesince}} ago
+    Last updated {{current.versions.this_date|humanize_timesince}} ago
     <a class="switch highlight ins">{% if not previous %}Highlight Changes{% else %}
         {% ifequal previous.versions.this_date current.versions.this_date %}
         No changes to highlight{% else %}Changes since {{previous.versions.this_date|timesince}} ago

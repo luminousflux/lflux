@@ -12,3 +12,5 @@ django-debug-toolbar
 django-nose
 -e git+git://github.com/luminousflux/django-luminous-tumblelog.git#egg=django-luminous-tumblelog
 embedly
+django-voting
+django-threadedcomments
