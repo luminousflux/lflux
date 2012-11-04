@@ -8,15 +8,22 @@ adminadmin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^tumblelog/', include('tumblelog.urls', namespace='tumblelog')),
-    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    url('^story/', include('lfluxproject.lstory.urls')),
+
     url('^$', 'lstory.views.index'),
 
+    url('^story/', include('lfluxproject.lstory.urls')),
+    url('^story/', include('lfluxproject.lqa.urls')),
+
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    url(r'^admin/', include(adminadmin.site.urls)),
     url(r'^admin_tools/', include('admin_tools.urls')),
+
     url(r'^backend/', include(admin.urls)),
 
-    url(r'^admin/', include(adminadmin.site.urls)),
+    url(r'^api/tumblelog/', include('tumblelog.urls', namespace='tumblelog')),
+    url(r'^api/comments/', include('django.contrib.comments.urls')),
+    url(r'^api/voting/', include('voting.urls')),
+
 )
 
 if settings.DEMO_MODE:
@@ -29,3 +36,5 @@ if settings.DEBUG:
             'document_root': settings.MEDIA_ROOT,
             }),
     )
+
+urlpatterns += patterns('', url(r'^(?P<url>.*)$', 'django.contrib.flatpages.views.flatpage'),)

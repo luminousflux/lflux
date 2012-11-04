@@ -1,0 +1,30 @@
+{% load static %}
+{% load make_map %}
+{% load replace %}
+<div id="essentials">
+    {% if current.region %}
+        <div id="place" class="essential">
+            <h3>Where</h3>
+            <canvas id="placemap"></canvas>
+        </div>
+        {{current.get_region_data|make_map:"placemap"}}
+    {% endif %}
+    <div id="time" class="essential">
+        <h3>When</h3>
+        <div id="time_selection">
+            {% spaceless %}
+            {% if current.timeframe_start %}{{current.timeframe_start|date:"Y"}}{% endif %}{% spaceless %}
+            {% endspaceless %}{% if current.timeframe_start or current.timeframe_end %}—{% endif %}{% spaceless %}
+            {% endspaceless %}{% if current.timeframe_end %}{{current.timeframe_end|date:"Y"}}{% else %}<em>ongoing</em>{% endif %}
+            {% endspaceless %}
+        </div>
+    </div>
+    <div id="freshness" class="essential" title="activity over the last month">
+        <h3>Active?</h3>
+        <span class="inlinesparkline">{{current.versions.activity|join:','|replace:"None,null"}}</span>
+    </div>
+    <script>
+        $('.inlinesparkline').sparkline('html', {height: '35px', spotColor: false, minSpotColor: false, maxSpotColor: false, disableInteraction: true});
+    </script>
+</div>
+<h1>{{current.title}}</h1>

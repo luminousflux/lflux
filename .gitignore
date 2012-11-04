@@ -10,3 +10,4 @@ lfluxproject/data/countries.txt
 lfluxproject/media/
 localsettings.py
 localstatic
+.DS_Store

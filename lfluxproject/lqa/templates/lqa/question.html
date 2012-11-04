@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load markup %}
+{% block content %}
+<div id="nav">
+    <a href="/">{{site.name}}</a> /
+    <a href="{{story.get_absolute_url}}">{{story.name}}<a> /
+    {{question.title}}
+</div>
+<div id="header">
+    {% include 'lstory/header.html' with current=story %}
+
+</div>
+<div id="summary">
+    <h2>{% trans "Question:" %} {{question.title}}</h2>
+
+</div>
+<div id="article">
+    <div class="inner">
+        
+        {{question.comment|markdown}}
+
+        <hr />
+        {% load threadedcomments_tags %}
+
+        {% get_comment_list for question as comment_list %}
+        {% for comment in comment_list|fill_tree|annotate_tree %}
+            {% ifchanged comment.parent_id %}{% else %}
+                </li>
+            {% endifchanged %}
+
+            {% if not comment.open and not comment.close %}
+                </li>
+            {% endif %}
+                
+            {% if comment.open %}
+                <ul>
+            {% endif %}
+
+            <li{% if comment.last %} class="last"{% endif %}>
+
+            {{ comment.comment|markdown }}
+            — {{comment.user}}
+            {% render_comment_form for question with comment.pk %}
+
+            {% for close in comment.close %}
+                </li>
+                </ul>
+            {% endfor %}
+        {% endfor %}
+
+        {% render_comment_form for question %}
+    </div>
+</div>
+
+{% endblock %}

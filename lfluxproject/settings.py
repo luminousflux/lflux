@@ -158,6 +158,14 @@ INSTALLED_APPS = (
     'limage',
     'lprofile',
     'ladmin',           # admin overrides & extensions.
+
+    'django.contrib.comments',
+    'voting',
+    'threadedcomments',
+
+    'lqa',
+
+    'django.contrib.flatpages',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -206,6 +214,7 @@ ADMIN_TOOLS_INDEX_DASHBOARD = {
 }
 
 CRISPY_TEMPLATE_PACK = 'uni_form'
+COMMENTS_APP = 'threadedcomments'
 
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 # you should change this in your local settings.
@@ -217,7 +226,7 @@ TUMBLELOG_PARENT_MODEL = 'lstory.Story'
 ANONYMOUS_USER_ID = -1  # required by guardian?
 
 AUTH_PROFILE_MODULE = 'lprofile.Profile'
-LOGIN_REDIRECT_URL = USERENA_SIGNIN_REDIRECT_URL = '/backend'
+LOGIN_REDIRECT_URL = USERENA_SIGNIN_REDIRECT_URL = '/backend/'
 LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'
 USERENA_REDIRECT_ON_SIGNOUT = '/'

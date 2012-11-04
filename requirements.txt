@@ -13,4 +13,6 @@ django-nose
 -e git+git://github.com/luminousflux/django-luminous-tumblelog.git#egg=django-luminous-tumblelog
 embedly
 django-voting
-django-threadedcomments
+-e git+git://github.com/luminousflux/django-threadedcomments.git#egg=django-threadedcomments
+#tastypie HEAD( >.9.11)  has SessionAuthentication
+-e git+git://github.com/toastdriven/django-tastypie.git#egg=django-tastypie

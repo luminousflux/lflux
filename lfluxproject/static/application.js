@@ -89,3 +89,26 @@ function initHistoryView() {
 }
 
 $(document).ready(initHistoryView);
+
+function initForms() {
+    var elem = $('form.replacecontent');
+    opts = {'success': function(data, statusText, xhr, form) {
+            var e = elem.find('.replace_here');
+            if(!e) {
+                e = elem;
+            }
+            if(data['error']) {
+                e.html(data['error']);
+            } else if(data['form']) {
+                e.html(data['form']);
+            } else if(data['result']) {
+                elem.html(data['result']);
+            }
+        }
+    };
+    if($(elem).data('request-type')) {
+        opts['target'] = elem;
+    }
+    elem.ajaxForm(opts);
+}
+$(document).ready(initForms);

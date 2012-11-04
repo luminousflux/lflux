@@ -1,22 +1,17 @@
 {% extends 'base.html' %}
 {% load url from future %}
-{% load make_map %}
 {% load static %}
-{% load replace %}
+{% load i18n %}
 {% block head %}
     {{ block.super }}
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url 'storyfeed' slug=current.slug %}" />
-    <script src="{% static 'js/worldmap.js' %}"></script>
-    <script src="{% static 'js/jquery.sparkline.min.js' %}"></script>
-    <script>
-        $(document).ready(function() {
-            $('#embed_value').val("{{embed_code|escapejs}}");
-        });
-    </script>
+
 {% endblock %}
 {% block content %}
 {% load markup %}
-{% load replace %}
+{% load threadedcomments_tags %}
+{% load voting_tags %}
+{% load lqa %}
 
 <div id="nav">
     <a href="/">{{site.name}}</a> /
@@ -24,33 +19,7 @@
 </div>
 
 <div id="header">
-    <div id="essentials">
-        {% if current.region %}
-            <div id="place" class="essential">
-                <h3>Where</h3>
-                <canvas id="placemap"></canvas>
-            </div>
-            {{current.get_region_data|make_map:"placemap"}}
-        {% endif %}
-        <div id="time" class="essential">
-            <h3>When</h3>
-            <div id="time_selection">
-                {% spaceless %}
-                {% if current.timeframe_start %}{{current.timeframe_start|date:"Y"}}{% endif %}{% spaceless %}
-                {% endspaceless %}{% if current.timeframe_start or current.timeframe_end %}—{% endif %}{% spaceless %}
-                {% endspaceless %}{% if current.timeframe_end %}{{current.timeframe_end|date:"Y"}}{% else %}<em>ongoing</em>{% endif %}
-                {% endspaceless %}
-            </div>
-        </div>
-        <div id="freshness" class="essential" title="activity over the last month">
-            <h3>Active?</h3>
-            <span class="inlinesparkline">{{current.versions.activity|join:','|replace:"None,null"}}</span>
-        </div>
-        <script>
-            $('.inlinesparkline').sparkline('html', {height: '35px', spotColor: false, minSpotColor: false, maxSpotColor: false, disableInteraction: true});
-        </script>
-    </div>
-    <h1>{{current.title}}</h1>
+    {% include 'lstory/header.html' %}
 </div>
 <div id="summary">
     {% if field_diff %}
@@ -115,6 +84,38 @@
     {% for post in tumbleposts %}
         {% include post.template %}
     {% endfor %}
+    </div>
+</div>
+
+<div id="react" class="state_tab2">
+    <div class="tab_content tab2 inner sections2 qa">
+        <a href="" class="pillbtn" onclick="$('#qaform').toggle(); return false;">Ask a question</a>
+        <h1>Q&amp;A</h1>
+        <ul class="filter">
+          <li class="sel"><a href="">all</a></li>
+          <li><a href="">answered</a></li>
+          <li><a href="">researching</a></li>
+          <li><a href="">open</a></li>
+      </ul>
+      {% comment %}
+      {% get_comment_list for current as comments root_only %}
+      {% votes_by_user user on comments as vote_dict %}
+      {% scores_for_objects comments as score_dict %}
+      {% for comment in comments|fill_tree|annotate_tree %}
+        {% dict_entry_for_item comment from vote_dict as vote %}
+        {% dict_entry_for_item comment from score_dict as score %}
+        {% endfor %}
+        {% endcomment %}
+        {% for question in current.question_set.all %}
+        {% include 'lqa/_question.html' %}
+      {% endfor %}
+      <div id="qaform" style="display: none; clear: both;">
+          {% if request.user.is_authenticated %}
+          {% render_question_form for current %}
+          {% else %}
+          {% trans 'Sign in to post a question!' %}
+          {% endif %}
+        </div>
     </div>
 </div>
 
