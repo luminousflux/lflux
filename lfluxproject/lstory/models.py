@@ -22,7 +22,7 @@ class Story(VersionedContentMixin, models.Model):
     timeframe_start = models.DateField(null=True)
     timeframe_end = models.DateField(null=True, blank=True)
 
-    cover_image = models.ImageField(null=True, upload_to='lstory')
+    cover_image = models.ImageField(null=True, blank=True, upload_to='lstory')
 
     region = CountryField(max_length=255, blank=True, help_text='country code, if applicable (shows map in full view)')
 
