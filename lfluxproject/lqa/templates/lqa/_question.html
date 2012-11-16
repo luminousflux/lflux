@@ -16,7 +16,7 @@
         <input type="image" id="questiondownarrow{{ question.id }}" src="{% if vote and vote.is_downvote %}{% static 'img/arrow_down.png' %}{% else %}{% static 'img/arrow_down_grey.png' %}{% endif %}">
       </form>
     </div>
-    <h2><a href="">{{question.title}}</a></h2>
+    <h2><a href="{% url 'lqa_question' object_id=question.id story_slug=question.story.slug %}">{{question.title}}</a></h2>
     <div class="meta">asked by <u>{{question.user.username}}</u></div>
     <div class="meta"><strong>open</strong> since {{question.created_at|date}}</div>
 </div>

@@ -15,7 +15,7 @@
     <h2>{% trans "Question:" %} {{question.title}}</h2>
 
 </div>
-<div id="article">
+<div id="react">
     <div class="inner">
         
         {{question.comment|markdown}}
@@ -40,8 +40,11 @@
             <li{% if comment.last %} class="last"{% endif %}>
 
             {{ comment.comment|markdown }}
-            — {{comment.user}}
-            {% render_comment_form for question with comment.pk %}
+            — {% if comment.url %}<a href="{{comment.url}}" rel="nofollow">{% endif %}{{comment.user}}{% if comment.url%}</a>{% endif %} <a href="#" onclick="$('#comment_form_for_{{comment.pk}}').toggle(); return false;">(reply)</a>
+
+            <div id="comment_form_for_{{comment.pk}}" style="display: none;">
+                {% render_comment_form for question with comment.pk %}
+            </div>
 
             {% for close in comment.close %}
                 </li>
@@ -49,7 +52,10 @@
             {% endfor %}
         {% endfor %}
 
-        {% render_comment_form for question %}
+        <a href="" class="pillbtn" onclick="$('#comment_form_for_question').toggle(); return false;">Add Comment</a>
+        <div id="comment_form_for_question" style="display: none;">
+            {% render_comment_form for question %}
+        </div>
     </div>
 </div>
 

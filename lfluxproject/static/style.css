@@ -898,3 +898,7 @@ body.historyversion #history div.version {
 #versionlink input {
     width: 100%;
 }
+
+#div_id_honeypot {
+    display: none;
+}

@@ -1,18 +1,7 @@
-{% load comments i18n %}
+{% load comments i18n crispy_forms_filters %}
 <form action="{% comment_form_target %}" method="post" class="uniForm replacecontent" data-request-type="xml">{% csrf_token %}
   {% if next %}<div><input type="hidden" name="next" value="{{ next }}" /></div>{% endif %}
-  <fieldset class="inlineLabels">
-  {% for field in form %}
-    {% if field.is_hidden %}
-      <div>{{ field }}</div>
-    {% else %}
-      <div class="ctrlHolder {% if field.errors %}error{%endif %}" {% ifequal field.name "honeypot" %}style="display:none;"{% endifequal %}>
-      {% if field.errors %}<div class="errorField">{{ field.errors }}</div>{% endif %}
-        {{ field.label_tag }} {{ field }}
-      </div>
-    {% endif %}
-  {% endfor %}
-  </fieldset>
+  {{ form|crispy }}
   <div class="buttonHolder">
     <input type="submit" name="preview" class="submit-preview secondaryAction" value="{% trans "Preview" %}" />
     <input type="submit" name="post" class="submit-post primaryAction" value="{% trans "Post" %}" />
