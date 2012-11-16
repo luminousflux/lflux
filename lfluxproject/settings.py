@@ -147,6 +147,7 @@ INSTALLED_APPS = (
     'crispy_forms',     # for tumblelog
     'tumblelog',
 
+
     'userena',
     'guardian',         # for userena
     'easy_thumbnails',  # for userena
