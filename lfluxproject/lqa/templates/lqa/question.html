@@ -4,7 +4,7 @@
 {% block content %}
 <div id="nav">
     <a href="/">{{site.name}}</a> /
-    <a href="{{story.get_absolute_url}}">{{story.name}}<a> /
+    <a href="{{story.get_absolute_url}}">{{story.name}}</a> /
     {{question.title}}
 </div>
 <div id="header">
@@ -12,15 +12,27 @@
 
 </div>
 <div id="summary">
-    <h2>{% trans "Question:" %} {{question.title}}</h2>
 
+</div>
+<div id="article" class="state_tab2">
+    <ul class="tabs">
+        <li class="first tab1">
+            <a href="{{question.story.get_absolute_url}}">{% trans "Back to Story" %}</a>
+        </li>
+        <li class="tab2">
+            <a href="{{question.get_absolute_url}}">{% trans "Question:" %} {{question.title}}</a>
+        </li>
+    </ul>
+
+    <div class="tab_content tab2 inner">
+
+        <div class="questiontext">
+            {{question.comment|markdown}}
+        </div>
+    </div>
 </div>
 <div id="react">
     <div class="inner">
-        
-        {{question.comment|markdown}}
-
-        <hr />
         {% load threadedcomments_tags %}
 
         {% get_comment_list for question as comment_list %}
@@ -34,13 +46,15 @@
             {% endif %}
                 
             {% if comment.open %}
-                <ul>
+                <ul class="thread">
             {% endif %}
 
             <li{% if comment.last %} class="last"{% endif %}>
 
             {{ comment.comment|markdown }}
-            — {% if comment.url %}<a href="{{comment.url}}" rel="nofollow">{% endif %}{{comment.user}}{% if comment.url%}</a>{% endif %} <a href="#" onclick="$('#comment_form_for_{{comment.pk}}').toggle(); return false;">(reply)</a>
+            <div class="meta">
+                — {% if comment.url %}<a href="{{comment.url}}" rel="nofollow">{% endif %}{% if comment.user %}{{comment.user}}{% else %}{{comment.name}}{% endif %}{% if comment.url%}</a>{% endif %} <a href="#" onclick="$('#comment_form_for_{{comment.pk}}').toggle(); return false;">(reply)</a>
+            </div>
 
             <div id="comment_form_for_{{comment.pk}}" style="display: none;">
                 {% render_comment_form for question with comment.pk %}

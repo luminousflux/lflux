@@ -902,3 +902,27 @@ body.historyversion #history div.version {
 #div_id_honeypot {
     display: none;
 }
+
+#react .thread {
+    padding: 0;
+}
+
+#react .thread ul {
+    padding: 0;
+    margin-bottom: 1em;
+}
+
+#react .thread li {
+    list-style-type: none;
+    border-left: 1px solid lightgrey;
+    padding-left: 1em;
+    margin-bottom: .5em;
+}
+
+#react .thread li {
+    border-top: 1px solid lightgrey;
+}
+
+#react .thread .meta {
+    padding-bottom: 1em;
+}

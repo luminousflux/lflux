@@ -91,24 +91,27 @@ function initHistoryView() {
 $(document).ready(initHistoryView);
 
 function initForms() {
-    var elem = $('form.replacecontent');
-    opts = {'success': function(data, statusText, xhr, form) {
-            var e = elem.find('.replace_here');
-            if(!e) {
-                e = elem;
+    var elems = $('form.replacecontent');
+    $.each(elems, function() {
+        var elem = $(this);
+        opts = {'success': function(data, statusText, xhr, form) {
+                var e = elem.find('.replace_here');
+                if(!e) {
+                    e = elem;
+                }
+                if(data['error']) {
+                    e.html(data['error']);
+                } else if(data['form']) {
+                    e.html(data['form']);
+                } else if(data['result']) {
+                    elem.html(data['result']);
+                }
             }
-            if(data['error']) {
-                e.html(data['error']);
-            } else if(data['form']) {
-                e.html(data['form']);
-            } else if(data['result']) {
-                elem.html(data['result']);
-            }
+        };
+        if($(elem).data('request-type')) {
+            opts['target'] = elem;
         }
-    };
-    if($(elem).data('request-type')) {
-        opts['target'] = elem;
-    }
-    elem.ajaxForm(opts);
+        elem.ajaxForm(opts);
+    });
 }
 $(document).ready(initForms);
