@@ -23,11 +23,15 @@
     #content-additional img {
         max-width: 90%;
     }
+
+    .inmoredetail {
+        color: grey;
+    }
 </style>
 {% endblock %}
 {% block content %}
 <div id="content-additional">
-    {{diff|markdown:"extra,insparagraph"}}
+    {{diff.body.0|markdown:"extra,insparagraph,inmoredetail"}}
 </div>
 {{ block.super }}
 {% endblock %}
