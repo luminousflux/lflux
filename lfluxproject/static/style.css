@@ -926,3 +926,14 @@ body.historyversion #history div.version {
 #react .thread .meta {
     padding-bottom: 1em;
 }
+
+.inmoredetail {
+    display: none;
+    color: gray;
+}
+
+.imdbutton {
+    color: gray;
+    font-size: 75%;
+    cursor: pointer;
+}

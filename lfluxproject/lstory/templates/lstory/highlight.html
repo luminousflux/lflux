@@ -68,9 +68,9 @@
 {% endif %}
 <div class="inner">
     {% if field_diff %}
-    {{ field_diff.body.0|markdown:"extra,insparagraph" }}
+    {{ field_diff.body.0|markdown:"extra,insparagraph,inmoredetail" }}
     {% else %}
-    {{current.body|markdown:"extra,insparagraph"}}
+    {{current.body|markdown:"extra,insparagraph,inmoredetail"}}
     {% endif %}
 </div>
 <div id="end_of_article"></div>

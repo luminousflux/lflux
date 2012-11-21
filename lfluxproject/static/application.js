@@ -115,3 +115,15 @@ function initForms() {
     });
 }
 $(document).ready(initForms);
+
+function initInMoreDetail() {
+    $('.inmoredetail').each(function() {
+            var detail = this;
+            var elem = document.createElement('span');
+            elem.innerHTML = '…';
+            $(elem).addClass('imdbutton');
+            $(this).before(elem);
+            $(elem).click(function() { $(detail).toggle(); $(elem).toggle(); });
+        });
+}
+$(document).ready(initInMoreDetail);
