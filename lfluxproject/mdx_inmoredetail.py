@@ -10,7 +10,7 @@ class InmoredetailPattern(Pattern):
     def handleMatch(self, m):
         el = util.etree.Element("span")
         el.text = m.group(2)
-        el.set('class', 'inmoredetail')
+        el.set('class', el.get('class', '') + ' inmoredetail')
 
         return el
 
@@ -59,7 +59,7 @@ class InmoredetailTreeProcessor(Treeprocessor):
             restchildren = children[ind+1:]
 
             for child in restchildren:
-                child.set('class', 'inmoredetail imd-%s' % imdcount)
+                child.set('class', child.get('class', '') + ' inmoredetail imd-%s' % imdcount)
                 if child.tail and child.tail.strip():
                     newelem = self._wrap_in_span(child.tail, imdcount)
                     child.tail = None
@@ -71,7 +71,7 @@ class InmoredetailTreeProcessor(Treeprocessor):
             x = children[children.index(x)+1]
             if x==end_tree[len(current)]:
                 break
-            x.set('class', 'inmoredetail imd-%s' % imdcount)
+            x.set('class', x.get('class', '') + ' inmoredetail imd-%s' % imdcount)
 
         """ going down to the end point """
         for i in range(depth+1, len(end_tree)):
@@ -81,7 +81,7 @@ class InmoredetailTreeProcessor(Treeprocessor):
             index = children.index(x)
             for j in range(index-1):
                 x = children[j]
-                x.set('class', 'inmoredetail imd-%s' % imdcount)
+                x.set('class', x.get('class','') + ' inmoredetail imd-%s' % imdcount)
                 if x.tail and x.tail.strip():
                     newelem = self._wrap_in_span(x.tail, imdcount)
                     x.tail = None

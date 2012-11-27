@@ -119,7 +119,7 @@ $(document).ready(initForms);
 function initInMoreDetail() {
     var imdIDs = {};
     $('.inmoredetail').each(function() {
-            var id = $(this).attr('class').replace(/inmoredetail/,'').trim();
+            var id = $(this).attr('class').split(' ').filter(function(x) { return x.indexOf('imd-')==0; })
             if(imdIDs[id]) {
                 return;
             }

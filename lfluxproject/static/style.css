@@ -303,7 +303,7 @@ ins, .ins, #meta a.ins {
   background-color: #ffb;  
   text-decoration: inherit;
 }
-blockquote.ins, p.ins , ul.ins {
+blockquote.ins, p.ins , ul.ins, li.ins {
   background-color: inherit;
   border-left: 8px solid #ffb;
   padding-left: 8px;
