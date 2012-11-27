@@ -117,13 +117,25 @@ function initForms() {
 $(document).ready(initForms);
 
 function initInMoreDetail() {
+    var imdIDs = {};
     $('.inmoredetail').each(function() {
+            var id = $(this).attr('class').replace(/inmoredetail/,'').trim();
+            if(imdIDs[id]) {
+                return;
+            }
             var detail = this;
             var elem = document.createElement('span');
             elem.innerHTML = '…';
             $(elem).addClass('imdbutton');
             $(this).before(elem);
-            $(elem).click(function() { $(detail).toggle(); $(elem).toggle(); });
+            $(elem).click(function() { $('.'+id).toggle(); $(elem).toggle(); });
+            imdIDs[id] = elem;
         });
+    $('.inmoredetail').click(function() {
+        var id = $(this).attr('class').replace(/inmoredetail/,'').trim();
+        var elem = imdIDs[id];
+        $(elem).toggle();
+        $('.'+id).toggle();
+    });
 }
 $(document).ready(initInMoreDetail);
