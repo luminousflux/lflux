@@ -200,13 +200,12 @@ abbr { border-bottom: 1px dotted #666; }
   margin: .6em 0 .7em 0;
 }
 #article h1, #article h2 {
-  float: left;
   font-size: 2.1em;
   margin-top: .2em;
   margin-bottom: .5em;
-  padding: 0 20px 0 0;
+  padding: 0 20px 0 0.66em;
   /*border-bottom: 3px solid #000;*/
-  margin-left: .66em;
+  margin-left: 0;
 }
 
 #article h1.ins, #article h2.ins {
@@ -303,7 +302,7 @@ ins, .ins, #meta a.ins {
   background-color: #ffb;  
   text-decoration: inherit;
 }
-blockquote.ins, p.ins , ul.ins, li.ins {
+blockquote.ins, h1.ins, h2.ins, p.ins , ul.ins, li.ins {
   background-color: inherit;
   border-left: 8px solid #ffb;
   padding-left: 8px;
