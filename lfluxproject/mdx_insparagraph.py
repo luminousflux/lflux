@@ -2,6 +2,7 @@ import re
 from markdown import Extension
 from markdown.treeprocessors import Treeprocessor
 from markdown.preprocessors import Preprocessor
+from markdown.inlinepatterns import SimpleTagPattern
 from markdown import etree_loader
 
 __version__ = '0.1'
@@ -41,13 +42,13 @@ class InsParagraphPreprocessor(Preprocessor):
                 newlines.append(line)
         return newlines
 
-
 class InsParagraphExtension(Extension):
     def extendMarkdown(self, md, md_globals):
         md.registerExtension(self)
         md.treeprocessors['insparagraph'] = InsParagraphProcessor(md)
         md.preprocessors.insert(0, 'insparagraph',
                                 InsParagraphPreprocessor(md))
+        md.inlinePatterns.insert(0, 'insparagraphtag', SimpleTagPattern(r'\<(ins).*\>(.*)\</ins\>', 'ins'))
 
 
 def makeExtension(configs=[]):

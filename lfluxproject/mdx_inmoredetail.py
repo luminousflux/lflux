@@ -16,6 +16,7 @@ class InmoredetailPattern(Pattern):
 
 class InmoredetailTreeProcessor(Treeprocessor):
     def _find_elem(self, tree, text):
+        tree.text = tree.text or ''
         if text in tree.text:
             return [tree]
         for child in tree.getchildren():
@@ -115,7 +116,6 @@ class InmoredetailTreeProcessor(Treeprocessor):
                         self._walk(x+[newelem],y, imdcount)
                         break
             imdcount += 1
-
 
         return root
 
