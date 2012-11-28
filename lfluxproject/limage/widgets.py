@@ -13,10 +13,12 @@ from pagedown.widgets import AdminPagedownWidget as OriginalAPW
 class AdminPagedownWidget(OriginalAPW):
     class Media:
         css = {'all': ('%s/css/overcast/jquery-ui-1.8.20.custom.css' % settings.STATIC_URL,
-                       '%s/limage-customizations.css' % settings.STATIC_URL,)}
+                       '%s/ladmin/limage-customizations.css' % settings.STATIC_URL,'%s/ladmin/lstory-customizations.css' % settings.STATIC_URL,)}
         js = ('%s/js/jquery-1.7.2.min.js' % settings.STATIC_URL,
               '%s/js/jquery-ui-1.8.20.custom.min.js' % settings.STATIC_URL,
               '%s/js/jquery.form.js' % settings.STATIC_URL,
+              '%s/js/admin/jquery.textarea.js' % settings.STATIC_URL,
+              '%s/js/admin/powerhour.messageboxes.js' % settings.STATIC_URL,
               '%s/limage-pagedown.js' % settings.STATIC_URL,)
 
     def render(self, name, value, attrs=None):
@@ -44,11 +46,15 @@ class AdminPagedownWidget(OriginalAPW):
                         button : "%(id)s_wmd_button_bar",
                         preview : "%(id)s_wmd_preview",
                     }
+                    var help = function(x) {
+                        alert('ohai');
+                    };
                     var editor = new Markdown.Editor(converter, selectors);
                     editor.run();
                     editors.push(editor);
 
                     lImage_pagedown.extend("./images/", "%(id)s_wmd_dialog", editor);
+                    lStory_pagedown.extend(editor);
                 })();
             </script>
             """ % {'attrs': flatatt(final_attrs),

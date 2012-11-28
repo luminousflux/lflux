@@ -1,0 +1,30 @@
+.ui-dialog-content .imagegrid {
+}
+
+.ui-dialog-content .imagegrid .image {
+    width: 30%;
+    float: left;
+    height: 100px;
+    margin: 1.5%;
+    position: relative;
+    text-align: center;
+}
+
+.ui-dialog-content .imagegrid .image img {
+    max-width: 100%;
+    max-height: 100%;
+    cursor: pointer;
+}
+
+.ui-dialog-content form {
+    clear: left;
+}
+
+.ui-dialog-content .imageuploadform p {
+    display: inline;
+}
+
+.ui-dialog-content input.loading {
+    background: url('/static/img/spinner.gif') no-repeat 50% 50%;
+    color: transparent;
+}

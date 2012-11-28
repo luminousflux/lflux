@@ -43,3 +43,37 @@ lImage_pagedown = {
         };
     }
 }
+
+lStory_pagedown = {
+    'extend': function(editor) {
+        var refresh = function() {
+            $(editors).each(function() { this.refreshPreview(); });
+        };
+        $('.wmd-button-row').each(function() {
+                var button_row = this;
+                var li = $(document.createElement('li'));
+                li.attr('class', 'wmd-button');
+                li.attr('id', 'wmd-imd-button');
+                li.append('<img src="/static/img/admin/wmd-imd-button.png" />');
+                li.attr('style', 'left: '+ $(button_row).children().length*25+'px');
+                $(button_row).append(li);
+                $(li).click(function() {
+                    var elem = $(this);
+                    var ta = elem.parents('.wmd-panel').find('textarea').first();
+                    if(ta.getSelection()) {
+                        ta.wrapSelection('[imd]','[/imd]');
+                        setTimeout(refresh,10);
+                    } else {
+                        MessageBoxes.Prompt('Enter IMD text here',
+                            "In more Detail",
+                            [{label: 'text', type: 'textarea', name: 'text'}],
+                            function(data) {
+                                ta.replaceSelection('[imd]'+data.text+'[/imd]');
+                                setTimeout(refresh,10);
+                            });
+                    }
+                    });
+                });
+        return true;
+    }
+}
