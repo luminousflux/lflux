@@ -118,8 +118,17 @@ $(document).ready(initForms);
 
 function initInMoreDetail() {
     var imdIDs = {};
+    var createdId = 999;
     $('.inmoredetail').each(function() {
-            var id = $(this).attr('class').split(' ').filter(function(x) { return x.indexOf('imd-')==0; })
+            var id = $(this).attr('class').split(' ').filter(function(x) { return x.indexOf('imd-')==0; });
+            if(id.length==0) {
+                id = ['imd-a'+createdId];
+                createdId+=1;
+            }
+            id = id[0];
+            $(this).addClass(id);
+            console.log(id);
+            console.log($(this).attr('class'));
             if(imdIDs[id]) {
                 return;
             }
@@ -132,7 +141,7 @@ function initInMoreDetail() {
             imdIDs[id] = elem;
         });
     $('.inmoredetail').click(function() {
-        var id = $(this).attr('class').replace(/inmoredetail/,'').trim();
+        var id = $(this).attr('class').split(' ').filter(function(x) { return x.indexOf('imd-')==0; })
         var elem = imdIDs[id];
         $(elem).show();
         $('.'+id).hide();
