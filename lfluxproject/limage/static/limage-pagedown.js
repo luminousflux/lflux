@@ -51,8 +51,11 @@ lStory_pagedown = {
         };
         $('.wmd-button-row').each(function() {
                 var button_row = this;
+                if($(button_row).find('.wmd-imd-button').length>0) {
+                    return;
+                }
                 var li = $(document.createElement('li'));
-                li.attr('class', 'wmd-button');
+                li.attr('class', 'wmd-button wmd-imd-button');
                 li.attr('id', 'wmd-imd-button');
                 li.append('<img src="/static/img/admin/wmd-imd-button.png" />');
                 li.attr('style', 'left: '+ $(button_row).children().length*25+'px');

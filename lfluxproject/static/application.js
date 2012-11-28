@@ -128,14 +128,14 @@ function initInMoreDetail() {
             elem.innerHTML = '…';
             $(elem).addClass('imdbutton');
             $(this).before(elem);
-            $(elem).click(function() { $('.'+id).toggle(); $(elem).toggle(); });
+            $(elem).click(function() { $('.'+id).show(); $(elem).toggle(); });
             imdIDs[id] = elem;
         });
     $('.inmoredetail').click(function() {
         var id = $(this).attr('class').replace(/inmoredetail/,'').trim();
         var elem = imdIDs[id];
-        $(elem).toggle();
-        $('.'+id).toggle();
+        $(elem).show();
+        $('.'+id).hide();
     });
 }
 $(document).ready(initInMoreDetail);
