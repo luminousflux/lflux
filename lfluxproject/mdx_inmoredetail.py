@@ -47,7 +47,6 @@ class InmoredetailTreeProcessor(Treeprocessor):
         i = len(current)
         """ going left, to the depth where we can traverse to end_tree """
         while i > depth+1:
-            print 'left'
             x = current.pop()
             if x.tail and x.tail.strip():
                 newelem = self._wrap_in_span(x.tail, imdcount)
@@ -69,7 +68,6 @@ class InmoredetailTreeProcessor(Treeprocessor):
         x = current.pop()
         children = current[-1].getchildren()
         while True and len(children)>children.index(x)+1:
-            print 'down'
             x = children[children.index(x)+1]
             if x==end_tree[len(current)]:
                 break
@@ -77,7 +75,6 @@ class InmoredetailTreeProcessor(Treeprocessor):
 
         """ going down to the end point """
         for i in range(depth+1, len(end_tree)):
-            print 'right'
             parent = end_tree[i-1]
             children = parent.getchildren()
             x = end_tree[i]
