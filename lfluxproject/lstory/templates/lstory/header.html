@@ -6,6 +6,10 @@
         <div id="place" class="essential">
             <h3>Where</h3>
             <canvas id="placemap"></canvas>
+            {% if current.get_region_data %}
+            {% else %}
+            <div id="placetext">{{current.region}}</div>
+            {% endif %}
         </div>
         {{current.get_region_data|make_map:"placemap"}}
     {% endif %}

@@ -107,7 +107,7 @@ abbr { border-bottom: 1px dotted #666; }
 #header #essentials div.essential {
   float: left;
   height: 60px;
-  margin: 0 0 0 10px;
+  padding: 0 0 0 10px;
   min-width: 107px;
   border-left: 2px dotted #ccc;
 }
@@ -935,4 +935,12 @@ body.historyversion #history div.version {
     color: gray;
     font-size: 75%;
     cursor: pointer;
+}
+
+#header #essentials #place #placetext {
+    width: 90%;
+    left: 4px;
+    position: relative;
+    padding: 0 5px;
+    margin-top: 1.7em;
 }
