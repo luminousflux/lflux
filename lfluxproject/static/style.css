@@ -928,13 +928,14 @@ body.historyversion #history div.version {
 
 .inmoredetail {
     display: none;
-    color: gray;
+    color: #5A5A5A;
 }
 
 .imdbutton {
     color: gray;
     font-size: 75%;
     cursor: pointer;
+    font-weight: bold;
 }
 
 #header #essentials #place #placetext {
