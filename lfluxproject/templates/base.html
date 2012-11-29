@@ -1,4 +1,4 @@
-{% load static %}{% load flatpages %}<!DOCTYPE html>
+{% load static %}{% load flatpages %}{% load i18n %}<!DOCTYPE html>
 <html>
     <head>
         <title>Luminous Flux {% block title %}{% endblock %}</title>
@@ -27,10 +27,13 @@
     </head>
     <body {% block bodyargs %}{% endblock %}>
         <div id="page">
+            <div id="brand">
+                <a href="/">{{site.name}}</a>
+            </div>
             {% block content %}
             {% endblock %}
             <section id="footer">
-            luminous flux preview
+            {{site.name}}
             {% get_flatpages as flatpages %}
             {% for page in flatpages %}
             · 
@@ -38,13 +41,13 @@
             {% endfor %}
             {% if settings.DEMO_MODE %}
                 <div style="color: white; text-align: right; float: right;">
-                demo mode:
+                    {% trans "demo mode" %}
                 {% if request.user.is_authenticated %}
-                <a href="{{ settings.LOGOUT_URL }}">logout</a> | 
-                <a href="/backend/">admin backend</a>
+                <a href="{{ settings.LOGOUT_URL }}">{% trans "Sign Out" %}</a> | 
+                <a href="/backend/">{% trans "Editor" %}</a>
                 {% else %}
-                <a href="{{ settings.LOGIN_URL }}">login</a> | 
-                <a href="{% url userena.views.signup %}">sign up</a>
+                <a href="{{ settings.LOGIN_URL }}">{% trans "Sign In" %}</a> | 
+                <a href="{% url userena.views.signup %}">{% trans "Sign Up" %}</a>
                 {% endif %}
                 </div>
             {% endif %}
