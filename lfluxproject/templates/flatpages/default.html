@@ -2,6 +2,12 @@
 {% load markup %}
 {% block title %}{{flatpage.title}}{%endblock%}
 {% block content %}
-<h1>{{flatpage.title}}</h1>
-{{flatpage.content|markdown}}
+<div id="header">
+    <h1>{{flatpage.title}}</h1>
+</div>
+<div id="article">
+    <div class="inner">
+        {{flatpage.content|markdown}}
+    </div>
+</div>
 {% endblock %}
