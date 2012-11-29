@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-29 03:15+0100\n"
+"POT-Creation-Date: 2012-11-29 03:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -186,8 +186,8 @@ msgid "Perpetual link to this version"
 msgstr "Fixer Link zu dieser Version"
 
 #: lstory/templates/lstory/history.inc.html:13
-msgid "Cite this version"
-msgstr "Diese Version zitieren"
+msgid "Link this"
+msgstr "Verlinken"
 
 #: lstory/templates/lstory/index.html:5
 msgid "by"
@@ -309,3 +309,6 @@ msgstr "Luminous Flux admin"
 #: templates/admin/base_site.html:7
 msgid "Luminous Flux administration"
 msgstr "Luminous Flux admin"
+
+#~ msgid "Cite this version"
+#~ msgstr "Diese Version zitieren"
