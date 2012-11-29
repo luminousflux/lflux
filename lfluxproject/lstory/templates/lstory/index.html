@@ -1,7 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %}{% load i18n %}
 {% block content %}
 {% for story in stories %}
  <hr />
- <h1><a href="{{story.get_absolute_url}}">{{story.title}}</a> <span style="font-size: .5em;">by {% for u in story.authors.all %}{{u.username}}{% if not forloop.last %}, {%endif%}{% endfor %}</span></h1>
+ <h1><a href="{{story.get_absolute_url}}">{{story.title}}</a> <span style="font-size: .5em;">{% trans "by" %} {% for u in story.authors.all %}{{u.username}}{% if not forloop.last %}, {%endif%}{% endfor %}</span></h1>
 {% endfor %}
 {% endblock %}

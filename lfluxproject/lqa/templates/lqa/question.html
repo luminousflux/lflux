@@ -53,7 +53,7 @@
 
             {{ comment.comment|markdown }}
             <div class="meta">
-                — {% if comment.url %}<a href="{{comment.url}}" rel="nofollow">{% endif %}{% if comment.user %}{{comment.user}}{% else %}{{comment.name}}{% endif %}{% if comment.url%}</a>{% endif %} <a href="#" onclick="$('#comment_form_for_{{comment.pk}}').toggle(); return false;">(reply)</a>
+                — {% if comment.url %}<a href="{{comment.url}}" rel="nofollow">{% endif %}{% if comment.user %}{{comment.user}}{% else %}{{comment.name}}{% endif %}{% if comment.url%}</a>{% endif %} <a href="#" onclick="$('#comment_form_for_{{comment.pk}}').toggle(); return false;">({% trans "reply" %})</a>
             </div>
 
             <div id="comment_form_for_{{comment.pk}}" style="display: none;">
@@ -66,7 +66,7 @@
             {% endfor %}
         {% endfor %}
 
-        <a href="" class="pillbtn" onclick="$('#comment_form_for_question').toggle(); return false;">Add Comment</a>
+        <a href="" class="pillbtn" onclick="$('#comment_form_for_question').toggle(); return false;">{% trans "Add Comment" %}</a>
         <div id="comment_form_for_question" style="display: none;">
             {% render_comment_form for question %}
         </div>

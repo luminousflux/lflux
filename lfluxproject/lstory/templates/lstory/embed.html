@@ -32,12 +32,12 @@
 
 {% block beforearticle %}
 <div id="switch_view">
-    view 
+    {% trans "view" %}
     <div class="view active" data-view="article,meta">
-        Main Article
+        {% trans "Main Article" %}
     </div>
     <div class="view" data-view="sidebar">
-        Firehose
+        {% trans "Firehose" %}
     </div>
 </div>
 {% endblock %}

@@ -11,3 +11,4 @@ lfluxproject/media/
 localsettings.py
 localstatic
 .DS_Store
+*.mo

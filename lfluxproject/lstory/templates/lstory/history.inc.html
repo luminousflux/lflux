@@ -1,16 +1,16 @@
-{% load humanize_timesince %}
+{% load i18n %}{% load humanize_timesince %}
 
 <div class="historyform">
-    Last updated {{current.versions.this_date|humanize_timesince}} ago
+    {% blocktrans with current.versions.this_date|humanize_timesince as timesince %}Last updated {{timesince}} ago{% endblocktrans %}
     <a class="switch highlight ins">{% if not previous %}Highlight Changes{% else %}
         {% ifequal previous.versions.this_date current.versions.this_date %}
-        No changes to highlight{% else %}Changes since {{previous.versions.this_date|timesince}} ago
+        {% blocktrans %}No changes to highlight{% endblocktrans %}{% else %}{% blocktrans with previous.versions.this_date|timesince as timesince %}Changes since {{timesince}} ago{% endblocktrans %}
         {% endifequal %}{% endif %}</a> 
-    <a class="switch version">{% if previous %}Access History{% else %}Displaying content from {{current.versions.this_date|date}}{% endif %}
+    <a class="switch version">{% if previous %}{% trans "Access History" %}{% else %}{% blocktrans with current.versions.this_date|date as date %}Displaying content from {{date}}{% endblocktrans %}{% endif %}
     
     
     </a>
-    {% if previous %}<div style="display: inline-block; "><a href="" onclick="$('#versionlink').toggle(); return false;" class="with_icon" title="Perpetual link to this version">∞<span>Cite this version</span></a><br />
+    {% if previous %}<div style="display: inline-block; "><a href="" onclick="$('#versionlink').toggle(); return false;" class="with_icon" title="{% trans "Perpetual link to this version" %}">∞<span>{% trans "Cite this version" %}</span></a><br />
     </div>{% endif %}
 </div>
 

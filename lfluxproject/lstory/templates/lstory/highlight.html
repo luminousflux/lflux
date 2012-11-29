@@ -39,10 +39,10 @@
 
 <div id="history">
     <div id="versionlink" style="">
-        link to this version:
+        {% trans "link to this version" %}:
         <input type="text" value="http://{{request.get_host}}{{current.get_version_url}}" />
         <br />
-        embed this article:
+        {% trans "embed this article" %}:
         <br />
         <input type="text" id="embed_value" />
     </div>
@@ -89,23 +89,16 @@
 
 <div id="react" class="state_tab2">
     <div class="tab_content tab2 inner sections2 qa">
-        <a href="" class="pillbtn" onclick="$('#qaform').toggle(); return false;">Ask a question</a>
-        <h1>Q&amp;A</h1>
+        <a href="" class="pillbtn" onclick="$('#qaform').toggle(); return false;">{% trans "Ask a question" %}</a>
+        <h1>{% trans "Q&amp;A" %}</h1>
+      {% comment %}
         <ul class="filter">
           <li class="sel"><a href="">all</a></li>
           <li><a href="">answered</a></li>
           <li><a href="">researching</a></li>
           <li><a href="">open</a></li>
       </ul>
-      {% comment %}
-      {% get_comment_list for current as comments root_only %}
-      {% votes_by_user user on comments as vote_dict %}
-      {% scores_for_objects comments as score_dict %}
-      {% for comment in comments|fill_tree|annotate_tree %}
-        {% dict_entry_for_item comment from vote_dict as vote %}
-        {% dict_entry_for_item comment from score_dict as score %}
-        {% endfor %}
-        {% endcomment %}
+      {% endcomment %}
         {% for question in current.question_set.all %}
         {% include 'lqa/_question.html' %}
       {% endfor %}

@@ -4,14 +4,14 @@
         {% block tumblemeta %}
         {% if previous %}
         {% ifgt previous.ltools_versiondate post.published_at %}
-        <span class="ins">{{ post.published_at|timesince }} ago</span>
+        <span class="ins">{% blocktrans with post.published_at|timesince as timesince %}{{ timesince }} ago{% endblocktrans %}</span>
         {% else %}
-        {{ post.published_at|timesince }} ago
+        {% blocktrans with post.published_at|timesince as timesince %}{{ timesince }} ago{% endblocktrans %}
         {% endifgt %}
         {% else %}
-        {{ post.published_at|timesince }} ago
+        {% blocktrans with post.published_at|timesince as timesince %}{{ timesince }} ago{% endblocktrans %}
         {% endif %}
-        by {{post.author}}
+        {% blocktrans with post.author as author %}by {{author}}{% endblocktrans %}
         {% endblock %}
     </div>
 </div>
