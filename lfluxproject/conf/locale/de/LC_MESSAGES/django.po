@@ -315,7 +315,7 @@ msgstr[1] "vor %d Wochen"
 #, python-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
-msgstr[0] "Gestern"
+msgstr[0] "vor %d Tag"
 msgstr[1] "vor %d Tagen"
 
 #: ltools/templatetags/humanize_timesince.py:28
