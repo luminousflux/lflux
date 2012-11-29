@@ -1,5 +1,6 @@
 {% load url from future %}
 {% load crispy_forms_tags %}
+{% load i18n %}
 <form action="{% url 'lqa_question_create' story_slug=story.slug %}" method="POST" class="uniForm replacecontent">
     <div class="replace_here">
         {{form|crispy}}
@@ -7,6 +8,6 @@
 
     <div class="buttonHolder">
         {% csrf_token %}
-        <input type="submit" class="primaryAction" />
+        <input type="submit" class="primaryAction" value="{% trans "Submit" %}" />
     </div>
 </form>

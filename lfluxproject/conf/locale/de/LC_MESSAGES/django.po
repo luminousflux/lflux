@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-29 03:22+0100\n"
+"POT-Creation-Date: 2012-11-29 03:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,6 +78,32 @@ msgstr "Speichern"
 msgid "Home"
 msgstr "Home"
 
+#: lqa/models.py:11
+msgid "Title"
+msgstr "Titel"
+
+#: lqa/models.py:12
+#, fuzzy
+msgid "Comment"
+msgstr "kommentieren"
+
+#: lqa/models.py:13
+msgid "User"
+msgstr "Benutzer"
+
+#: lqa/models.py:14
+msgid "Story"
+msgstr "Artikel"
+
+#: lqa/models.py:16
+msgid "Created at"
+msgstr "Erstellt am"
+
+#: lqa/models.py:18
+#, fuzzy
+msgid "State"
+msgstr "Speichern"
+
 #: lqa/templates/lqa/_question.html:10
 msgid "votes"
 msgstr "Stimmen"
@@ -93,6 +119,10 @@ msgstr "offen"
 #: lqa/templates/lqa/_question.html:22
 msgid "since"
 msgstr "seit"
+
+#: lqa/templates/lqa/_question_form.html:11
+msgid "Submit"
+msgstr "Abschicken"
 
 #: lqa/templates/lqa/question.html:20
 msgid "Back to Story"
@@ -192,6 +222,36 @@ msgstr "Verlinken"
 #: lstory/templates/lstory/index.html:5
 msgid "by"
 msgstr "von"
+
+#: lstory/templates/lstory/mark_as_read_popup.inc:2
+msgid "Looks like you're done reading!"
+msgstr "Sieht so aus als ob du fertig gelesen hast!"
+
+#: lstory/templates/lstory/mark_as_read_popup.inc:4
+msgid "Marking as read"
+msgstr "Speichere Lesestatus"
+
+#: lstory/templates/lstory/mark_as_read_popup.inc:5
+msgid "I don't want this feature, Disable tracking."
+msgstr "Ich will dieses Feature nicht, deaktiviere Tracking."
+
+#: lstory/templates/lstory/mark_as_read_popup.inc:7
+msgid ""
+"You told us not to highlight what changed in stories since you last read "
+"them."
+msgstr "Du hast uns gesagt, dass wir nicht speichern sollst wann du welche Stories liest."
+
+#: lstory/templates/lstory/mark_as_read_popup.inc:8
+msgid "Strike that, I'd like to know what changed. Enable tracking."
+msgstr "Nein, ich würde gerne wissen, was sich ändert. Tracking aktivieren."
+
+#: lstory/templates/lstory/marked_as_read.inc:2
+msgid "Marked as read."
+msgstr "Als gelesen Markiert."
+
+#: lstory/templates/lstory/marked_as_read.inc:2
+msgid "Undo"
+msgstr "Rückgängig"
 
 #: ltools/admin.py:10
 msgid "My Instances"
