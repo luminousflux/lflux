@@ -2,6 +2,11 @@
 {% load markup %}
 {% block title %}{{flatpage.title}}{%endblock%}
 {% block content %}
+<div id="bar">
+    <div id="nav">
+        <a href="/">{{site.name}}</a> / {{flatpage.title}}
+    </div>
+</div>
 <div id="header">
     <h1>{{flatpage.title}}</h1>
 </div>

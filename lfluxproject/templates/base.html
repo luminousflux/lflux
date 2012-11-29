@@ -33,10 +33,11 @@
             {% block content %}
             {% endblock %}
             <section id="footer">
-            {{site.name}}
             {% get_flatpages as flatpages %}
             {% for page in flatpages %}
+            {% if not forloop.first %}
             · 
+            {% endif %}
                 <a href="{{ page.url }}">{{ page.title }}</a>
             {% endfor %}
             {% if settings.DEMO_MODE %}
