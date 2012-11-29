@@ -178,11 +178,11 @@ msgstr "Einbetten"
 
 #: lstory/templates/lstory/highlight.html:87
 msgid "About the Author"
-msgstr ""
+msgstr "Über den Autor"
 
 #: lstory/templates/lstory/highlight.html:101
 msgid "Current events"
-msgstr ""
+msgstr "Aktuelle Themen"
 
 #: lstory/templates/lstory/highlight.html:115
 msgid "Ask a question"
