@@ -563,11 +563,19 @@ ul.tabs li.sel a,
   background: #f90;
   border-radius: 2em;
   font-size: 1.1em;
+  padding: 0 10px;
 }
 #react .qa .pillbtn,   
 #react .stories .side {
   float: right;    
   margin: 10px 100px 0 0;
+}
+
+#react .qa .pillbtn {
+    padding-top: 2px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
 }
 #react .stories .side {
   margin-top: 15px;
