@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-29 03:33+0100\n"
+"POT-Creation-Date: 2012-11-29 19:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,11 +26,11 @@ msgstr "Letzte Aktionen"
 
 #: settings.py:47
 msgid "German"
-msgstr ""
+msgstr "Deutsch"
 
 #: settings.py:48
 msgid "English"
-msgstr ""
+msgstr "Englisch"
 
 #: ladmin/templates/ladmin/index.html:18
 #, python-format
@@ -124,19 +124,19 @@ msgstr "seit"
 msgid "Submit"
 msgstr "Abschicken"
 
-#: lqa/templates/lqa/question.html:20
+#: lqa/templates/lqa/question.html:22
 msgid "Back to Story"
 msgstr "Zurück zum Bericht"
 
-#: lqa/templates/lqa/question.html:23
+#: lqa/templates/lqa/question.html:25
 msgid "Question:"
 msgstr "Frage:"
 
-#: lqa/templates/lqa/question.html:56
+#: lqa/templates/lqa/question.html:58
 msgid "reply"
 msgstr "antworten"
 
-#: lqa/templates/lqa/question.html:69
+#: lqa/templates/lqa/question.html:71
 msgid "Add Comment"
 msgstr "kommentieren"
 
@@ -168,23 +168,31 @@ msgstr "aktuell"
 msgid "Active?"
 msgstr "Aktiv?"
 
-#: lstory/templates/lstory/highlight.html:42
+#: lstory/templates/lstory/highlight.html:44
 msgid "link to this version"
 msgstr "Link zu dieser Version"
 
-#: lstory/templates/lstory/highlight.html:45
+#: lstory/templates/lstory/highlight.html:47
 msgid "embed this article"
 msgstr "Einbetten"
 
-#: lstory/templates/lstory/highlight.html:92
+#: lstory/templates/lstory/highlight.html:87
+msgid "About the Author"
+msgstr ""
+
+#: lstory/templates/lstory/highlight.html:101
+msgid "Current events"
+msgstr ""
+
+#: lstory/templates/lstory/highlight.html:115
 msgid "Ask a question"
 msgstr "Frage stellen"
 
-#: lstory/templates/lstory/highlight.html:93
+#: lstory/templates/lstory/highlight.html:116
 msgid "Q&amp;A"
 msgstr "Fragen &amp; Antworten"
 
-#: lstory/templates/lstory/highlight.html:110
+#: lstory/templates/lstory/highlight.html:133
 msgid "Sign in to post a question!"
 msgstr "Eine Anmeldung ist nötig um Fragen zu stellen!"
 
@@ -219,7 +227,11 @@ msgstr "Fixer Link zu dieser Version"
 msgid "Link this"
 msgstr "Verlinken"
 
-#: lstory/templates/lstory/index.html:5
+#: lstory/templates/lstory/index.html:15
+msgid "Current Issues"
+msgstr "Aktuelle Themen"
+
+#: lstory/templates/lstory/index.html:21
 msgid "by"
 msgstr "von"
 
@@ -239,7 +251,9 @@ msgstr "Ich will dieses Feature nicht, deaktiviere Tracking."
 msgid ""
 "You told us not to highlight what changed in stories since you last read "
 "them."
-msgstr "Du hast uns gesagt, dass wir nicht speichern sollst wann du welche Stories liest."
+msgstr ""
+"Du hast uns gesagt, dass wir nicht speichern sollst wann du welche Stories "
+"liest."
 
 #: lstory/templates/lstory/mark_as_read_popup.inc:8
 msgid "Strike that, I'd like to know what changed. Enable tracking."
@@ -342,23 +356,23 @@ msgid "something really bad or really weird happened. we'll look into it!"
 msgstr ""
 "Etwas ganz schlimmes oder ganz komisches ist passiert. Wir schauen's uns an!"
 
-#: templates/base.html:44
+#: templates/base.html:45
 msgid "demo mode"
 msgstr "Demomodus"
 
-#: templates/base.html:46
+#: templates/base.html:47
 msgid "Sign Out"
 msgstr "Abmelden"
 
-#: templates/base.html:47
+#: templates/base.html:48
 msgid "Editor"
 msgstr "Redakteurbereich"
 
-#: templates/base.html:49
+#: templates/base.html:50
 msgid "Sign In"
 msgstr "Anmelden"
 
-#: templates/base.html:50
+#: templates/base.html:51
 msgid "Sign Up"
 msgstr "Registrieren"
 
@@ -369,6 +383,68 @@ msgstr "Luminous Flux admin"
 #: templates/admin/base_site.html:7
 msgid "Luminous Flux administration"
 msgstr "Luminous Flux admin"
+
+#: templates/userena/profile_detail.html:5
+#, python-format
+msgid "%(username)s's profile."
+msgstr ""
+
+#: templates/userena/profile_detail.html:16
+#: templates/userena/profile_form.html:20
+msgid "View profile"
+msgstr ""
+
+#: templates/userena/profile_detail.html:17
+msgid "Edit details"
+msgstr "Details ändern"
+
+#: templates/userena/profile_detail.html:18
+#: templates/userena/profile_form.html:22
+msgid "Change password"
+msgstr "Passwort ändern"
+
+#: templates/userena/profile_detail.html:19
+#: templates/userena/profile_form.html:23
+#, fuzzy
+msgid "Change email"
+msgstr "Email ändern"
+
+#: templates/userena/profile_detail.html:27
+msgid "Your mugshot"
+msgstr "Dein Foto"
+
+#: templates/userena/profile_detail.html:31
+msgid "Name"
+msgstr "Name"
+
+#: templates/userena/profile_detail.html:35
+msgid "Website"
+msgstr "Website"
+
+#: templates/userena/profile_detail.html:39
+msgid "About me"
+msgstr "Über Mich"
+
+#: templates/userena/profile_form.html:5
+msgid "Account setup"
+msgstr "Benutzereinstellungen"
+
+#: templates/userena/profile_form.html:13
+#, python-format
+msgid "Account &raquo; %(username)s"
+msgstr "Benutzer &raquo; %(username)s"
+
+#: templates/userena/profile_form.html:21
+msgid "Edit profile"
+msgstr "Profil ändern"
+
+#: templates/userena/profile_form.html:28
+msgid "Edit Profile"
+msgstr "Profil ändern"
+
+#: templates/userena/profile_form.html:31
+msgid "Save changes"
+msgstr "Änderungen speichern"
 
 #~ msgid "Cite this version"
 #~ msgstr "Diese Version zitieren"
