@@ -928,6 +928,7 @@ body.historyversion #history div.version {
 
 .inmoredetail {
     display: none;
+    cursor: pointer;
     color: #5A5A5A;
 }
 
