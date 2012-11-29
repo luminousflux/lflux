@@ -251,6 +251,7 @@ body.en #sidebar h2 {
 }
 #sidebar .inner {
     border-left: none;
+    padding-bottom: 0;
 }
 
 
