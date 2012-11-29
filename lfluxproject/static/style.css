@@ -956,8 +956,6 @@ body.historyversion #history div.version {
 
 #authorinfo {
     margin-top: .5em;
-    margin-bottom: 2em;
-    border-bottom: 1px solid #CCC;
 }
 
 #authorinfo > * {
@@ -976,4 +974,11 @@ body.historyversion #history div.version {
 
 .clear {
     clear: left;
+}
+
+#sidebar .tabs:nth-child(1) {
+    padding-top: 0;
+}
+#sidebar .tabs {
+    padding-top: 3em;
 }
