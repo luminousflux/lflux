@@ -102,9 +102,11 @@
         </li>
     </ul>
     <div id="stream" class="tumblelog">
-    {% for post in tumbleposts %}
-        {% include post.template %}
-    {% endfor %}
+        <div id="entries">
+            {% for post in tumbleposts %}
+                {% include post.template %}
+            {% endfor %}
+        </div>
     </div>
 </div>
 
