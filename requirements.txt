@@ -16,3 +16,4 @@ django-voting
 -e git+git://github.com/luminousflux/django-threadedcomments.git#egg=django-threadedcomments
 #tastypie HEAD( >.9.11)  has SessionAuthentication
 -e git+git://github.com/toastdriven/django-tastypie.git#egg=django-tastypie
+tldextract

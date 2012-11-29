@@ -1,5 +1,5 @@
 {% extends 'tumblelog/post.html'%}
-{% load markup i18n %}
+{% load markup i18n tldextract_f %}
 {% load ifgt %}
         {% block tumblemeta %}
         {% if previous %}
@@ -13,5 +13,6 @@
         {% endif %}
         {% blocktrans with post.author as author %}by {{author}}{% endblocktrans %}
         {% endblock %}
+        {% block tumblevia %}{% if post.data.provider_url %}via <a href="{{post.data.provider_url}}">{{post.data.provider_url|tldextract}}</a>{% endif %}{% endblock %}
     </div>
 </div>
