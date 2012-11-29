@@ -1,7 +1,23 @@
-{% extends 'base.html' %}{% load i18n %}
+{% extends 'base.html' %}{% load i18n markup %}
 {% block content %}
-{% for story in stories %}
- <hr />
- <h1><a href="{{story.get_absolute_url}}">{{story.title}}</a> <span style="font-size: .5em;">{% trans "by" %} {% for u in story.authors.all %}{{u.username}}{% if not forloop.last %}, {%endif%}{% endfor %}</span></h1>
-{% endfor %}
+<div id="header">
+    <h1>{{site.name}}</h1>
+</div>
+<div id="article">
+    <div class="inner">
+        {{flatcontent.content|default:""|markdown}}
+    </div>
+</div>
+<div id="sidebar">
+    <ul class="tabs">
+        <li class="sel">
+            <a href>{% trans "Current Issues" %}</a>
+        </li>
+    </ul>
+    <div class="inner">
+        {% for story in stories %}
+        <h2><a href="{{story.get_absolute_url}}">{{story.title}}</a> <span style="font-size: .5em;">{% trans "by" %} {% for u in story.authors.all %}{% if not u.get_full_name %}{{u.username}}{% else %}{{u.get_full_name}}{%endif%}{% if not forloop.last %}, {%endif%}{% endfor %}</span></h2>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

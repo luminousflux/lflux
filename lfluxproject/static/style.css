@@ -244,10 +244,15 @@ body.en #sidebar h2 {
   position: relative;
 }
 
-#article .inner {
+#article .inner,
+#sidebar .inner {
  padding: 0 35px 2em 20px;
  border-left: 10px solid #fff;
 }
+#sidebar .inner {
+    border-left: none;
+}
+
 
 #article img.side {
  float: right;
@@ -389,7 +394,7 @@ body.en #article #summary ul li {
 
 #article #leadimage {
   position: relative;
-  height: 260px;
+  width: 100%;
   margin-bottom: 3em;
   overflow: hidden;
 }
