@@ -2,10 +2,12 @@
 {% load i18n %}
 {% load markup %}
 {% block content %}
-<div id="nav">
-    <a href="/">{{site.name}}</a> /
-    <a href="{{story.get_absolute_url}}">{{story.name}}</a> /
-    {{question.title}}
+<div id="bar">
+    <div id="nav">
+        <a href="/">{{site.name}}</a> /
+        <a href="{{story.get_absolute_url}}">{{story.name}}</a> /
+        {{question.title}}
+    </div>
 </div>
 <div id="header">
     {% include 'lstory/header.html' with current=story %}
