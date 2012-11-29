@@ -953,3 +953,27 @@ body.historyversion #history div.version {
 #box-nav li {
     display: inline-block;
 }
+
+#authorinfo {
+    margin-top: .5em;
+    margin-bottom: 2em;
+    border-bottom: 1px solid #CCC;
+}
+
+#authorinfo > * {
+    margin-left: 95px;
+}
+
+#authorinfo .mugshot {
+    margin-left: .4em;
+    float: left;
+}
+
+#authorinfo .name {
+    font-size: 1.8em;
+    padding-top: .5em;
+}
+
+.clear {
+    clear: left;
+}

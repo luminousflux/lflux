@@ -80,6 +80,15 @@
 </div>
 
 <div id="sidebar">
+    <div id="authorinfo">
+        {% for author in current.authors.all %}
+        <img class="mugshot" src="{{author.get_profile.get_mugshot_url}}" /> <div class="name">{% if author.get_profile.website %}<a href="{{author.get_profile.website}}">{% endif %}{% if author.get_profile.get_full_name %}{{author.get_profile.get_full_name}}{% else %}{{author.username}}{% endif %}{% if author.get_profile.website %}</a>{% endif %}</div>
+        <div class="about">
+            {% if author.get_profile.about_me %}{{author.get_profile.about_me|markdown}}{% endif %}
+        </div>
+        {% endfor %}
+        <br class="clear" />
+    </div>
     <div id="stream" class="tumblelog">
     {% for post in tumbleposts %}
         {% include post.template %}
