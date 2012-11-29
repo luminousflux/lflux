@@ -988,3 +988,8 @@ body.historyversion #history div.version {
 #sidebar .tabs {
     padding-top: 3em;
 }
+
+body.index .story .author {
+    font-size: .6em;
+    white-space: nowrap;
+}

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}{% load i18n markup %}
+{% block bodyargs %}class="index"{% endblock %}
 {% block content %}
 <div id="header">
     <h1>{{site.name}}</h1>
@@ -16,7 +17,9 @@
     </ul>
     <div class="inner">
         {% for story in stories %}
-        <h2><a href="{{story.get_absolute_url}}">{{story.title}}</a> <span style="font-size: .5em;">{% trans "by" %} {% for u in story.authors.all %}{% if not u.get_full_name %}{{u.username}}{% else %}{{u.get_full_name}}{%endif%}{% if not forloop.last %}, {%endif%}{% endfor %}</span></h2>
+        <div class="story">
+            <h2><a href="{{story.get_absolute_url}}">{{story.title}}</a> <span class="author">{% trans "by" %} {% for u in story.authors.all %}{% if not u.get_full_name %}{{u.username}}{% else %}{{u.get_full_name}}{%endif%}{% if not forloop.last %}, {%endif%}{% endfor %}</span></h2>
+        </div>
         {% endfor %}
     </div>
 </div>
