@@ -19,6 +19,9 @@ class Profile(UserenaBaseProfile, ApiKeyProfileMixin):
                                 verbose_name=('user'),
                                 related_name='my_profile')
 
+    about_me = models.TextField(blank=True, null=True)
+    website = models.URLField(blank=True, null=True)
+
 
 @receiver(post_save, sender=User)
 def demo_mode_set_permission(sender, instance, created, raw, **kwargs):

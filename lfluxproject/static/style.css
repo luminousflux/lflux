@@ -945,3 +945,11 @@ body.historyversion #history div.version {
     padding: 0 5px;
     margin-top: 1.7em;
 }
+
+#box-nav {
+    width: 100%;
+}
+
+#box-nav li {
+    display: inline-block;
+}
