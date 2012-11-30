@@ -14,12 +14,14 @@
         <link rel="stylesheet" href="{% static 'tumblelog/tumblelog.css' %}" />
         <script src="{% static 'js/worldmap.js' %}"></script>
         <script src="{% static 'js/jquery.sparkline.min.js' %}"></script>
+
         <script>
             $(document).ready(function() {
                 $('#embed_value').val("{{embed_code|escapejs}}");
             });
         </script>
 
+        <link href='http://fonts.googleapis.com/css?family=Podkova' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="{% static 'uni_form/uni-form.css' %}" />
         <link rel="stylesheet" href="{% static 'uni_form/default.uni-form.css' %}" />
         {% block head %}
@@ -28,7 +30,7 @@
     <body {% block bodyargs %}{% endblock %}>
         <div id="page">
             <div id="brand">
-                <a href="/">{{site.name}}</a>
+                <a href="/"><img src="/static/img/onon.png" width="100" alt="{{site.name}}" /> BETA</a>
             </div>
             {% block content %}
             {% endblock %}
