@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% load markup %}
+{% load markup humanize_timesince %}
 {% block content %}
 <div id="bar">
     <div id="nav">
@@ -51,16 +51,8 @@
                 <ul class="thread">
             {% endif %}
 
-            <li{% if comment.last %} class="last"{% endif %}>
-
-            {{ comment.comment|markdown }}
-            <div class="meta">
-                — {% if comment.url %}<a href="{{comment.url}}" rel="nofollow">{% endif %}{% if comment.user %}{{comment.user}}{% else %}{{comment.name}}{% endif %}{% if comment.url%}</a>{% endif %} <a href="#" onclick="$('#comment_form_for_{{comment.pk}}').toggle(); return false;">({% trans "reply" %})</a>
-            </div>
-
-            <div id="comment_form_for_{{comment.pk}}" style="display: none;">
-                {% render_comment_form for question with comment.pk %}
-            </div>
+            <li class="leveldown {% if comment.last %} last{% endif %}">
+            {% include 'comments/_comment.inc' %}
 
             {% for close in comment.close %}
                 </li>

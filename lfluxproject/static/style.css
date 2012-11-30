@@ -604,25 +604,25 @@ ul.tabs li.sel a,
   background-color: #999;
 }
 #react .qa .pillbtn,
-#react .stories .pillbtn {
+#react .stories .pillbtn,
+#react .pillbtn {
   border: 3px solid #fff;
   background: #f90;
   border-radius: 2em;
   font-size: 1.1em;
   padding: 0 10px;
+  color: white;
+  padding-top: 2px;
+  text-decoration: none;
+  font-weight: bold;
 }
 #react .qa .pillbtn,
-#react .stories .side {
+#react .stories .side,
+#react .pillbtn {
   float: right;    
   margin: 10px 100px 0 0;
 }
 
-#react .qa .pillbtn {
-  padding-top: 2px;
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-}
 #react .stories .side {
   margin-top: 15px;
 }
@@ -966,24 +966,46 @@ body.historyversion #history div.version {
     padding: 0;
 }
 
+#react .thread .preview {
+    background-color: white;
+}
+
 #react .thread ul {
     padding: 0;
     margin-bottom: 1em;
 }
 
-#react .thread li {
+#react .thread p {
+    margin: 0 0 .5em 0;
+    line-height: 1.5em;
+}
+
+#react .thread li.leveldown {
     list-style-type: none;
     border-left: 1px solid lightgrey;
     padding-left: 1em;
     margin-bottom: .5em;
 }
 
-#react .thread li {
+#react .thread li.leveldown {
     border-top: 1px solid lightgrey;
 }
 
+
 #react .thread .meta {
     padding-bottom: 1em;
+    font-size: .8em;
+}
+
+#react .thread .meta1 {
+}
+
+#react .thread .meta1 .username {
+    font-weight: bold;
+}
+
+#react .thread .meta1 .timeago {
+    color: #444;
 }
 
 .inmoredetail {

@@ -1,5 +1,12 @@
-{% load comments i18n crispy_forms_filters %}
+{% load comments i18n crispy_forms_filters markup %}
 <form action="{% comment_form_target %}" method="post" class="uniForm replacecontent" data-request-type="xml">{% csrf_token %}
+
+    {% if form.data.preview %}
+    <div class="preview">
+        {{comment|markdown}}
+    </div>
+    {% endif %}
+
   {% if next %}<div><input type="hidden" name="next" value="{{ next }}" /></div>{% endif %}
   {{ form|crispy }}
   <div class="buttonHolder">
