@@ -32,7 +32,11 @@
             <div id="brand">
                 <a href="/"><img src="/static/img/onon.png" width="100" alt="{{site.name}}" /> BETA</a>
             </div>
+            {% block overcontent %}
+            {% endblock %}
+            {% block surroundcontent %}
             {% block content %}
+            {% endblock %}
             {% endblock %}
             <section id="footer">
             {% get_flatpages as flatpages %}

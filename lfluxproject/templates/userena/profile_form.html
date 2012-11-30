@@ -12,20 +12,28 @@
 
 {% block content_title %}<h2>{% blocktrans with profile.user.username as username %}Account &raquo; {{ username }}{% endblocktrans %}</h2>{% endblock %}
 
+{% block overcontent %}
+<div id="bar">
+    <div id="nav">
+        <a href='{% url "userena_profile_detail" user.username %}'><span>{% trans 'View profile' %}</span></a> / 
+        <a href='{% url "userena_profile_edit" user.username %}'>{% trans "Edit profile" %}</a> / 
+        <a href='{% url "userena_password_change" user.username %}'>{% trans "Change password" %}</a> / 
+        <a href='{% url "userena_email_change" user.username %}'>{% trans "Change email" %}</a> / 
+    </div>
+</div>
+<div id="header">
+    <h1>{% trans "Edit Profile" %}</h1>
+</div>
+{% endblock %}
+
+
 {% block content %}
 
 <div id="article">
 <form action="" enctype="multipart/form-data" method="post" class="uniForm inner">
-  <ul id="box-nav">
-    <li class="first"><a href="{% url 'userena_profile_detail' user.username %}"><span>{% trans 'View profile' %}</span></a></li>
-    <li class="selected"><a href="{% url 'userena_profile_edit' user.username %}">{% trans "Edit profile" %}</a></li>
-    <li><a href="{% url 'userena_password_change' user.username %}">{% trans "Change password" %}</a></li>
-    <li class="last"><a href="{% url 'userena_email_change' user.username %}">{% trans "Change email" %}</a></li>
-  </ul>
   {% csrf_token %}
   <fieldset style="clear: left;">
       <br />
-    <legend>{% trans "Edit Profile" %}</legend>
     {{ form|crispy }}
   </fieldset>
   <input type="submit" value="{% trans "Save changes" %}" />

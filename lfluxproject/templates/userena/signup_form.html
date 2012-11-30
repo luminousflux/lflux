@@ -1,0 +1,22 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n crispy_forms_filters%}
+
+{% block title %}{% trans "Signup" %}{% endblock %}
+
+{% block overcontent %}
+<div id="header">
+    <h1>{% trans "Signup" %}</h1>
+</div>
+{% endblock %}
+{% block content %}
+<form action="" method="post" class="uniForm">
+  {% csrf_token %}
+  <fieldset class="inlineLabels">
+    {{form|crispy}}
+  </fieldset>
+  <div class="buttonHolder">
+      <input type="submit" value="{% trans "Signup"%}" class="primaryAction" />
+  </div>
+</form>
+{% endblock %}
+
