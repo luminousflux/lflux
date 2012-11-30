@@ -43,9 +43,9 @@ abbr { border-bottom: 1px dotted #666; }
   width: 1010px;
   background: #fff;
   padding: 0;
-  border: 1px solid #e0e0e0;
+  /*border: 1px solid #e0e0e0;*/
   border-top: 6px solid #f56; /* fe6460 lachs */
-  -webkit-box-shadow: rgba(0,0,0,.4) 0 0 5px -2px;
+  -webkit-box-shadow: rgba(0,0,0,.6) 0 0 6px -1px;
   /*overflow: hidden;*/
 }
 
@@ -255,12 +255,12 @@ body.en #sidebar h2 {
 
 #sidebar .inner,
 #article .inner {
- padding: 0 35px 2em 20px;
- border-left: 10px solid #fff;
+  padding: 0 25px 2em 20px;
+  border-left: 10px solid #fff;
 }
 #sidebar .inner {
-    border-left: none;
-    padding-bottom: 0;
+  border-left: none;
+  padding: 0 15px 0 15px;
 }
 
 #article #author {
@@ -435,22 +435,27 @@ body.en #article #summary ul li {
 #article #leadimage {
   position: relative;
   width: 100%;
-  margin-bottom: 3em;
+  height: 230px; /* TODO WRONG */
+  margin-bottom: 1.5em;
   overflow: hidden;
 }
 
 #article #leadimage img {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 1;
-    width: 609px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 609px;
 }
 
 #article img {
   z-index: 1;      
   /*width: 250px;*/
   float: right;
+}
+
+#article ul {
+  padding-left: 1.5em;
 }
 
 #article #leadimage div.label {
