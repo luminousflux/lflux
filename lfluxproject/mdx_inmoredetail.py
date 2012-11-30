@@ -71,7 +71,6 @@ class InmoredetailTreeProcessor(Treeprocessor):
         children = current[-1].getchildren()
         while True and len(children)>children.index(x)+1:
             x = children[children.index(x)+1]
-            print 'mark', x.tag, x.text, x.tail
             if x==end_tree[len(current)]:
                 break
             x.set('class', x.get('class', '') + ' inmoredetail imd-%s' % imdcount)
