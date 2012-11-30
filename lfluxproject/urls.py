@@ -24,10 +24,8 @@ urlpatterns = patterns(
     url(r'^api/comments/', include('django.contrib.comments.urls')),
     url(r'^api/voting/', include('voting.urls')),
 
+    url(r'^accounts/', include('userena.urls')),
 )
-
-if settings.DEMO_MODE:
-    urlpatterns += patterns('', url(r'^accounts/', include('userena.urls')), )
 
 if settings.DEBUG:
     urlpatterns += patterns(
