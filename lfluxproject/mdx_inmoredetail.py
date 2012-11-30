@@ -95,14 +95,14 @@ class InmoredetailTreeProcessor(Treeprocessor):
         parent = end_tree[-1]
         is_tail = not('[/imd]' in parent.text)
         if is_tail:
-            before, after = parent.tail.split('[/imd]')
+            before, after = parent.tail.split('[/imd]',1)
             parent.tail = ''
             parent.set('class', parent.get('class','') + 'inmoredetail imd-%s' % imdcount)
             newelem = self._wrap_in_span(before, imdcount)
             newelem.tail = after
             end_tree[-2].insert(end_tree[-2].getchildren().index(parent)+1, newelem)
         else:
-            before, after = parent.text.split('[/imd]')
+            before, after = parent.text.split('[/imd]',1)
             parent.text = after
             newelem = self._wrap_in_span(before, imdcount)
             parent.insert(0, newelem)
@@ -117,12 +117,12 @@ class InmoredetailTreeProcessor(Treeprocessor):
                 parent,elem = x[-2:]
                 is_tail = not ('[imd]' in elem.text)
                 if not is_tail:
-                    before, after = elem.text.split('[imd]')
+                    before, after = elem.text.split('[imd]',1)
                     elem.text = before
                     newelem = self._wrap_in_span(after, imdcount)
                     elem.append(newelem)
                 else:
-                    before, after = elem.tail.split('[imd]')
+                    before, after = elem.tail.split('[imd]',1)
                     elem.tail = before
                     elemindex = parent.getchildren().index(elem)
                     newelem = self._wrap_in_span(after, imdcount)
