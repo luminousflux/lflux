@@ -25,6 +25,8 @@ class Profile(UserenaBaseProfile, ApiKeyProfileMixin):
 
 @receiver(post_save, sender=User)
 def demo_mode_set_permission(sender, instance, created, raw, **kwargs):
+    if raw:
+        return
     try:
         Profile.objects.get_or_create(user=instance)
     except Exception, e:
