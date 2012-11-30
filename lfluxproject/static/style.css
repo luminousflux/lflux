@@ -147,6 +147,8 @@ abbr { border-bottom: 1px dotted #666; }
   font-family: Georgia, Helvetica, sans-serif;
   font-style: italic;
   color: #444;
+  column-count: 2;
+  -moz-column-count: 2;
   -webkit-column-count: 2;
 }
 #summary ul {
