@@ -249,6 +249,31 @@ body.en #sidebar h2 {
  border-left: 10px solid #fff;
 }
 
+#article #author {
+  background: #444;
+  border-top-left-radius: .5em;
+  border-bottom-left-radius: .5em;
+  padding: 5px;
+  float: left;
+  margin-left: -72px;
+  position: absolute;
+}
+#article #author img {
+  float: none;
+  display: block;
+}
+#article #authorprofile {
+  display: none;
+  background: #444;
+  color: #ccc;
+  padding: 10px 10px 10px 30px;
+  margin-left: -30px;
+}
+#article #authorprofile .name {
+  font-family: Podkova, Arial, Helvetica, sans-serif;
+  font-size: 1.7em;
+}
+
 #article img.side {
  float: right;
  border: 1px solid #ccc;
