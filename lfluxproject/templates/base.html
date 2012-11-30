@@ -1,4 +1,4 @@
-{% load static %}{% load flatpages %}{% load i18n %}<!DOCTYPE html>
+{% load static %}{% load flatpages %}{% load i18n %}{% load url from future %}<!DOCTYPE html>
 <html>
     <head>
         <title>Luminous Flux {% block title %}{% endblock %}</title>
@@ -42,18 +42,22 @@
             {% endif %}
                 <a href="{{ page.url }}">{{ page.title }}</a>
             {% endfor %}
-            {% if settings.DEMO_MODE %}
-                <div style="color: white; text-align: right; float: right;">
-                    {% trans "demo mode" %}
-                {% if request.user.is_authenticated %}
-                <a href="{{ settings.LOGOUT_URL }}">{% trans "Sign Out" %}</a> | 
-                <a href="/backend/">{% trans "Editor" %}</a>
-                {% else %}
-                <a href="{{ settings.LOGIN_URL }}">{% trans "Sign In" %}</a> | 
-                <a href="{% url userena.views.signup %}">{% trans "Sign Up" %}</a>
+            <div style="text-align: right; float: right;">
+                {% if settings.DEMO_MODE %}
+                    {% trans "demo mode" %} ·
                 {% endif %}
-                </div>
-            {% endif %}
+                {% if request.user.is_authenticated %}
+                {{request.user.username}} ·
+                <a href="{% url "userena_profile_detail" username=request.user.username %}">{% trans "Profile" %}</a> · 
+                <a href="{{ settings.LOGOUT_URL }}">{% trans "Sign Out" %}</a> · 
+                    {% if request.user.is_staff %}
+                        <a href="/backend/">{% trans "Editor" %}</a>
+                    {% endif %}
+                {% else %}
+                    <a href="{{ settings.LOGIN_URL }}">{% trans "Sign In" %}</a> · 
+                    <a href="{% url userena.views.signup %}">{% trans "Sign Up" %}</a>
+                {% endif %}
+            </div>
             </section>
         </div>
         {% block additional_body %}

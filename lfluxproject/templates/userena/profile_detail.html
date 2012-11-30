@@ -1,5 +1,5 @@
 {% extends 'userena/base_userena.html' %}
-{% load i18n %}
+{% load i18n tldextract_f markup %}
 {% load url from future %}
 
 {% block title %}{% blocktrans with profile.user.username as username %}{{ username }}'s profile.{% endblocktrans %}{% endblock %}
@@ -19,28 +19,25 @@
           {% endblock %}
         </ul>
       {% endif %}
-    {% endblock %}
-
-    <div id="details">
-      {% block profile_details %}
-        <img class="mugshot" src="{{ profile.get_mugshot_url }}" alt="{% trans "Your mugshot" %}" />
-        <dl>
-          {% block profile_definition_list %}
-            {% if profile.user.get_full_name %}
-              <dt>{% trans "Name" %}</dt>
-              <dd>{{ profile.user.get_full_name }}</dd>
-            {% endif %}
-            {% if profile.website %}
-              <dt>{% trans "Website" %}</dt>
-              <dd>{{ profile.website|urlize }}</dd>
-            {% endif %}
-            {% if profile.about_me %}
-              <dt>{% trans "About me" %}</dt>
-              <dd>{{ profile.about_me }}</dd>
-            {% endif %}
-          {% endblock %}
-        </dl>
       {% endblock %}
+      <div id="header">
+          <h1>
+                {% if profile.user.get_full_name %}
+                {{ profile.user.get_full_name }}
+                {% else %}
+                {{profile.user.username}}
+                {% endif %}
+            </h1>
+        </div>
+
+    <div id="article">
+        <div class="inner">
+          {% block profile_details %}
+          <img class="mugshot" src="{{ profile.get_mugshot_url }}" alt="{% trans "Your mugshot" %}" />
+          {{ profile.about_me|markdown }}
+          <a href="{{profile.website}}">{{profile.website|tldextract}}</a>
+          {% endblock %}
+        </div> 
     </div>
   </div>
 {% endblock %}
