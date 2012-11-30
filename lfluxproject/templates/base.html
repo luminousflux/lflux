@@ -47,15 +47,15 @@
                     {% trans "demo mode" %} ·
                 {% endif %}
                 {% if request.user.is_authenticated %}
-                {{request.user.username}} ·
-                <a href="{% url "userena_profile_detail" username=request.user.username %}">{% trans "Profile" %}</a> · 
-                <a href="{{ settings.LOGOUT_URL }}">{% trans "Sign Out" %}</a> · 
-                    {% if request.user.is_staff %}
-                        <a href="/backend/">{% trans "Editor" %}</a>
-                    {% endif %}
+                    {{request.user.username}} ·
+                    <a href="{% url "userena_profile_detail" username=request.user.username %}">{% trans "Profile" %}</a> · 
+                    <a href="{{ settings.LOGOUT_URL }}">{% trans "Sign Out" %}</a> · 
+                        {% if request.user.is_staff %}
+                            <a href="/backend/">{% trans "Editor" %}</a>
+                        {% endif %}
                 {% else %}
                     <a href="{{ settings.LOGIN_URL }}">{% trans "Sign In" %}</a> · 
-                    <a href="{% url userena.views.signup %}">{% trans "Sign Up" %}</a>
+                    <a href="{% url "userena.views.signup" %}">{% trans "Sign Up" %}</a>
                 {% endif %}
             </div>
             </section>
