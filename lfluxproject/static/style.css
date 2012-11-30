@@ -253,10 +253,16 @@ body.en #sidebar h2 {
   position: relative;
 }
 
-#article .inner {
+#article .inner,
+#sidebar .inner {
  padding: 0 35px 2em 20px;
  border-left: 10px solid #fff;
 }
+#sidebar .inner {
+    border-left: none;
+    padding-bottom: 0;
+}
+
 
 #article #author {
   background: #444;
@@ -429,7 +435,7 @@ body.en #article #summary ul li {
 
 #article #leadimage {
   position: relative;
-  height: 230px;
+  width: 100%;
   margin-bottom: 3em;
   overflow: hidden;
 }
@@ -597,11 +603,19 @@ ul.tabs li.sel a,
   background: #f90;
   border-radius: 2em;
   font-size: 1.1em;
+  padding: 0 10px;
 }
 #react .qa .pillbtn,   
 #react .stories .side {
   float: right;    
   margin: 10px 100px 0 0;
+}
+
+#react .qa .pillbtn {
+    padding-top: 2px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
 }
 #react .stories .side {
   margin-top: 15px;
@@ -778,7 +792,7 @@ ul.tabs li.sel a,
 #footer {
   font-size: .9em;
   background: #000;
-  color: #444;
+  color: #AAA;
   padding-top: 5px;
   padding-bottom: 7px;
 }
@@ -968,6 +982,7 @@ body.historyversion #history div.version {
 
 .inmoredetail {
     display: none;
+    cursor: pointer;
     color: #5A5A5A;
     border-left: 5px solid #eee;
 }
@@ -1025,4 +1040,9 @@ body.historyversion #history div.version {
 }
 #sidebar .tabs {
     padding-top: 3em;
+}
+
+body.index .story .author {
+    font-size: .6em;
+    white-space: nowrap;
 }

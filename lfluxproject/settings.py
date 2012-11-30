@@ -215,6 +215,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'lfluxproject.context_processors.settings_processor',
     'lfluxproject.context_processors.tracking_processor',
     'lfluxproject.context_processors.site_processor',
+    'lfluxproject.context_processors.flatcontent',
 )
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'

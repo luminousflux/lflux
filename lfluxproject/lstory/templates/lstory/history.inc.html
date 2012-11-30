@@ -2,7 +2,7 @@
 
 <div class="historyform">
     {% blocktrans with current.versions.this_date|humanize_timesince as timesince %}Last updated {{timesince}} ago{% endblocktrans %}
-    <a class="switch highlight ins">{% if not previous %}Highlight Changes{% else %}
+    <a class="switch highlight {% if previous %}{% ifequal previous.versions.this_date current.versions.this_date %}{% else %}ins{% endifequal %}{% endif %}">{% if not previous %}Highlight Changes{% else %}
         {% ifequal previous.versions.this_date current.versions.this_date %}
         {% blocktrans %}No changes to highlight{% endblocktrans %}{% else %}{% blocktrans with previous.versions.this_date|timesince as timesince %}Changes since {{timesince}} ago{% endblocktrans %}
         {% endifequal %}{% endif %}</a> 

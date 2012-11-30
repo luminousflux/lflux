@@ -19,6 +19,8 @@ class InmoredetailTreeProcessor(Treeprocessor):
         tree.text = tree.text or ''
         if text in tree.text:
             return [tree]
+        if text in (tree.tail or ''):
+            return [tree]
         for child in tree.getchildren():
             x = self._find_elem(child, text)
             if x:
@@ -91,10 +93,19 @@ class InmoredetailTreeProcessor(Treeprocessor):
                 parent.text = ''
                 parent.insert(0, newelem)
         parent = end_tree[-1]
-        text = parent.text[0:parent.text.index('[/imd]')]
-        parent.text = parent.text[parent.text.index('[/imd]')+6:]
-        newelem = self._wrap_in_span(text, imdcount)
-        parent.insert(0, newelem)
+        is_tail = not('[/imd]' in parent.text)
+        if is_tail:
+            before, after = parent.tail.split('[/imd]')
+            parent.tail = ''
+            parent.set('class', parent.get('class','') + 'inmoredetail imd-%s' % imdcount)
+            newelem = self._wrap_in_span(before, imdcount)
+            newelem.tail = after
+            end_tree[-2].insert(end_tree[-2].getchildren().index(parent)+1, newelem)
+        else:
+            before, after = parent.text.split('[/imd]')
+            parent.text = after
+            newelem = self._wrap_in_span(before, imdcount)
+            parent.insert(0, newelem)
 
 
     def run(self, root):
@@ -104,12 +115,20 @@ class InmoredetailTreeProcessor(Treeprocessor):
             x = self._find_start(root)
             if x:
                 parent,elem = x[-2:]
-                index = elem.text.index('[imd]')
-                text = elem.text[index+len('[imd]'):]
-                elem.text = elem.text[0:index]
-                elemindex = parent.getchildren().index(elem)
-                newelem = self._wrap_in_span(text, imdcount)
-                elem.append(newelem)
+                is_tail = not ('[imd]' in elem.text)
+                if not is_tail:
+                    before, after = elem.text.split('[imd]')
+                    elem.text = before
+                    newelem = self._wrap_in_span(after, imdcount)
+                    elem.append(newelem)
+                else:
+                    before, after = elem.tail.split('[imd]')
+                    elem.tail = before
+                    elemindex = parent.getchildren().index(elem)
+                    newelem = self._wrap_in_span(after, imdcount)
+                    parent.insert(elemindex+1, newelem)
+                if is_tail:
+                    x.pop()
                 if '[/imd]' in newelem.text:
                     index = newelem.text.index('[/imd]')
                     newelem.text,newelem.tail = newelem.text[0:index],newelem.text[index+6:]
