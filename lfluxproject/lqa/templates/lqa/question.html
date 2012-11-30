@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load markup humanize_timesince %}
+{% block bodyargs %}
+class="question"
+{% endblock %}
 {% block content %}
 <div id="bar">
     <div id="nav">
@@ -17,6 +20,7 @@
 
 </div>
 <div id="article" class="state_tab2">
+    {% include 'lqa/question_vote.inc' %}
     <ul class="tabs">
         <li class="first tab1">
             <a href="{{question.story.get_absolute_url}}">{% trans "Back to Story" %}</a>

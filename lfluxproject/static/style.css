@@ -645,7 +645,8 @@ ul.tabs li.sel a,
   height: 42px;
 }
 
-#react .qa .votes {
+
+.votes {
   float: left;
   background: #fff;
   padding: 1em .2em .2em .2em;
@@ -657,13 +658,48 @@ ul.tabs li.sel a,
 #react .item h2 {
   margin: .2em 0 0 0;
 }
-#react .qa .votes h2 {
+.votes h2 {
   float: none;
   color: #000;
   font-size: 2em;
   margin: 0;
   line-height: .5em;
 }
+.votecontainer .vote {
+    padding-top: 3px;
+    padding-right: 2em;
+    float: left;
+}
+
+body.question .votecontainer .votes {
+    padding-top: 10px;
+    background-color: white;
+    padding-right: .5em;
+    -webkit-box-shadow: rgba(0,0,0,.2) -3px 3px 3px -1px;
+    -moz-box-shadow: rgba(0,0,0,.2) -3px 3px 3px -1px;
+    box-shadow: rgba(0,0,0,.2) -3px 3px 3px -1px;
+}
+
+#article .votecontainer  {
+    font-size: .92em;
+    position: absolute;
+    left: -3.8em;
+    top: 3.5em;
+}
+
+#article .votecontainer h2 {
+    margin: 0;
+    margin-top: .3em;
+    font-size: 1.6em;
+}
+
+#article .votecontainer .vote {
+    margin-left: -12px;
+    padding-top: 6px;
+}
+
+.votecontainer h2 a,
+#article .votecontainer h2 a,
 #react .item h2 a {
   color: #333;
 }

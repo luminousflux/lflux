@@ -1,22 +1,7 @@
-{% load voting_tags %}
-{% load url from future %}
-{% load static %}
 {% load i18n %}
-{% score_for_object question as score %}
-{% vote_by_user request.user on question as vote %}
+{% load url from future %}
 <div class="item">
-    <div class="votes">
-        <h2>{{score.score|default_if_none:'0'}}</h2>
-        {% trans "votes" %}
-    </div>
-    <div class="vote" style="float: left; padding-right: 2em;">
-      <form class="questionvote" id="questionup{{ question.id }}" action="{% if vote and vote.is_upvote %}{% url 'lqa_question_vote' object_id=question.id direction='clear' %}{% else %}{% url 'lqa_question_vote' object_id=question.id direction='up' %}{% endif %}" method="POST">{% csrf_token %}
-        <input type="image" id="questionuparrow{{ question.id }}" src="{% if vote and vote.is_upvote %}{% static 'img/arrow_up.png' %}{% else %}{% static 'img/arrow_up_grey.png' %}{% endif %}">
-      </form>
-      <form class="questionvote" id="questiondown{{ question.id }}" action="{% if vote and vote.is_downvote %}{% url 'lqa_question_vote' object_id=question.id direction='clear' %}{% else %}{% url 'lqa_question_vote' object_id=question.id direction='down' %}{% endif %}" method="POST">{% csrf_token %}
-        <input type="image" id="questiondownarrow{{ question.id }}" src="{% if vote and vote.is_downvote %}{% static 'img/arrow_down.png' %}{% else %}{% static 'img/arrow_down_grey.png' %}{% endif %}">
-      </form>
-    </div>
+    {% include 'lqa/question_vote.inc' %}
     <h2><a href="{% url 'lqa_question' object_id=question.id story_slug=question.story.slug %}">{{question.title}}</a></h2>
     <div class="meta">{% trans "asked by" %} <u>{{question.user.username}}</u></div>
     <div class="meta"><strong>{% trans "open" %}</strong> {% trans "since" %} {{question.created_at|date}}</div>
