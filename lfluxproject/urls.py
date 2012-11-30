@@ -4,6 +4,8 @@ from django.conf.urls.defaults import patterns, include, url
 from django.conf import settings
 from ladmin.admin import admin
 from django.contrib import admin as adminadmin
+from lqa.forms import EditProfileForm
+#from userena.forms import EditProfileForm
 adminadmin.autodiscover()
 
 urlpatterns = patterns(
@@ -24,7 +26,8 @@ urlpatterns = patterns(
     url(r'^api/comments/', include('django.contrib.comments.urls')),
     url(r'^api/voting/', include('voting.urls')),
 
-    url(r'^accounts/', include('userena.urls')),
+    url(r'^user/(?P<username>[\.\w]+)/edit/$', 'userena.views.profile_edit',{'edit_profile_form':EditProfileForm},  name='userena_profile_edit', ),
+    url(r'^user/', include('userena.urls')),
 )
 
 if settings.DEBUG:

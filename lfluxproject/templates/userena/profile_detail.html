@@ -6,34 +6,37 @@
 {% block content_title %}<h2>{{ profile.user.username }} {% if profile.user.get_full_name %}({{ profile.user.get_full_name }}){% endif %}</h2>{% endblock %}
 
 {% block overcontent %}
-      {% if user.username == profile.user.username %}
-        <div id="bar">
-        <div id="nav">
-          {% block profile_navigation_items %}
-            <a href="{% url 'userena_profile_detail' user.username %}">{% trans "View profile" %}</a> /
-            <a href="{% url 'userena_profile_edit' user.username %}">{% trans "Edit details" %}</a> /
-            <a href="{% url 'userena_password_change' user.username %}">{% trans "Change password" %}</a> /
-            <a href="{% url 'userena_email_change' user.username %}">{% trans "Change email" %}</a> /
-            {% endblock %}
-        </div></div>
-      {% endif %}
+  {% if user.username == profile.user.username %}
+    <div id="bar">
+    <div id="nav">
+      {% block profile_navigation_items %}
+        <a href="{% url 'userena_profile_detail' user.username %}">{% trans "View profile" %}</a> /
+        <a href="{% url 'userena_profile_edit' user.username %}">{% trans "Edit details" %}</a> /
+        <a href="{% url 'userena_password_change' user.username %}">{% trans "Change password" %}</a> /
+        <a href="{% url 'userena_email_change' user.username %}">{% trans "Change email" %}</a> /
+       {% endblock %}
+    </div></div>
+    {% endif %}
+  <div id="header">
+      <h1>
+            {% if profile.user.get_full_name %}
+            {{ profile.user.get_full_name }}
+            {% else %}
+            {{profile.user.username}}
+            {% endif %}
+        </h1>
+    </div>
 {% endblock %}
 {% block content %}
     {% block profile_navigation %}
       {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
       {% endblock %}
-      <div id="header">
-          <h1>
-                {% if profile.user.get_full_name %}
-                {{ profile.user.get_full_name }}
-                {% else %}
-                {{profile.user.username}}
-                {% endif %}
-            </h1>
-        </div>
 
     <div id="article">
         <div class="inner">
+            {% if user.username == profile.user.username %}
+            <label>Email (private): </label> {{profile.user.email}}
+            {% endif %}
           {% block profile_details %}
           <img class="mugshot" src="{{ profile.get_mugshot_url }}" alt="{% trans "Your mugshot" %}" />
           {{ profile.about_me|default:""|markdown }}
