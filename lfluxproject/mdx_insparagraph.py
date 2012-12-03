@@ -45,13 +45,18 @@ class InsParagraphPreprocessor(Preprocessor):
                 newlines.append(line)
         return newlines
 
+class IMDPattern(SimpleTagPattern, object):
+    def handleMatch(self, m):
+        print 'match!', m.groups()
+        return super(IMDPattern, self).handleMatch(m)
+
 class InsParagraphExtension(Extension):
     def extendMarkdown(self, md, md_globals):
         md.registerExtension(self)
         md.treeprocessors['insparagraph'] = InsParagraphProcessor(md)
         md.preprocessors.insert(0, 'insparagraph',
                                 InsParagraphPreprocessor(md))
-        md.inlinePatterns.insert(0, 'insparagraphtag', SimpleTagPattern(r'\<(ins).*\>(.*)\</ins\>', 'ins'))
+
 
 
 def makeExtension(configs=[]):

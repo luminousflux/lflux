@@ -121,7 +121,7 @@ class InmoredetailTreeProcessor(Treeprocessor):
                 else:
                     mark_tail = mark_tail + [(root, parent,)]
                     for child in root.getchildren():
-                        mark_self, mark_tail = self._mark(root, child)
+                        mark_self, mark_tail = self._mark(root, child, mark_self, mark_tail)
                 return start, end, mark_self, mark_tail
         else:
             s,swhere = self._is_start(root)
@@ -139,7 +139,7 @@ class InmoredetailTreeProcessor(Treeprocessor):
 
                 if swhere!=ewhere:
                     for child in root.getchildren():
-                        mark_self, mark_tail = self._mark(root, child)
+                        mark_self, mark_tail = self._mark(root, child, mark_self, mark_tail)
                 return start, end, mark_self, mark_tail
 
 
@@ -225,6 +225,12 @@ class InmoredetailTreeProcessor(Treeprocessor):
                         
             else:
                 if start:
+                    s = start[0][0]
+                    print 'could not find end!', s.tag, s.text, '|', s.tail
+                    break
+                if end:
+                    e = end[0][0]
+                    print 'could not find start!', e.tag, e.text, '|', e.tail
                     break
 
         return root
