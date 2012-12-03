@@ -16,129 +16,197 @@ class InmoredetailPattern(Pattern):
 
 class InmoredetailTreeProcessor(Treeprocessor):
     def _find_elem(self, tree, text):
-        tree.text = tree.text or ''
-        if text in tree.text:
-            return [tree]
-        if text in (tree.tail or ''):
-            return [tree]
-        for child in tree.getchildren():
-            x = self._find_elem(child, text)
-            if x:
-                return [tree] + x
-        return None
+        x = self._has_tag(tree)
+        if x is not None:
+            return x
+        for elem in tree.getchildren():
+            return self._find_elem(elem, text)
+
+        
+
+    def _has_tag(self, elem, text):
+        elem.text = elem.text or ''
+        if text in elem.text:
+            return elem, 'text'
+        if text in (elem.tail or ''):
+            return elem, 'tail'
+        return None,None
 
     def _find_start(self, tree):
         return self._find_elem(tree, '[imd]')
     def _find_end(self, tree):
         return self._find_elem(tree, '[/imd]')
 
-    def _wrap_in_span(self, text, imdcount):
+    def _is_start(self, elem):
+        x,y = self._has_tag(elem, '[imd]')
+
+        return x,y
+    def _is_end(self, elem):
+        return self._has_tag(elem, '[/imd]')
+
+    def _set_class(self, elem):
+        elem.set('class', elem.get('class','') + ' inmoredetail imd-%s' % self.imdcount)
+
+    def _wrap_in_span(self, text):
         newelem = util.etree.Element('span')
         newelem.text = text
-        newelem.set('class', 'inmoredetail imd-%s' % imdcount)
+        self._set_class(newelem)
         return newelem
 
+    def _mark(self, elem, mark_self, mark_tail):
+        return mark_self+[elem], mark_tail+[elem]
 
-    def _walk(self, start_tree, end_tree, imdcount):
-        depth = 0
-        for i in range(len(start_tree)):
-            if start_tree[:i] == end_tree[:i]:
-                depth = i
 
-        current = start_tree
-        i = len(current)
-        """ going left, to the depth where we can traverse to end_tree """
-        while i > depth+1:
-            x = current.pop()
-            if x.tail and x.tail.strip():
-                newelem = self._wrap_in_span(x.tail, imdcount)
-                x.tail = None
-                x.append(newelem)
-            i = len(current)
-            parent = current[-1]
-            children = parent.getchildren()
-            ind = children.index(x)
-            restchildren = children[ind+1:]
+    def _walk(self, parent, root, start, end, mark_self, mark_tail):
+        """
+            
+            a
+                b
+                    c
+                        d
+                        d.tail
+                    c.tail
+                    e - START       - not start_set, not end_set, start, not end
+                        f           - start_set, not end_set, start, not end
+                        f.tail
+                    e.tail
+                    g
+                    g.tail
+                b.tail
+                h
+                h.tail
+                j
+                j.tail
+                k
+                    l
+                        m
+                        m.tail
+                    l.tail
+                    n
+                    n.tail
+                k.tail
+                o
+                o.tail
+                p
+                    q
+                        r
+                        r.tail
+                    q.tail
+                    s - END
+                    s.tail
+                    t
+                    t.tail
+                p.tail
+                u
+                u.tail
 
-            for child in restchildren:
-                child.set('class', child.get('class', '') + ' inmoredetail imd-%s' % imdcount)
-                if child.tail and child.tail.strip():
-                    newelem = self._wrap_in_span(child.tail, imdcount)
-                    child.tail = None
-                    child.append(newelem)
-        """ traversing the siblings """
-        x = current.pop()
-        children = current[-1].getchildren()
-        while True and len(children)>children.index(x)+1:
-            x = children[children.index(x)+1]
-            if x==end_tree[len(current)]:
-                break
-            x.set('class', x.get('class', '') + ' inmoredetail imd-%s' % imdcount)
+        """
+        start_set = bool(start)
+        end_set = bool(end)
 
-        """ going down to the end point """
-        for i in range(depth+1, len(end_tree)):
-            parent = end_tree[i-1]
-            children = parent.getchildren()
-            x = end_tree[i]
-            index = children.index(x)
-            for j in range(index-1):
-                x = children[j]
-                x.set('class', x.get('class','') + ' inmoredetail imd-%s' % imdcount)
-                if x.tail and x.tail.strip():
-                    newelem = self._wrap_in_span(x.tail, imdcount)
-                    x.tail = None
-                    x.append(newelem)
-            if parent.text and parent.text.strip():
-                newelem = self._wrap_in_span(parent.text, imdcount)
-                parent.text = ''
-                parent.insert(0, newelem)
-        parent = end_tree[-1]
-        is_tail = not('[/imd]' in parent.text)
-        if is_tail:
-            before, after = parent.tail.split('[/imd]',1)
-            parent.tail = ''
-            parent.set('class', parent.get('class','') + 'inmoredetail imd-%s' % imdcount)
-            newelem = self._wrap_in_span(before, imdcount)
-            newelem.tail = after
-            end_tree[-2].insert(end_tree[-2].getchildren().index(parent)+1, newelem)
+        if start_set and end_set:
+            return start, end, mark_self, mark_tail
+        if not start_set and end_set:
+            return start, end, mark_self, mark_tail
+
+
+        if start_set:
+            e,ewhere = self._is_end(root)
+            if ewhere:
+                end.append((e, parent,))
+                mark_self = mark_self + [root]
+                if ewhere=='text':
+                    """ our work here is done """
+                    return start, end, mark_self, mark_tail
+                else:
+                    mark_tail = mark_tail + [root]
+                    for child in root.getchildren():
+                        mark_self, mark_tail = self._mark(child)
+                return start, end, mark_self, mark_tail
         else:
-            before, after = parent.text.split('[/imd]',1)
-            parent.text = after
-            newelem = self._wrap_in_span(before, imdcount)
-            parent.insert(0, newelem)
+            s,swhere = self._is_start(root)
+            if swhere:
+                start.append((s,parent,))
+                
+                e,ewhere = self._is_end(root)
+                if ewhere:
+                    end.append((e,parent,))
+
+                if swhere=='text':
+                    mark_self = mark_self + [root]
+                if swhere=='tail' or ewhere=='tail':
+                    mark_tail = mark_tail + [root]
+
+                if swhere!=ewhere:
+                    for child in root.getchildren():
+                        mark_self, mark_tail = self._mark(child)
+                return start, end, mark_self, mark_tail
+
+
+        for child in root.getchildren():
+            start, end, mark_self, mark_tail = self._walk(root, child, start, end, mark_self, mark_tail)
+            if start and end:
+                break
+        if start and not end:
+            if start_set:
+                mark_self = list(set(mark_self + [root]))
+            mark_tail = list(set(mark_tail + [root]))
+        return start, end, mark_self, mark_tail
 
 
     def run(self, root):
-        x = True
-        imdcount = 0
-        while x:
-            x = self._find_start(root)
-            if x:
-                parent,elem = x[-2:]
-                is_tail = not ('[imd]' in elem.text)
-                if not is_tail:
-                    before, after = elem.text.split('[imd]',1)
-                    elem.text = before
-                    newelem = self._wrap_in_span(after, imdcount)
-                    elem.append(newelem)
-                else:
-                    before, after = elem.tail.split('[imd]',1)
-                    elem.tail = before
-                    elemindex = parent.getchildren().index(elem)
-                    newelem = self._wrap_in_span(after, imdcount)
-                    parent.insert(elemindex+1, newelem)
-                if is_tail:
-                    x.pop()
-                if '[/imd]' in newelem.text:
-                    index = newelem.text.index('[/imd]')
-                    newelem.text,newelem.tail = newelem.text[0:index],newelem.text[index+6:]
-                else:
-                    for i in range(len(x)):
-                        y = self._find_end(x[-i])
-                        if y:
-                            self._walk(x+[newelem],y, imdcount)
-                            break
-            imdcount += 1
+        start = True
+        self.imdcount = 0
+        while start:
+            self.imdcount += 1
+            start, end, mark_self, mark_tail = self._walk(None, root, [], [], [], [])
+            if start and end:
+                for x in set(mark_self):
+                    newelem = None
+                    if x==start[0][0]:
+                        before, after = x.text.split('[imd]',1)
+                        x.text = before
+                        newelem = self._wrap_in_span(after)
+                        x.append(newelem)
+                    if x==end[0][0] and x not in mark_tail:
+                        if newelem is not None:
+                            x = newelem
+                        before, after = x.text.split('[/imd]',1)
+                        n1 = self._wrap_in_span(before)
+                        n2 = util.etree.Element('span')
+                        n2.text = after
+                        x.text = ''
+                        x.append(n1)
+                        x.append(n2)
+
+                for x in set(mark_tail):
+                    newelem = None
+                    if x==start[0][0]:
+                        before, after = x.tail.split('[imd]',1)
+                        n1 = self._wrap_in_span(before)
+                        n1.set('class','')
+                        n2 = self._wrap_in_span(after)
+                        idx = start[0][1].getchildren().index(x)
+                        x.tail = ''
+                        start[0][1].insert(idx+1, n2)
+                        start[0][1].insert(idx+1, n1)
+                        newelem = n2
+                    if x==end[0][0]:
+                        if newelem is not None:
+                            before, after = newelem.text.split('[/imd]',1)
+                            newelem.text, newelem.tail = before, after
+                        else:
+                            before, after = x.tail.split('[/imd]',1)
+                            x.tail = ''
+                            n1 = self._wrap_in_span(before)
+                            n2 = self._wrap_in_span(after)
+                            n2.set('class','')
+                            idx = end[0][1].getchildren().index(x)
+                            end[0][1].insert(idx+1, n2)
+                            end[0][1].insert(idx+1, n1)
+            else:
+                if start:
+                    break
 
         return root
 

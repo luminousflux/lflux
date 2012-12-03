@@ -20,3 +20,7 @@ class Question(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('lqa_question', (), {'story_slug': self.story.slug, 'object_id': self.id},)
+
+    @property
+    def story_version(self):
+        return self.story.versions.for_date(self.created_at)
