@@ -44,13 +44,13 @@ class InmoredetailTreeProcessor(Treeprocessor):
     def _is_end(self, elem):
         return self._has_tag(elem, '[/imd]')
 
-    def _set_class(self, elem):
-        elem.set('class', elem.get('class','') + ' inmoredetail imd-%s' % self.imdcount)
+    def _set_class(self, elem, cls=None):
+        elem.set('class', elem.get('class','') + (cls if cls is not None else ' inmoredetail imd-%s' % self.imdcount))
 
-    def _wrap_in_span(self, text):
+    def _wrap_in_span(self, text, cls=None):
         newelem = util.etree.Element('span')
         newelem.text = text
-        self._set_class(newelem)
+        self._set_class(newelem, cls)
         return newelem
 
     def _mark(self, parent, elem, mark_self, mark_tail):
@@ -168,8 +168,12 @@ class InmoredetailTreeProcessor(Treeprocessor):
                     if x==start[0][0]:
                         before, after = x.text.split('[imd]',1)
                         x.text = before
-                        newelem = self._wrap_in_span(after)
-                        x.insert(0,newelem)
+                        label, imd = (None, after,) if '||' not in after.split('[/imd]')[0] else after.split('||',1)
+                        if label:
+                            newelem = self._wrap_in_span(label)
+                            x.insert(0,newelem)
+                        newelem = self._wrap_in_span(imd)
+                        x.insert(1, newelem)
                         done = True
                     if x==end[0][0] and x not in marked_tail:
                         if newelem is not None:
@@ -194,14 +198,20 @@ class InmoredetailTreeProcessor(Treeprocessor):
                     newelem = None
                     done = False
                     if x==start[0][0]:
+                        idx = parent.getchildren().index(x)
+
                         before, after = x.tail.split('[imd]',1)
-                        n1 = self._wrap_in_span(before)
-                        n1.set('class','')
-                        n2 = self._wrap_in_span(after)
-                        idx = start[0][1].getchildren().index(x)
+                        label, imd = (None, after,) if '||' not in after.split('[/imd]')[0] else after.split('||',1)
+                        n0 = None
+                        if label:
+                            n0 = self._wrap_in_span(label, 'label-imd-%s' % self.imdcount)
+                        n1 = self._wrap_in_span(before, '')
+                        n2 = self._wrap_in_span(imd)
                         x.tail = ''
-                        start[0][1].insert(idx+1, n2)
-                        start[0][1].insert(idx+1, n1)
+                        parent.insert(idx+1, n2)
+                        if n0 is not None:
+                            parent.insert(idx+1,n0)
+                        parent.insert(idx+1, n1)
                         newelem = n2
                         done = True
                     if x==end[0][0]:
@@ -212,8 +222,7 @@ class InmoredetailTreeProcessor(Treeprocessor):
                             before, after = x.tail.split('[/imd]',1)
                             x.tail = ''
                             n1 = self._wrap_in_span(before)
-                            n2 = self._wrap_in_span(after)
-                            n2.set('class','roflcopter')
+                            n2 = self._wrap_in_span(after, '')
                             idx = end[0][1].getchildren().index(x)
                             end[0][1].insert(idx+1, n2)
                             end[0][1].insert(idx+1, n1)

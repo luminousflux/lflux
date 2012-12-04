@@ -1061,6 +1061,15 @@ body.historyversion #history div.version {
     padding: .4em;
 }
 
+.imdbutton.manualbutton {
+    vertical-align: super;
+    padding: .1em .2em;
+}
+.imdbutton.manualbutton ins {
+    background: none;
+    color: #ffb;
+}
+
 #header #essentials #place #placetext {
     width: 90%;
     left: 4px;

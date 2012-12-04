@@ -127,16 +127,21 @@ function initInMoreDetail() {
             }
             id = id[0];
             $(this).addClass(id);
-            console.log(id);
-            console.log($(this).attr('class'));
             if(imdIDs[id]) {
                 return;
             }
             var detail = this;
-            var elem = document.createElement('span');
-            elem.innerHTML = '…';
+            var elem = null;
+            console.log(id);
+            if($('.label-'+id).length>0) {
+                var elem = $('.label-'+id)[0];
+                $(elem).addClass('manualbutton');
+            } else {
+                var elem = document.createElement('span');
+                elem.innerHTML = '…';
+                $(this).before(elem);
+            }
             $(elem).addClass('imdbutton');
-            $(this).before(elem);
             $(elem).click(function() { $('.'+id).show(); $(elem).toggle(); });
             imdIDs[id] = elem;
         });
