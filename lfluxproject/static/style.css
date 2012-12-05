@@ -491,10 +491,12 @@ body.en #article #summary ul li {
   margin: 5px 10px 5px 0;
 }
 
+#article .linkbar,
 #article #reactions .linkbar {
   display: block;
   font-size: .9em;
 }
+#article .linkbar a,
 #article #reactions .linkbar a {
   color: #888;
 }
