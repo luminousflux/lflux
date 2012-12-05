@@ -242,6 +242,7 @@ AUTH_PROFILE_MODULE = 'lprofile.Profile'
 LOGIN_URL = '/user/signin/'
 LOGOUT_URL = '/user/signout/'
 USERENA_REDIRECT_ON_SIGNOUT = '/'
+USERENA_SIGNIN_REDIRECT_URL = '/user/%(username)s/'
 
 DEMO_MODE = False  # make all users admin per default
 
