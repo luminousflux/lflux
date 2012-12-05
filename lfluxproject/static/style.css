@@ -217,6 +217,7 @@ abbr { border-bottom: 1px dotted #666; }
   padding: 0 20px 0 0.66em;
   /*border-bottom: 3px solid #000;*/
   margin-left: 0;
+  padding-left: 0;
 }
 
 #article h1.ins, #article h2.ins {
