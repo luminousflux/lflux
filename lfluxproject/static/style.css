@@ -455,6 +455,7 @@ body.en #article #summary ul li {
   z-index: 1;      
   /*width: 250px;*/
   float: right;
+  clear: right;
 }
 
 #article ul {
