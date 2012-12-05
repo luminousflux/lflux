@@ -494,7 +494,7 @@ body.en #article #summary ul li {
 #article .linkbar,
 #article #reactions .linkbar {
   display: block;
-  font-size: .9em;
+  font-size: .85em;
 }
 #article .linkbar a,
 #article #reactions .linkbar a {
