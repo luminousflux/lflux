@@ -74,7 +74,7 @@
       <img class="mugshot" src="{{current.authors.all.0.get_profile.get_mugshot_url}}" width="30" />
       </div>{% endif %}<div id="authorprofile">
       {% for author in current.authors.all %}
-      <div class="name">{% if author.get_profile.website %}<a href="{{author.get_profile.website}}">{% endif %}{% if author.get_profile.get_full_name %}{{author.get_profile.get_full_name}}{% else %}{{author.username}}{% endif %}{% if author.get_profile.website %}</a>{% endif %}</div>
+      <div class="name">{% if author.get_profile.website %}<a href="{{author.get_profile.website}}">{% endif %}{% if author.get_full_name %}{{author.get_full_name}}{% else %}{{author.username}}{% endif %}{% if author.get_profile.website %}</a>{% endif %}</div>
       <div class="about">
           {% if author.get_profile.about_me %}{{author.get_profile.about_me|markdown}}{% endif %}
       </div>
