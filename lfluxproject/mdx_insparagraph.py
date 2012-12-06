@@ -1,4 +1,5 @@
 import re
+import markdown
 from markdown import Extension
 from markdown.treeprocessors import Treeprocessor
 from markdown.preprocessors import Preprocessor
@@ -29,11 +30,15 @@ class InsParagraphProcessor(Treeprocessor):
 
 
 class InsParagraphPreprocessor(Preprocessor):
+    RE = re.compile(r'^\.ins\s*([ ]{0,3}\[([^\]]*)\]:\s*([^ ]*)[ ]*(%s)?)$' % markdown.preprocessors.ReferencePreprocessor.TITLE, re.DOTALL)
     """ move .ins declaration inside block "tags" """
     def run(self, lines):
         BLOCKCHARS = ('=', '>', '*', '+', '-', '#', )
         newlines = []
         for line in lines:
+            if self.RE.match(line):
+                newlines.append(self.RE.match(line).groups()[0])
+                continue
             if line.startswith('.ins ') and len(line) > 6 and (
                     line[4] in BLOCKCHARS or line[5] in BLOCKCHARS):
                 idx = 5
