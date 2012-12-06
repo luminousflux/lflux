@@ -16,7 +16,7 @@ from django.core.urlresolvers import reverse
 from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
 from admin_tools.utils import get_admin_site_name
 
-from lfluxproject.lstory.models import Story
+from lfluxproject.lstory.models import Story, ChangeSuggestion
 from lfluxproject.ltools.admin import OwnInstancesList, ModelAdd
 from tumblelog.bookmarklet import generate_bookmarklink
 
@@ -32,7 +32,9 @@ class CustomIndexDashboard(Dashboard):
         self.children.append(OwnInstancesList(_('My Stories'), model=Story, key='authors'))
         self.children.append(modules.AppList(title='Tumblelog', models=('tumblelog.*',)))
         self.children.append(ModelAdd(None, model=Story, text='Create new Story'))
+        self.children.append(OwnInstancesList(_('My Suggestions'), model=ChangeSuggestion, key='user'))
         self.children.append(modules.LinkList('bookmarklet', children=[{'title': 'luminous flux bookmarklet', 'url': generate_bookmarklink(context['request'])}]))
+        
 
 
 

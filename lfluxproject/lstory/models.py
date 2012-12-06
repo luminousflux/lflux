@@ -59,7 +59,6 @@ class Story(VersionedContentMixin, models.Model):
         return ('storyembed', [self.slug],)
 
 
-
 try:
     reversion.register(Story)
 except reversion.revisions.RegistrationError, e:
@@ -86,3 +85,19 @@ class StorySummary(models.Model):
 
     def storyversions(self):
         return self.story.versions.for_date(self.timeframe_start), self.story.versions.for_date(self.timeframe_end)
+
+class ChangeSuggestion(models.Model):
+    summary = models.TextField(null=True, blank=True)
+    body = models.TextField(null=True, blank=True)
+
+    story = models.ForeignKey(Story)
+    for_version = models.DateTimeField(null=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    user = models.ForeignKey(User)
+
+    class Meta:
+        verbose_name_plural = 'Change Suggestions'
+
+    def __unicode__(self):
+        return u'Change Suggestion for "%s", created at %s' % (self.story.slug, self.created_at,)

@@ -285,6 +285,7 @@ body.en #sidebar h2 {
   color: #ccc;
   padding: 10px 10px 10px 30px;
   margin-left: -30px;
+  margin-top: 1em;
 }
 #article #authorprofile .name {
   font-family: Podkova, Arial, Helvetica, sans-serif;
@@ -853,6 +854,8 @@ body.question .votecontainer .votes {
 }
 #meta .icon:first-child {
     float: left;
+    padding-right: .5em;
+    padding-top: 1px;
 }
 
 #history {

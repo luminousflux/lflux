@@ -6,7 +6,7 @@
         {% ifequal previous.versions.this_date current.versions.this_date %}
         {% blocktrans %}No changes to highlight{% endblocktrans %}{% else %}{% blocktrans with previous.versions.this_date|timesince as timesince %}Changes since {{timesince}} ago{% endblocktrans %}
         {% endifequal %}{% endif %}</a> 
-    <a class="switch version">{% if previous %}{% trans "Access History" %}{% else %}{% blocktrans with current.versions.this_date|date as date %}Displaying content from {{date}}{% endblocktrans %}{% endif %}
+    <a class="switch version">▸▸ {% if previous %}{% trans "Access History" %}{% else %}{% blocktrans with current.versions.this_date|date as date %}Displaying content from {{date}}{% endblocktrans %}{% endif %}
     
     
     </a>

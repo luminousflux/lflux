@@ -1,10 +1,11 @@
 from datetime import datetime
+from django.core.exceptions import ObjectDoesNotExist
 
 from django.contrib import admin
 from django.db import models
 import reversion
 
-from models import Story, StorySummary
+from models import Story, StorySummary, ChangeSuggestion
 
 from limage.widgets import AdminPagedownWidget
 from limage.models import Image
@@ -103,7 +104,16 @@ class StorySummaryAdmin(admin.ModelAdmin):
                 form.initial['timeframe_start'] = last_summary
                 form.initial['timeframe_end'] = datetime.now()
 
-            templateresponse.context_data['diff'] = story.diff_to_older(story.versions.for_date(last_summary))
+            older_version = None
+            try:
+                story.versions.for_date(last_summary)
+            except ObjectDoesNotExist, e:
+                l = story.versions.list()
+                if l:
+                    older_version = l[-1]
+
+
+            templateresponse.context_data['diff'] = story.diff_to_older(older_version) if older_version else None
 
         return templateresponse
 
@@ -112,3 +122,20 @@ class StorySummaryAdmin(admin.ModelAdmin):
             obj.author = request.user
         super(StorySummaryAdmin, self).save_model(request, obj, form, change)
 admin.site.register(StorySummary, StorySummaryAdmin)
+
+class ChangeSuggestionAdmin(admin.ModelAdmin):
+    add_form_template = 'lstory/changesuggestion/add_form.html'
+    exclude = ('user','for_version',)
+
+    def add_view(self, request, *args, **kwargs):
+        templateresponse = super(StorySummaryAdmin, self).add_view(request, *args, **kwargs)
+
+        if not hasattr(templateresponse, 'context_data'):
+            return templateresponse
+
+        return templateresponse
+
+    def save_model(self, request, obj, form, change):
+        if not obj.pk:
+            obj.user = request.user
+admin.site.register(ChangeSuggestion, ChangeSuggestionAdmin)

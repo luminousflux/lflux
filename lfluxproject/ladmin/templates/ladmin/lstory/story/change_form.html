@@ -17,9 +17,9 @@
     </style>
 {% endblock %}
 {% block object-tools %}
-<ul class="object-tools" style="position: absolute; right: 20em;">
+<ul class="object-tools" style="float: left; left: 33%;">
     {% if original.pk %}
-    <li><a href="{% url 'admin:ladmin_sharestory' id=original.pk%}">Add Author</a></li>
+    <li><a href="{% url 'admin:ladmin_sharestory' id=original.pk%}">{% trans "Add Author" %}</a></li>
     {% endif %}
 </ul>
     {{ block.super }}
