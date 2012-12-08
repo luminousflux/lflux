@@ -13,9 +13,6 @@ urlpatterns = patterns(
 
     url('^$', 'lstory.views.index'),
 
-    url('^story/', include('lfluxproject.lstory.urls')),
-    url('^story/', include('lfluxproject.lqa.urls')),
-
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(adminadmin.site.urls)),
     url(r'^admin_tools/', include('admin_tools.urls')),
@@ -29,6 +26,9 @@ urlpatterns = patterns(
 
     url(r'^user/(?P<username>[\.\w]+)/edit/$', 'userena.views.profile_edit',{'edit_profile_form':EditProfileForm},  name='userena_profile_edit', ),
     url(r'^user/', include('userena.urls')),
+    url('', include('lfluxproject.lstory.urls')),
+    url('', include('lfluxproject.lqa.urls')),
+
 )
 
 if settings.DEBUG:
@@ -38,5 +38,3 @@ if settings.DEBUG:
             'document_root': settings.MEDIA_ROOT,
             }),
     )
-
-urlpatterns += patterns('', url(r'^(?P<url>.*)$', 'django.contrib.flatpages.views.flatpage'),)
