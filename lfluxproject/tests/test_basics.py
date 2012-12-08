@@ -15,6 +15,6 @@ class BasicFunctionalityTest(TestCase):
         client = Client()
         with reversion.create_revision():
             Story.objects.create(published=datetime.now(), body='roflcopter', summary='roflcopter', title='roflcopter',slug='roflcopter',name='roflcopter')
-        responses = [client.get('/story/roflcopter/'),client.get('/story/roflcopter/embed/')]
+        responses = [client.get('/roflcopter/'),client.get('/roflcopter/embed/')]
         for x in responses:
             self.assertEqual(x.status_code, 200)
