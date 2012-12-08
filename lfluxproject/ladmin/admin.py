@@ -4,6 +4,7 @@ from lstory.admin import Story, StoryUserAdmin, ChangeSuggestion, ChangeSuggesti
 from urls import urlpatterns
 from django import forms
 from tumblelog.admin import admin_classes
+from django.contrib.flatpages.admin import FlatPage, FlatPageAdmin
 
 
 class UserShareForm(forms.Form):
@@ -33,6 +34,7 @@ admin = LAdminSite('backend')
 admin.register(Story, UserBasedStoryAdmin)
 admin.register(StorySummary, StorySummaryAdmin)
 admin.register(ChangeSuggestion, ChangeSuggestionAdmin)
+admin.register(FlatPage, FlatPageAdmin)
 
 for admin_class in admin_classes:
     admin.register(*admin_class)

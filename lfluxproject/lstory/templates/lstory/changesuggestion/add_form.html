@@ -1,0 +1,106 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+
+{% block extrahead %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/overcast/jquery-ui-1.8.20.custom.css' %}" />
+<script src="{% static 'js/jsdiff.js' %}"></script>
+<script src="{% static 'js/jquery-1.7.2.min.js' %}"></script>
+<script src="{% static 'js/jquery-ui-1.8.20.custom.min.js' %}"></script>
+<style>
+    .inmoredetail {
+        color: grey;
+        border-left: 3px solid grey;
+    }
+    .inmoredetail .inmoredetail,
+    .inmoredetail + .inmoredetail {
+        border-left: none;
+    }
+
+    .summary_preview, .text_preview, #oldbody, #oldsummary {
+        padding-right: 2em;
+    }
+</style>
+<script>
+    $(function() {
+        $('#tabs').tabs();
+    });
+</script>
+{% endblock %}
+{% block content %}
+
+
+<div style="float: left; width: 40%;">
+    <div id="tabs">
+        <ul>
+            <li><a href="#tab-1">Difference</a></li>
+            <li><a href="#tab-2">Preview</a></li>
+        </ul>
+        <div class="diff" id="tab-1">
+            <h2>Summary</h2>
+            <div id="oldsummary">
+            </div>
+            <h2>Text</h2>
+            <div id="oldbody">
+            </div>
+        </div>
+        <div class="preview" id="tab-2">
+            <a href="#" onclick="refreshBodyPreview(true);refreshSummaryPreview(true); return false;">Refresh</a>
+            <h2>Summary</h2>
+            <div class="summary_preview">
+            </div>
+            <h2>Text</h2>
+            <div class="text_preview">
+            </div>
+        </div>
+    </div>
+</div>
+<div style="float: left; width: 60%;">
+    {{ block.super}}
+</div>
+<div style="clear: both;">&nbsp;</div>
+
+
+<script>
+    var oldbody = '{{original_body|escapejs}}';
+    var oldsummary = '{{original_summary|escapejs}}';
+    var bodyel = document.getElementById('id_body');
+    var summaryel = document.getElementById('id_summary');
+
+    var oldsummaryel = document.getElementById('oldsummary');
+    var oldbodyel = document.getElementById('oldbody');
+
+    function refreshDiff() {
+        oldbodyel.innerHTML = diffString(escape(oldbody), escape(bodyel.value)).replace(/\n/g,'<br/>');
+        oldsummaryel.innerHTML = diffString(escape(oldsummary), escape(summaryel.value)).replace(/\n/g,'<br />');
+    }
+    var x = function() {
+        refreshDiff();
+    };
+    refreshDiff();
+    $(bodyel).keyup(x);
+    $(summaryel).keyup(x);
+
+    var timer = null;
+
+    function refreshPreview(element, text, ignore_timer) {
+        if(timer) {
+            clearTimeout(timer);
+        }
+        element.html('loading');
+        var fn = function() { element.load('/api/preview/', {'text': text})};
+        console.log(ignore_timer);
+        if(ignore_timer===undefined) {
+            timer = setTimeout(fn, 3000);
+        } else {
+            fn();
+        }
+    };
+    function refreshBodyPreview(ignore_timer) {
+        refreshPreview($('.text_preview'), $(bodyel).val(), ignore_timer);
+    }
+    var refreshSummaryPreview = function(ignore_timer) {refreshPreview($('.summary_preview'), $(summaryel).val(), ignore_timer);};
+    $(bodyel).keyup(function(){ refreshBodyPreview();});
+    $(summaryel).keyup(function(){ refreshSummaryPreview();});
+</script>
+{% endblock %}

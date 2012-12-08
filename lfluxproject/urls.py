@@ -25,6 +25,7 @@ urlpatterns = patterns(
     url(r'^api/tumblelog/', include('tumblelog.urls', namespace='tumblelog')),
     url(r'^api/comments/', include('django.contrib.comments.urls')),
     url(r'^api/voting/', include('voting.urls')),
+    url(r'^api/preview/', 'lpreview.views.preview'),
 
     url(r'^user/(?P<username>[\.\w]+)/edit/$', 'userena.views.profile_edit',{'edit_profile_form':EditProfileForm},  name='userena_profile_edit', ),
     url(r'^user/', include('userena.urls')),

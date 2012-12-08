@@ -34,6 +34,7 @@ class CustomIndexDashboard(Dashboard):
         self.children.append(ModelAdd(None, model=Story, text='Create new Story'))
         self.children.append(OwnInstancesList(_('My Suggestions'), model=ChangeSuggestion, key='user'))
         self.children.append(modules.LinkList('bookmarklet', children=[{'title': 'luminous flux bookmarklet', 'url': generate_bookmarklink(context['request'])}]))
+        self.children.append(modules.AppList(title='Static Content', models=('django.contrib.flatpages.*',)))
         
 
 

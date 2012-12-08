@@ -51,8 +51,6 @@ class StoryUserAdmin(StoryAdmin):
                          }
         publish = '_publish' in request.POST
 
-        print 'publish', publish
-
         if publish:
             request.POST = request.POST.copy()
             request.POST['_continue'] = 1
@@ -125,15 +123,36 @@ admin.site.register(StorySummary, StorySummaryAdmin)
 
 class ChangeSuggestionAdmin(admin.ModelAdmin):
     add_form_template = 'lstory/changesuggestion/add_form.html'
+    change_form_template = 'lstory/changesuggestion/add_form.html'
     exclude = ('user','for_version',)
 
-    def add_view(self, request, *args, **kwargs):
-        templateresponse = super(StorySummaryAdmin, self).add_view(request, *args, **kwargs)
+    def _extend_view(self, templateresponse):
+        if not hasattr(templateresponse, 'context_data'):
+            return templateresponse
+
+        form = templateresponse.context_data['adminform'].form
+
+        story_id = form.initial.get('story') or form.data.get('story')
+
+        if story_id:
+            story = Story.objects.get(pk=story_id)
+            templateresponse.context_data['original_body'] = story.body
+            templateresponse.context_data['original_summary'] = story.summary
+            if (not form.instance or not form.instance.pk) and not 'body' in form.data:
+                form.initial['body'] = story.body
+                form.initial['summary'] = story.summary
 
         if not hasattr(templateresponse, 'context_data'):
             return templateresponse
 
         return templateresponse
+
+    def add_view(self, request, *args, **kwargs):
+        return self._extend_view(super(ChangeSuggestionAdmin, self).add_view(request, *args, **kwargs))
+
+    def change_view(self, request, *args, **kwargs):
+        return self._extend_view(super(ChangeSuggestionAdmin, self).change_view(request, *args, **kwargs))
+
 
     def save_model(self, request, obj, form, change):
         if not obj.pk:
