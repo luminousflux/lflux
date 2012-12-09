@@ -97,20 +97,6 @@
 </div>
 
 <div id="sidebar">
-    <!--ul class="tabs">
-        <li class="sel">
-            <a href>{% trans "About the Author" %}</a>
-        </li>
-    </ul>
-    <div id="authorinfo">
-        {% for author in current.authors.all %}
-        <img class="mugshot" src="{{author.get_profile.get_mugshot_url}}" /> <div class="name">{% if author.get_profile.website %}<a href="{{author.get_profile.website}}">{% endif %}{% if author.get_full_name %}{{author.get_full_name}}{% else %}{{author.username}}{% endif %}{% if author.get_profile.website %}</a>{% endif %}</div>
-        <div class="about">
-            {% if author.get_profile.about_me %}{{author.get_profile.about_me|markdown}}{% endif %}
-        </div>
-        {% endfor %}
-        <br class="clear" />
-    </div-->
     <ul class="tabs">
         <li class="sel">
             <a href>{% trans "Current events" %}</a>
