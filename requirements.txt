@@ -6,7 +6,7 @@ git+git://github.com/luminousflux/django-taggit.git#egg=django-taggit
 markdown
 -e git+git://github.com/fin/django-pagedown.git#egg=django-pagedown
 PIL
-django-userena
+-e git+git://github.com/luminousflux/django-userena.git#egg=django-userena
 django-admin-tools
 django-debug-toolbar
 django-nose
