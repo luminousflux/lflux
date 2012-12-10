@@ -21,5 +21,3 @@ DATABASES = {
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEMO_MODE = True
 EMBEDLY_KEY = 'roflcopter'
-
-print INSTALLED_APPS
