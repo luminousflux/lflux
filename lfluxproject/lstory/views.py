@@ -31,7 +31,7 @@ def version(request, slug, date, template='lstory/highlight.html'):
     obj = Story.objects.get(slug=slug)
     date = _parse_iso_datetime(date)
     version = obj.versions.for_date(date)
-    tumblepage = Paginator(Post.objects.for_parent(obj).public().filter(published_at__lte=date),10).page(request.GET.get('page', 1))
+    tumblepage = Post.objects.for_parent(obj).get_page(request.GET.get('page', 1))
 
     return direct_to_template(request, template, {
         'current': version,
@@ -57,7 +57,7 @@ def diff(request, slug, model, template='lstory/highlight.html'):
     current = obj.versions.for_date(todate)
     previous = obj.versions.for_date(fromdate)
 
-    tumblepage = Paginator(Post.objects.for_parent(obj).public(),10).page(request.GET.get('page', 1))
+    tumblepage = Post.objects.for_parent(obj).get_page(request.GET.get('page', 1))
 
 
     may_track = not request.COOKIES.get('do_not_track')
