@@ -132,7 +132,6 @@ function initInMoreDetail() {
             }
             var detail = this;
             var elem = null;
-            console.log(id);
             if($('.label-'+id).length>0) {
                 var elem = $('.label-'+id)[0];
                 $(elem).addClass('manualbutton');
