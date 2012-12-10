@@ -169,11 +169,11 @@ class InmoredetailTreeProcessor(Treeprocessor):
                         before, after = x.text.split('[imd]',1)
                         x.text = before
                         label, imd = (None, after,) if '||' not in after.split('[/imd]')[0] else after.split('||',1)
-                        if label:
-                            newelem = self._wrap_in_span(label)
-                            x.insert(0,newelem)
                         newelem = self._wrap_in_span(imd)
-                        x.insert(1, newelem)
+                        x.insert(0, newelem)
+                        if label:
+                            newelem = self._wrap_in_span(label, 'label-imd-%s' % self.imdcount)
+                            x.insert(0,newelem)
                         done = True
                     if x==end[0][0] and x not in marked_tail:
                         if newelem is not None:
