@@ -514,7 +514,8 @@ body.en #article #summary ul li {
   border-left: 1px solid #ccc;
   margin-top: -2.5em;
   background: #eee;
-  right: 338px;
+  position: relative;
+  right: 0;
 }
 #sidebar.fixed {
   position: fixed;
@@ -524,7 +525,13 @@ body.en #article #summary ul li {
 #sidebar.fixed #stream #entries {
   height: 400px;
   overflow: auto;
-}            
+}          
+
+#sidebar .share {
+    position: absolute;
+    right: 10px;
+    top: 0;
+}
 
 ul.tabs {
   list-style: none;

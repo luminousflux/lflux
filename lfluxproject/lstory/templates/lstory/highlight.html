@@ -9,6 +9,9 @@
     {{ block.super }}
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url 'storyfeed' slug=current.slug %}" />
     {% if not current.versions.is_current %}<meta name="robots" content="noindex" />{% endif %}
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">stLight.options({publisher: "ur-400ae623-499-2bef-1ae-308e1976689"});</script>
 {% endblock %}
 {% block content %}
 {% load markup %}
@@ -102,6 +105,11 @@
             <a href>{% trans "Current events" %}</a>
         </li>
     </ul>
+    <div class="share">
+        <span class='st_facebook' displayText='Facebook'></span>
+        <span class='st_twitter' displayText='Tweet'></span>
+        <span class='st_email' displayText='Email'></span>
+    </div>
     <div id="stream" class="tumblelog">
         <div id="entries">
             {% for post in tumbleposts %}
