@@ -98,7 +98,7 @@
 
 <div id="sidebar">
     <ul class="tabs">
-        <li class="sel">
+        <li class="sel {% if tumbleposts and tumbleposts.0.is_pinned %}pinned{%endif%}">
             <a href>{% trans "Current events" %}</a>
         </li>
     </ul>

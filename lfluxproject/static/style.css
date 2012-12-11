@@ -543,6 +543,11 @@ ul.tabs {
   border-left: 10px solid #fff;
 }
 
+ul.tabs li.sel.pinned.pinned a {
+  background: #eeb;
+  border-bottom-color: #eeb;
+}
+
 ul.tabs li {
   float: left;
 }
