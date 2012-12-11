@@ -188,7 +188,7 @@ msgstr "AutorIn"
 
 #: lstory/templates/lstory/highlight.html:116
 msgid "Current events"
-msgstr "Aktuelle Themen"
+msgstr "Neuigkeiten"
 
 #: lstory/templates/lstory/highlight.html:130
 msgid "Ask a question"
