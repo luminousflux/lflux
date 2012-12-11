@@ -2,7 +2,7 @@
 {% load markup humanize_timesince %}
 {% load threadedcomments_tags %}
 <div class="meta1">
-    <span class="username">{{user}}</span>
+    <span class="username">{{comment.user}}</span>
     <span class="timeago">{{comment.submit_date|humanize_timesince}}</span>
 </div>
 {{ comment.comment|markdown }}

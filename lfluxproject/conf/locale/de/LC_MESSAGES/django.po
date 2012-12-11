@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-09 20:23+0100\n"
+"POT-Creation-Date: 2012-12-11 16:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -146,6 +146,11 @@ msgstr "kommentieren"
 msgid "votes"
 msgstr "Stimmen"
 
+#: lqa/templates/lqa/question_vote.inc:12
+#: lqa/templates/lqa/question_vote.inc:15
+msgid "Only works if you're logged in!"
+msgstr "Nur möglich, wenn du eingeloggt bist!"
+
 #: lstory/templates/lstory/embed.html:35
 msgid "view"
 msgstr "zeigen"
@@ -174,31 +179,27 @@ msgstr "aktuell"
 msgid "Active?"
 msgstr "Aktiv?"
 
-#: lstory/templates/lstory/highlight.html:47
+#: lstory/templates/lstory/highlight.html:51
 msgid "link to this version"
 msgstr "Link zu dieser Version"
 
-#: lstory/templates/lstory/highlight.html:50
+#: lstory/templates/lstory/highlight.html:54
 msgid "embed this article"
 msgstr "Einbetten"
 
-#: lstory/templates/lstory/highlight.html:102
-msgid "About the Author"
-msgstr "AutorIn"
-
-#: lstory/templates/lstory/highlight.html:116
+#: lstory/templates/lstory/highlight.html:106
 msgid "Current events"
 msgstr "Neuigkeiten"
 
-#: lstory/templates/lstory/highlight.html:130
+#: lstory/templates/lstory/highlight.html:125
 msgid "Ask a question"
 msgstr "Frage stellen"
 
-#: lstory/templates/lstory/highlight.html:131
+#: lstory/templates/lstory/highlight.html:126
 msgid "Q&amp;A"
 msgstr "Fragen &amp; Antworten"
 
-#: lstory/templates/lstory/highlight.html:148
+#: lstory/templates/lstory/highlight.html:143
 msgid "Sign in to post a question!"
 msgstr "Eine Anmeldung ist nötig um Fragen zu stellen!"
 
@@ -366,28 +367,28 @@ msgid "something really bad or really weird happened. we'll look into it!"
 msgstr ""
 "Etwas ganz schlimmes oder ganz komisches ist passiert. Wir schauen's uns an!"
 
-#: templates/base.html:51
+#: templates/base.html:52
 msgid "demo mode"
 msgstr "Demomodus"
 
-#: templates/base.html:55
+#: templates/base.html:56
 #, fuzzy
 msgid "Profile"
 msgstr "Profil ändern"
 
-#: templates/base.html:56
+#: templates/base.html:57
 msgid "Sign Out"
 msgstr "Abmelden"
 
-#: templates/base.html:58
+#: templates/base.html:59
 msgid "Editor"
 msgstr "Redakteurbereich"
 
-#: templates/base.html:61
+#: templates/base.html:62
 msgid "Sign In"
 msgstr "Anmelden"
 
-#: templates/base.html:62
+#: templates/base.html:63
 msgid "Sign Up"
 msgstr "Registrieren"
 
@@ -488,6 +489,9 @@ msgstr ""
 #, fuzzy
 msgid "Signup"
 msgstr "Registrieren"
+
+#~ msgid "About the Author"
+#~ msgstr "AutorIn"
 
 #~ msgid "Name"
 #~ msgstr "Name"
