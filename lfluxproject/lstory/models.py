@@ -46,17 +46,17 @@ class Story(VersionedContentMixin, models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('story', [self.slug],)
+        return ('story', [self.versions.current().slug],)
 
     @models.permalink
     def get_version_url(self):
         if not hasattr(self, '_version'):
-            return ('story', [self.slug],)
-        return ('storyversion', [self.slug, self.ltools_versiondate.isoformat()],)
+            return ('story', [self.versions.current().slug],)
+        return ('storyversion', [self.versions.current().slug, self.ltools_versiondate.isoformat()],)
     
     @models.permalink
     def get_embed_url(self):
-        return ('storyembed', [self.slug],)
+        return ('storyembed', [self.versions.current().slug],)
 
 
 try:
@@ -100,4 +100,4 @@ class ChangeSuggestion(models.Model):
         verbose_name_plural = 'Change Suggestions'
 
     def __unicode__(self):
-        return u'Change Suggestion for "%s", created at %s' % (self.story.slug, self.created_at,)
+        return u'Change Suggestion for "%s", created at %s' % (self.story.versions.current().slug, self.created_at,)

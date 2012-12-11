@@ -124,6 +124,14 @@ class VersionManagerAccessor(object):
                 raise VersionManagerHelperException("sorry, this is only available for %s instances" % self.cls)
             return not hasattr(self.obj, '_version') or self.for_date(datetime.now())._version == self.obj._version
 
+        def current(self):
+            if not self.obj:
+                raise VersionManagerHelperException("sorry, this is only available for %s instances" % self.cls)
+            if not hasattr(self.obj, '_version'):
+                return self.obj
+            return self.cls._default_manager.get(pk=self.obj.pk)
+
+
         def activity(self):
             diff_overrides = {'d': lambda x,y: SequenceMatcher(a=x,b=y).ratio(), '=': lambda x,y: 0}
             by_date = self.by_date()
