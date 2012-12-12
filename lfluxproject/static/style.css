@@ -1032,7 +1032,7 @@ body.historyversion #history div.version {
 
 #react .thread p {
     margin: 0 0 .5em 0;
-    line-height: 1.5em;
+    line-height: 1.2em;
 }
 
 #react .thread li.leveldown {
@@ -1043,6 +1043,7 @@ body.historyversion #history div.version {
 }
 
 #react .thread li.leveldown {
+    padding-top: .5em;
     border-top: 1px solid lightgrey;
 }
 
@@ -1050,17 +1051,14 @@ body.historyversion #history div.version {
 #react .thread .meta {
     padding-bottom: 1em;
     font-size: .8em;
+    color: #444;
 }
 
-#react .thread .meta1 {
-}
-
-#react .thread .meta1 .username {
+#react .thread .meta .username {
     font-weight: bold;
 }
 
-#react .thread .meta1 .timeago {
-    color: #444;
+#react .thread .meta .timeago {
 }
 
 .inmoredetail {
