@@ -9,12 +9,8 @@ class InsParagraphProcessor(markdown.treeprocessors.Treeprocessor):
             if child.tag=='ins':
                 continue
             if (child.text or '').lstrip().startswith('.ins'):
-                newelem = markdown.util.etree.Element('span')
-                newelem.text = root.text.lstrip()[5:]
-                children = list(root.getchildren())
-                for child2 in children:
-                    newelem.append(child2)
-                    root.remove(child2)
+                newelem = markdown.util.etree.Element('ins')
+                newelem.text = child.text.lstrip()[5:]
                 child.text = ''
                 child.insert(0, newelem)
             else:
