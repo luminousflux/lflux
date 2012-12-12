@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load markup humanize_timesince %}
+{% load threadedcomments_tags %}
 {% block bodyargs %}
 class="question"
 {% endblock %}
@@ -8,38 +9,38 @@ class="question"
 <div id="bar">
     <div id="nav">
         <a href="/">{{site.name}}</a> /
-        <a href="{{story.get_absolute_url}}">{{story.name}}</a> /
+        {% trans "Question for" %} <a href="{{story.get_absolute_url}}">{{story.name}}</a> /
         {{question.title}}
     </div>
 </div>
 <div id="header">
-    {% include 'lstory/header.html' with current=story %}
+    <h1>{{question.title}}</h1>
 
 </div>
 <div id="summary">
 
 </div>
+<div id="meta">
+    <span class="icon">◂</span>
+    <a href="{{question.story.get_absolute_url}}">{% blocktrans with question.story.name as storyname %}Back to {{storyname}}{% endblocktrans %}</a>
+    <span class="author">{% blocktrans with question.user.username as username %}Asked by {{username}}{% endblocktrans %}</span>
+    <span class="status">{% blocktrans with question.get_state_display as status  and question.created_at|date as created_at %}{{status}} since {{created_at}}{% endblocktrans %}</span>
+</div>
 <div id="article" class="state_tab2">
     {% include 'lqa/question_vote.inc' %}
-    <ul class="tabs">
-        <li class="first tab1">
-            <a href="{{question.story.get_absolute_url}}">{% trans "Back to Story" %}</a>
-        </li>
-        <li class="tab2">
-            <a href="{{question.get_absolute_url}}">{% trans "Question:" %} {{question.title}}</a>
-        </li>
-    </ul>
-
-    <div class="tab_content tab2 inner">
-
-        <div class="questiontext">
-            {{question.comment|markdown}}
-        </div>
+    <div class="questiontext inner">
+        {{question.comment|markdown}}
     </div>
 </div>
-<div id="react">
+<div id="comments">
     <div class="inner">
-        {% load threadedcomments_tags %}
+        <a href="" class="pillbtn" onclick="$('#comment_form_for_question').toggle(); return false;">{% trans "Add Comment" %}</a>
+        <h2>{% trans "Comments" %}</h2>
+
+        <div id="comment_form_for_question" style="display: none;">
+            {% render_comment_form for question %}
+            <hr />
+        </div>
 
         {% get_comment_list for question as comment_list %}
         {% for comment in comment_list|fill_tree|annotate_tree %}
@@ -63,11 +64,6 @@ class="question"
                 </ul>
             {% endfor %}
         {% endfor %}
-
-        <a href="" class="pillbtn" onclick="$('#comment_form_for_question').toggle(); return false;">{% trans "Add Comment" %}</a>
-        <div id="comment_form_for_question" style="display: none;">
-            {% render_comment_form for question %}
-        </div>
     </div>
 </div>
 

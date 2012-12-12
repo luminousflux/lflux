@@ -2,13 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-11 16:30+0100\n"
+"POT-Creation-Date: 2012-12-12 19:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,9 +19,8 @@ msgid "My Stories"
 msgstr "Meine Stories"
 
 #: dashboard.py:35
-#, fuzzy
 msgid "My Suggestions"
-msgstr "Meine Aktionen"
+msgstr "Meine Vorschläge"
 
 #: dashboard.py:57 ladmin/templates/ladmin/index.html:53
 msgid "Recent Actions"
@@ -72,7 +69,6 @@ msgid "Unknown content"
 msgstr "Unbekannter inhalt"
 
 #: ladmin/templates/ladmin/lstory/story/change_form.html:22
-#, fuzzy
 msgid "Add Author"
 msgstr "Autoren hinzufügen"
 
@@ -88,39 +84,45 @@ msgstr "Speichern"
 msgid "Home"
 msgstr "Home"
 
-#: lqa/models.py:11
+#: lqa/models.py:8
+msgid "new"
+msgstr "neu"
+
+#: lqa/models.py:8
+msgid "researching"
+msgstr "in Bearbeitung"
+
+#: lqa/models.py:8
+msgid "answered"
+msgstr "beantwortet"
+
+#: lqa/models.py:12
 msgid "Title"
 msgstr "Titel"
 
-#: lqa/models.py:12
-#, fuzzy
-msgid "Comment"
-msgstr "kommentieren"
-
 #: lqa/models.py:13
+msgid "Comment"
+msgstr "Kommentar"
+
+#: lqa/models.py:14
 msgid "User"
 msgstr "Benutzer"
 
-#: lqa/models.py:14
+#: lqa/models.py:15
 msgid "Story"
 msgstr "Artikel"
 
-#: lqa/models.py:16
+#: lqa/models.py:17
 msgid "Created at"
 msgstr "Erstellt am"
 
-#: lqa/models.py:18
-#, fuzzy
+#: lqa/models.py:19
 msgid "State"
-msgstr "Speichern"
+msgstr "Status"
 
 #: lqa/templates/lqa/_question.html:6
 msgid "asked by"
 msgstr "fragt"
-
-#: lqa/templates/lqa/_question.html:7
-msgid "open"
-msgstr "offen"
 
 #: lqa/templates/lqa/_question.html:7
 msgid "since"
@@ -130,17 +132,31 @@ msgstr "seit"
 msgid "Submit"
 msgstr "Abschicken"
 
+#: lqa/templates/lqa/question.html:11
+msgid "Question for"
+msgstr "Frage zu"
+
+#: lqa/templates/lqa/question.html:24
+#, python-format
+msgid "Back to %(storyname)s"
+msgstr "Zurück zu %(storyname)s"
+
+#: lqa/templates/lqa/question.html:25
+msgid "Asked by %(username)s"
+msgstr "%(username)s fragt"
+
 #: lqa/templates/lqa/question.html:26
-msgid "Back to Story"
-msgstr "Zurück zum Bericht"
+#, python-format
+msgid "%(status)s since %(created_at)s"
+msgstr "%(status)s seit %(created_at)s"
 
-#: lqa/templates/lqa/question.html:29
-msgid "Question:"
-msgstr "Frage:"
-
-#: lqa/templates/lqa/question.html:67
+#: lqa/templates/lqa/question.html:36
 msgid "Add Comment"
-msgstr "kommentieren"
+msgstr "Neuer Kommentar"
+
+#: lqa/templates/lqa/question.html:37
+msgid "Comments"
+msgstr "Kommentare"
 
 #: lqa/templates/lqa/question_vote.inc:8
 msgid "votes"
@@ -192,14 +208,14 @@ msgid "Current events"
 msgstr "Neuigkeiten"
 
 #: lstory/templates/lstory/highlight.html:125
-msgid "Ask a question"
-msgstr "Frage stellen"
-
-#: lstory/templates/lstory/highlight.html:126
 msgid "Q&amp;A"
 msgstr "Fragen &amp; Antworten"
 
-#: lstory/templates/lstory/highlight.html:143
+#: lstory/templates/lstory/highlight.html:138
+msgid "Ask a question"
+msgstr "Frage stellen"
+
+#: lstory/templates/lstory/highlight.html:144
 msgid "Sign in to post a question!"
 msgstr "Eine Anmeldung ist nötig um Fragen zu stellen!"
 
@@ -372,9 +388,8 @@ msgid "demo mode"
 msgstr "Demomodus"
 
 #: templates/base.html:56
-#, fuzzy
 msgid "Profile"
-msgstr "Profil ändern"
+msgstr "Profil"
 
 #: templates/base.html:57
 msgid "Sign Out"
@@ -400,7 +415,7 @@ msgstr "Luminous Flux admin"
 msgid "Luminous Flux administration"
 msgstr "Luminous Flux admin"
 
-#: templates/comments/_comment.inc:10
+#: templates/comments/_comment.inc:8
 msgid "reply"
 msgstr "antworten"
 
@@ -409,20 +424,17 @@ msgstr "antworten"
 #: templates/userena/password_reset_confirm_form.html:20
 #: templates/userena/password_reset_form.html:4
 #: templates/userena/password_reset_form.html:8
-#, fuzzy
 msgid "Reset password"
-msgstr "Passwort ändern"
+msgstr "Passwort zurücksetzen"
 
 #: templates/userena/password_reset_confirm_form.html:15
 #: templates/userena/password_reset_form.html:14
-#, fuzzy
 msgid "Reset Password"
-msgstr "Passwort ändern"
+msgstr "Passwort zurücksetzen"
 
 #: templates/userena/password_reset_form.html:19
-#, fuzzy
 msgid "Send password"
-msgstr "Passwort ändern"
+msgstr "Passwort abschicken"
 
 #: templates/userena/profile_detail.html:5
 #, python-format
@@ -445,7 +457,6 @@ msgstr "Passwort ändern"
 
 #: templates/userena/profile_detail.html:16
 #: templates/userena/profile_form.html:21
-#, fuzzy
 msgid "Change email"
 msgstr "Email ändern"
 
@@ -476,7 +487,6 @@ msgstr "Änderungen speichern"
 
 #: templates/userena/signin_form.html:5 templates/userena/signin_form.html:9
 #: templates/userena/signin_form.html:20
-#, fuzzy
 msgid "Signin"
 msgstr "Anmelden"
 
@@ -486,9 +496,11 @@ msgstr ""
 
 #: templates/userena/signup_form.html:4 templates/userena/signup_form.html:8
 #: templates/userena/signup_form.html:18
-#, fuzzy
 msgid "Signup"
 msgstr "Registrieren"
+
+#~ msgid "open"
+#~ msgstr "offen"
 
 #~ msgid "About the Author"
 #~ msgstr "AutorIn"

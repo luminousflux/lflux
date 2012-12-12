@@ -122,7 +122,6 @@
 
 <div id="react" class="state_tab2">
     <div class="tab_content tab2 inner sections2 qa">
-        <a href="" class="pillbtn" onclick="$('#qaform').toggle(); return false;">{% trans "Ask a question" %}</a>
         <h1>{% trans "Q&amp;A" %}</h1>
       {% comment %}
         <ul class="filter">
@@ -135,7 +134,9 @@
         {% for question in current.question_set.all %}
         {% include 'lqa/_question.html' %}
       {% endfor %}
+      <a href="#" style="margin-top: -4em;" class="pillbtn" onclick="$('#qaform').toggle(); return false;">{% trans "Ask a question" %}</a>
       <div id="qaform" style="display: none; clear: both;">
+          <hr />
           {% if request.user.is_authenticated %}
           {% render_question_form for current %}
           {% else %}
