@@ -21,13 +21,13 @@ class="question"
 
 </div>
 <div id="meta">
+    {% include 'lqa/question_vote.inc' %}
     <span class="icon">◂</span>
     <a href="{{question.story.get_absolute_url}}">{% blocktrans with question.story.name as storyname %}Back to {{storyname}}{% endblocktrans %}</a>
     <span class="author">{% blocktrans with question.user.username as username %}Asked by {{username}}{% endblocktrans %}</span>
     <span class="status">{% blocktrans with question.get_state_display as status  and question.created_at|date as created_at %}{{status}} since {{created_at}}{% endblocktrans %}</span>
 </div>
 <div id="article" class="state_tab2">
-    {% include 'lqa/question_vote.inc' %}
     <div class="questiontext inner">
         {{question.comment|markdown}}
     </div>
@@ -38,7 +38,11 @@ class="question"
         <h2>{% trans "Comments" %}</h2>
 
         <div id="comment_form_for_question" style="display: none;">
+            {% if request.user.is_authenticated %}
             {% render_comment_form for question %}
+            {% else %}
+            <div class="pleaselogin">{% trans "Please log in to post a comment!"%}</div>
+            {% endif %}
             <hr />
         </div>
 

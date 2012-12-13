@@ -692,18 +692,22 @@ ul.tabs li.sel a,
 
 body.question .votecontainer .votes {
     padding-top: 10px;
-    background-color: white;
-    padding-right: .5em;
-    -webkit-box-shadow: rgba(0,0,0,.2) -3px 3px 3px -1px;
-    -moz-box-shadow: rgba(0,0,0,.2) -3px 3px 3px -1px;
-    box-shadow: rgba(0,0,0,.2) -3px 3px 3px -1px;
+    background: none;
+    margin-top: -.75em;
+    padding-right: 0;
+    margin-right: 1em;
 }
 
-#article .votecontainer  {
+body.question .votecontainer  {
+    margin-top: .25em;
     font-size: .92em;
     position: absolute;
-    left: -3.8em;
-    top: 3.5em;
+    left: -7em;
+}
+
+
+body.question #meta {
+    overflow: visible;
 }
 
 #article .votecontainer h2 {
@@ -1042,11 +1046,7 @@ body.historyversion #history div.version {
     border-left: 1px solid lightgrey;
     padding-left: 1em;
     margin-bottom: .5em;
-}
-
-.thread li.leveldown {
     padding-top: .5em;
-    border-top: 1px solid lightgrey;
 }
 
 
@@ -1142,4 +1142,15 @@ body.historyversion #history div.version {
 body.index .story .author {
     font-size: .6em;
     white-space: nowrap;
+}
+
+.pleaselogin {
+    padding: 5px 10px;
+    background-color: red;
+    margin: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    width: 50%;
+    margin-top: 0;
 }

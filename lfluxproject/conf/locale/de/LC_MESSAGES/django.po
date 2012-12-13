@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-12 19:10+0100\n"
+"POT-Creation-Date: 2012-12-14 00:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -132,31 +132,36 @@ msgstr "seit"
 msgid "Submit"
 msgstr "Abschicken"
 
-#: lqa/templates/lqa/question.html:11
+#: lqa/templates/lqa/question.html:12
 msgid "Question for"
 msgstr "Frage zu"
 
-#: lqa/templates/lqa/question.html:24
+#: lqa/templates/lqa/question.html:26
 #, python-format
 msgid "Back to %(storyname)s"
 msgstr "Zurück zu %(storyname)s"
 
-#: lqa/templates/lqa/question.html:25
+#: lqa/templates/lqa/question.html:27
+#, python-format
 msgid "Asked by %(username)s"
 msgstr "%(username)s fragt"
 
-#: lqa/templates/lqa/question.html:26
+#: lqa/templates/lqa/question.html:28
 #, python-format
 msgid "%(status)s since %(created_at)s"
 msgstr "%(status)s seit %(created_at)s"
 
-#: lqa/templates/lqa/question.html:36
+#: lqa/templates/lqa/question.html:37
 msgid "Add Comment"
 msgstr "Neuer Kommentar"
 
-#: lqa/templates/lqa/question.html:37
+#: lqa/templates/lqa/question.html:38
 msgid "Comments"
 msgstr "Kommentare"
+
+#: lqa/templates/lqa/question.html:44 templates/comments/_comment.inc:15
+msgid "Please log in to post a comment!"
+msgstr "Um ein Kommentar abzugeben, melde dich bitte an!"
 
 #: lqa/templates/lqa/question_vote.inc:8
 msgid "votes"

@@ -9,6 +9,10 @@
 </div>
 
 <div id="comment_form_for_{{comment.pk}}" style="display: none;">
-    {% render_comment_form for comment.content_object with comment.pk %}
+    {% if request.user.is_authenticated %}
+        {% render_comment_form for comment.content_object with comment.pk %}
+    {% else %}
+        <div class="pleaselogin">{% trans "Please log in to post a comment!"%}</div>
+    {% endif %}
 </div>
 
