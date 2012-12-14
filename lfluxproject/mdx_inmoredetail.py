@@ -235,11 +235,11 @@ class InmoredetailTreeProcessor(Treeprocessor):
             else:
                 if start:
                     s = start[0][0]
-                    print 'could not find end!', s.tag, s.text, '|', s.tail
+                    #print u'could not find end!', s.tag, s.text, u'|', s.tail
                     break
                 if end:
                     e = end[0][0]
-                    print 'could not find start!', e.tag, e.text, '|', e.tail
+                    #print u'could not find start!', e.tag, e.text, u'|', e.tail
                     break
 
         return root
