@@ -115,10 +115,7 @@ class InmoredetailTreeProcessor(Treeprocessor):
             if ewhere:
                 end.append((e, parent,))
                 mark_self = mark_self + [root]
-                if ewhere=='text':
-                    """ our work here is done """
-                    return start, end, mark_self, mark_tail
-                else:
+                if ewhere=='tail':
                     mark_tail = mark_tail + [(root, parent,)]
                     for child in root.getchildren():
                         mark_self, mark_tail = self._mark(root, child, mark_self, mark_tail)
@@ -143,7 +140,6 @@ class InmoredetailTreeProcessor(Treeprocessor):
 
                 if swhere=='tail' or ewhere:
                     return start, end, mark_self, mark_tail
-
 
         for child in root.getchildren():
             start, end, mark_self, mark_tail = self._walk(root, child, start, end, mark_self, mark_tail)
@@ -199,7 +195,7 @@ class InmoredetailTreeProcessor(Treeprocessor):
                     x, parent = pair
                     newelem = None
                     done = False
-                    if x==start[0][0]:
+                    if x==start[0][0] and x not in mark_self:
                         idx = parent.getchildren().index(x)
 
                         before, after = x.tail.split('[imd]',1)
@@ -216,7 +212,7 @@ class InmoredetailTreeProcessor(Treeprocessor):
                         parent.insert(idx+1, n1)
                         newelem = n2
                         done = True
-                    if x==end[0][0]:
+                    if x==end[0][0] and x in marked_tail:
                         if newelem is not None:
                             before, after = newelem.text.split('[/imd]',1)
                             newelem.text, newelem.tail = before, after
