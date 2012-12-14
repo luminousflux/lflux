@@ -137,10 +137,12 @@ class InmoredetailTreeProcessor(Treeprocessor):
                 if swhere=='tail' or ewhere=='tail':
                     mark_tail = mark_tail + [(root, parent,)]
 
-                if swhere!=ewhere:
+                if ewhere and swhere!=ewhere:
                     for child in root.getchildren():
                         mark_self, mark_tail = self._mark(root, child, mark_self, mark_tail)
-                return start, end, mark_self, mark_tail
+
+                if swhere=='tail' or ewhere:
+                    return start, end, mark_self, mark_tail
 
 
         for child in root.getchildren():
