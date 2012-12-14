@@ -1,7 +1,8 @@
-{% load url from future %}<li class="leveldown">
+{% load url from future %}{% load i18n%}
+<li class="leveldown">
 {% include 'comments/_comment.inc' %}
 {% if comment.user in comment.content_object.story.authors.all %}
-    This comment changes the question to: {% for statechoice in comment.content_object.STATES %}
+    {% trans "This comment changes the question to:" %} {% for statechoice in comment.content_object.STATES %}
     <a href="{% url 'lqa_state' pk=comment.content_object.pk state=statechoice.0%}">{{statechoice.1}}</a>
     {% endfor %}
 {% endif %}

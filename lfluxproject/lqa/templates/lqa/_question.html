@@ -1,8 +1,8 @@
-{% load i18n %}
+{% load i18n  comments %}
 {% load url from future %}
 <div class="item">
     {% include 'lqa/question_vote.inc' %}
     <h2><a href="{% url 'lqa_question' object_id=question.id story_slug=question.story.slug %}">{{question.title}}</a></h2>
     <div class="meta">{% trans "asked by" %} <u>{{question.user.username}}</u></div>
-    <div class="meta"><strong>{{question.get_state_display}}</strong> {% trans "since" %} {{question.created_at|date}}</div>
+    <div class="meta"><strong>{{question.get_state_display}}</strong> {% trans "since" %} {{question.created_at|date}}; <strong>{% get_comment_count for question as count %}{{count}}</strong> {% trans "Comments" %}</div>
 </div>
