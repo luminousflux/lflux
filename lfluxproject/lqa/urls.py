@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.views.generic.list_detail import object_list
 from voting.views import vote_on_object
-from lqa.views import create_question, show_question
+from lqa.views import create_question, show_question, change_state
 from lqa.models import Question
 
 urlpatterns = patterns(
@@ -12,4 +12,5 @@ urlpatterns = patterns(
     url(r'^api/questions/(?P<object_id>\d+)/(?P<direction>up|down|clear)vote/$',
         vote_on_object, dict(model=Question, template_object_name='question',
             allow_xmlhttprequest=True), name='lqa_question_vote'),
+    url(r'^api/questions/(?P<pk>\d+)/state_to/(?P<state>[^/]+)/$', change_state, name='lqa_state')
 )

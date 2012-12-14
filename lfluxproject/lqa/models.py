@@ -5,10 +5,10 @@ from lstory.models import Story
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_noop
 
-STATES = [ugettext_noop('new'), ugettext_noop('researching'), ugettext_noop('answered')]
-STATES = tuple([(x,_(x),) for x in STATES])
 
 class Question(models.Model):
+    STATES = [ugettext_noop('new'), ugettext_noop('researching'), ugettext_noop('answered')]
+    STATES = tuple([(x,_(x),) for x in STATES])
     title = models.CharField(verbose_name=_('Title'), max_length=255)
     comment = models.TextField(verbose_name=_('Comment'))
     user = models.ForeignKey(User, verbose_name=_('User'))
