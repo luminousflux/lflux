@@ -597,7 +597,6 @@ ul.tabs li.sel a,
 }
 #react .tab_content h1 {
   font-family: Arial, Helvetica, sans-serif;
-  float: left;
   margin-right: 1em;
 }
 #react .tab_content ul.filter {

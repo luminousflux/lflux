@@ -1,7 +1,7 @@
 import json
 import functools
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
@@ -65,3 +65,14 @@ def edit_question(request, story, question_id):
 
 def show_question(request, story_slug, object_id):
     return direct_to_template(request, 'lqa/question.html', {'story': Story.objects.get(slug=story_slug), 'question': Question.objects.get(pk=object_id)})
+
+def change_state(request, pk, state):
+    q = Question.objects.get(pk=pk)
+    if not request.user.is_authenticated() or request.user not in q.story.authors.all():
+        return HttpResponse('unauthorized!')
+    if state in [x[0] for x in q.STATES]:
+        q.state = state
+        q.save()
+    else:
+        return HttpResponse("invalid state!")
+    return HttpResponseRedirect(q.get_absolute_url())

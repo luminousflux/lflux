@@ -4,11 +4,12 @@ from django.contrib.auth.models import User
 from lstory.models import Story
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_noop
+import reversion
 
-STATES = [ugettext_noop('new'), ugettext_noop('researching'), ugettext_noop('answered')]
-STATES = tuple([(x,_(x),) for x in STATES])
 
 class Question(models.Model):
+    STATES = [ugettext_noop('new'), ugettext_noop('researching'), ugettext_noop('answered'), ugettext_noop('answered in article'),]
+    STATES = tuple([(x,_(x),) for x in STATES])
     title = models.CharField(verbose_name=_('Title'), max_length=255)
     comment = models.TextField(verbose_name=_('Comment'))
     user = models.ForeignKey(User, verbose_name=_('User'))
@@ -25,3 +26,5 @@ class Question(models.Model):
     @property
     def story_version(self):
         return self.story.versions.for_date(self.created_at)
+
+reversion.register(Question)

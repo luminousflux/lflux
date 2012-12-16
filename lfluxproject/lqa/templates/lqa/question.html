@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load markup humanize_timesince %}
 {% load threadedcomments_tags %}
+{% load url from future %}
 {% block bodyargs %}
 class="question"
 {% endblock %}
@@ -32,6 +33,21 @@ class="question"
         {{question.comment|markdown}}
     </div>
 </div>
+{% if request.user in question.story.authors.all %}
+<div id="sidebar">
+    <ul class="tabs">
+        <li class="sel">
+            <a href>{% trans "Admin" %}</a>
+        </li>
+    </ul>
+    <div class="inner">
+        <strong>{% trans "Change Question Status to:" %}</strong><br />{% for statechoice in question.STATES %}
+        <a href="{% url 'lqa_state' pk=question.pk state=statechoice.0%}">{{statechoice.1}}</a>
+        {% endfor %}
+        <br />
+    </div>
+</div>
+{% endif %}
 <div id="comments">
     <div class="inner">
         <a href="" class="pillbtn" onclick="$('#comment_form_for_question').toggle(); return false;">{% trans "Add Comment" %}</a>
