@@ -4,9 +4,19 @@ Thank you for trying to install Luminous Flux.
 
 Here's what you'll have to do:
 
-* install dependencies. they are given in requirements.txt; we recommend using pbundler for this: https://github.com/zeha/pbundler
-* add database settings in settings.py
-* add a SECRET_KEY in settings.py - you'll get a TypeError otherwise
+* install dependencies given in requirements.txt
+  we recommend using pbundler for this: https://github.com/zeha/pbundler
+  but `pip install -r requirements.txt` should work too
+* install database connector as listed at https://docs.djangoproject.com/en/1.4/topics/install/#database-installation
+* in settings.py
+ - edit database settings
+ - change the SECRET_KEY to a unique long string
+ - change the EMAIL_BACKEND to something more sensible
+* run the following commands
+> ./lfluxproject/manage.py collectstatic --noinput
+> ./lfluxproject/manage.py syncdb
+> ./lfluxproject/manage.py migrate
+> ./lfluxproject/manage.py compilemessages
 
 Have fun!
 
