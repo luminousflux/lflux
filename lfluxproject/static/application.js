@@ -152,3 +152,15 @@ function initInMoreDetail() {
     });
 }
 $(document).ready(initInMoreDetail);
+
+
+function openLinksInNewWindow() {
+    $("a[href^=http]").each(function(){
+        if(this.href.indexOf(location.hostname) == -1) {
+            $(this).attr({
+                target: "_blank",
+            });
+        }
+    });
+}
+$(document).ready(openLinksInNewWindow);

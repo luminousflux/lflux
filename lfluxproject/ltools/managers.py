@@ -158,6 +158,8 @@ class VersionManagerAccessor(object):
                             length = len(getattr(current_version,key))
                         except ValueError, e:
                             pass # allow for nullable elements
+                        except OSError, e:
+                            pass # allow for image to not exist
                         tmp+=value*length
                     activity.append(tmp)
                 else:
