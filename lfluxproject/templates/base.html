@@ -1,4 +1,4 @@
-{% load static from staticfiles %}{% load flatpages %}{% load i18n %}{% load url from future %}<!DOCTYPE html>
+{% load static from staticfiles %}{% load flatpages %}{% load i18n googleanalytics_tags %}{% load url from future %}<!DOCTYPE html>
 <html>
     <head>
         <title>{% block title %}{% endblock %} {{site.name}}</title>
@@ -67,5 +67,6 @@
         </div>
         {% block additional_body %}
         {% endblock %}
+        {% googleanalytics %}
     </body>
 </html>

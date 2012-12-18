@@ -180,6 +180,7 @@ INSTALLED_APPS = (
     'lqa',
 
     'django.contrib.flatpages',
+    'google_analytics',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -253,3 +254,5 @@ EMBEDLY_KEY = None # OVERRIDE THIS
 EMBEDLY_MAXWIDTH = 300
 
 SOUTH_TESTS_MIGRATE = False
+
+GOOGLE_ANALYTICS_ACCOUNT_CODE = False
