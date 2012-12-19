@@ -9,6 +9,7 @@ env/*
 lfluxproject/data/countries.txt
 lfluxproject/media/
 localsettings.py
+local_settings.py
 localstatic
 .DS_Store
 *.mo
