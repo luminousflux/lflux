@@ -169,7 +169,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 EMBEDLY_KEY = None # OVERRIDE THIS
 EMBEDLY_MAXWIDTH = 300
 GOOGLE_ANALYTICS_ACCOUNT_CODE = False
-SECRET_KEY = ''             # Make this unique, and don't share it with anybody.
+SECRET_KEY = ''                         # Make this unique, and don't share it with anybody.
 
 
-DEMO_MODE = False  # make all users editors per default
+DEMO_MODE = False                       # make all users editors per default
+
+try:                                    # import all settings from local_settings. we recommend setting DJANGO_SETTINGS_MODULE environment variable and importing from here instead, so one can f.e. change INSTALLED_APPS
+    from local_settings import *
+except ImportError:
+    pass

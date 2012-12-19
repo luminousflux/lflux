@@ -1,0 +1,18 @@
+SECRET_KEY =                                    # make this a long, unique, secret string
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.',        # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+    }
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend' # change this for deployment
+EMBEDLY_KEY = 
+GOOGLE_ANALYTICS_ACCOUNT_CODE = 
+
+DEMO_MODE = False                               # make all users editors per default

@@ -8,11 +8,8 @@ Here's what you'll have to do:
   we recommend using pbundler for this: https://github.com/zeha/pbundler
   but `pip install -r requirements.txt` should work too
 * install database connector as listed at https://docs.djangoproject.com/en/1.4/topics/install/#database-installation
-* in settings.py
- - edit database settings
- - change the SECRET_KEY to a unique long string
- - change the EMAIL_BACKEND to something more sensible
-* run the following commands
+* create a local_settings.py (using local_settings.py.template as a template) OR set DJANGO_SETTINGS_MODULE to something that's not local_settings (like localsettings)
+* run the following commands (prepend with "pbundler run" if using pbundler)
 > ./lfluxproject/manage.py collectstatic --noinput
 > ./lfluxproject/manage.py syncdb
 > ./lfluxproject/manage.py migrate
