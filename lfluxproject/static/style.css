@@ -761,7 +761,6 @@ body.question #meta {
 #next, .inner, #footer {
   clear: both;
   padding: 10px 20px 15px 30px;
-  overflow: hidden;
 }
 
 #react {
