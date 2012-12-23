@@ -32,7 +32,7 @@
       {% comment %}Dirty hack. Will use django-guardian in the future.{% endcomment %}
       {% endblock %}
 
-    <div id="article">
+    <div id="article" class="text">
         <div class="inner">
             {% if user.username == profile.user.username %}
             <label>Email (private): </label> {{profile.user.email}}

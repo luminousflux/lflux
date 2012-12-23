@@ -28,7 +28,7 @@ class="question"
     <span class="author">{% blocktrans with question.user.username as username %}Asked by {{username}}{% endblocktrans %}</span>
     <span class="status">{% blocktrans with question.get_state_display as status  and question.created_at|date as created_at %}{{status}} since {{created_at}}{% endblocktrans %}</span>
 </div>
-<div id="article" class="state_tab2">
+<div id="article" class="state_tab2 text">
     <div class="questiontext inner">
         {{question.comment|markdown}}
     </div>

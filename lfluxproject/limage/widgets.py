@@ -13,13 +13,16 @@ from pagedown.widgets import AdminPagedownWidget as OriginalAPW
 class AdminPagedownWidget(OriginalAPW):
     class Media:
         css = {'all': ('%s/css/overcast/jquery-ui-1.8.20.custom.css' % settings.STATIC_URL,
-                       '%s/ladmin/limage-customizations.css' % settings.STATIC_URL,'%s/ladmin/lstory-customizations.css' % settings.STATIC_URL,)}
+                       '%s/ladmin/limage-customizations.css' % settings.STATIC_URL,
+                       '%s/ladmin/lstory-customizations.css' % settings.STATIC_URL,
+                       '%s/text.css' % settings.STATIC_URL,)}
         js = ('%s/js/jquery-1.7.2.min.js' % settings.STATIC_URL,
               '%s/js/jquery-ui-1.8.20.custom.min.js' % settings.STATIC_URL,
               '%s/js/jquery.form.js' % settings.STATIC_URL,
               '%s/js/admin/jquery.textarea.js' % settings.STATIC_URL,
               '%s/js/admin/powerhour.messageboxes.js' % settings.STATIC_URL,
-              '%s/limage-pagedown.js' % settings.STATIC_URL,)
+              '%s/limage-pagedown.js' % settings.STATIC_URL,
+              '%s/text.js' % settings.STATIC_URL,)
 
     def render(self, name, value, attrs=None):
         if value is None:

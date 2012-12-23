@@ -43,7 +43,7 @@
     <span class="icon">⌚</span>
     {% include 'lstory/history.inc.html' %}<br />
 </div>
-<div id="article" data-article-id="{{current.versions.current.slug}}" data-mark-as-read="{% url "mark_as_read" slug=current.versions.current.slug%}" data-article-current="{{ current.versions.is_current }}" data-article-changed="{% if previous %}{% ifequal current.versions.this_date previous.versions.this_date %}False{%else%}True{%endifequal%}{% else %}False{% endif %}" {% if previous %}data-article-previous-date="{{previous.versions.this_date.isoformat}}"{% endif %} data-article-current-date="{{current.versions.this_date.isoformat}}" data-allow-mark-as-read="{% if allow_mark_as_read %}True{% else %}False{%endif%}">
+<div id="article" class="text" data-article-id="{{current.versions.current.slug}}" data-mark-as-read="{% url "mark_as_read" slug=current.versions.current.slug%}" data-article-current="{{ current.versions.is_current }}" data-article-changed="{% if previous %}{% ifequal current.versions.this_date previous.versions.this_date %}False{%else%}True{%endifequal%}{% else %}False{% endif %}" {% if previous %}data-article-previous-date="{{previous.versions.this_date.isoformat}}"{% endif %} data-article-current-date="{{current.versions.this_date.isoformat}}" data-allow-mark-as-read="{% if allow_mark_as_read %}True{% else %}False{%endif%}">
 
 
 <div id="history">

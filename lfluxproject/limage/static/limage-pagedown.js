@@ -76,7 +76,24 @@ lStory_pagedown = {
                             });
                     }
                     });
+                li = $(document.createElement('li'));
+                li.attr('class', 'wmd-button wmd-imd-button');
+                li.attr('id', 'wmd-imd-button');
+                li.append('<img src="/static/img/admin/wmd-preview-button.png" />');
+                li.attr('style', 'left: '+ $(button_row).children().length*25+'px');
+                $(button_row).append(li);
+                $(li).click(function() {
+                    var elem = $(this);
+                    var ta = elem.parents('.wmd-panel').find('textarea').first();
+                    text = ta.val();
+                    var div = document.createElement('div');
+                    $(div).addClass('text');
+                    $(document).append(div);
+                    $(div).load('/api/preview/', {'text': text}, function() {initInMoreDetail();});
+                    $(div).dialog({modal: true, width: 609, beforeClose: function() { $(div).remove();div=null; }});
+                    $(div).attr('style', 'height: 400px; overflow: scroll; background-color: white;');
                 });
+            });
         return true;
     }
 }
