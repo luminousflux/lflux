@@ -37,4 +37,12 @@ admin.register(ChangeSuggestion, ChangeSuggestionAdmin)
 admin.register(FlatPage, FlatPageAdmin)
 
 for admin_class in admin_classes:
-    admin.register(*admin_class)
+    model, cls = admin_class
+    newcls = type(cls.__name__+'ForUser',
+            (cls,object,),
+            {'has_add_permission': lambda self, request: True,
+             'has_change_permission': lambda self, request, obj=None: True if not obj else obj.author==request.user,
+             'has_delete_permission': lambda self, request, obj=None: True if not obj else obj.author==request.user,
+             'queryset': lambda self, request: super(self.__class__,self).queryset(request).filter(author=request.user)
+            })
+    admin.register(model, newcls)
