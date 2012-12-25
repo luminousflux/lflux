@@ -312,6 +312,7 @@ a.with_icon span { text-decoration: underline; padding-left: .3em }
 #article #leadimage {
   position: relative;
   width: 100%;
+  max-width: 100%;
   height: 230px; /* TODO WRONG */
   margin-bottom: 1.5em;
   overflow: hidden;
