@@ -312,7 +312,6 @@ a.with_icon span { text-decoration: underline; padding-left: .3em }
 #article #leadimage {
   position: relative;
   width: 100%;
-  max-width: 100%;
   height: 230px; /* TODO WRONG */
   margin-bottom: 1.5em;
   overflow: hidden;
@@ -324,6 +323,7 @@ a.with_icon span { text-decoration: underline; padding-left: .3em }
   top: 0;
   z-index: 1;
   width: 609px;
+  max-width: 100%;
 }
 
 #article #leadimage div.label {
