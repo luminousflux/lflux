@@ -255,6 +255,7 @@ body.en #sidebar h2 {
 #article #author img {
   float: none;
   display: block;
+  max-width: 100%;
 }
 #article #authorprofile {
   display: none;
