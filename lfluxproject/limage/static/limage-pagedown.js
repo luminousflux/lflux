@@ -69,9 +69,9 @@ lStory_pagedown = {
                     } else {
                         MessageBoxes.Prompt('Enter IMD text here',
                             "In more Detail",
-                            [{label: 'text', type: 'textarea', name: 'text'}],
+                            [{label: 'title', name: 'title', type:'text'}, {label: 'text', type: 'textarea', name: 'text'}],
                             function(data) {
-                                ta.replaceSelection('[imd]'+data.text+'[/imd]');
+                                ta.replaceSelection('[imd]'+(data.title?data.title+'|':'')+(data.text||'')+'[/imd]');
                                 setTimeout(refresh,10);
                             });
                     }

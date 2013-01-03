@@ -22,8 +22,6 @@ class InmoredetailTreeProcessor(Treeprocessor):
         for elem in tree.getchildren():
             return self._find_elem(elem, text)
 
-        
-
     def _has_tag(self, elem, text):
         elem.text = elem.text or ''
         if text in elem.text:
@@ -170,8 +168,8 @@ class InmoredetailTreeProcessor(Treeprocessor):
                         newelem = self._wrap_in_span(imd)
                         x.insert(0, newelem)
                         if label:
-                            newelem = self._wrap_in_span(label, 'label-imd-%s' % self.imdcount)
-                            x.insert(0,newelem)
+                            newelem1 = self._wrap_in_span(label, 'label-imd-%s' % self.imdcount)
+                            x.insert(0,newelem1)
                         done = True
                     if x==end[0][0] and x not in marked_tail:
                         if newelem is not None:
