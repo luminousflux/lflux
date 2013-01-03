@@ -71,7 +71,7 @@ lStory_pagedown = {
                             "In more Detail",
                             [{label: 'title', name: 'title', type:'text'}, {label: 'text', type: 'textarea', name: 'text'}],
                             function(data) {
-                                ta.replaceSelection('[imd]'+(data.title?data.title+'|':'')+(data.text||'')+'[/imd]');
+                                ta.replaceSelection('[imd]'+(data.title?data.title+'||':'')+(data.text||'')+'[/imd]');
                                 setTimeout(refresh,10);
                             });
                     }
