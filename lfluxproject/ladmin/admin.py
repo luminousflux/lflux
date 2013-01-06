@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.admin import AdminSite
-from lstory.admin import Story, StoryUserAdmin, ChangeSuggestion, ChangeSuggestionAdmin, StorySummary, StorySummaryAdmin
+from lstory.admin import Story, StoryUserAdmin, ChangeSuggestion, ChangeSuggestionAdmin, StorySummary, StorySummaryAdmin, Stakeholder, StakeholderAdmin
 from urls import urlpatterns
 from django import forms
 from tumblelog.admin import admin_classes
@@ -31,6 +31,7 @@ class LAdminSite(AdminSite):
 
 
 admin = LAdminSite('backend')
+admin.register(Stakeholder, StakeholderAdmin)
 admin.register(Story, UserBasedStoryAdmin)
 admin.register(StorySummary, StorySummaryAdmin)
 admin.register(ChangeSuggestion, ChangeSuggestionAdmin)

@@ -86,5 +86,6 @@ blockquote.ins, h1.ins, h2.ins, p.ins , ul.ins, li.ins {
 }
 .text .imdbutton.manualbutton ins {
     background: none;
-    color: #ffb;
+    color: inherit;
+    border-bottom: 3px solid #ffb;
 }

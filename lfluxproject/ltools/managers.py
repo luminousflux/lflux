@@ -3,6 +3,7 @@ from datetime import datetime, timedelta, date
 import reversion
 from collections import namedtuple
 from difflib import SequenceMatcher
+from django.contrib.contenttypes.models import ContentType
 
 
 # convenience methods for reversion-backed models
@@ -28,6 +29,21 @@ class VersionManagerAccessor(object):
             ret.__dict__.update(version.field_dict)
             ret._version = version
             ret.ltools_versiondate = version.revision.date_created
+            ret._current = self.obj
+
+            if hasattr(self.cls._meta, 'versioned_attributes'):
+                recursing_attrs = [x[:-2] for x in self.cls._meta.versioned_attributes if x[-2:]==':r']
+                for aname in recursing_attrs:
+                    def roflcopter():
+                        result = []
+                        attr = getattr(ret, aname)
+                        ctype = ContentType.objects.get_for_model(attr.model)
+                        versions = ret._version.revision.version_set.filter(content_type=ctype)
+                        for version in versions:
+                            instance = version.object_version.object
+                            result.append(instance)
+                        return result
+                    setattr(ret, aname+'_', roflcopter)
             return ret
 
         def _proxify_objects(self, retval):
@@ -46,11 +62,16 @@ class VersionManagerAccessor(object):
                     self._proxify_objects(getattr(reversion, methodname)(self.obj, *args, **kwargs))
                     )
 
+        def list(self):
+            if not hasattr(self, '_list'):
+                self._list = self._proxify_objects(reversion.get_for_object(self.obj).select_related('revision'))
+            return self._list
+
         def __init__(self, obj, cls):
             self.obj = obj
             self.cls = cls
 
-            methods = {'list': 'get_for_object',
+            methods = {
                        'for_date': 'get_for_date',
                        }
             for name, methodname in methods.iteritems():
@@ -129,7 +150,9 @@ class VersionManagerAccessor(object):
                 raise VersionManagerHelperException("sorry, this is only available for %s instances" % self.cls)
             if not hasattr(self.obj, '_version'):
                 return self.obj
-            return self.cls._default_manager.get(pk=self.obj.pk)
+            if not hasattr(self.obj, '_current'):
+                self.obj._current = self.cls._default_manager.get(pk=self.obj.pk)
+            return self.obj._current
 
 
         def activity(self):

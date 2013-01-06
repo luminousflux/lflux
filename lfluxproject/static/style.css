@@ -351,7 +351,8 @@ a.with_icon span { text-decoration: underline; padding-left: .3em }
   clear: both;
 }
 
-#article #reactions img {
+#article #reactions img,
+#article #stakeholders img {
   float: left;
   margin: 5px 10px 5px 0;
 }

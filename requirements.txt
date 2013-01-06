@@ -1,5 +1,5 @@
 django==1.4.0
-django-reversion==1.6
+django-reversion==1.6.4
 git+git://github.com/luminousflux/overdiff.git#egg=overdiff
 south
 git+git://github.com/luminousflux/django-taggit.git#egg=django-taggit

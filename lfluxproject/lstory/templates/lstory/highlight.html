@@ -93,6 +93,18 @@
     {% else %}
     {{current.body|markdown:"extra,insparagraph,inmoredetail"}}
     {% endif %}
+
+    <div id="stakeholders">
+        {% for stakeholder in field_diff.stakeholder_set_|default:current.stakeholder_set.all %}
+        {% if forloop.first %}
+        <h2>{% trans 'Stakeholders' %}</h2>
+        {% endif %}
+        {% if stakeholder.image.0 %}<img src="{{stakeholder.image.0.url}}" width="60" />{% endif %}
+        <strong style="color: #579;"><span class="{% if stakeholder.name.1 %}ins{%endif%} page"> {{stakeholder.name.0}}</span></strong>
+        {{stakeholder.description.0|markdown:'inmoredetail,insparagraph,extra'}}
+        <span class="linkbar">{% if stakeholder.website.0 %}<a href="{{stakeholder.website.0}}">{% trans 'website' %}</a>{% endif %}</span>
+        {% endfor %}
+    </div>
 </div>
 <div id="end_of_article"></div>
 <div id="mark_as_read" class="hiding reload-here">

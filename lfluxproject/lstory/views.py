@@ -69,7 +69,6 @@ def diff(request, slug, model, template='lstory/highlight.html'):
 
     embed_code = render_to_string('lstory/embedcode.html', {'story': current}, context_instance=RequestContext(request))
 
-
     response = direct_to_template(request, template, {
         'current': current,
         'previous': previous,

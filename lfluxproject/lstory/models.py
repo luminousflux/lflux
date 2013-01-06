@@ -1,11 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
-from ltools.managers import VersionManagerAccessor
 import reversion
 from ltools.models import VersionedContentMixin
 from ltools.fields import CountryField
 
+from ltools.managers import VersionManagerAccessor
 from lstory.managers import StoryManager
 
 
@@ -33,25 +33,27 @@ class Story(VersionedContentMixin, models.Model):
 
     tags = TaggableManager(blank=True)
 
-    versions = VersionManagerAccessor()
-
     objects = StoryManager()
+    versions = VersionManagerAccessor()
 
     def __unicode__(self):
         return "%s%s" % (self.title, ' /unpublished' if not self.published else '')
 
     class Meta:
         verbose_name_plural = 'Stories'
-        versioned_attributes = ['body:d', 'summary:d', 'region:=', 'title:=', 'cover_image:=']
+        versioned_attributes = ['body:d', 'summary:d', 'region:=', 'title:=', 'cover_image:=', 'stakeholder_set:r']
 
     @models.permalink
     def get_absolute_url(self):
-        return ('story', [self.versions.current().slug],)
+        if hasattr(self, '_version'):
+            return ('story', [self.versions.current().slug],)
+        else:
+            return ('story', [self.slug],)
 
     @models.permalink
     def get_version_url(self):
         if not hasattr(self, '_version'):
-            return ('story', [self.versions.current().slug],)
+            return ('story', [self.slug],) # assume this is the current version, since _version is not set
         return ('storyversion', [self.versions.current().slug, self.ltools_versiondate.isoformat()],)
     
     @models.permalink
@@ -59,11 +61,6 @@ class Story(VersionedContentMixin, models.Model):
         return ('storyembed', [self.versions.current().slug],)
 
 
-try:
-    reversion.register(Story)
-except reversion.revisions.RegistrationError, e:
-    if not unicode(e).endswith('has already been registered with django-reversion'):
-        raise
 
 
 class StorySummary(models.Model):
@@ -101,3 +98,34 @@ class ChangeSuggestion(models.Model):
 
     def __unicode__(self):
         return u'Change Suggestion for "%s", created at %s' % (self.story.versions.current().slug, self.created_at,)
+
+class Stakeholder(VersionedContentMixin, models.Model):
+    image = models.ImageField(null=True, blank=True, upload_to='lstory')
+    name = models.CharField(max_length=255)
+    website = models.CharField(blank=True,max_length=255)
+    other_contacts = models.CharField(blank=True, max_length=255)
+    description = models.TextField(blank=True)
+    weight = models.IntegerField(default=0)
+
+    story = models.ForeignKey(Story)
+    versions = VersionManagerAccessor()
+
+    objects = models.Manager()
+
+    class Meta:
+        verbose_name_plural = 'Stakeholders'
+        versioned_attributes = ['description:d','name:=','website:=','image:=']
+
+    def __unicode__(self):
+        return u'%s for %s' % (self.name, self.story,)
+
+
+
+
+try:
+    reversion.register(Story, follow=['stakeholder_set'])
+    reversion.register(Stakeholder)
+except reversion.revisions.RegistrationError, e:
+    print unicode(e)
+    if not unicode(e).endswith('has already been registered with django-reversion'):
+        raise

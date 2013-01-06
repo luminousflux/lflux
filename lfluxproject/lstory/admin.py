@@ -5,15 +5,26 @@ from django.contrib import admin
 from django.db import models
 import reversion
 
-from models import Story, StorySummary, ChangeSuggestion
+from models import Story, StorySummary, ChangeSuggestion, Stakeholder
 
 from limage.widgets import AdminPagedownWidget
 from limage.models import Image
 from django.contrib.contenttypes import generic
+from django import forms
+
+
+class StakeholderAdmin(reversion.VersionAdmin):
+    pass
+admin.site.register(Stakeholder, StakeholderAdmin)
+
+class StakeholderInline(admin.StackedInline):
+    model = Stakeholder
+    extra = 1
 
 
 class StoryAdmin(reversion.VersionAdmin):
     prepopulated_fields = {"slug": ("name",)}
+    inlines = [StakeholderInline,]
 admin.site.register(Story, StoryAdmin)
 
 
@@ -23,11 +34,6 @@ class StoryUserAdmin(StoryAdmin):
     formfield_overrides = {
         models.TextField: {'widget': AdminPagedownWidget},
     }
-
-    def save_model(self, request, obj, form, change):
-        obj.save()
-        if obj.pk and request.user not in obj.authors.all():
-            obj.authors.add(request.user)
 
     def change_view(self, request, object_id, form_url='', extra_context=None):
         extra_context = extra_context or {}
