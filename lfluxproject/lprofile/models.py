@@ -42,6 +42,9 @@ def demo_mode_set_permission(sender, instance, created, raw, **kwargs):
         Permission.objects.get_by_natural_key(app_label='lstory', model='story', codename='add_story'),
         Permission.objects.get_by_natural_key(app_label='lstory', model='story', codename='change_story'),
         Permission.objects.get_by_natural_key(app_label='lstory', model='story', codename='delete_story'),
+        Permission.objects.get_by_natural_key(app_label='lstory', model='stakeholder', codename='add_stakeholder'),
+        Permission.objects.get_by_natural_key(app_label='lstory', model='stakeholder', codename='change_stakeholder'),
+        Permission.objects.get_by_natural_key(app_label='lstory', model='stakeholder', codename='delete_stakeholder'),
     ]
 
     for p in default_group_perms:
