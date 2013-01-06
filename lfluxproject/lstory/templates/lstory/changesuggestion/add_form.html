@@ -7,27 +7,20 @@
 <script src="{% static 'js/jsdiff.js' %}"></script>
 <script src="{% static 'js/jquery-1.7.2.min.js' %}"></script>
 <script src="{% static 'js/jquery-ui-1.8.20.custom.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'text.css' %}" />
 <style>
-    .inmoredetail {
-        color: grey;
-        border-left: 3px solid grey;
-    }
-    .inmoredetail .inmoredetail,
-    .inmoredetail + .inmoredetail {
-        border-left: none;
-    }
-
     .summary_preview, .text_preview, #oldbody, #oldsummary {
         padding-right: 2em;
     }
 </style>
-<script>
-    $(function() {
+{% endblock %}
+{% block content %}
+<script type="text/javascript">
+    $(document).ready(function() {
         $('#tabs').tabs();
     });
 </script>
-{% endblock %}
-{% block content %}
+<script src="{% static 'text.js' %}"></script>
 
 
 <div style="float: left; width: 40%;">
@@ -47,10 +40,10 @@
         <div class="preview" id="tab-2">
             <a href="#" onclick="refreshBodyPreview(true);refreshSummaryPreview(true); return false;">Refresh</a>
             <h2>Summary</h2>
-            <div class="summary_preview">
+            <div class="summary_preview text">
             </div>
             <h2>Text</h2>
-            <div class="text_preview">
+            <div class="text_preview text">
             </div>
         </div>
     </div>
@@ -88,7 +81,7 @@
             clearTimeout(timer);
         }
         element.html('loading');
-        var fn = function() { element.load('/api/preview/', {'text': text})};
+        var fn = function() { element.load('/api/preview/', {'text': text}, function() {initInMoreDetail(element);})};
         console.log(ignore_timer);
         if(ignore_timer===undefined) {
             timer = setTimeout(fn, 3000);

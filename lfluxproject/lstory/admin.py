@@ -159,7 +159,6 @@ class ChangeSuggestionAdmin(admin.ModelAdmin):
     def change_view(self, request, *args, **kwargs):
         return self._extend_view(super(ChangeSuggestionAdmin, self).change_view(request, *args, **kwargs))
 
-
     def save_model(self, request, obj, form, change):
         if not obj.pk:
             obj.user = request.user
