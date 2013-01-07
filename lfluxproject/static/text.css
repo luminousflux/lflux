@@ -81,8 +81,12 @@ blockquote.ins, h1.ins, h2.ins, p.ins , ul.ins, li.ins {
 }
 
 .text .imdbutton.manualbutton {
-    vertical-align: super;
-    padding: .1em .2em;
+    font-weight: normal;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    font-size: 1em;
+    line-height: 1em;
+    color: inherit;
 }
 .text .imdbutton.manualbutton ins {
     background: none;
