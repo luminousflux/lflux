@@ -1,5 +1,6 @@
 {% extends "admin/change_form.html" %}
 {% load static %}
+{% load url from future %}
 
 {% block extrahead %}
 {{ block.super }}
@@ -111,4 +112,12 @@
         $(summaryel).keyup(function(){ refreshSummaryPreview();});
     });
 </script>
+{% endblock %}
+{% block submit_buttons_bottom %}
+{% if object_id and request.user in adminform.form.instance.story.authors.all %}
+<div class="submit-row">
+    <button onclick="if(confirm('are you sure you want to overwrite the story with the data here?')) {window.location = '{% url 'backend:lstory_changesuggestion_save_to_story' object_id %}'; } return false;">publish in story</button>
+</div>
+{% endif %}
+{{block.super}}
 {% endblock %}

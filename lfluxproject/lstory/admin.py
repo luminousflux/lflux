@@ -1,9 +1,13 @@
 from datetime import datetime
 from django.core.exceptions import ObjectDoesNotExist
+from functools import update_wrapper
+
+from django.http import HttpResponse, HttpResponseRedirect
 
 from django.contrib import admin
 from django.db import models
 import reversion
+from django.core.urlresolvers import reverse
 
 from models import Story, StorySummary, ChangeSuggestion, Stakeholder
 
@@ -11,6 +15,9 @@ from limage.widgets import AdminPagedownWidget
 from limage.models import Image
 from django.contrib.contenttypes import generic
 from django import forms
+
+from django.template.loader import render_to_string
+from django.contrib.admin.util import unquote
 
 
 class StakeholderAdmin(reversion.VersionAdmin):
@@ -54,6 +61,7 @@ class StoryUserAdmin(StoryAdmin):
         extra_context = {'versions_since': len(versions_since),
                          'last_summary_date': last_summary_date,
                          'summaries': existing_summaries,
+                         'changesuggestions': s.changesuggestion_set.all()
                          }
         publish = '_publish' in request.POST
 
@@ -64,7 +72,6 @@ class StoryUserAdmin(StoryAdmin):
         x = super(StoryUserAdmin, self).change_view(request, object_id,
                                                        extra_context=extra_context)
 
-        
         if publish:
             s = Story.objects.get(pk=object_id)
             s.published = datetime.now()
@@ -84,6 +91,14 @@ class StoryUserAdmin(StoryAdmin):
             obj.published = datetime.now()
             obj.save()
         return super(StoryUserAdmin, self).response_add(request, obj, *args, **kwargs)
+
+    def save_model(self, request, obj, form, change):
+        new = not obj.pk
+        r = super(StoryUserAdmin, self).save_model(request, obj, form, change)
+        if new:
+            obj.authors.add(request.user)
+        return r
+
 
 class StorySummaryAdmin(admin.ModelAdmin):
     add_form_template = 'lstory/storysummary/add_form.html'
@@ -166,8 +181,46 @@ class ChangeSuggestionAdmin(reversion.VersionAdmin):
     def change_view(self, request, *args, **kwargs):
         return self._extend_view(super(ChangeSuggestionAdmin, self).change_view(request, *args, **kwargs))
 
+    def save_to_story_view(self, request, object_id, *args, **kwargs):
+        obj = self.get_object(request, unquote(object_id))
+        story = obj.story
+        if not request.user in story.authors.all():
+            return HttpResponse('403')
+        story.summary = obj.summary
+        story.body = obj.body
+        story.save()
+        obj.delete()
+        self.message_user(request, 'content now in story')
+        return HttpResponseRedirect(reverse('backend:lstory_story_change', args=[story.pk]))
+
+    def get_urls(self):
+        urls = list(super(ChangeSuggestionAdmin, self).get_urls())
+        from django.conf.urls import patterns, url
+        def wrap(view):
+            def wrapper(*args, **kwargs):
+                return self.admin_site.admin_view(view)(*args, **kwargs)
+            return update_wrapper(wrapper, view)
+        info = self.model._meta.app_label, self.model._meta.module_name
+        urls1 = patterns('', 
+                url(r'^([^/]+)/save_to_story/$', wrap(self.save_to_story_view), name='%s_%s_save_to_story' % info,),
+            )
+        return urls[0:2] + urls1 + urls[3:]
     def save_model(self, request, obj, form, change):
-        if not obj.pk:
+        new = not obj.pk
+        if new:
             obj.user = request.user
-        return super(ChangeSuggestionAdmin, self).save_model(request, obj, form, change)
+        result = super(ChangeSuggestionAdmin, self).save_model(request, obj, form, change)
+        if request.user not in obj.story.authors.all():
+            for author in obj.story.authors.all():
+                author.email_user(
+                        ('new' if new else 'changed') + ' change suggestion for %s' % obj.story.name,
+                        render_to_string('lstory/changesuggestion/email_to_authors.txt',
+                            {'story': obj.story,
+                             'changesuggestion': obj,
+                             'user': request.user,
+                             'recipient': author,
+                             'new': new,
+                             'domain': request.META['SERVER_NAME']})
+                        )
+        return result
 admin.site.register(ChangeSuggestion, ChangeSuggestionAdmin)

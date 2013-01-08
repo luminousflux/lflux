@@ -27,6 +27,10 @@
 
 {% block content %}
 <div id="content-additional">
+    <h2>Change Suggestions</h2>
+    {% for suggestion in changesuggestions %}
+    <a href="{% url 'backend:lstory_changesuggestion_change' suggestion.pk %}">by {{suggestion.user}}</a>
+    {% endfor %}
     <h2>Summaries</h2>
     <p>{% if versions_since %}{{versions_since}} Updates{% if last_summary_date %} since last summary from {{last_summary_date}}{%else%}, no summary yet{%endif%}
     <a href="{%url 'admin:lstory_storysummary_add'%}?story={{original.pk}}">write one</a>

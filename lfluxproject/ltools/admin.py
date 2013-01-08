@@ -15,12 +15,6 @@ class OwnInstancesList(DashboardModule):
         super(OwnInstancesList, self).__init__(title, **kwargs)
         self.title = model
 
-    def __init__(self, title, model, key='user', **kwargs):
-        self.model = model
-        self.key = key
-        super(OwnInstancesList, self).__init__(title, **kwargs)
-        self.title = model
-
     def init_with_context(self, context):
         fltr = {}
         fltr[self.key] = context['request'].user
@@ -61,4 +55,24 @@ class ModelAdd(DashboardModule):
                                                  self.model.__name__.lower(),))
         })
 
+        self._initialized = True
+
+class CreateForInstance(DashboardModule):
+    template='ltools/instanceforobject.html'
+    layout='stacked'
+
+    def __init__(self, model, instances, key, **kwargs):
+        self.model = model
+        self.instances = instances
+        self.key = key
+        print 'setting key', key
+        super(CreateForInstance, self).__init__(_("Create %s for %s") % (self.model.__name__, self.instances.model.__name__,))
+
+    def init_with_context(self, context):
+        print 'key is', self.key
+        for child in self.instances:
+            self.children.append({
+                'title': child, 
+                'create_url': reverse('%s:%s_%s_add' % (get_admin_site_name(context), self.model._meta.app_label, self.model.__name__.lower(),))+'?'+self.key+'='+str(child.pk)
+                })
         self._initialized = True

@@ -1,0 +1,10 @@
+{% load url from future %}
+Hello {{recipient.username}},
+
+The User {{user.username}} has {% if new %}created{%else%}changed{% endif %} a change request on your story {{story.name}}.
+
+You can find it at:
+
+http://{{domain}}{% url 'backend:lstory_changesuggestion_change' changesuggestion.pk %}
+
+

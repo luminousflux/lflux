@@ -1,0 +1,9 @@
+{% extends "admin_tools/dashboard/module.html"%}
+{% block module_content %}
+<select id="instanceforobject">
+    {% for child in module.children %}
+        <option value="{{child.create_url}}">{{child.title}}</option>
+    {% endfor %}
+</select>
+<button onclick="document.location = document.getElementById('instanceforobject').value; return false;">go</button>
+{% endblock %}
