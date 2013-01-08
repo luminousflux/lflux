@@ -24,6 +24,7 @@ class AdminPagedownWidget(OriginalAPW):
               static.url('js/admin/jquery.textarea.js'),
               static.url('js/admin/powerhour.messageboxes.js'),
               static.url('limage-pagedown.js'),
+              static.url('js/jquery-fullscreen-textarea.js'),
               static.url('text.js'),)
 
     def render(self, name, value, attrs=None):
@@ -60,6 +61,7 @@ class AdminPagedownWidget(OriginalAPW):
 
                     lImage_pagedown.extend("./images/", "%(id)s_wmd_dialog", editor);
                     lStory_pagedown.extend(editor);
+                    $('#'+selectors.input).fullTextArea();
                 })();
             </script>
             """ % {'attrs': flatatt(final_attrs),

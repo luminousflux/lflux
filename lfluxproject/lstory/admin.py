@@ -131,6 +131,9 @@ class ChangeSuggestionAdmin(reversion.VersionAdmin):
     add_form_template = 'lstory/changesuggestion/add_form.html'
     change_form_template = 'lstory/changesuggestion/add_form.html'
     exclude = ('user',)
+    formfield_overrides = {
+        models.TextField: {'widget': AdminPagedownWidget},
+    }
 
     def _extend_view(self, templateresponse):
         if not hasattr(templateresponse, 'context_data'):
