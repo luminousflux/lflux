@@ -88,7 +88,7 @@ class ChangeSuggestion(models.Model):
     body = models.TextField(null=True, blank=True)
 
     story = models.ForeignKey(Story)
-    for_version = models.DateTimeField(null=False)
+    for_version = models.DateTimeField(null=False, auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     user = models.ForeignKey(User)
@@ -125,6 +125,7 @@ class Stakeholder(VersionedContentMixin, models.Model):
 try:
     reversion.register(Story, follow=['stakeholder_set'])
     reversion.register(Stakeholder)
+    reversion.register(ChangeSuggestion)
 except reversion.revisions.RegistrationError, e:
     print unicode(e)
     if not unicode(e).endswith('has already been registered with django-reversion'):

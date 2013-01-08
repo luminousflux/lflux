@@ -127,10 +127,10 @@ class StorySummaryAdmin(admin.ModelAdmin):
         super(StorySummaryAdmin, self).save_model(request, obj, form, change)
 admin.site.register(StorySummary, StorySummaryAdmin)
 
-class ChangeSuggestionAdmin(admin.ModelAdmin):
+class ChangeSuggestionAdmin(reversion.VersionAdmin):
     add_form_template = 'lstory/changesuggestion/add_form.html'
     change_form_template = 'lstory/changesuggestion/add_form.html'
-    exclude = ('user','for_version',)
+    exclude = ('user',)
 
     def _extend_view(self, templateresponse):
         if not hasattr(templateresponse, 'context_data'):
@@ -142,8 +142,12 @@ class ChangeSuggestionAdmin(admin.ModelAdmin):
 
         if story_id:
             story = Story.objects.get(pk=story_id)
-            templateresponse.context_data['original_body'] = story.body
-            templateresponse.context_data['original_summary'] = story.summary
+            version = story.versions.for_date(form.instance.for_version) if form.instance and form.instance.pk else story
+            templateresponse.context_data['story_changed'] = not version.versions.is_current()
+            templateresponse.context_data['original_body'] = version.body
+            templateresponse.context_data['original_summary'] = version.summary
+            templateresponse.context_data['current_body'] = story.body
+            templateresponse.context_data['current_summary'] = story.summary
             if (not form.instance or not form.instance.pk) and not 'body' in form.data:
                 form.initial['body'] = story.body
                 form.initial['summary'] = story.summary
@@ -162,4 +166,5 @@ class ChangeSuggestionAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         if not obj.pk:
             obj.user = request.user
+        return super(ChangeSuggestionAdmin, self).save_model(request, obj, form, change)
 admin.site.register(ChangeSuggestion, ChangeSuggestionAdmin)

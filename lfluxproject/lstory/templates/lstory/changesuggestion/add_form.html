@@ -24,10 +24,14 @@
 
 
 <div style="float: left; width: 40%;">
+    {% if story_changed %}
+        Story changed since Change Suggestion was created!
+    {% endif %}
     <div id="tabs">
         <ul>
-            <li><a href="#tab-1">Difference</a></li>
+            <li><a href="#tab-1">Difference {% if story_changed %}to original Version{%endif %}</a></li>
             <li><a href="#tab-2">Preview</a></li>
+            {% if story_changed %}<li><a href="#tab-3">Difference to current<a/></li>{% endif %}
         </ul>
         <div class="diff" id="tab-1">
             <h2>Summary</h2>
@@ -46,6 +50,14 @@
             <div class="text_preview text">
             </div>
         </div>
+        {% if story_changed %}<div class="diffcur" id="tab-3">
+            <h2>Summary</h2>
+            <div id="cursummary">
+            </div>
+            <h2>Text</h2>
+            <div id="curbody">
+            </div>
+        </div>{% endif %}
     </div>
 </div>
 <div style="float: left; width: 60%;">
@@ -57,15 +69,21 @@
 <script>
     var oldbody = '{{original_body|escapejs}}';
     var oldsummary = '{{original_summary|escapejs}}';
+    var curbody = '{{current_body|escapejs}}';
+    var cursummary = '{{current_summary|escapejs}}';
     var bodyel = document.getElementById('id_body');
     var summaryel = document.getElementById('id_summary');
 
     var oldsummaryel = document.getElementById('oldsummary');
     var oldbodyel = document.getElementById('oldbody');
+    var cursummaryel = document.getElementById('cursummary');
+    var curbodyel = document.getElementById('curbody');
 
     function refreshDiff() {
         oldbodyel.innerHTML = diffString(escape(oldbody), escape(bodyel.value)).replace(/\n/g,'<br/>');
         oldsummaryel.innerHTML = diffString(escape(oldsummary), escape(summaryel.value)).replace(/\n/g,'<br />');
+        curbodyel.innerHTML = diffString(escape(curbody), escape(bodyel.value)).replace(/\n/g,'<br/>');
+        cursummaryel.innerHTML = diffString(escape(cursummary), escape(summaryel.value)).replace(/\n/g,'<br />');
     }
     var x = function() {
         refreshDiff();
