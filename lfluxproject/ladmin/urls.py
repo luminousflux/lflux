@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from lstory.models import Story
+from lstory.models import Story, ChangeSuggestion
 from limage.views import browse
 from views import share
 

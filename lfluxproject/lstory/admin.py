@@ -166,6 +166,7 @@ class ChangeSuggestionAdmin(reversion.VersionAdmin):
             templateresponse.context_data['original_summary'] = version.summary
             templateresponse.context_data['current_body'] = story.body
             templateresponse.context_data['current_summary'] = story.summary
+            templateresponse.context_data['story'] = story
             if (not form.instance or not form.instance.pk) and not 'body' in form.data:
                 form.initial['body'] = story.body
                 form.initial['summary'] = story.summary
@@ -205,6 +206,7 @@ class ChangeSuggestionAdmin(reversion.VersionAdmin):
                 url(r'^([^/]+)/save_to_story/$', wrap(self.save_to_story_view), name='%s_%s_save_to_story' % info,),
             )
         return urls[0:2] + urls1 + urls[3:]
+
     def save_model(self, request, obj, form, change):
         new = not obj.pk
         if new:
