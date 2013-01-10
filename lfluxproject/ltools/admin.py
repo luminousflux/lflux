@@ -65,8 +65,7 @@ class CreateForInstance(DashboardModule):
         self.model = model
         self.instances = instances
         self.key = key
-        print 'setting key', key
-        super(CreateForInstance, self).__init__(_("Create %s for %s") % (self.model.__name__, self.instances.model.__name__,))
+        super(CreateForInstance, self).__init__(_("Create %(modelname)s for %(instancename)s") % {'modelname':self.model.__name__, 'instancename':self.instances.model.__name__,})
 
     def init_with_context(self, context):
         print 'key is', self.key

@@ -6,31 +6,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-14 00:45+0100\n"
+"POT-Creation-Date: 2013-01-11 00:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: dashboard.py:32
+#: dashboard.py:33
 msgid "My Stories"
 msgstr "Meine Stories"
 
-#: dashboard.py:35
+#: dashboard.py:38
 msgid "My Suggestions"
 msgstr "Meine Vorschläge"
 
-#: dashboard.py:57 ladmin/templates/ladmin/index.html:53
+#: dashboard.py:58 ladmin/templates/ladmin/index.html:53
 msgid "Recent Actions"
 msgstr "Letzte Aktionen"
 
-#: settings.py:47
+#: settings.py:6
 msgid "German"
 msgstr "Deutsch"
 
-#: settings.py:48
+#: settings.py:7
 msgid "English"
 msgstr "Englisch"
 
@@ -72,11 +73,11 @@ msgstr "Unbekannter inhalt"
 msgid "Add Author"
 msgstr "Autoren hinzufügen"
 
-#: ladmin/templates/ladmin/lstory/story/change_form.html:41
+#: ladmin/templates/ladmin/lstory/story/change_form.html:45
 msgid "Publish"
 msgstr "Veröffentlichen"
 
-#: ladmin/templates/ladmin/lstory/story/change_form.html:43
+#: ladmin/templates/ladmin/lstory/story/change_form.html:47
 msgid "Save"
 msgstr "Speichern"
 
@@ -84,39 +85,43 @@ msgstr "Speichern"
 msgid "Home"
 msgstr "Home"
 
-#: lqa/models.py:8
+#: lqa/models.py:11
 msgid "new"
 msgstr "neu"
 
-#: lqa/models.py:8
+#: lqa/models.py:11
 msgid "researching"
 msgstr "in Bearbeitung"
 
-#: lqa/models.py:8
+#: lqa/models.py:11
 msgid "answered"
 msgstr "beantwortet"
 
-#: lqa/models.py:12
+#: lqa/models.py:11
+msgid "answered in article"
+msgstr "in Artikel beantwortet"
+
+#: lqa/models.py:13
 msgid "Title"
 msgstr "Titel"
 
-#: lqa/models.py:13
+#: lqa/models.py:14
 msgid "Comment"
 msgstr "Kommentar"
 
-#: lqa/models.py:14
+#: lqa/models.py:15
 msgid "User"
 msgstr "Benutzer"
 
-#: lqa/models.py:15
+#: lqa/models.py:16
 msgid "Story"
 msgstr "Artikel"
 
-#: lqa/models.py:17
+#: lqa/models.py:18
 msgid "Created at"
 msgstr "Erstellt am"
 
-#: lqa/models.py:19
+#: lqa/models.py:20
 msgid "State"
 msgstr "Status"
 
@@ -128,38 +133,46 @@ msgstr "fragt"
 msgid "since"
 msgstr "seit"
 
+#: lqa/templates/lqa/_question.html:7 lqa/templates/lqa/question.html:54
+msgid "Comments"
+msgstr "Kommentare"
+
 #: lqa/templates/lqa/_question_form.html:11
 msgid "Submit"
 msgstr "Abschicken"
 
-#: lqa/templates/lqa/question.html:12
+#: lqa/templates/lqa/question.html:13
 msgid "Question for"
 msgstr "Frage zu"
 
-#: lqa/templates/lqa/question.html:26
+#: lqa/templates/lqa/question.html:27
 #, python-format
 msgid "Back to %(storyname)s"
 msgstr "Zurück zu %(storyname)s"
 
-#: lqa/templates/lqa/question.html:27
+#: lqa/templates/lqa/question.html:28
 #, python-format
 msgid "Asked by %(username)s"
 msgstr "%(username)s fragt"
 
-#: lqa/templates/lqa/question.html:28
+#: lqa/templates/lqa/question.html:29
 #, python-format
 msgid "%(status)s since %(created_at)s"
 msgstr "%(status)s seit %(created_at)s"
 
-#: lqa/templates/lqa/question.html:37
+#: lqa/templates/lqa/question.html:40
+msgid "Admin"
+msgstr "Admin"
+
+#: lqa/templates/lqa/question.html:44
+msgid "Change Question Status to:"
+msgstr "Fragestatus ändern auf:"
+
+#: lqa/templates/lqa/question.html:53
 msgid "Add Comment"
 msgstr "Neuer Kommentar"
 
-#: lqa/templates/lqa/question.html:38
-msgid "Comments"
-msgstr "Kommentare"
-
-#: lqa/templates/lqa/question.html:44 templates/comments/_comment.inc:15
+#: lqa/templates/lqa/question.html:60 templates/comments/_comment.inc:15
 msgid "Please log in to post a comment!"
 msgstr "Um ein Kommentar abzugeben, melde dich bitte an!"
 
@@ -208,19 +221,27 @@ msgstr "Link zu dieser Version"
 msgid "embed this article"
 msgstr "Einbetten"
 
+#: lstory/templates/lstory/highlight.html:100
+msgid "Stakeholders"
+msgstr "Akteure"
+
 #: lstory/templates/lstory/highlight.html:106
+msgid "website"
+msgstr "Website"
+
+#: lstory/templates/lstory/highlight.html:120
 msgid "Current events"
 msgstr "Neuigkeiten"
 
-#: lstory/templates/lstory/highlight.html:125
+#: lstory/templates/lstory/highlight.html:139
 msgid "Q&amp;A"
 msgstr "Fragen &amp; Antworten"
 
-#: lstory/templates/lstory/highlight.html:138
+#: lstory/templates/lstory/highlight.html:152
 msgid "Ask a question"
 msgstr "Frage stellen"
 
-#: lstory/templates/lstory/highlight.html:144
+#: lstory/templates/lstory/highlight.html:158
 msgid "Sign in to post a question!"
 msgstr "Eine Anmeldung ist nötig um Fragen zu stellen!"
 
@@ -303,9 +324,14 @@ msgstr "Rückgängig"
 msgid "My Instances"
 msgstr "Meine Instanzen"
 
-#: ltools/admin.py:46
+#: ltools/admin.py:40
 msgid "My Model Actions"
 msgstr "Meine Model-Aktionen"
+
+#: ltools/admin.py:68
+#, python-format
+msgid "Create %(modelname)s for %(instancename)s"
+msgstr "Neue %(modelname)s für %(instancename)s"
 
 #: ltools/templates/comments/form.html:13
 #: ltools/templates/comments/preview.html:13
@@ -388,27 +414,27 @@ msgid "something really bad or really weird happened. we'll look into it!"
 msgstr ""
 "Etwas ganz schlimmes oder ganz komisches ist passiert. Wir schauen's uns an!"
 
-#: templates/base.html:52
+#: templates/base.html:54
 msgid "demo mode"
 msgstr "Demomodus"
 
-#: templates/base.html:56
+#: templates/base.html:58
 msgid "Profile"
 msgstr "Profil"
 
-#: templates/base.html:57
+#: templates/base.html:59
 msgid "Sign Out"
 msgstr "Abmelden"
 
-#: templates/base.html:59
+#: templates/base.html:61
 msgid "Editor"
 msgstr "Redakteurbereich"
 
-#: templates/base.html:62
+#: templates/base.html:64
 msgid "Sign In"
 msgstr "Anmelden"
 
-#: templates/base.html:63
+#: templates/base.html:65
 msgid "Sign Up"
 msgstr "Registrieren"
 
@@ -423,6 +449,10 @@ msgstr "Luminous Flux admin"
 #: templates/comments/_comment.inc:8
 msgid "reply"
 msgstr "antworten"
+
+#: templates/comments/posted.html:5
+msgid "This comment changes the question to:"
+msgstr "Dieses Kommentar ändert den Fragestatus auf:"
 
 #: templates/userena/password_reset_confirm_form.html:4
 #: templates/userena/password_reset_confirm_form.html:8
@@ -444,12 +474,12 @@ msgstr "Passwort abschicken"
 #: templates/userena/profile_detail.html:5
 #, python-format
 msgid "%(username)s's profile."
-msgstr ""
+msgstr "%(username)s's Profil"
 
 #: templates/userena/profile_detail.html:13
 #: templates/userena/profile_form.html:18
 msgid "View profile"
-msgstr ""
+msgstr "Profil ansehen"
 
 #: templates/userena/profile_detail.html:14
 msgid "Edit details"
@@ -497,7 +527,7 @@ msgstr "Anmelden"
 
 #: templates/userena/signin_form.html:22
 msgid "Forgot your password?"
-msgstr ""
+msgstr "Passwort vergessen?"
 
 #: templates/userena/signup_form.html:4 templates/userena/signup_form.html:8
 #: templates/userena/signup_form.html:18
@@ -512,9 +542,6 @@ msgstr "Registrieren"
 
 #~ msgid "Name"
 #~ msgstr "Name"
-
-#~ msgid "Website"
-#~ msgstr "Website"
 
 #~ msgid "About me"
 #~ msgstr "Über Mich"
