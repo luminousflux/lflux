@@ -99,10 +99,12 @@
         {% if forloop.first %}
         <h2>{% trans 'Stakeholders' %}</h2>
         {% endif %}
+        <div class="stakeholder">
         {% if stakeholder.image.0 %}<img src="{{stakeholder.image.0.url}}" width="60" />{% endif %}
         <strong style="color: #579;"><span class="{% if stakeholder.name.1 %}ins{%endif%} page"> {{stakeholder.name.0}}</span></strong>
         {{stakeholder.description.0|markdown:'inmoredetail,insparagraph,extra'}}
         <span class="linkbar">{% if stakeholder.website.0 %}<a href="{{stakeholder.website.0}}">{% trans 'website' %}</a>{% endif %}</span>
+        </div>
         {% endfor %}
     </div>
 </div>

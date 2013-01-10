@@ -357,6 +357,19 @@ a.with_icon span { text-decoration: underline; padding-left: .3em }
   margin: 5px 10px 5px 0;
 }
 
+#article #stakeholders .stakeholder {
+    display: block;
+    clear: left;
+}
+
+#article #stakeholders p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+#article #stakeholders p:first-of-type {
+    display: inline;
+}
+
 #article .linkbar,
 #article #reactions .linkbar {
   display: block;
