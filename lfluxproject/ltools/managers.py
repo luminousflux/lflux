@@ -29,7 +29,6 @@ class VersionManagerAccessor(object):
             ret.__dict__.update(version.field_dict)
             ret._version = version
             ret.ltools_versiondate = version.revision.date_created
-            ret._current = self.obj
 
             if hasattr(self.cls._meta, 'versioned_attributes'):
                 recursing_attrs = [x[:-2] for x in self.cls._meta.versioned_attributes if x[-2:]==':r']

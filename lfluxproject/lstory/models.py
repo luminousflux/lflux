@@ -54,7 +54,8 @@ class Story(VersionedContentMixin, models.Model):
     def get_version_url(self):
         if not hasattr(self, '_version'):
             return ('story', [self.slug],) # assume this is the current version, since _version is not set
-        return ('storyversion', [self.versions.current().slug, self.ltools_versiondate.isoformat()],)
+        s = self.versions.current().slug
+        return ('storyversion', [s, self.ltools_versiondate.isoformat()],)
     
     @models.permalink
     def get_embed_url(self):
