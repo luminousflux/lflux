@@ -28,7 +28,7 @@ def index(request, template='lstory/index.html'):
     })
 
 def version(request, slug, date, template='lstory/highlight.html'):
-    obj = get_object_or_404(model, slug=slug)
+    obj = get_object_or_404(Story, slug=slug)
     date = _parse_iso_datetime(date)
     version = obj.versions.for_date(date)
     tumblepage = Post.objects.for_parent(obj).get_page(request.GET.get('page', 1))
