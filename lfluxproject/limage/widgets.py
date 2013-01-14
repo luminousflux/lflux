@@ -59,7 +59,7 @@ class AdminPagedownWidget(OriginalAPW):
                     editor.run();
                     editors.push(editor);
 
-                    lImage_pagedown.extend(typeof global_imageurl === 'undefined'?global_imageurl:"./images/", "%(id)s_wmd_dialog", editor);
+                    lImage_pagedown.extend(typeof global_imageurl === 'undefined'?"./images/":global_imageurl, "%(id)s_wmd_dialog", editor);
                     lStory_pagedown.extend(editor);
                     $('#'+selectors.input).fullTextArea();
                 })();
