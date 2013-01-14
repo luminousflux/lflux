@@ -223,7 +223,7 @@ msgstr "Einbetten"
 
 #: lstory/templates/lstory/highlight.html:100
 msgid "Stakeholders"
-msgstr "Akteure"
+msgstr "Beteiligte"
 
 #: lstory/templates/lstory/highlight.html:106
 msgid "website"
