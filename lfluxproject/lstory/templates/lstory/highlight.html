@@ -95,17 +95,26 @@
     {% endif %}
 
     <div id="stakeholders">
-        {% for stakeholder in field_diff.stakeholder_set_|default:current.stakeholder_set.all %}
-        {% if forloop.first %}
-        <h2>{% trans 'Stakeholders' %}</h2>
-        {% endif %}
-        <div class="stakeholder">
-        {% if stakeholder.image.0 %}<img src="{{stakeholder.image.0.url}}" width="60" />{% endif %}
-        <strong style="color: #579;"><span class="{% if stakeholder.name.1 %}ins{%endif%} page"> {{stakeholder.name.0}}</span></strong>
-        {{stakeholder.description.0|markdown:'inmoredetail,insparagraph,extra'}}
-        <span class="linkbar">{% if stakeholder.website.0 %}<a href="{{stakeholder.website.0}}">{% trans 'website' %}</a>{% endif %}</span>
-        </div>
-        {% endfor %}
+        {% with stakeholders=field_diff.stakeholder_set_|default:current.stakeholder_set.all %}
+        {% for stakeholder in stakeholders|dictsort:"weight" %}
+            {% if forloop.first %}
+            <h2>{% trans 'Stakeholders' %}</h2>
+            {% endif %}
+            <div class="stakeholder">
+            {% if field_diff %}
+                {% if stakeholder.image.0 %}<img src="{{stakeholder.image.0.url}}" width="60" />{% endif %}
+                <strong style="color: #579;"><span class="{% if stakeholder.name.1 %}ins{%endif%} page"> {{stakeholder.name.0}}</span></strong>
+                {{stakeholder.description.0|markdown:'inmoredetail,insparagraph,extra'}}
+                <span class="linkbar">{% if stakeholder.website.0 %}<a href="{{stakeholder.website.0}}">{% trans 'website' %}</a>{% endif %}</span>
+            {% else %}
+                {% if stakeholder.image %}<img src="{{stakeholder.image.url}}" width="60" />{% endif %}
+                <strong style="color: #579;"><span class="page"> {{stakeholder.name}}</span></strong>
+                {{stakeholder.description|markdown:'inmoredetail,insparagraph,extra'}}
+                <span class="linkbar">{% if stakeholder.website %}<a href="{{stakeholder.website}}">{% trans 'website' %}</a>{% endif %}</span>
+            {% endif %}
+            </div>
+            {% endfor %}
+        {% endwith %}
     </div>
 </div>
 <div id="end_of_article"></div>

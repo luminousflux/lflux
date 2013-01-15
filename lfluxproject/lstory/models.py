@@ -115,8 +115,8 @@ class Stakeholder(VersionedContentMixin, models.Model):
 
     class Meta:
         verbose_name_plural = 'Stakeholders'
-        versioned_attributes = ['description:d','name:=','website:=','image:=']
-        ordering = ['story','weight']
+        versioned_attributes = ['description:d','name:=','website:=','image:=','weight:=']
+        ordering = ['-weight']
 
     def __unicode__(self):
         return u'%s for %s' % (self.name, self.story,)
