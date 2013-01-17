@@ -122,6 +122,14 @@ class Stakeholder(VersionedContentMixin, models.Model):
         return u'%s for %s' % (self.name, self.story,)
 
 
+class BackgroundContent(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255)
+    story = models.ForeignKey(Story)
+    body = models.TextField()
+    author = models.ForeignKey(User)
+    weight = models.IntegerField(default=0)
 
 
 try:

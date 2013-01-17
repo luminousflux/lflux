@@ -1,0 +1,7 @@
+{% extends 'admin/change_form.html' %}
+{% block extrahead %}
+<script>
+    global_imageurl = '../../story/{{story_id|default_if_none:"None"}}/images/';
+</script>
+{{block.super}}
+{% endblock %}

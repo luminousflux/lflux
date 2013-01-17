@@ -38,6 +38,19 @@
        {% endif %}</p>
 </div>
 {{ block.super }}
+<fieldset class="module inline-related inline-group">
+    <h3>{%trans 'Background Content' %}</h3>
+    {% for content in original.backgroundcontent_set.all %}
+    <div class="form-row">
+        <div>
+            <a href="{% url 'admin:lstory_backgroundcontent_change' content.id %}">{{ content.name }}</a>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="add-row">
+        <a href="{% url 'admin:lstory_backgroundcontent_add'%}?story={{original.id}}">{% trans "Add another Background Content" %}</a>
+    </div>
+</fieldset>
 {% endblock %}
 
 {% block submit_buttons_bottom %}<div class="submit-row">

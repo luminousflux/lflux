@@ -9,7 +9,7 @@ from django.db import models
 import reversion
 from django.core.urlresolvers import reverse
 
-from models import Story, StorySummary, ChangeSuggestion, Stakeholder
+from models import Story, StorySummary, ChangeSuggestion, Stakeholder, BackgroundContent
 
 from limage.widgets import AdminPagedownWidget
 from limage.models import Image
@@ -226,3 +226,33 @@ class ChangeSuggestionAdmin(reversion.VersionAdmin):
                         )
         return result
 admin.site.register(ChangeSuggestion, ChangeSuggestionAdmin)
+
+class BackgroundContentAdmin(admin.ModelAdmin):
+    add_form_template = 'lstory/backgroundcontent/add_form.html'
+    change_form_template = 'lstory/backgroundcontent/add_form.html'
+    meta = BackgroundContent
+    
+    formfield_overrides = {
+        models.TextField: {'widget': AdminPagedownWidget},
+    }
+
+    def has_change_permission(self, request, obj=None):
+        return (request.user in obj.story.authors.all()) if obj else True
+
+    def _extend_view(self, templateresponse):
+        if not hasattr(templateresponse, 'context_data'):
+            return templateresponse
+        form = templateresponse.context_data['adminform'].form
+        story_id = form.initial.get('story') or form.data.get('story')
+        templateresponse.context_data['story_id'] = story_id
+        return templateresponse
+
+
+    def add_view(self, request, *args, **kwargs):
+        return self._extend_view(super(BackgroundContentAdmin, self).add_view(request, *args, **kwargs))
+
+    def change_view(self, request, *args, **kwargs):
+        return self._extend_view(super(BackgroundContentAdmin, self).change_view(request, *args, **kwargs))
+
+
+admin.site.register(BackgroundContent, BackgroundContentAdmin)
