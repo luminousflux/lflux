@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load markup humanize_timesince %}
+{% block bodyargs %}
+class="backgroundcontent"
+{% endblock %}
+
+{% block content %}
+<div id="bar">
+    <div id="nav">
+        <a href="/">{{site.name}}</a> /
+        {% trans "Background Content for" %} <a href="{{story.get_absolute_url}}">{{story.name}}</a> /
+        {{backgroundcontent.name}}
+    </div>
+</div>
+<div id="header">
+    <h1>{{backgroundcontent.name}}</h1>
+</div>
+<div id="meta">
+    <span class="icon">◂</span>
+    <a href="{{story.get_absolute_url}}">{% blocktrans with story.name as storyname %}Back to {{storyname}}{% endblocktrans %}</a>
+    <span class="author">{% blocktrans with backgroundcontent.author.username as username %}Created by {{username}}{% endblocktrans %}</span>
+    <span class="status">{% blocktrans with backgroundcontent.created_at|date as created_at %}on {{created_at}}{% endblocktrans %}</span>
+</div>
+<div id="article">
+    <div class="inner">
+        {{backgroundcontent.body|markdown:'inmoredetail,extra'}}
+    </div>
+</div>
+{% endblock %}

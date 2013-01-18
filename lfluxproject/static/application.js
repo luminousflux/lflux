@@ -126,3 +126,17 @@ function openLinksInNewWindow() {
     });
 }
 $(document).ready(openLinksInNewWindow);
+
+function initSidebarTabs() {
+    $('#sidebar .tabs a').click(function() {
+        var tab = $(this);
+        tab.parents('.tabs li').siblings().removeClass('sel');
+        tab.parents('.tabs li').addClass('sel');
+        var content = $(tab.attr('href'));
+        content.siblings().not('.share').hide();
+        content.show();
+        tab.parents('.tabs').show();
+        return false;
+    });
+}
+$(document).ready(initSidebarTabs);

@@ -231,6 +231,7 @@ class BackgroundContentAdmin(admin.ModelAdmin):
     add_form_template = 'lstory/backgroundcontent/add_form.html'
     change_form_template = 'lstory/backgroundcontent/add_form.html'
     meta = BackgroundContent
+    exclude = ('author',)
     
     formfield_overrides = {
         models.TextField: {'widget': AdminPagedownWidget},
@@ -253,6 +254,11 @@ class BackgroundContentAdmin(admin.ModelAdmin):
 
     def change_view(self, request, *args, **kwargs):
         return self._extend_view(super(BackgroundContentAdmin, self).change_view(request, *args, **kwargs))
+
+    def save_model(self, request, obj, form, change):
+        if not obj.pk:
+            obj.author = request.user
+        super(BackgroundContentAdmin, self).save_model(request, obj, form, change)
 
 
 admin.site.register(BackgroundContent, BackgroundContentAdmin)

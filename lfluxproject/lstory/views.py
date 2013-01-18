@@ -132,3 +132,12 @@ def mark_as_read(request, slug):
         'previous_value': previous_value,
         'current': s,
     })
+
+def backgroundcontent(request, story_slug, slug):
+    story = get_object_or_404(Story, slug=story_slug)
+    bc = story.backgroundcontent_set.get(slug=slug)
+
+    return direct_to_template(request, 'lstory/backgroundcontent.html', {
+        'story': story,
+        'backgroundcontent': bc,
+        })

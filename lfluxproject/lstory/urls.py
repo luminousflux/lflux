@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 from feeds import StoryFeed
 from models import Story
-from views import diff, version, summary, mark_as_read, toggle_tracking
+from views import diff, version, summary, mark_as_read, toggle_tracking, backgroundcontent
 
 urlpatterns = patterns(
     '',
@@ -15,6 +15,7 @@ urlpatterns = patterns(
         'model': Story,
         'template': 'lstory/embed.html',
         }, name='storyembed'),
+    url(r'^(?P<story_slug>[^/]*)/additional/(?P<slug>[^/]*)/$', backgroundcontent, name='backgroundcontent'),
     url(r'^(?P<slug>[^/]*)/$', diff, {
         'model': Story,
         }, name='story'),

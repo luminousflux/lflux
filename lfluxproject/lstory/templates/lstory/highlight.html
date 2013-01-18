@@ -126,13 +126,16 @@
 <div id="sidebar">
     <ul class="tabs">
         <li class="sel {% if tumbleposts and tumbleposts.0.is_pinned %}pinned{%endif%}">
-            <a href>{% trans "Current events" %}</a>
+            <a href="#stream">{% trans "Current events" %}</a>
         </li>
+        {% if current.backgroundcontent_set.count %}<li class="">
+            <a href="#backgroundcontent">{% trans "Background Info" %}</a>
+            </li>{% endif %}
     </ul>
     <div class="share">
-        <span class='st_facebook' displayText='Facebook'></span>
-        <span class='st_twitter' displayText='Tweet'></span>
-        <span class='st_email' displayText='Email'></span>
+        <span class='st_facebook' displayText=''></span>
+        <span class='st_twitter' displayText=''></span>
+        <span class='st_email' displayText=''></span>
     </div>
     <div id="stream" class="tumblelog">
         <div id="entries">
@@ -140,6 +143,13 @@
                 {% include post.template %}
             {% endfor %}
         </div>
+    </div>
+    <div id="backgroundcontent">
+        {% for bcitem in current.backgroundcontent_set.all %}
+        <div class="bgcontent_item">
+            <a href="{{bcitem.get_absolute_url}}">{{bcitem.name}}</a> {% blocktrans with bcitem.created_at|date as created %}from {{created}}{% endblocktrans %}
+        </div>
+        {% endfor %}
     </div>
 </div>
 

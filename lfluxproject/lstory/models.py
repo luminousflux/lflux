@@ -56,12 +56,10 @@ class Story(VersionedContentMixin, models.Model):
             return ('story', [self.slug],) # assume this is the current version, since _version is not set
         s = self.versions.current().slug
         return ('storyversion', [s, self.ltools_versiondate.isoformat()],)
-    
+
     @models.permalink
     def get_embed_url(self):
         return ('storyembed', [self.versions.current().slug],)
-
-
 
 
 class StorySummary(models.Model):
@@ -130,6 +128,14 @@ class BackgroundContent(models.Model):
     body = models.TextField()
     author = models.ForeignKey(User)
     weight = models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return u'%s for %s' % (self.name, self.story.name,)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('backgroundcontent', [], {'story_slug': self.story.slug, 'slug': self.slug},)
+
 
 
 try:

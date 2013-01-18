@@ -275,7 +275,7 @@ body.en #sidebar h2 {
 }
 
 #article a, #stream a, #summary a {
-  color: #579;  
+  color: #579;
 }
 
 .reldate {
@@ -400,10 +400,20 @@ a.with_icon span { text-decoration: underline; padding-left: .3em }
   top: 4em;
   -webkit-box-shadow: rgba(0,0,0,.2) 0px -1px 5px;
 }
+
+#sidebar #backgroundcontent {
+    display: none;
+}
+#sidebar #backgroundcontent .bgcontent_item a {
+    color: inherit;
+}
+#sidebar #backgroundcontent .bgcontent_item {
+    padding: 5px 10px;
+}
 #sidebar.fixed #stream #entries {
   height: 400px;
   overflow: auto;
-}          
+}
 
 #sidebar .share {
     position: absolute;
