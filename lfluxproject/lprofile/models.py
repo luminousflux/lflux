@@ -48,6 +48,9 @@ def demo_mode_set_permission(sender, instance, created, raw, **kwargs):
         Permission.objects.get_by_natural_key(app_label='lstory', model='changesuggestion', codename='add_changesuggestion'),
         Permission.objects.get_by_natural_key(app_label='lstory', model='changesuggestion', codename='change_changesuggestion'),
         Permission.objects.get_by_natural_key(app_label='lstory', model='changesuggestion', codename='delete_changesuggestion'),
+        Permission.objects.get_by_natural_key(app_label='lstory', model='backgroundcontent', codename='add_backgroundcontent'),
+        Permission.objects.get_by_natural_key(app_label='lstory', model='backgroundcontent', codename='change_backgroundcontent'),
+        Permission.objects.get_by_natural_key(app_label='lstory', model='backgroundcontent', codename='delete_backgroundcontent'),
     ]
 
     for p in default_group_perms:
