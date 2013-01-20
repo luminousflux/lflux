@@ -5,6 +5,10 @@
 class="backgroundcontent"
 {% endblock %}
 
+{% block title %}
+    {{story.name}}: {{backgroundcontent.name}}
+{% endblock %}
+
 {% block content %}
 <div id="bar">
     <div id="nav">
