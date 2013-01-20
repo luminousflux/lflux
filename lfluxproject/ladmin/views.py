@@ -15,7 +15,7 @@ def share(request, id, model, key='users', template='ladmin/share/share_object.h
     obj = model.objects.get(pk=id)
     current_shares = getattr(obj, key).all()
 
-    if not request.user.is_superuser or not request.user in current_shares:
+    if not request.user.is_superuser and not request.user in current_shares:
         raise Http404()
 
     share_with = obj.authors.exclude(pk=request.user.pk)
