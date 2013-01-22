@@ -4,8 +4,10 @@
 unset GIT_DIR
 bash ./update_dependencies.sh # pbundle updates are run in here too
 pbundle run ./lfluxproject/manage.py collectstatic --noinput
+find ./lfluxproject/localstatic -type f | while read file; do gzip -c "$file" > "$file.gz"; done
 pbundle run ./lfluxproject/manage.py syncdb
 pbundle run ./lfluxproject/manage.py migrate
 pbundle run ./lfluxproject/manage.py compilemessages
 X=`pbundle run printenv SUPERVISOR_NAME`
 pbundle run sudo supervisorctl restart $X
+
