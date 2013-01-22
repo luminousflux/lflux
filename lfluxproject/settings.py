@@ -174,6 +174,9 @@ SECRET_KEY = ''                         # Make this unique, and don't share it w
 
 DEMO_MODE = False                       # make all users editors per default
 
+TUMBLELOG_POSTS_PER_PAGE = 15
+
+
 try:                                    # import all settings from local_settings. we recommend setting DJANGO_SETTINGS_MODULE environment variable and importing from here instead, so one can f.e. change INSTALLED_APPS
     from local_settings import *
 except ImportError:

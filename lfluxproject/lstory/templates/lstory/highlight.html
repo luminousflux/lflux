@@ -137,11 +137,9 @@
         <span class='st_twitter' displayText=''></span>
         <span class='st_email' displayText=''></span>
     </div>
-    <div id="stream" class="tumblelog">
+    <div id="stream" class="tumblelog" data-refresh-url="{% url 'tumblelog:list' parent__slug=current.slug %}">
         <div id="entries">
-            {% for post in tumbleposts %}
-                {% include post.template %}
-            {% endfor %}
+            {% include 'tumblelog/post_list.inc' with posts=tumbleposts page_obj=tumbleposts paginator=tumbleposts.paginator%}
         </div>
     </div>
     <div id="backgroundcontent">

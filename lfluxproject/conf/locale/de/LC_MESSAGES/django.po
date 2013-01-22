@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-18 21:33+0100\n"
+"POT-Creation-Date: 2013-01-22 02:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -154,7 +154,7 @@ msgid "Question for"
 msgstr "Frage zu"
 
 #: lqa/templates/lqa/question.html:27
-#: lstory/templates/lstory/backgroundcontent.html:21
+#: lstory/templates/lstory/backgroundcontent.html:25
 #, python-format
 msgid "Back to %(storyname)s"
 msgstr "Zurück zu %(storyname)s"
@@ -194,16 +194,16 @@ msgstr "Stimmen"
 msgid "Only works if you're logged in!"
 msgstr "Nur möglich, wenn du eingeloggt bist!"
 
-#: lstory/templates/lstory/backgroundcontent.html:12
+#: lstory/templates/lstory/backgroundcontent.html:16
 msgid "Background Content for"
 msgstr "Hintergrundinfo für "
 
-#: lstory/templates/lstory/backgroundcontent.html:22
+#: lstory/templates/lstory/backgroundcontent.html:26
 #, python-format
 msgid "Created by %(username)s"
 msgstr "Erstellt von %(username)s"
 
-#: lstory/templates/lstory/backgroundcontent.html:23
+#: lstory/templates/lstory/backgroundcontent.html:27
 #, python-format
 msgid "on %(created_at)s"
 msgstr "am %(created_at)s"
@@ -261,20 +261,20 @@ msgstr "Neuigkeiten"
 msgid "Background Info"
 msgstr "Hintergrundinformationen"
 
-#: lstory/templates/lstory/highlight.html:150
+#: lstory/templates/lstory/highlight.html:148
 #, python-format
 msgid "from %(created)s"
 msgstr "von %(created)s"
 
-#: lstory/templates/lstory/highlight.html:158
+#: lstory/templates/lstory/highlight.html:156
 msgid "Q&amp;A"
 msgstr "Fragen &amp; Antworten"
 
-#: lstory/templates/lstory/highlight.html:171
+#: lstory/templates/lstory/highlight.html:169
 msgid "Ask a question"
 msgstr "Frage stellen"
 
-#: lstory/templates/lstory/highlight.html:177
+#: lstory/templates/lstory/highlight.html:175
 msgid "Sign in to post a question!"
 msgstr "Eine Anmeldung ist nötig um Fragen zu stellen!"
 
