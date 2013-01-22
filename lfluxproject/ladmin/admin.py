@@ -19,7 +19,8 @@ class UserShareForm(forms.Form):
 class UserBasedStoryAdmin(StoryUserAdmin):
     def queryset(self, request):
         qs = super(UserBasedStoryAdmin, self).queryset(request)
-        qs = qs.filter(authors=request.user)
+        if not request.user.is_superuser:
+            qs = qs.filter(authors=request.user)
         return qs
     change_form_template = 'ladmin/lstory/story/change_form.html'
 

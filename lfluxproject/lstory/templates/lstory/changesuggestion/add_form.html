@@ -130,7 +130,11 @@
 {% if object_id and request.user in adminform.form.instance.story.authors.all %}
     <div class="submit-row">
         <span id="publish-error"></span>
+        {% if story_changed %}
+        Can't publish this; story has been changed since suggestion. You'll have to add the changes manually!
+        {% else %}
         <button id="publish-btn" onclick="if(confirm('are you sure you want to overwrite the story with the data here?')) {window.location = '{% url 'backend:lstory_changesuggestion_save_to_story' object_id %}'; } return false;">publish in story</button>
+        {% endif %}
     </div>
 {% endif %}
 {% endblock %}
