@@ -19,12 +19,14 @@ def share(request, id, model, key='users', template='ladmin/share/share_object.h
         raise Http404()
 
     share_with = obj.authors.exclude(pk=request.user.pk)
+    done = False
 
     if request.POST:
         form = UserShareForm(request.user, request.POST, initial={'users': share_with})
         if form.is_valid():
             obj.authors = list(form.cleaned_data['users']) + [request.user]
             obj.save()
+        done = True
     else:
         form = UserShareForm(request.user, initial={'users': share_with})
 
@@ -34,6 +36,7 @@ def share(request, id, model, key='users', template='ladmin/share/share_object.h
         'original': obj,
         'app_label': model._meta.app_label,
         'form': form,
+        'done': done,
     }
 
     return TemplateResponse(request, template, values, current_app=get_admin_site_name(RequestContext(request)))

@@ -20,5 +20,6 @@
     {{ form.as_p }}
     {% csrf_token %}
     <p><input type="submit" /></p>
+    {% if done %}<p>Saved, thank you!</p>{% endif %}
 </form>
 {% endblock %}
