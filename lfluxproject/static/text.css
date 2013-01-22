@@ -80,11 +80,13 @@ blockquote.ins, h1.ins, h2.ins, p.ins , ul.ins, li.ins {
     padding: .4em;
 }
 
+.text .imdbutton.manualbutton:after {
+    content: " »";
+}
 .text .imdbutton.manualbutton {
     font-weight: normal;
     padding-top: 1px;
     padding-bottom: 1px;
-    font-size: 1em;
     line-height: 1em;
     color: inherit;
 }
