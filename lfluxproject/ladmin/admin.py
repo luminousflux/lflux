@@ -8,7 +8,7 @@ from django.contrib.flatpages.admin import FlatPage, FlatPageAdmin
 
 
 class UserShareForm(forms.Form):
-    users = forms.ModelMultipleChoiceField(queryset=User.objects.all(),
+    users = forms.ModelMultipleChoiceField(queryset=User.objects.filter(is_staff=True),
                                            label='Share with', required=False)
 
     def __init__(self, current_user, *args, **kwargs):
