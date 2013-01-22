@@ -16,6 +16,10 @@
     .summary_preview, .text_preview, #oldbody, #oldsummary {
         padding-right: 2em;
     }
+
+    ins, del {
+        background-color: yellow;
+    }
 </style>
 {% endblock %}
 {% block content %}
@@ -114,13 +118,19 @@
         $(bodyel).keyup(function(){ refreshBodyPreview();});
         $(summaryel).keyup(function(){ refreshSummaryPreview();});
     });
+
+    $(document.body).delegate('input,textarea','click keydown', function() {
+        $('#publish-btn').attr('disabled','disabled');
+        $('#publish-error').html('save (or refresh) first, then ');
+    });
 </script>
 {% endblock %}
 {% block submit_buttons_bottom %}
-{% if object_id and request.user in adminform.form.instance.story.authors.all %}
-<div class="submit-row">
-    <button onclick="if(confirm('are you sure you want to overwrite the story with the data here?')) {window.location = '{% url 'backend:lstory_changesuggestion_save_to_story' object_id %}'; } return false;">publish in story</button>
-</div>
-{% endif %}
 {{block.super}}
+{% if object_id and request.user in adminform.form.instance.story.authors.all %}
+    <div class="submit-row">
+        <span id="publish-error"></span>
+        <button id="publish-btn" onclick="if(confirm('are you sure you want to overwrite the story with the data here?')) {window.location = '{% url 'backend:lstory_changesuggestion_save_to_story' object_id %}'; } return false;">publish in story</button>
+    </div>
+{% endif %}
 {% endblock %}
