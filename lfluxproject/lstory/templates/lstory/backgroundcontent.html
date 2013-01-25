@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% load markup humanize_timesince %}
+{% load lmarkdown humanize_timesince %}
 {% block bodyargs %}
 class="backgroundcontent"
 {% endblock %}
@@ -28,7 +28,7 @@ class="backgroundcontent"
 </div>
 <div id="article">
     <div class="inner">
-        {{backgroundcontent.body|markdown:'inmoredetail,extra'}}
+        {{backgroundcontent.body|lmarkdown}}
     </div>
 </div>
 {% endblock %}

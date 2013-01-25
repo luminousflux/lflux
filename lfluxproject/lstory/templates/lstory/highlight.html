@@ -15,7 +15,7 @@
     <meta name="description" content="{{current.summary|truncatewords:40}}" />
 {% endblock %}
 {% block content %}
-{% load markup %}
+{% load lmarkdown %}
 {% load threadedcomments_tags %}
 {% load voting_tags %}
 {% load lqa %}
@@ -32,9 +32,9 @@
 </div>
 <div id="summary">
     {% if field_diff %}
-        {{field_diff.summary.0|markdown:"extra,insparagraph"}}
+        {{field_diff.summary.0|lmarkdown}}
     {% else %}
-        {{current.summary|markdown:"extra,insparagraph"}}
+        {{current.summary|lmarkdown}}
     {% endif %}
 </div>
 {% block beforearticle %}
@@ -83,15 +83,15 @@
       {% for author in current.authors.all %}
       <div class="name">{% if author.get_profile.website %}<a href="{{author.get_profile.website}}">{% endif %}{% if author.get_full_name %}{{author.get_full_name}}{% else %}{{author.username}}{% endif %}{% if author.get_profile.website %}</a>{% endif %}</div>
       <div class="about">
-          {% if author.get_profile.about_me %}{{author.get_profile.about_me|markdown}}{% endif %}
+          {% if author.get_profile.about_me %}{{author.get_profile.about_me|lmarkdown}}{% endif %}
       </div>
       {% endfor %}
     </div>
 
     {% if field_diff %}
-    {{ field_diff.body.0|markdown:"extra,insparagraph,inmoredetail" }}
+    {{ field_diff.body.0|lmarkdown}}
     {% else %}
-    {{current.body|markdown:"extra,insparagraph,inmoredetail"}}
+    {{current.body|lmarkdown}}
     {% endif %}
 
     <div id="stakeholders">
@@ -104,12 +104,12 @@
             {% if field_diff %}
                 {% if stakeholder.image.0 %}<img src="{{stakeholder.image.0.url}}" width="60" />{% endif %}
                 <strong style="color: #579;"><span class="{% if stakeholder.name.1 %}ins{%endif%} page"> {{stakeholder.name.0}}</span></strong>
-                {{stakeholder.description.0|markdown:'inmoredetail,insparagraph,extra'}}
+                {{stakeholder.description.0|lmarkdown}}
                 <span class="linkbar">{% if stakeholder.website.0 %}<a href="{{stakeholder.website.0}}">{% trans 'website' %}</a>{% endif %}</span>
             {% else %}
                 {% if stakeholder.image %}<img src="{{stakeholder.image.url}}" width="60" />{% endif %}
                 <strong style="color: #579;"><span class="page"> {{stakeholder.name}}</span></strong>
-                {{stakeholder.description|markdown:'inmoredetail,insparagraph,extra'}}
+                {{stakeholder.description|lmarkdown}}
                 <span class="linkbar">{% if stakeholder.website %}<a href="{{stakeholder.website}}">{% trans 'website' %}</a>{% endif %}</span>
             {% endif %}
             </div>

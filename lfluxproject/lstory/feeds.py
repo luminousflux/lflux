@@ -1,7 +1,6 @@
 from ltools.feeds import RevisionFeed
 from models import Story
-import markdown
-
+from ltools.templatetags.lmarkdown import lmarkdown
 
 class StoryFeed(RevisionFeed):
     def __init__(self, stype):
@@ -27,11 +26,10 @@ class StoryFeed(RevisionFeed):
 
     def item_description(self, item):
         prev, cur = item
-        md = lambda x: markdown.markdown(x, extensions=['inmoredetail','insparagraphlite','extra'])
         if prev:
             diffs = cur.diff_to_older(prev)
-            return md(diffs['summary'][0]) + u'<hr />' + md(diffs['body'][0])
-        return markdown.markdown(cur.body)       # TODO highlighting
+            return lmarkdown(diffs['summary'][0]) + u'<hr />' + lmarkdown(diffs['body'][0])
+        return lmarkdown(cur.body)       # TODO highlighting
 
     def item_pubdate(self, item):
         prev, cur = item

@@ -1,7 +1,6 @@
 from datetime import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from functools import update_wrapper
-import markdown
 
 from django.http import HttpResponse, HttpResponseRedirect
 
@@ -20,7 +19,7 @@ from django import forms
 from django.template.loader import render_to_string
 from django.contrib.admin.util import unquote
 
-lfluxmarkdown = lambda x: markdown.markdown(x, extensions=['inmoredetail','insparagraphlite','extra'])
+from ltools.templatetags.lmarkdown import lmarkdown
 
 class StakeholderAdmin(reversion.VersionAdmin):
     pass
@@ -36,14 +35,14 @@ class StoryAdminForm(forms.ModelForm):
     def clean_body(self):
         body = self.cleaned_data.get('body','')
         try:
-            lfluxmarkdown(body)
+            lmarkdown(body)
         except Exception, e:
             raise forms.ValidationError("syntax error in body element %s " % repr(e))
         return body
     def clean_summary(self):
         summary = self.cleaned_data.get('summary','')
         try:
-            lfluxmarkdown(summary)
+            lmarkdown(summary)
         except Exception, e:
             raise forms.ValidationError("syntax error in summary element %s" % repr(e))
         return summary
