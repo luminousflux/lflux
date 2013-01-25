@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-22 02:48+0100\n"
+"POT-Creation-Date: 2013-01-25 20:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -426,6 +426,11 @@ msgstr[1] "vor %d Minuten"
 #: ltools/templatetags/humanize_timesince.py:34
 msgid "just a few seconds ago"
 msgstr "jetzt gerade"
+
+#: ltools/templatetags/lmarkdown.py:8
+msgid ""
+"Sorry, something is wrong with this text version. We have been notified."
+msgstr "Irgendetwas ist an dieser Version des Texts komisch und wir können sie nicht darstellen. Sorry!"
 
 #: templates/404.html:2
 msgid "things not found"
