@@ -33,7 +33,7 @@
     <body {% block bodyargs %}{% endblock %}>
         <div id="page">
             <div id="brand">
-                <a href="/">{% ifstatic 'img/logo.png' %}<img src="{{static}}" width="100" alt="{{site.name}}" />{% else %}{{site.name}}{% endifstatic %}</a>
+                <a href="/">{% block brand %}{% ifstatic 'img/logo.png' %}<img src="{{static}}" width="100" alt="{{site.name}}" />{% else %}{{site.name}}{% endifstatic %}{% endblock %}</a>
             </div>
             {% block overcontent %}
             {% endblock %}
