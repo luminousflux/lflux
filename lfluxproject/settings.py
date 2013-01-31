@@ -86,6 +86,7 @@ INSTALLED_APPS = (
     'voting',
     'threadedcomments',
     'google_analytics',
+    'overextends',
 )
 
 # A sample logging configuration. The only tangible logging

@@ -18,4 +18,5 @@ django-voting
 -e git+git://github.com/toastdriven/django-tastypie.git#egg=django-tastypie
 tldextract
 # installed but not required. only injects code if configured in settings:
-django-googleanalytics 
+django-googleanalytics
+django-overextends

@@ -6,7 +6,7 @@ body {
   padding: 0 0 50px 0;
   margin: 0;
   border-top: 6px solid #b45;
-  background: #eee url(/static/img/bgpatt.png) repeat-x; /* -webkit-gradient(linear, left top, left 6%, from(rgba(50,50,50,0.3)), to(rgba(80,80,80,0)));*/
+  background: #eee;
 }
 
 

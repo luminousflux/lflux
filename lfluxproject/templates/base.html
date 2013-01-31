@@ -1,4 +1,4 @@
-{% load static from staticfiles %}{% load flatpages %}{% load i18n googleanalytics_tags %}{% load url from future %}<!DOCTYPE html>
+{% load static from staticfiles %}{% load flatpages %}{% load i18n googleanalytics_tags %}{% load url from future %}{% load ifstatic %}<!DOCTYPE html>
 <html>
     <head>
         <title>{% block title %}{% endblock %} {{site.name}}</title>
@@ -33,7 +33,7 @@
     <body {% block bodyargs %}{% endblock %}>
         <div id="page">
             <div id="brand">
-                <a href="/"><img src="{% static 'img/onon.png' %}" width="100" alt="{{site.name}}" /> BETA</a>
+                <a href="/">{% ifstatic 'img/logo.png' %}<img src="{{static}}" width="100" alt="{{site.name}}" />{% else %}{{site.name}}{% endifstatic %}</a>
             </div>
             {% block overcontent %}
             {% endblock %}
