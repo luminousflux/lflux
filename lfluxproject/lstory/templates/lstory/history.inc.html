@@ -2,15 +2,15 @@
 
 <div class="historyform">
     {% blocktrans with current.versions.this_date|humanize_timesince as timesince %}Last updated {{timesince}} ago{% endblocktrans %}
-    <a class="switch highlight {% if previous %}{% ifequal previous.versions.this_date current.versions.this_date %}{% else %}ins{% endifequal %}{% endif %}">{% if not previous %}{% trans "Highlight Changes" %}{% else %}
+    <a id="timelinehighlightbtn" class="switch highlight {% if previous %}{% ifequal previous.versions.this_date current.versions.this_date %}{% else %}ins{% endifequal %}{% endif %}">{% if not previous %}{% trans "Highlight Changes" %}{% else %}
         {% ifequal previous.versions.this_date current.versions.this_date %}
         {% blocktrans %}No changes to highlight{% endblocktrans %}{% else %}{% blocktrans with previous.versions.this_date|timesince as timesince %}Changes since {{timesince}} ago{% endblocktrans %}
         {% endifequal %}{% endif %}</a> 
-    <a class="switch version">▸▸ {% if previous %}{% trans "Access History" %}{% else %}{% blocktrans with current.versions.this_date|date as date %}Displaying content from {{date}}{% endblocktrans %}{% endif %}
+    <a id="timelineversionbtn" class="switch version">▸▸ {% if previous %}{% trans "Access History" %}{% else %}{% blocktrans with current.versions.this_date|date as date %}Displaying content from {{date}}{% endblocktrans %}{% endif %}
     
     
     </a>
-    {% if previous %}<div style="display: inline-block; "><a href="" onclick="$('#versionlink').toggle(); return false;" class="with_icon" title="{% trans "Perpetual link to this version" %}">∞<span>{% trans "Link this" %}</span></a><br />
+    {% if previous %}<div id="versionlinkbtn" style="display: inline-block; "><a href="" onclick="$('#versionlink').toggle(); return false;" class="with_icon" title="{% trans "Perpetual link to this version" %}">∞<span>{% trans "Link this" %}</span></a><br />
     </div>{% endif %}
 </div>
 

@@ -32,10 +32,14 @@ function initMarkAsRead() {
     var eh = function(event) {
         event.preventDefault();
         event.stopPropagation();
-        var element = $(this).parent('.reload-here');
-        $(this).parent('.reload-here').addClass('loading');
-        $(this).parent('.reload-here').load($(this).attr('href'), function() { mark_as_read_if_needed(); element.removeClass('loading'); } );
+        var element = $(this).parents('.reload-here');
+        console.log(this);
+        console.log($(this).parents('.reload-here'));
+        console.log(element);
+        $(this).parents('.reload-here').addClass('loading');
+        $(this).parents('.reload-here').load($(this).attr('href'), function() { mark_as_read_if_needed(); element.removeClass('loading'); } );
     };
+    $('#mark_as_read .tracking-status').on('click', 'a', eh);
     $('#mark_as_read .tracking-status').on('click', 'a', eh);
 
     $('#mark_as_read').on('click', 'a', eh);
@@ -140,3 +144,12 @@ function initSidebarTabs() {
     });
 }
 $(document).ready(initSidebarTabs);
+
+function initFeaturetour() {
+    $('#featuretourbtn').click(function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        $('#featuretour').joyride({'tipLocation': 'top', 'tipContainer': document.body, 'nubPosition': 'bottom',});
+    });
+}
+$(document).ready(initFeaturetour);

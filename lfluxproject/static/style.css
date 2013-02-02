@@ -799,18 +799,39 @@ body.historyversion #history div.version {
 
 
 #mark_as_read {
-    background-color: grey;
+    clear: left;
+    background-color: rgb(255,255,220);
     border-radius: 8px;
     padding: 10px;
     margin-left: 20px;
     margin-right: 25px;
     margin-bottom: 1em;
-    color: white;
+    color: grey;
     opacity: 1;
     -webkit-transition:opacity 700ms ease-in-out;
     -moz-transition:opacity 700ms ease-in-out;
     transition:opacity 700ms ease-in-out;
 }
+
+#mark_as_read .column-left {
+    margin-top: 1em;
+    width: 50%;
+    font-size: .9em;
+    float: left;
+    margin-right: 5%;
+}
+
+#mark_as_read .column-right {
+    margin-top: 1em;
+    width: 40%;
+    font-size: .9em;
+    float: left;
+}
+
+#mark_as_read .clear {
+    height: 1px;
+}
+
 #mark_as_read a {
     color: inherit;
 }
@@ -1024,4 +1045,8 @@ body.index .story .author {
     font-size: .8em;
     padding: 0 5px;
     color: inherit;
+}
+
+.joyride-content-wrapper {
+    padding-right: 20px;
 }

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-25 20:38+0100\n"
+"POT-Creation-Date: 2013-02-02 02:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -220,6 +220,58 @@ msgstr "Hauptartikel"
 msgid "Firehose"
 msgstr "Zusätzliche Inhalte"
 
+#: lstory/templates/lstory/featuretour.inc:2
+#: lstory/templates/lstory/featuretour.inc:5
+#: lstory/templates/lstory/featuretour.inc:9
+#: lstory/templates/lstory/featuretour.inc:13
+#: lstory/templates/lstory/featuretour.inc:17
+msgid "Next"
+msgstr "Weiter"
+
+#: lstory/templates/lstory/featuretour.inc:3
+msgid ""
+"The main text always represents our current understanding of the situation. "
+"When something happens, we try to update it daily."
+msgstr ""
+"Der Haupttext reflektiert unser aktuelles Verständnis der Situation."
+"Wir versuchen, den Text tagesaktuell zu halten."
+
+#: lstory/templates/lstory/featuretour.inc:6
+msgid ""
+"To make this process transparent, you can browse through all previous "
+"versions here."
+msgstr ""
+"Um diesen Prozess transparenz zu machen, kannst du alle früheren Versionen ansehen"
+
+#: lstory/templates/lstory/featuretour.inc:10
+msgid ""
+"If you want to link to the current version, or embed this story in your "
+"website, look here."
+msgstr ""
+"Hier findest du den Link zur aktuellen Version und eine Code, um diesen Artikel in anderen Websites einzubetten"
+
+#: lstory/templates/lstory/featuretour.inc:14
+msgid "Here you can see what changed between a previous version and now."
+msgstr "Hier kannst du sehen, was sich seit einer anderen Version geändert hat."
+
+#: lstory/templates/lstory/featuretour.inc:17
+#: lstory/templates/lstory/featuretour.inc:22
+msgid "Close"
+msgstr "Schließen"
+
+#: lstory/templates/lstory/featuretour.inc:18
+msgid ""
+"The 'Current Events' section is a collection of links relevant to the topic"
+msgstr ""
+"Die Sektion 'Neuigkeiten' beinhaltet interessante Links, Zitate und andere Inhalte zu dem Thema."
+
+#: lstory/templates/lstory/featuretour.inc:23
+msgid ""
+"Sometimes we interview people or publish background research. You can find "
+"these here."
+msgstr ""
+"Manchmal führen wir interviews oder veröffentlichen Hintergrundinformationen. Diese findest du hier."
+
 #: lstory/templates/lstory/header.html:8
 msgid "Where"
 msgstr "Wo"
@@ -321,35 +373,31 @@ msgstr "Aktuelle Themen"
 msgid "by"
 msgstr "von"
 
-#: lstory/templates/lstory/mark_as_read_popup.inc:2
-msgid "Looks like you're done reading!"
-msgstr "Sieht so aus als ob du fertig gelesen hast!"
-
 #: lstory/templates/lstory/mark_as_read_popup.inc:4
+msgid "Next time you come here, we will highlight what changed since now."
+msgstr "Nächstes Mal werden wir hervorheben, was sich seit jetzt getan hat."
+
+#: lstory/templates/lstory/mark_as_read_popup.inc:7
 msgid "Marking as read"
 msgstr "Speichere Lesestatus"
 
-#: lstory/templates/lstory/mark_as_read_popup.inc:5
-msgid "I don't want this feature, Disable tracking."
-msgstr "Ich will dieses Feature nicht, deaktiviere Tracking."
+#: lstory/templates/lstory/mark_as_read_popup.inc:10
+msgid "Disable this feature."
+msgstr "Feature deaktivieren."
 
-#: lstory/templates/lstory/mark_as_read_popup.inc:7
-msgid ""
-"You told us not to highlight what changed in stories since you last read "
-"them."
-msgstr ""
-"Du hast uns gesagt, dass wir nicht speichern sollst wann du welche Stories "
-"liest."
+#: lstory/templates/lstory/mark_as_read_popup.inc:15
+msgid "Tracking disabled."
+msgstr "Tracking inaktiv."
 
-#: lstory/templates/lstory/mark_as_read_popup.inc:8
-msgid "Strike that, I'd like to know what changed. Enable tracking."
-msgstr "Nein, ich würde gerne wissen, was sich ändert. Tracking aktivieren."
+#: lstory/templates/lstory/mark_as_read_popup.inc:18
+msgid "Re-enable tracking."
+msgstr "Tracking reaktivieren."
 
 #: lstory/templates/lstory/marked_as_read.inc:2
 msgid "Marked as read."
 msgstr "Als gelesen Markiert."
 
-#: lstory/templates/lstory/marked_as_read.inc:2
+#: lstory/templates/lstory/marked_as_read.inc:3
 msgid "Undo"
 msgstr "Rückgängig"
 
@@ -430,7 +478,9 @@ msgstr "jetzt gerade"
 #: ltools/templatetags/lmarkdown.py:8
 msgid ""
 "Sorry, something is wrong with this text version. We have been notified."
-msgstr "Irgendetwas ist an dieser Version des Texts komisch und wir können sie nicht darstellen. Sorry!"
+msgstr ""
+"Irgendetwas ist an dieser Version des Texts komisch und wir können sie nicht "
+"darstellen. Sorry!"
 
 #: templates/404.html:2
 msgid "things not found"
@@ -452,27 +502,27 @@ msgid "something really bad or really weird happened. we'll look into it!"
 msgstr ""
 "Etwas ganz schlimmes oder ganz komisches ist passiert. Wir schauen's uns an!"
 
-#: templates/base.html:54
+#: templates/base.html:57
 msgid "demo mode"
 msgstr "Demomodus"
 
-#: templates/base.html:58
+#: templates/base.html:61
 msgid "Profile"
 msgstr "Profil"
 
-#: templates/base.html:59
+#: templates/base.html:62
 msgid "Sign Out"
 msgstr "Abmelden"
 
-#: templates/base.html:61
+#: templates/base.html:64
 msgid "Editor"
 msgstr "Redakteurbereich"
 
-#: templates/base.html:64
+#: templates/base.html:67
 msgid "Sign In"
 msgstr "Anmelden"
 
-#: templates/base.html:65
+#: templates/base.html:68
 msgid "Sign Up"
 msgstr "Registrieren"
 
@@ -571,6 +621,22 @@ msgstr "Passwort vergessen?"
 #: templates/userena/signup_form.html:18
 msgid "Signup"
 msgstr "Registrieren"
+
+#~ msgid "Looks like you're done reading!"
+#~ msgstr "Sieht so aus als ob du fertig gelesen hast!"
+
+#~ msgid "I don't want this feature, Disable tracking."
+#~ msgstr "Ich will dieses Feature nicht, deaktiviere Tracking."
+
+#~ msgid ""
+#~ "You told us not to highlight what changed in stories since you last read "
+#~ "them."
+#~ msgstr ""
+#~ "Du hast uns gesagt, dass wir nicht speichern sollst wann du welche "
+#~ "Stories liest."
+
+#~ msgid "Strike that, I'd like to know what changed. Enable tracking."
+#~ msgstr "Nein, ich würde gerne wissen, was sich ändert. Tracking aktivieren."
 
 #~ msgid "open"
 #~ msgstr "offen"
