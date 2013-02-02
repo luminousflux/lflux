@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-02 02:17+0100\n"
+"POT-Creation-Date: 2013-02-02 03:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -233,26 +233,28 @@ msgid ""
 "The main text always represents our current understanding of the situation. "
 "When something happens, we try to update it daily."
 msgstr ""
-"Der Haupttext reflektiert unser aktuelles Verständnis der Situation."
-"Wir versuchen, den Text tagesaktuell zu halten."
+"Der Haupttext reflektiert unser aktuelles Verständnis der Situation.Wir "
+"versuchen, den Text tagesaktuell zu halten."
 
 #: lstory/templates/lstory/featuretour.inc:6
 msgid ""
 "To make this process transparent, you can browse through all previous "
 "versions here."
 msgstr ""
-"Um diesen Prozess transparenz zu machen, kannst du alle früheren Versionen ansehen"
+"Dieser Prozess ist transparent: du kannst auch alle früheren Versionen ansehen."
 
 #: lstory/templates/lstory/featuretour.inc:10
 msgid ""
 "If you want to link to the current version, or embed this story in your "
 "website, look here."
 msgstr ""
-"Hier findest du den Link zur aktuellen Version und eine Code, um diesen Artikel in anderen Websites einzubetten"
+"Hier findest du den Link zur aktuellen Version und eine Code, um diesen "
+"Artikel in anderen Websites einzubetten"
 
 #: lstory/templates/lstory/featuretour.inc:14
 msgid "Here you can see what changed between a previous version and now."
-msgstr "Hier kannst du sehen, was sich seit einer anderen Version geändert hat."
+msgstr ""
+"Hier kannst du sehen, was sich seit einer anderen Version geändert hat."
 
 #: lstory/templates/lstory/featuretour.inc:17
 #: lstory/templates/lstory/featuretour.inc:22
@@ -263,14 +265,16 @@ msgstr "Schließen"
 msgid ""
 "The 'Current Events' section is a collection of links relevant to the topic"
 msgstr ""
-"Die Sektion 'Neuigkeiten' beinhaltet interessante Links, Zitate und andere Inhalte zu dem Thema."
+"Die Sektion 'Neuigkeiten' beinhaltet interessante Links, Zitate und andere "
+"Inhalte zu dem Thema."
 
 #: lstory/templates/lstory/featuretour.inc:23
 msgid ""
 "Sometimes we interview people or publish background research. You can find "
 "these here."
 msgstr ""
-"Manchmal führen wir interviews oder veröffentlichen Hintergrundinformationen. Diese findest du hier."
+"Manchmal führen wir interviews oder veröffentlichen "
+"Hintergrundinformationen. Diese findest du hier."
 
 #: lstory/templates/lstory/header.html:8
 msgid "Where"
@@ -392,6 +396,14 @@ msgstr "Tracking inaktiv."
 #: lstory/templates/lstory/mark_as_read_popup.inc:18
 msgid "Re-enable tracking."
 msgstr "Tracking reaktivieren."
+
+#: lstory/templates/lstory/mark_as_read_popup.inc:23
+msgid "Learn more"
+msgstr "Mehr Informationen"
+
+#: lstory/templates/lstory/mark_as_read_popup.inc:24
+msgid "Sign up for updates"
+msgstr "Haltet mich auf dem Laufenden"
 
 #: lstory/templates/lstory/marked_as_read.inc:2
 msgid "Marked as read."
