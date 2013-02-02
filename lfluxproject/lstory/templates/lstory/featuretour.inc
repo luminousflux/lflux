@@ -19,7 +19,7 @@
 </li>
 
 {% if current.backgroundcontent_set.all %}
-<li data-id="backgroundcontent" data-button="{% trans "Close" %}">
+<li data-id="backgroundcontentbtn" data-button="{% trans "Close" %}">
     <p>{% trans "Sometimes we interview people or publish background research. You can find these here." %}
 </li>
 {% endif %}
