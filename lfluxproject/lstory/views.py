@@ -18,7 +18,10 @@ def _parse_iso_datetime(s):
         try:
             return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S.%f")
         except ValueError:
-            return datetime.strptime(s, "%Y-%m-%d")
+            try:
+                return datetime.strptime(s, "%Y-%m-%d")
+            except ValueError:
+                return None
 
 
 def index(request, template='lstory/index.html'):
