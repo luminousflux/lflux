@@ -14,17 +14,14 @@ class IfStaticNode(template.Node):
         return "<IfStaticNode>"
 
     def render(self, context):
-        context.push()
         val1 = self.var1.resolve(context, True)
-        context['static'] = static(val1)
-        print context['static']
-
-        print val1
         if staticfiles_storage.exists(val1):
+            context.push()
+            context['static'] = static(val1)
             x = self.nodelist_true.render(context)
+            context.pop()
         else:
             x = self.nodelist_false.render(context)
-        context.pop()
         return x
 
 def do_ifstatic(parser, token, negate):
