@@ -54,6 +54,7 @@ def diff(request, slug, model, template='lstory/highlight.html'):
 
     fromdate = request.GET.get('since', None) or cookie_lastread or unicode(datetime.now().isoformat()) 
     fromdate = _parse_iso_datetime(fromdate) if fromdate else None
+    fromdate = fromdate or datetime.now()
 
     todate = _parse_iso_datetime(request.GET['until']) if request.GET.get('until') else datetime.now()
 
