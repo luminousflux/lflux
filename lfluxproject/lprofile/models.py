@@ -10,17 +10,20 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import get_apps
 from django.contrib.auth.management import create_permissions
+from django.utils.translation import ugettext as _
+
+
 from tumblelog.models import ApiKeyProfileMixin
 
 
 class Profile(UserenaBaseProfile, ApiKeyProfileMixin):
     user = models.OneToOneField(User,
                                 unique=True,
-                                verbose_name=('user'),
+                                verbose_name=_('user'),
                                 related_name='my_profile')
 
-    about_me = models.TextField(blank=True, null=True)
-    website = models.URLField(blank=True, null=True)
+    about_me = models.TextField(_('about me'), blank=True, null=True)
+    website = models.URLField(_('website'), blank=True, null=True)
 
 
 @receiver(post_save, sender=User)

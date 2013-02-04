@@ -1,10 +1,12 @@
 from django.db import models
 from django.contrib.comments.models import Comment
 from django.contrib.auth.models import User
-from lstory.models import Story
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_noop
+
 import reversion
+
+from lstory.models import Story
 
 
 class Question(models.Model):
@@ -26,5 +28,4 @@ class Question(models.Model):
     @property
     def story_version(self):
         return self.story.versions.for_date(self.created_at)
-
 reversion.register(Question)

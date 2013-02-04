@@ -1,9 +1,11 @@
 import overdiff
 import collections
+
 from django.db import models
-import django.db.models.options as options
+from django.db.models import options
+from django.utils.translation import ugettext as _
+
 from ltools.markdowntools import pars_to_blocks
-#from ltools.managers import VersionManagerAccessor
 
 options.DEFAULT_NAMES = options.DEFAULT_NAMES + ('versioned_attributes',)
 

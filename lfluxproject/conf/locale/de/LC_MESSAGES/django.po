@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-02 03:17+0100\n"
+"POT-Creation-Date: 2013-02-04 23:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,6 +74,7 @@ msgid "Add Author"
 msgstr "Autoren hinzufügen"
 
 #: ladmin/templates/ladmin/lstory/story/change_form.html:42
+#: lstory/models.py:142 lstory/models.py:143
 msgid "Background Content"
 msgstr "Hintergrundinformationen"
 
@@ -93,43 +94,61 @@ msgstr "Speichern"
 msgid "Home"
 msgstr "Home"
 
-#: lqa/models.py:11
+#: limage/models.py:10 lstory/models.py:109
+msgid "image"
+msgstr "Bild"
+
+#: lprofile/models.py:22
+msgid "user"
+msgstr "Benutzer"
+
+#: lprofile/models.py:25
+msgid "about me"
+msgstr "Über Mich"
+
+#: lprofile/models.py:26 lstory/models.py:111
+#: lstory/templates/lstory/highlight.html:108
+#: lstory/templates/lstory/highlight.html:113
+msgid "website"
+msgstr "Website"
+
+#: lqa/models.py:13
 msgid "new"
 msgstr "neu"
 
-#: lqa/models.py:11
+#: lqa/models.py:13
 msgid "researching"
 msgstr "in Bearbeitung"
 
-#: lqa/models.py:11
+#: lqa/models.py:13
 msgid "answered"
 msgstr "beantwortet"
 
-#: lqa/models.py:11
+#: lqa/models.py:13
 msgid "answered in article"
 msgstr "in Artikel beantwortet"
 
-#: lqa/models.py:13
+#: lqa/models.py:15
 msgid "Title"
 msgstr "Titel"
 
-#: lqa/models.py:14
+#: lqa/models.py:16
 msgid "Comment"
 msgstr "Kommentar"
 
-#: lqa/models.py:15
+#: lqa/models.py:17
 msgid "User"
 msgstr "Benutzer"
 
-#: lqa/models.py:16
+#: lqa/models.py:18 lstory/models.py:46
 msgid "Story"
 msgstr "Artikel"
 
-#: lqa/models.py:18
+#: lqa/models.py:20
 msgid "Created at"
 msgstr "Erstellt am"
 
-#: lqa/models.py:20
+#: lqa/models.py:22
 msgid "State"
 msgstr "Status"
 
@@ -194,6 +213,127 @@ msgstr "Stimmen"
 msgid "Only works if you're logged in!"
 msgstr "Nur möglich, wenn du eingeloggt bist!"
 
+#: lstory/models.py:16 lstory/models.py:110 lstory/models.py:133
+msgid "name"
+msgstr "Name"
+
+#: lstory/models.py:16
+msgid "this should not change during the story's lifetime"
+msgstr "soll sich nie ändern"
+
+#: lstory/models.py:17
+msgid "title"
+msgstr "Titel"
+
+#: lstory/models.py:17
+msgid "this reflects our current understanding of the topic"
+msgstr ""
+"reflektiert immer unser aktuelles Verständnis des Themas, darf sich also "
+"ändern"
+
+#: lstory/models.py:18 lstory/models.py:134
+msgid "slug"
+msgstr "URL-Kürzel"
+
+#: lstory/models.py:18
+msgid "based on story name"
+msgstr "basiert auf dem Namen"
+
+#: lstory/models.py:20
+msgid "last update"
+msgstr "Letztes Update"
+
+#: lstory/models.py:21 lstory/models.py:97 lstory/models.py:132
+msgid "created at"
+msgstr "Erstellt am"
+
+#: lstory/models.py:22
+msgid "published at"
+msgstr "Veröffentlicht am"
+
+#: lstory/models.py:25 lstory/models.py:71
+msgid "start of timeframe"
+msgstr "Start des Berichtzeitraums"
+
+#: lstory/models.py:26 lstory/models.py:72
+msgid "end of timeframe"
+msgstr "Ende des Berichtzeitraums"
+
+#: lstory/models.py:28
+msgid "cover image"
+msgstr "Titelbild"
+
+#: lstory/models.py:30
+msgid "region"
+msgstr "Region"
+
+#: lstory/models.py:30
+msgid "country code, if applicable (shows map in full view)"
+msgstr "2-stelliger Ländercode, wenn möglich"
+
+#: lstory/models.py:32 lstory/models.py:92
+msgid "summary"
+msgstr "Zusammenfassung"
+
+#: lstory/models.py:32
+msgid "markdown-formatted summary text consistiong of 2 or 3 list items only!"
+msgstr ""
+"Markdown-formatierte Zusammenfassung, die nur aus 2 oder 3 Listeneinträgen "
+"besteht!"
+
+#: lstory/models.py:33 lstory/models.py:73 lstory/models.py:93
+#: lstory/models.py:135
+msgid "body"
+msgstr "Text"
+
+#: lstory/models.py:33
+msgid "markdown-formatted story text"
+msgstr "Markdown-formatierter Text zu dem Thema"
+
+#: lstory/models.py:47
+msgid "Stories"
+msgstr "Themen"
+
+#: lstory/models.py:77
+msgid "Story Summary"
+msgstr "Zusammenfassung von Änderungen"
+
+#: lstory/models.py:78
+msgid "Story Summaries"
+msgstr "Zusammenfassungen von Änderungen"
+
+#: lstory/models.py:96
+msgid "for version"
+msgstr "für die Version"
+
+#: lstory/models.py:102
+msgid "Change Suggestion"
+msgstr "Änderungsvorschlag"
+
+#: lstory/models.py:103
+msgid "Change Suggestions"
+msgstr "Änderungsvorschläge"
+
+#: lstory/models.py:112
+msgid "other contacts"
+msgstr "Andere Kontakte"
+
+#: lstory/models.py:113
+msgid "description"
+msgstr "Beschreibung"
+
+#: lstory/models.py:114 lstory/models.py:136
+msgid "weight"
+msgstr "Gewicht"
+
+#: lstory/models.py:122
+msgid "Stakeholder"
+msgstr "Beteiligte Person"
+
+#: lstory/models.py:123 lstory/templates/lstory/highlight.html:101
+msgid "Stakeholders"
+msgstr "Beteiligte"
+
 #: lstory/templates/lstory/backgroundcontent.html:16
 msgid "Background Content for"
 msgstr "Hintergrundinfo für "
@@ -241,7 +381,8 @@ msgid ""
 "To make this process transparent, you can browse through all previous "
 "versions here."
 msgstr ""
-"Dieser Prozess ist transparent: du kannst auch alle früheren Versionen ansehen."
+"Dieser Prozess ist transparent: du kannst auch alle früheren Versionen "
+"ansehen."
 
 #: lstory/templates/lstory/featuretour.inc:10
 msgid ""
@@ -299,15 +440,6 @@ msgstr "Link zu dieser Version"
 #: lstory/templates/lstory/highlight.html:54
 msgid "embed this article"
 msgstr "Einbetten"
-
-#: lstory/templates/lstory/highlight.html:101
-msgid "Stakeholders"
-msgstr "Beteiligte"
-
-#: lstory/templates/lstory/highlight.html:108
-#: lstory/templates/lstory/highlight.html:113
-msgid "website"
-msgstr "Website"
 
 #: lstory/templates/lstory/highlight.html:129
 msgid "Current events"
@@ -658,9 +790,6 @@ msgstr "Registrieren"
 
 #~ msgid "Name"
 #~ msgstr "Name"
-
-#~ msgid "About me"
-#~ msgstr "Über Mich"
 
 #~ msgid "Cite this version"
 #~ msgstr "Diese Version zitieren"
