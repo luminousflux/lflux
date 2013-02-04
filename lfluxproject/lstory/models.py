@@ -70,7 +70,7 @@ class StorySummary(models.Model):
     story = models.ForeignKey(Story)
     timeframe_start = models.DateTimeField(_('start of timeframe'))
     timeframe_end = models.DateTimeField(_('end of timeframe'))
-    body = models.TextField(_('body'), help_text='markdown-formatted summary text')
+    body = models.TextField(_('body'), help_text=_('markdown-formatted summary text consistiong of 2 or 3 list items only!'))
     author = models.ForeignKey(User)
 
     class Meta:

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-04 23:49+0100\n"
+"POT-Creation-Date: 2013-02-04 23:51+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -275,7 +275,7 @@ msgstr "2-stelliger Ländercode, wenn möglich"
 msgid "summary"
 msgstr "Zusammenfassung"
 
-#: lstory/models.py:32
+#: lstory/models.py:32 lstory/models.py:73
 msgid "markdown-formatted summary text consistiong of 2 or 3 list items only!"
 msgstr ""
 "Markdown-formatierte Zusammenfassung, die nur aus 2 oder 3 Listeneinträgen "
