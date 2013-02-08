@@ -89,7 +89,7 @@ lStory_pagedown = {
                     var div = document.createElement('div');
                     $(div).addClass('text');
                     $(document).append(div);
-                    $(div).load('/api/preview/', {'text': text}, function() {initInMoreDetail();});
+                    $(div).load('/api/preview/', {'text': text}, function() {initInMoreDetail(); initLinkPopup();});
                     $(div).dialog({modal: true, width: 609, beforeClose: function() { $(div).remove();div=null; }});
                     $(div).attr('style', 'height: 400px; overflow: scroll; background-color: white;');
                 });
