@@ -150,23 +150,3 @@ function initFeaturetour() {
     });
 }
 $(document).ready(initFeaturetour);
-
-
-function initLinkPopup() {
-    $('a[data-popup-iframe]').click(function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        var width = $(this).data('popup-width') || 800;
-        var div = document.createElement('div');
-        var iframe = document.createElement('iframe');
-        $(iframe).attr('src', $(this).data('popup-iframe'));
-        $(iframe).css('width', '100%');
-        $(iframe).css('height', '100%');
-        $(iframe).css('border', 'none');
-        $(div).append(iframe);
-        $(document.body).append(div);
-        $(div).dialog({'width': width, 'height': $(window).height()*.75});
-    });
-}
-$(document).ready(initLinkPopup);
