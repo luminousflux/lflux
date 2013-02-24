@@ -1,0 +1,13 @@
+{% load static from staticfiles %}        <script src="{% static 'js/jquery-1.7.2.min.js' %}"></script>
+        <script src="{% static 'js/jquery.scrollable.js' %}"></script>
+        <script src="{% static 'js/jquery.scrollto.js' %}"></script>
+        <script src="{% static 'js/jquery.form.js' %}"></script>
+        <script src="{% static 'js/jquery-ui-1.8.20.custom.min.js' %}"></script>
+        <script src="{% static 'js/waypoints.min.js' %}"></script>
+        <script src="{% static 'text.js' %}"></script>
+        <script src="{% static 'js/es5-shim.js' %}"></script>
+        <script src="{% static 'js/worldmap.js' %}"></script>
+        <script src="{% static 'js/jquery.sparkline.min.js' %}"></script>
+        <script src="{% static '3rd/joyride/jquery.joyride-2.0.3.js' %}"></script>
+        <script src="{% static 'tumblelog/tumblelog.js' %}"></script>
+        <script src="{% static 'application.js' %}"></script>

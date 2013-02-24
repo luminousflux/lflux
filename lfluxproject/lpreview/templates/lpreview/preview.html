@@ -1,0 +1,13 @@
+{% load static from staticfiles %}
+<html>
+    <head>
+        {% include 'all_javascript.inc' %}
+        <link rel="stylesheet" href="{% static 'text.css' %}" />
+    </head>
+    <body>
+{% block content %}
+<div class="text">
+    {{preview}}
+</div>
+{% endblock %}
+</body>

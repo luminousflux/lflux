@@ -82,6 +82,7 @@ INSTALLED_APPS = (
     'lprofile',
     'ladmin',           # admin overrides & extensions.
     'lqa',
+    'lpreview',
 
     'voting',
     'threadedcomments',

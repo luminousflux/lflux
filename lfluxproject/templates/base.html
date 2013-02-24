@@ -2,26 +2,16 @@
 <html>
     <head>
         <title>{% block title %}{% endblock %} {{site.name}}</title>
+
+
+        {% include 'all_javascript.inc' %}
+
         <link rel="stylesheet" href="{% static 'css/overcast/jquery-ui-1.8.20.custom.css' %}" />
-        <script src="{% static 'js/jquery-1.7.2.min.js' %}"></script>
-        <script src="{% static 'js/jquery.scrollable.js' %}"></script>
-        <script src="{% static 'js/jquery.scrollto.js' %}"></script>
-        <script src="{% static 'js/jquery.form.js' %}"></script>
-        <script src="{% static 'js/jquery-ui-1.8.20.custom.min.js' %}"></script>
-        <script src="{% static 'js/waypoints.min.js' %}"></script>
-        <script src="{% static 'text.js' %}"></script>
+        <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Podkova' type='text/css'>
         <link rel="stylesheet" href="{% static 'tumblelog/tumblelog.css' %}" />
-        <script src="{% static 'js/es5-shim.js' %}"></script>
-        <script src="{% static 'js/worldmap.js' %}"></script>
-        <script src="{% static 'js/jquery.sparkline.min.js' %}"></script>
-        <script src="{% static '3rd/joyride/jquery.joyride-2.0.3.js' %}"></script>
-        <script src="{% static 'tumblelog/tumblelog.js' %}"></script>
-        <link href='http://fonts.googleapis.com/css?family=Podkova' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="{% static '3rd/joyride/joyride-2.0.3.css' %}" />
         <link rel="stylesheet" href="{% static 'uni_form/uni-form.css' %}" />
         <link rel="stylesheet" href="{% static 'uni_form/default.uni-form.css' %}" />
-
-        <script src="{% static 'application.js' %}"></script>
         <link rel="stylesheet" href="{% static 'style.css' %}" />
         <link rel="stylesheet" href="{% static 'text.css' %}" />
 
