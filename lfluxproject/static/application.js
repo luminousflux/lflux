@@ -29,7 +29,10 @@ function initMarkAsRead() {
         $('#mark_as_read').removeClass('hiding');
         mark_as_read_if_needed();
     }, {'offset': '100%'});
+
     var eh = function(event) {
+        if($(this).hasClass('ignorereload'))
+            return;
         event.preventDefault();
         event.stopPropagation();
         var element = $(this).parents('.reload-here');

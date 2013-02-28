@@ -89,20 +89,6 @@ def diff(request, slug, model, template='lstory/highlight.html'):
     return response
 
 
-def summary(request, slug, date_end, template='lstory/highlight.html'):
-    story = get_object_or_404(Story, slug=slug)
-    summary = story.storysummary_set.get(timeframe_end=_parse_iso_datetime(date_end))
-    previous, current = summary.storyversions()
-    diff = current.diff_to_older(previous)
-    return direct_to_template(request, template, {
-        'story': story,
-        'summary': summary,
-        'field_diff': diff,
-        'current': current,
-        'previous': previous,
-    })
-
-
 def toggle_tracking(request, set_track=False):
     # fake the correct value for the context processor
     if not set_track:

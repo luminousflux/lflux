@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load i18n crispy_forms_tags %}
+{% block content %}
+<div id="bar">
+    <div id="nav">
+        <a href="/">{{site.name}}</a> /
+        <a href="{{obj.get_absolute_url}}">{{obj.name}}</a> /
+        {% trans "Subscribe" %}
+    </div>
+</div>
+<div id="header">
+    <h1>{% trans "Subscribe" %}</h1>
+</div>
+<div class="article">
+    <div class="inner">
+        <form method="post" class="uniForm">
+            {{form|crispy}}
+            <div class="buttonHolder">
+                {% csrf_token %}
+                <input type="submit" class="primaryAction" value="{% trans "Submit" %}" />
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

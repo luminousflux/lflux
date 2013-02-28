@@ -1,15 +1,21 @@
+# -*- coding: utf-8 -*-
+
+import operator
+import html2text
 import reversion
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
-
-
-from taggit.managers import TaggableManager
+from django.template.loader import render_to_string
 
 from ltools.models import VersionedContentMixin
 from ltools.fields import CountryField
 from ltools.managers import VersionManagerAccessor
 from lstory.managers import StoryManager
+
+from taggit.managers import TaggableManager
+from tumblelog.models import Post
 
 
 class Story(VersionedContentMixin, models.Model):
@@ -67,26 +73,61 @@ class Story(VersionedContentMixin, models.Model):
 
 
 class StorySummary(models.Model):
+    body = models.TextField(_('body'), help_text=_('markdown-formatted summary text consistiong of 2 or 3 list items only!'),)
+
     story = models.ForeignKey(Story)
-    timeframe_start = models.DateTimeField(_('start of timeframe'))
-    timeframe_end = models.DateTimeField(_('end of timeframe'))
-    body = models.TextField(_('body'), help_text=_('markdown-formatted summary text consistiong of 2 or 3 list items only!'))
+    for_revision = models.ForeignKey(reversion.models.Revision)
+    revision_date = models.DateTimeField()
+
     author = models.ForeignKey(User)
 
     class Meta:
         verbose_name = _('Story Summary')
         verbose_name_plural = _('Story Summaries')
-        unique_together = (('story', 'timeframe_end',),)
+        unique_together = (('story', 'for_revision',),)
 
     @models.permalink
     def get_absolute_url(self):
-        return ('storysummary', [self.story.slug, self.timeframe_end.isoformat()],)
+        return ('storysummary', [self.story.slug, self.for_revision.pk],)
 
     def __unicode__(self):
-        return u'Summary for %s between %s and %s' % (self.story.slug, self.timeframe_start, self.timeframe_end,)
+        return u'Summary for %s at %s' % (self.story.slug, self.revision_date,)
 
-    def storyversions(self):
-        return self.story.versions.for_date(self.timeframe_start), self.story.versions.for_date(self.timeframe_end)
+    def story_diff(self):
+        cur = self.storyversion()
+        prev = cur.versions.previous()
+        return cur.diff_to_older(prev)
+
+    def storyversion(self):
+        return [y for y in self.story.versions.list() if y._version.revision==self.for_revision][0]
+
+    def previous_summary(self):
+        previous_summaries = self.story.storysummary_set.filter(revision_date__lt=self.revision_date).order_by('-revision_date')
+        return previous_summaries[0] if previous_summaries else None
+
+    def tumbleposts(self):
+        posts = Post.objects.filter(parent=self.story, published_at__lte=self.revision_date)
+        prev = self.previous_summary()
+        if prev:
+            posts=posts.filter(published_at__gte=prev.revision_date)
+        return posts
+
+    @classmethod
+    def summarize_period(cls, start_date, end_date):
+        summaries = cls.objects.filter(revision_date__lte=end_date)
+        if start_date:
+            summaries = summaries.filter(revision_date__gte=start_date)
+        posts = reduce(set.union, [set(x.tumbleposts()) for x in summaries], set())
+
+        field_order = [('body','','\n\n',), ('source',u'—','\n',), ('title','','\n',),('text','','\n',),('photo','photo: ','\n',),('url','','\n',)]
+
+        to_s = lambda data,field_order: ''.join([pre+data[key]+post for key,pre,post in field_order if key in data and data[key]])
+
+        posts = [to_s(post.data,field_order) for post in posts]
+        posts = [x for x in posts if x]
+
+        return render_to_string('lstory/storysummary.txt', {'summaries': summaries, 'posts': posts})
+
 
 class ChangeSuggestion(models.Model):
     summary = models.TextField(_('summary'), null=True, blank=True)

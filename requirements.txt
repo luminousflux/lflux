@@ -20,3 +20,6 @@ tldextract
 # installed but not required. only injects code if configured in settings:
 django-googleanalytics
 django-overextends
+django-celery
+django-celery-email
+html2text

@@ -1,6 +1,8 @@
 from ltools.feeds import RevisionFeed
 from models import Story
 from ltools.templatetags.lmarkdown import lmarkdown
+from django.template.loader import render_to_string
+from tumblelog.models import Post
 
 class StoryFeed(RevisionFeed):
     def __init__(self, stype):
@@ -10,9 +12,7 @@ class StoryFeed(RevisionFeed):
         return Story.objects.get(slug=slug, published__isnull=False)
 
     def items(self, obj):
-        items = [y[-1] for (x,y,) in obj.versions.by_date().iteritems()]
-        return zip(items[0:-2], items[1:-1])
-
+        return obj.storysummary_set.all()
 
     def link(self, obj):
         return obj.get_absolute_url()
@@ -21,20 +21,14 @@ class StoryFeed(RevisionFeed):
         return obj.name
 
     def item_title(self, item):
-        prev, cur = item
-        return '%s as of %s' % (cur.title, cur.last_update)
+        return item.story.title
 
     def item_description(self, item):
-        prev, cur = item
-        if prev:
-            diffs = cur.diff_to_older(prev)
-            return lmarkdown(diffs['summary'][0]) + u'<hr />' + lmarkdown(diffs['body'][0])
-        return lmarkdown(cur.body)       # TODO highlighting
+        posts = Post.objects.filter(parent=item.story, published_at__lte=item.revision_date, published_at__gte=item.previous_summary().revision_date) if item.previous_summary() else []
+        return lmarkdown(item.body) + '\n\n\n<br /><br /><br />' + ''.join([render_to_string(post.template, {'post': post}) for post in posts])
 
     def item_pubdate(self, item):
-        prev, cur = item
-        return cur.last_update
+        return item.revision_date
 
     def item_link(self, item):
-        prev, cur = item
-        return cur.versions.current().get_absolute_url()+'#for:'+cur.last_update.isoformat()
+        return item.storyversion().get_version_url()

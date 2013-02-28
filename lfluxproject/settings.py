@@ -65,6 +65,9 @@ INSTALLED_APPS = (
     'django_nose',
     'django_extensions',
 
+    'djcelery',
+    'djcelery_email',
+
     'debug_toolbar',
     'ltools',           # overrides some django templates
     'pagedown',
@@ -72,7 +75,6 @@ INSTALLED_APPS = (
     'taggit',
     'reversion',
     'crispy_forms',     # for tumblelog
-    'tumblelog',
     'userena',
     'guardian',         # for userena
     'easy_thumbnails',  # for userena
@@ -83,11 +85,14 @@ INSTALLED_APPS = (
     'ladmin',           # admin overrides & extensions.
     'lqa',
     'lpreview',
+    'lsubscribe',
 
     'voting',
     'threadedcomments',
     'google_analytics',
     'overextends',
+
+    'tumblelog',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -178,6 +183,12 @@ DEMO_MODE = False                       # make all users editors per default
 
 TUMBLELOG_POSTS_PER_PAGE = 15
 
+
+import djcelery
+djcelery.setup_loader()
+
+CELERY_RESULT_BACKEND = "database"
+CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
 
 try:                                    # import all settings from local_settings. we recommend setting DJANGO_SETTINGS_MODULE environment variable and importing from here instead, so one can f.e. change INSTALLED_APPS
     from local_settings import *

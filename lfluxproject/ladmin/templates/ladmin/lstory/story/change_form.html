@@ -31,11 +31,6 @@
     {% for suggestion in changesuggestions %}
     <a href="{% url 'backend:lstory_changesuggestion_change' suggestion.pk %}">by {{suggestion.user}}</a>
     {% endfor %}
-    <h2>Summaries</h2>
-    <p>{% if versions_since %}{{versions_since}} Updates{% if last_summary_date %} since last summary from {{last_summary_date}}{%else%}, no summary yet{%endif%}
-    <a href="{%url 'admin:lstory_storysummary_add'%}?story={{original.pk}}">write one</a>
-       {%else%}No non-summaried updates
-       {% endif %}</p>
 </div>
 {{ block.super }}
 <fieldset class="module inline-related inline-group">
@@ -59,3 +54,9 @@
     {% endif %}
     <input type="submit" value="{% trans 'Save' %}" name="_continue" {{ onclick_attrib }}/>
 </div>{% endblock %}
+
+{% block after_related_objects %}
+<fieldset class="module inline-related inline-group">
+    <h3>{%trans 'Change Summary' %}</h3>
+    {{summary_form.as_p}}
+{% endblock %}

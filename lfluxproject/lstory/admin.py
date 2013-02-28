@@ -9,7 +9,8 @@ from django.db import models
 import reversion
 from django.core.urlresolvers import reverse
 
-from models import Story, StorySummary, ChangeSuggestion, Stakeholder, BackgroundContent
+from .models import Story, StorySummary, ChangeSuggestion, Stakeholder, BackgroundContent
+from .forms import StorySummaryForm
 
 from limage.widgets import AdminPagedownWidget
 from limage.models import Image
@@ -20,6 +21,11 @@ from django.template.loader import render_to_string
 from django.contrib.admin.util import unquote
 
 from ltools.templatetags.lmarkdown import lmarkdown
+
+
+
+from reversion.models import VERSION_CHANGE
+
 
 class StakeholderAdmin(reversion.VersionAdmin):
     pass
@@ -51,7 +57,6 @@ class StoryAdmin(reversion.VersionAdmin):
     prepopulated_fields = {"slug": ("name",)}
     inlines = [StakeholderInline,]
     form = StoryAdminForm
-
 admin.site.register(Story, StoryAdmin)
 
 
@@ -64,24 +69,17 @@ class StoryUserAdmin(StoryAdmin):
 
     def change_view(self, request, object_id, form_url='', extra_context=None):
         extra_context = extra_context or {}
+
+        summary_form = StorySummaryForm(request.POST,prefix='storysummary') if request.POST else StorySummaryForm(prefix='storysummary')
+
         s = Story.objects.get(pk=object_id)
 
-        last_summary_date = None
-
-        existing_summaries = s.storysummary_set.all().order_by('-timeframe_end')
-
-        if existing_summaries:
-            last_summary_date = existing_summaries[0].timeframe_end
 
         versions_since = s.versions.by_date().keys()
-        if last_summary_date:
-            versions_since = [x for x in versions_since if x >= last_summary_date.date()]
-
 
         extra_context = {'versions_since': len(versions_since),
-                         'last_summary_date': last_summary_date,
-                         'summaries': existing_summaries,
-                         'changesuggestions': s.changesuggestion_set.all()
+                         'changesuggestions': s.changesuggestion_set.all(),
+                         'summary_form': summary_form
                          }
         publish = '_publish' in request.POST
 
@@ -119,47 +117,33 @@ class StoryUserAdmin(StoryAdmin):
             obj.authors.add(request.user)
         return r
 
+    def log_change(self, request, object, message):
+        """Sets the version meta information."""
+        super(reversion.VersionAdmin, self).log_change(request, object, message)
+        revision = self.revision_manager.save_revision(
+            self.get_revision_data(request, object, VERSION_CHANGE),
+            user = request.user,
+            comment = message,
+            ignore_duplicates = self.ignore_duplicate_revisions,
+            db = self.revision_context_manager.get_db(),
+        )
+        summary_form = StorySummaryForm(request.POST,prefix='storysummary')
+        if summary_form.is_valid():
+            body = summary_form.cleaned_data.get('body','')
+            if body:
+                StorySummary.objects.create(for_revision=revision, revision_date=revision.date_created, story=object, author=request.user, body=body)
+
 
 class StorySummaryAdmin(admin.ModelAdmin):
-    add_form_template = 'lstory/storysummary/add_form.html'
-
     exclude = ('author',)
-
-    def add_view(self, request, *args, **kwargs):
-        templateresponse = super(StorySummaryAdmin, self).add_view(request, *args, **kwargs)
-
-        if not hasattr(templateresponse, 'context_data'):
-            return templateresponse
-
-        form = templateresponse.context_data['adminform'].form
-
-        story_id = form.initial.get('story') or form.data.get('story')
-
-        if story_id:
-            story = Story.objects.get(pk=story_id)
-            summaries = story.storysummary_set.all().order_by('-timeframe_end')
-            last_summary = summaries[0].timeframe_end if summaries else story.published
-            if not 'timeframe_start' in form.data:
-                form.initial['timeframe_start'] = last_summary
-                form.initial['timeframe_end'] = datetime.now()
-
-            older_version = None
-            try:
-                story.versions.for_date(last_summary)
-            except ObjectDoesNotExist, e:
-                l = story.versions.list()
-                if l:
-                    older_version = l[-1]
-
-
-            templateresponse.context_data['diff'] = story.diff_to_older(older_version) if older_version else None
-
-        return templateresponse
+    add_form_template = 'lstory/storysummary/add_form.html'
+    change_form_template = 'lstory/storysummary/add_form.html'
 
     def save_model(self, request, obj, form, change):
-        if not obj.pk:
-            obj.author = request.user
-        super(StorySummaryAdmin, self).save_model(request, obj, form, change)
+        new = not obj.pk
+        if new:
+            obj.user = request.user
+        return super(ChangeSuggestionAdmin, self).save_model(request, obj, form, change)
 admin.site.register(StorySummary, StorySummaryAdmin)
 
 class ChangeSuggestionAdmin(reversion.VersionAdmin):
@@ -252,7 +236,7 @@ class BackgroundContentAdmin(admin.ModelAdmin):
     change_form_template = 'lstory/backgroundcontent/add_form.html'
     meta = BackgroundContent
     exclude = ('author',)
-    
+
     formfield_overrides = {
         models.TextField: {'widget': AdminPagedownWidget},
     }

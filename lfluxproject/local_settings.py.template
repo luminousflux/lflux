@@ -16,3 +16,5 @@ EMBEDLY_KEY =
 GOOGLE_ANALYTICS_ACCOUNT_CODE = 
 
 DEMO_MODE = False                               # make all users editors per default
+
+DEFAULT_FROM_EMAIL = 

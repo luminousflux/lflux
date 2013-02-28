@@ -1,0 +1,11 @@
+{% load i18n %}{% blocktrans %}
+Ohai;
+
+you requested to be signed up for updates to {{name}}.
+
+Please confirm by clicking this link:
+
+http://{{domain}}{{confirm_link}}
+
+Otherwise, please just ignore this email.
+{% endblocktrans %}

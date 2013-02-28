@@ -31,7 +31,7 @@
 {% endblock %}
 {% block content %}
 <div id="content-additional">
-    {{diff.body.0|markdown:"extra,insparagraph,inmoredetail"}}
+    {{original.story_diff.body.0|markdown:"extra,insparagraph,inmoredetail"}}
 </div>
 {{ block.super }}
 {% endblock %}

@@ -20,7 +20,7 @@
     {% endif %}
 </div>
 <div class="column-right">
-    <a href="#help" id="featuretourbtn">{% trans "Learn more" %}</a>
-    <!-- <a href="#subscribe">{% trans "Sign up for updates" %}</a><br /> -->
+    <a href="#help" id="featuretourbtn">{% trans "Learn more" %}</a><br />
+    <a href="{% url 'lstory_subscribe' slug=current.versions.current.slug %}" class="ignorereload">{% trans "Sign up for updates" %}</a>
 </div>
 <div class="clear">&nbsp;</div>

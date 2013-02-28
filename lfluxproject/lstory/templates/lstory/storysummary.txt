@@ -1,0 +1,11 @@
+{% load i18n %}{% for summary in summaries %}
+{{summary.body}}
+{% endfor %}
+{% if posts %}
+
+{% trans "Current Events" %}:
+{% endif %}
+{% for post in posts %}
+{% if not forloop.first %}
+-
+{% endif %} {{post}}{% endfor %}
