@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-04 23:51+0100\n"
+"POT-Creation-Date: 2013-02-28 21:14+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,28 +73,32 @@ msgstr "Unbekannter inhalt"
 msgid "Add Author"
 msgstr "Autoren hinzufügen"
 
-#: ladmin/templates/ladmin/lstory/story/change_form.html:42
-#: lstory/models.py:142 lstory/models.py:143
+#: ladmin/templates/ladmin/lstory/story/change_form.html:37
+#: lstory/models.py:183 lstory/models.py:184
 msgid "Background Content"
 msgstr "Hintergrundinformationen"
 
-#: ladmin/templates/ladmin/lstory/story/change_form.html:51
+#: ladmin/templates/ladmin/lstory/story/change_form.html:46
 msgid "Add another Background Content"
 msgstr "Neue Hintergrundinfos hinzufügen"
 
-#: ladmin/templates/ladmin/lstory/story/change_form.html:58
+#: ladmin/templates/ladmin/lstory/story/change_form.html:53
 msgid "Publish"
 msgstr "Veröffentlichen"
 
-#: ladmin/templates/ladmin/lstory/story/change_form.html:60
+#: ladmin/templates/ladmin/lstory/story/change_form.html:55
 msgid "Save"
 msgstr "Speichern"
+
+#: ladmin/templates/ladmin/lstory/story/change_form.html:60
+msgid "Change Summary"
+msgstr "Zusammenfassung der Änderung"
 
 #: ladmin/templates/ladmin/share/share_object.html:9
 msgid "Home"
 msgstr "Home"
 
-#: limage/models.py:10 lstory/models.py:109
+#: limage/models.py:10 lstory/models.py:150
 msgid "image"
 msgstr "Bild"
 
@@ -106,7 +110,7 @@ msgstr "Benutzer"
 msgid "about me"
 msgstr "Über Mich"
 
-#: lprofile/models.py:26 lstory/models.py:111
+#: lprofile/models.py:26 lstory/models.py:152
 #: lstory/templates/lstory/highlight.html:108
 #: lstory/templates/lstory/highlight.html:113
 msgid "website"
@@ -140,7 +144,7 @@ msgstr "Kommentar"
 msgid "User"
 msgstr "Benutzer"
 
-#: lqa/models.py:18 lstory/models.py:46
+#: lqa/models.py:18 lstory/models.py:52
 msgid "Story"
 msgstr "Artikel"
 
@@ -165,6 +169,7 @@ msgid "Comments"
 msgstr "Kommentare"
 
 #: lqa/templates/lqa/_question_form.html:11
+#: lsubscribe/templates/lsubscribe/form.html:20
 msgid "Submit"
 msgstr "Abschicken"
 
@@ -213,124 +218,124 @@ msgstr "Stimmen"
 msgid "Only works if you're logged in!"
 msgstr "Nur möglich, wenn du eingeloggt bist!"
 
-#: lstory/models.py:16 lstory/models.py:110 lstory/models.py:133
+#: lstory/models.py:22 lstory/models.py:151 lstory/models.py:174
 msgid "name"
 msgstr "Name"
 
-#: lstory/models.py:16
+#: lstory/models.py:22
 msgid "this should not change during the story's lifetime"
 msgstr "soll sich nie ändern"
 
-#: lstory/models.py:17
+#: lstory/models.py:23
 msgid "title"
 msgstr "Titel"
 
-#: lstory/models.py:17
+#: lstory/models.py:23
 msgid "this reflects our current understanding of the topic"
 msgstr ""
 "reflektiert immer unser aktuelles Verständnis des Themas, darf sich also "
 "ändern"
 
-#: lstory/models.py:18 lstory/models.py:134
+#: lstory/models.py:24 lstory/models.py:175
 msgid "slug"
 msgstr "URL-Kürzel"
 
-#: lstory/models.py:18
+#: lstory/models.py:24
 msgid "based on story name"
 msgstr "basiert auf dem Namen"
 
-#: lstory/models.py:20
+#: lstory/models.py:26
 msgid "last update"
 msgstr "Letztes Update"
 
-#: lstory/models.py:21 lstory/models.py:97 lstory/models.py:132
+#: lstory/models.py:27 lstory/models.py:138 lstory/models.py:173
 msgid "created at"
 msgstr "Erstellt am"
 
-#: lstory/models.py:22
+#: lstory/models.py:28
 msgid "published at"
 msgstr "Veröffentlicht am"
 
-#: lstory/models.py:25 lstory/models.py:71
+#: lstory/models.py:31
 msgid "start of timeframe"
 msgstr "Start des Berichtzeitraums"
 
-#: lstory/models.py:26 lstory/models.py:72
+#: lstory/models.py:32
 msgid "end of timeframe"
 msgstr "Ende des Berichtzeitraums"
 
-#: lstory/models.py:28
+#: lstory/models.py:34
 msgid "cover image"
 msgstr "Titelbild"
 
-#: lstory/models.py:30
+#: lstory/models.py:36
 msgid "region"
 msgstr "Region"
 
-#: lstory/models.py:30
+#: lstory/models.py:36
 msgid "country code, if applicable (shows map in full view)"
 msgstr "2-stelliger Ländercode, wenn möglich"
 
-#: lstory/models.py:32 lstory/models.py:92
+#: lstory/models.py:38 lstory/models.py:133
 msgid "summary"
 msgstr "Zusammenfassung"
 
-#: lstory/models.py:32 lstory/models.py:73
+#: lstory/models.py:38 lstory/models.py:76
 msgid "markdown-formatted summary text consistiong of 2 or 3 list items only!"
 msgstr ""
 "Markdown-formatierte Zusammenfassung, die nur aus 2 oder 3 Listeneinträgen "
 "besteht!"
 
-#: lstory/models.py:33 lstory/models.py:73 lstory/models.py:93
-#: lstory/models.py:135
+#: lstory/models.py:39 lstory/models.py:76 lstory/models.py:134
+#: lstory/models.py:176
 msgid "body"
 msgstr "Text"
 
-#: lstory/models.py:33
+#: lstory/models.py:39
 msgid "markdown-formatted story text"
 msgstr "Markdown-formatierter Text zu dem Thema"
 
-#: lstory/models.py:47
+#: lstory/models.py:53
 msgid "Stories"
 msgstr "Themen"
 
-#: lstory/models.py:77
+#: lstory/models.py:85
 msgid "Story Summary"
 msgstr "Zusammenfassung von Änderungen"
 
-#: lstory/models.py:78
+#: lstory/models.py:86
 msgid "Story Summaries"
 msgstr "Zusammenfassungen von Änderungen"
 
-#: lstory/models.py:96
+#: lstory/models.py:137
 msgid "for version"
 msgstr "für die Version"
 
-#: lstory/models.py:102
+#: lstory/models.py:143
 msgid "Change Suggestion"
 msgstr "Änderungsvorschlag"
 
-#: lstory/models.py:103
+#: lstory/models.py:144
 msgid "Change Suggestions"
 msgstr "Änderungsvorschläge"
 
-#: lstory/models.py:112
+#: lstory/models.py:153
 msgid "other contacts"
 msgstr "Andere Kontakte"
 
-#: lstory/models.py:113
+#: lstory/models.py:154
 msgid "description"
 msgstr "Beschreibung"
 
-#: lstory/models.py:114 lstory/models.py:136
+#: lstory/models.py:155 lstory/models.py:177
 msgid "weight"
 msgstr "Gewicht"
 
-#: lstory/models.py:122
+#: lstory/models.py:163
 msgid "Stakeholder"
 msgstr "Beteiligte Person"
 
-#: lstory/models.py:123 lstory/templates/lstory/highlight.html:101
+#: lstory/models.py:164 lstory/templates/lstory/highlight.html:101
 msgid "Stakeholders"
 msgstr "Beteiligte"
 
@@ -545,6 +550,52 @@ msgstr "Als gelesen Markiert."
 msgid "Undo"
 msgstr "Rückgängig"
 
+#: lstory/templates/lstory/storysummary.txt:6
+msgid "Current Events"
+msgstr "Neuigkeiten"
+
+#: lsubscribe/models.py:18
+msgid "frequency"
+msgstr "Frequenz"
+
+#: lsubscribe/models.py:20
+msgid "email"
+msgstr "email"
+
+#: lsubscribe/models.py:53
+#, python-format
+msgid "%(site_name)s: Please confirm your subscription to %(name)s"
+msgstr "%(site_name)s: Bitte bestätige deine Anmeldung für Updates zu %(name)s"
+
+#: lsubscribe/models.py:85
+#, python-format
+msgid "%(site_name)s: %(frequency)s mail for %(name)s"
+msgstr "%(site_name)s: %(frequency)s Mail für %(name)s"
+
+#: lsubscribe/templates/lsubscribe/confirmation_email.txt:1
+#, python-format
+msgid ""
+"\n"
+"Ohai;\n"
+"\n"
+"you requested to be signed up for updates to %(name)s.\n"
+"\n"
+"Please confirm by clicking this link:\n"
+"\n"
+"http://%(domain)s%(confirm_link)s\n"
+"\n"
+"Otherwise, please just ignore this email.\n"
+msgstr ""
+"\nOhai;\n\n"
+"Bitte bestätige deine Anmeldung für %(name)s, indem du auf diesen Link gehst:\n"
+"http://%(domain)s%(confirm_link)s\n\n"
+"Ansonsten, ignoriere bitte diese Nachricht!\n"
+
+#: lsubscribe/templates/lsubscribe/form.html:8
+#: lsubscribe/templates/lsubscribe/form.html:12
+msgid "Subscribe"
+msgstr "Anmelden"
+
 #: ltools/admin.py:10
 msgid "My Instances"
 msgstr "Meine Instanzen"
@@ -559,12 +610,10 @@ msgid "Create %(modelname)s for %(instancename)s"
 msgstr "Neue %(modelname)s für %(instancename)s"
 
 #: ltools/templates/comments/form.html:13
-#: ltools/templates/comments/preview.html:13
 msgid "Preview"
 msgstr "Vorschau"
 
 #: ltools/templates/comments/form.html:14
-#: ltools/templates/comments/preview.html:14
 msgid "Post"
 msgstr "Abschicken"
 
@@ -646,27 +695,27 @@ msgid "something really bad or really weird happened. we'll look into it!"
 msgstr ""
 "Etwas ganz schlimmes oder ganz komisches ist passiert. Wir schauen's uns an!"
 
-#: templates/base.html:57
+#: templates/base.html:48
 msgid "demo mode"
 msgstr "Demomodus"
 
-#: templates/base.html:61
+#: templates/base.html:52
 msgid "Profile"
 msgstr "Profil"
 
-#: templates/base.html:62
+#: templates/base.html:53
 msgid "Sign Out"
 msgstr "Abmelden"
 
-#: templates/base.html:64
+#: templates/base.html:55
 msgid "Editor"
 msgstr "Redakteurbereich"
 
-#: templates/base.html:67
+#: templates/base.html:58
 msgid "Sign In"
 msgstr "Anmelden"
 
-#: templates/base.html:68
+#: templates/base.html:59
 msgid "Sign Up"
 msgstr "Registrieren"
 
