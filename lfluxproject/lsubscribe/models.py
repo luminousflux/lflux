@@ -12,7 +12,7 @@ from django.contrib.sites.models import Site
 
 from lstory.models import StorySummary
 
-SUBSCRIPTION_TYPES = (('daily',)*2, ('weekly',)*2,)
+SUBSCRIPTION_TYPES = (('daily',_('daily')), ('weekly',_('weekly'),),)
 
 class Subscription(models.Model):
     frequency = models.CharField(_('frequency'), max_length=255, choices=SUBSCRIPTION_TYPES, null=False, blank=False, default='daily')
