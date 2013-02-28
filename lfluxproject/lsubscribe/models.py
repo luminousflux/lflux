@@ -3,7 +3,7 @@ from datetime import datetime
 from django.db import models
 from django.core.mail import send_mail
 from django.conf import settings
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
 from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
