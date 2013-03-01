@@ -73,7 +73,7 @@ class Subscription(models.Model):
 
     def send_email(self):
         now = datetime.now()
-        summary = StorySummary.summarize_period(self.last_delivery, now).strip()
+        summary = StorySummary.summarize_period(self.content_object, self.last_delivery, now).strip()
 
         if not summary:
             print 'no updates for summary %s' % self.pk

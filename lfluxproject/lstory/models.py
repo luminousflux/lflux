@@ -113,8 +113,8 @@ class StorySummary(models.Model):
         return posts
 
     @classmethod
-    def summarize_period(cls, start_date, end_date):
-        summaries = cls.objects.filter(revision_date__lte=end_date)
+    def summarize_period(cls, story, start_date, end_date):
+        summaries = cls.objects.filter(revision_date__lte=end_date, story=story)
         if start_date:
             summaries = summaries.filter(revision_date__gte=start_date)
         posts = reduce(set.union, [set(x.tumbleposts()) for x in summaries], set())
