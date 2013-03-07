@@ -853,7 +853,7 @@ body.historyversion #history div.version {
 }
 .timeline ul {
     position: relative;
-    height: 30px;
+    height: 50px;
     width: auto;
     padding: 0;
     margin: 0;
@@ -870,16 +870,18 @@ body.historyversion #history div.version {
     border-right: 1px solid grey;
     min-width: 9em;
     margin-bottom: 5px;
+    padding-right: 10px;
 }
 .timeline ul.months li li {
     border-right: none;
     min-width: 2px;
+    padding-right: 0;
 }
 
 .timeline ul li .month {
     position: absolute;
     right: 0;
-    padding-right: 5px;
+    padding-right: 10px;
 }
 
 .timeline ul li ul li {
