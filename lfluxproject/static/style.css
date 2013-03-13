@@ -539,6 +539,7 @@ ul.tabs li.sel a,
 }
 
 #react .tab_content .item {
+  max-width: 77%;
   clear: both;
   margin-bottom: .2em;
   overflow: hidden;
