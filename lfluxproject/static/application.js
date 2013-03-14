@@ -114,7 +114,6 @@ function initForms() {
         if($(elem).data('request-type')) {
             opts['target'] = elem;
         }
-        console.log('ajaxforming');
         elem.ajaxForm(opts);
     });
 }
