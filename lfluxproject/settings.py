@@ -51,6 +51,9 @@ TEMPLATE_DIRS = (
 INSTALLED_APPS = (
     'admin_tools',
     'admin_tools.dashboard',
+
+    'ltools',           # overrides some django templates
+
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -69,7 +72,6 @@ INSTALLED_APPS = (
     'djcelery_email',
 
     'debug_toolbar',
-    'ltools',           # overrides some django templates
     'pagedown',
     'south',
     'taggit',

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-28 22:51+0100\n"
+"POT-Creation-Date: 2013-03-14 20:16+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -116,45 +116,49 @@ msgstr "Über Mich"
 msgid "website"
 msgstr "Website"
 
-#: lqa/models.py:13
+#: lqa/models.py:21
 msgid "new"
 msgstr "neu"
 
-#: lqa/models.py:13
+#: lqa/models.py:21
 msgid "researching"
 msgstr "in Bearbeitung"
 
-#: lqa/models.py:13
+#: lqa/models.py:21
 msgid "answered"
 msgstr "beantwortet"
 
-#: lqa/models.py:13
+#: lqa/models.py:21
 msgid "answered in article"
 msgstr "in Artikel beantwortet"
 
-#: lqa/models.py:15
+#: lqa/models.py:23
 msgid "Title"
 msgstr "Titel"
 
-#: lqa/models.py:16
+#: lqa/models.py:24
 msgid "Comment"
 msgstr "Kommentar"
 
-#: lqa/models.py:17
+#: lqa/models.py:25
 msgid "User"
 msgstr "Benutzer"
 
-#: lqa/models.py:18 lstory/models.py:52
+#: lqa/models.py:26 lstory/models.py:52
 msgid "Story"
 msgstr "Artikel"
 
-#: lqa/models.py:20
+#: lqa/models.py:28
 msgid "Created at"
 msgstr "Erstellt am"
 
-#: lqa/models.py:22
+#: lqa/models.py:30
 msgid "State"
 msgstr "Status"
+
+#: lqa/models.py:45
+msgid "%(site_name)s: An Author replied to your Question on %(name)s"
+msgstr "%(site_name)s: EineR der AutorInnen hat auf deine Frage zu %(name)s geantwortet"
 
 #: lqa/templates/lqa/_question.html:6
 msgid "asked by"
@@ -172,6 +176,26 @@ msgstr "Kommentare"
 #: lsubscribe/templates/lsubscribe/form.html:20
 msgid "Submit"
 msgstr "Abschicken"
+
+#: lqa/templates/lqa/author_commented_notification.txt:1
+#, python-format
+msgid ""
+"\n"
+"Ohai;\n"
+"\n"
+"one of the authors of %(name)s just replied to your question:\n"
+"\n"
+"Check it out:\n"
+"http://%(domain)s%(question_link)s\n"
+msgstr ""
+"\n"
+"Ohai;\n"
+"\n"
+"EineR der AutorInnen von %(name)s hat gerade auf deine Frage geantwortet:\n"
+"\n"
+"Gleich ansehen:\n"
+"http://%(domain)s%(question_link)s\n"
+
 
 #: lqa/templates/lqa/question.html:13
 msgid "Question for"
@@ -205,7 +229,7 @@ msgstr "Fragestatus ändern auf:"
 msgid "Add Comment"
 msgstr "Neuer Kommentar"
 
-#: lqa/templates/lqa/question.html:60 templates/comments/_comment.inc:15
+#: lqa/templates/lqa/question.html:60 templates/comments/_comment.inc:20
 msgid "Please log in to post a comment!"
 msgstr "Um ein Kommentar abzugeben, melde dich bitte an!"
 
@@ -217,6 +241,14 @@ msgstr "Stimmen"
 #: lqa/templates/lqa/question_vote.inc:15
 msgid "Only works if you're logged in!"
 msgstr "Nur möglich, wenn du eingeloggt bist!"
+
+#: lstory/forms.py:6 lstory/models.py:38 lstory/models.py:76
+msgid "markdown-formatted summary text consistiong of 2 or 3 list items only!"
+msgstr ""
+"Markdown-formatierte Zusammenfassung, die nur aus 2 oder 3 Listeneinträgen "
+"besteht!\n"
+"\n"
+"ZB:<br />* ein Punkt<br />* zweiter Punkt"
 
 #: lstory/models.py:22 lstory/models.py:151 lstory/models.py:174
 msgid "name"
@@ -279,12 +311,6 @@ msgstr "2-stelliger Ländercode, wenn möglich"
 #: lstory/models.py:38 lstory/models.py:133
 msgid "summary"
 msgstr "Zusammenfassung"
-
-#: lstory/models.py:38 lstory/models.py:76
-msgid "markdown-formatted summary text consistiong of 2 or 3 list items only!"
-msgstr ""
-"Markdown-formatierte Zusammenfassung, die nur aus 2 oder 3 Listeneinträgen "
-"besteht!\n\nZB:<br />* ein Punkt<br />* zweiter Punkt"
 
 #: lstory/models.py:39 lstory/models.py:76 lstory/models.py:134
 #: lstory/models.py:176
@@ -739,7 +765,11 @@ msgstr "Luminous Flux admin"
 msgid "Luminous Flux administration"
 msgstr "Luminous Flux admin"
 
-#: templates/comments/_comment.inc:8
+#: templates/comments/_comment.inc:9
+msgid "(Author)"
+msgstr "(Autor)"
+
+#: templates/comments/_comment.inc:13
 msgid "reply"
 msgstr "antworten"
 

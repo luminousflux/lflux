@@ -968,6 +968,12 @@ body.historyversion #history div.version {
     font-weight: bold;
 }
 
+.thread .meta .username .userlabel {
+    background-color: rgb(100,255,100);
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+
 .thread .meta .timeago {
 }
 

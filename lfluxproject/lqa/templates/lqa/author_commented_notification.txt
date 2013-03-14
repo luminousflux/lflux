@@ -1,0 +1,8 @@
+{% load i18n %}{% blocktrans %}
+Ohai;
+
+one of the authors of {{name}} just replied to your question:
+
+Check it out:
+http://{{domain}}{{question_link}}
+{% endblocktrans %}
