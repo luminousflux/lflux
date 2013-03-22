@@ -27,7 +27,8 @@ def _parse_iso_datetime(s):
 def index(request, template='lstory/index.html'):
     stories = Story.objects.filter(published__isnull=False)
     return direct_to_template(request, template, {
-        'stories': stories,
+        'stories': stories.filter(retired__isnull=True),
+        'retired': stories.filter(retired__isnull=False),
     })
 
 def version(request, slug, date, template='lstory/highlight.html'):

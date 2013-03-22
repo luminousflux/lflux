@@ -38,6 +38,8 @@ class Story(VersionedContentMixin, models.Model):
     summary = models.TextField(_('summary'), help_text=_('markdown-formatted summary text consistiong of 2 or 3 list items only!'), blank=True)
     body = models.TextField(_('body'), help_text=_('markdown-formatted story text'), blank=True)
 
+    retired = models.DateTimeField(_('retired at'), null=True, blank=True)
+
 
 
     tags = TaggableManager(blank=True)

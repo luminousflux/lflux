@@ -4,23 +4,28 @@
 <div id="header">
     <h1>{{site.name}}</h1>
 </div>
-<div id="article" class="text">
+<div id="index">
+    <div class="inner">
+        {% for story in stories %}
+        <div class="story">
+            {% if story.cover_image %}<div class="leadimage"><img src="{{story.cover_image.url}}" /></div>{% endif %}
+            {% include 'lstory/_linkto.inc' %}
+        </div>
+        {% endfor %}
+
+        {% for story in retired %}
+            {% if forloop.first %}
+                <h2>{% trans 'Retired Stories' %}
+            {% endif %}
+            {% include 'lstory/_linkto.inc' with h='h4' %}
+        {% endfor %}
+    </div>
+</div>
+<div id="react">
     <div class="inner">
         {{flatcontent.content|default:""|markdown}}
     </div>
 </div>
 <div id="sidebar">
-    <ul class="tabs">
-        <li class="sel">
-            <a href>{% trans "Current Issues" %}</a>
-        </li>
-    </ul>
-    <div class="inner">
-        {% for story in stories %}
-        <div class="story">
-            <h2><a href="{{story.get_absolute_url}}">{{story.title}}</a> <span class="author">{% trans "by" %} {% for u in story.authors.all %}{% if not u.get_full_name %}{{u.username}}{% else %}{{u.get_full_name}}{%endif%}{% if not forloop.last %}, {%endif%}{% endfor %}</span></h2>
-        </div>
-        {% endfor %}
-    </div>
 </div>
 {% endblock %}
