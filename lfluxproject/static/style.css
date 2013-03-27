@@ -315,7 +315,7 @@ a.with_icon span { text-decoration: underline; padding-left: .3em }
 }
 .index .story {
     min-height: 5em;
-    max-height: 200px;
+    max-height: 150px;
     overflow: hidden;
     position: relative;
     margin-bottom: 2em;
