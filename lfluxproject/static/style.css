@@ -310,6 +310,9 @@ a.with_icon { text-decoration: none; }
 a.with_icon span { text-decoration: underline; padding-left: .3em }
 
 
+.index .leadimage img {
+    width: 100%;
+}
 .index .story {
     min-height: 5em;
     max-height: 200px;

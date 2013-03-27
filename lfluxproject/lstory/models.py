@@ -48,7 +48,7 @@ class Story(VersionedContentMixin, models.Model):
     versions = VersionManagerAccessor()
 
     def __unicode__(self):
-        return "%s%s" % (self.title, ' /unpublished' if not self.published else '')
+        return "".join([self.title, ' /unpublished' if not self.published else '', ' /retired' if self.retired else ''])
 
     class Meta:
         verbose_name = _('Story')

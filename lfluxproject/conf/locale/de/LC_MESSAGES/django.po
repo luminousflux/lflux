@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-14 20:16+0100\n"
+"POT-Creation-Date: 2013-03-27 12:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,7 +74,7 @@ msgid "Add Author"
 msgstr "Autoren hinzufügen"
 
 #: ladmin/templates/ladmin/lstory/story/change_form.html:37
-#: lstory/models.py:183 lstory/models.py:184
+#: lstory/models.py:185 lstory/models.py:186
 msgid "Background Content"
 msgstr "Hintergrundinformationen"
 
@@ -98,7 +98,7 @@ msgstr "Zusammenfassung der Änderung"
 msgid "Home"
 msgstr "Home"
 
-#: limage/models.py:10 lstory/models.py:150
+#: limage/models.py:10 lstory/models.py:152
 msgid "image"
 msgstr "Bild"
 
@@ -110,7 +110,7 @@ msgstr "Benutzer"
 msgid "about me"
 msgstr "Über Mich"
 
-#: lprofile/models.py:26 lstory/models.py:152
+#: lprofile/models.py:26 lstory/models.py:154
 #: lstory/templates/lstory/highlight.html:108
 #: lstory/templates/lstory/highlight.html:113
 msgid "website"
@@ -144,7 +144,7 @@ msgstr "Kommentar"
 msgid "User"
 msgstr "Benutzer"
 
-#: lqa/models.py:26 lstory/models.py:52
+#: lqa/models.py:26 lstory/models.py:54
 msgid "Story"
 msgstr "Artikel"
 
@@ -157,8 +157,11 @@ msgid "State"
 msgstr "Status"
 
 #: lqa/models.py:45
+#, python-format
 msgid "%(site_name)s: An Author replied to your Question on %(name)s"
-msgstr "%(site_name)s: EineR der AutorInnen hat auf deine Frage zu %(name)s geantwortet"
+msgstr ""
+"%(site_name)s: EineR der AutorInnen hat auf deine Frage zu %(name)s "
+"geantwortet"
 
 #: lqa/templates/lqa/_question.html:6
 msgid "asked by"
@@ -195,7 +198,6 @@ msgstr ""
 "\n"
 "Gleich ansehen:\n"
 "http://%(domain)s%(question_link)s\n"
-
 
 #: lqa/templates/lqa/question.html:13
 msgid "Question for"
@@ -242,7 +244,7 @@ msgstr "Stimmen"
 msgid "Only works if you're logged in!"
 msgstr "Nur möglich, wenn du eingeloggt bist!"
 
-#: lstory/forms.py:6 lstory/models.py:38 lstory/models.py:76
+#: lstory/forms.py:6 lstory/models.py:38 lstory/models.py:78
 msgid "markdown-formatted summary text consistiong of 2 or 3 list items only!"
 msgstr ""
 "Markdown-formatierte Zusammenfassung, die nur aus 2 oder 3 Listeneinträgen "
@@ -250,7 +252,7 @@ msgstr ""
 "\n"
 "ZB:<br />* ein Punkt<br />* zweiter Punkt"
 
-#: lstory/models.py:22 lstory/models.py:151 lstory/models.py:174
+#: lstory/models.py:22 lstory/models.py:153 lstory/models.py:176
 msgid "name"
 msgstr "Name"
 
@@ -268,7 +270,7 @@ msgstr ""
 "reflektiert immer unser aktuelles Verständnis des Themas, darf sich also "
 "ändern"
 
-#: lstory/models.py:24 lstory/models.py:175
+#: lstory/models.py:24 lstory/models.py:177
 msgid "slug"
 msgstr "URL-Kürzel"
 
@@ -280,7 +282,7 @@ msgstr "basiert auf dem Namen"
 msgid "last update"
 msgstr "Letztes Update"
 
-#: lstory/models.py:27 lstory/models.py:138 lstory/models.py:173
+#: lstory/models.py:27 lstory/models.py:140 lstory/models.py:175
 msgid "created at"
 msgstr "Erstellt am"
 
@@ -308,12 +310,12 @@ msgstr "Region"
 msgid "country code, if applicable (shows map in full view)"
 msgstr "2-stelliger Ländercode, wenn möglich"
 
-#: lstory/models.py:38 lstory/models.py:133
+#: lstory/models.py:38 lstory/models.py:135
 msgid "summary"
 msgstr "Zusammenfassung"
 
-#: lstory/models.py:39 lstory/models.py:76 lstory/models.py:134
-#: lstory/models.py:176
+#: lstory/models.py:39 lstory/models.py:78 lstory/models.py:136
+#: lstory/models.py:178
 msgid "body"
 msgstr "Text"
 
@@ -321,49 +323,57 @@ msgstr "Text"
 msgid "markdown-formatted story text"
 msgstr "Markdown-formatierter Text zu dem Thema"
 
-#: lstory/models.py:53
+#: lstory/models.py:41
+msgid "retired at"
+msgstr "abgeschlossen am"
+
+#: lstory/models.py:55
 msgid "Stories"
 msgstr "Themen"
 
-#: lstory/models.py:85
+#: lstory/models.py:87
 msgid "Story Summary"
 msgstr "Zusammenfassung von Änderungen"
 
-#: lstory/models.py:86
+#: lstory/models.py:88
 msgid "Story Summaries"
 msgstr "Zusammenfassungen von Änderungen"
 
-#: lstory/models.py:137
+#: lstory/models.py:139
 msgid "for version"
 msgstr "für die Version"
 
-#: lstory/models.py:143
+#: lstory/models.py:145
 msgid "Change Suggestion"
 msgstr "Änderungsvorschlag"
 
-#: lstory/models.py:144
+#: lstory/models.py:146
 msgid "Change Suggestions"
 msgstr "Änderungsvorschläge"
 
-#: lstory/models.py:153
+#: lstory/models.py:155
 msgid "other contacts"
 msgstr "Andere Kontakte"
 
-#: lstory/models.py:154
+#: lstory/models.py:156
 msgid "description"
 msgstr "Beschreibung"
 
-#: lstory/models.py:155 lstory/models.py:177
+#: lstory/models.py:157 lstory/models.py:179
 msgid "weight"
 msgstr "Gewicht"
 
-#: lstory/models.py:163
+#: lstory/models.py:165
 msgid "Stakeholder"
 msgstr "Beteiligte Person"
 
-#: lstory/models.py:164 lstory/templates/lstory/highlight.html:101
+#: lstory/models.py:166 lstory/templates/lstory/highlight.html:101
 msgid "Stakeholders"
 msgstr "Beteiligte"
+
+#: lstory/templates/lstory/_linkto.inc:3
+msgid "by"
+msgstr "von"
 
 #: lstory/templates/lstory/backgroundcontent.html:16
 msgid "Background Content for"
@@ -532,13 +542,9 @@ msgstr "Fixer Link zu dieser Version"
 msgid "Link this"
 msgstr "Verlinken"
 
-#: lstory/templates/lstory/index.html:15
-msgid "Current Issues"
-msgstr "Aktuelle Themen"
-
-#: lstory/templates/lstory/index.html:21
-msgid "by"
-msgstr "von"
+#: lstory/templates/lstory/index.html:18
+msgid "Retired Stories"
+msgstr "Abgeschlossene Themen"
 
 #: lstory/templates/lstory/mark_as_read_popup.inc:4
 msgid "Next time you come here, we will highlight what changed since now."
@@ -856,6 +862,9 @@ msgstr "Passwort vergessen?"
 #: templates/userena/signup_form.html:18
 msgid "Signup"
 msgstr "Registrieren"
+
+#~ msgid "Current Issues"
+#~ msgstr "Aktuelle Themen"
 
 #~ msgid "Looks like you're done reading!"
 #~ msgstr "Sieht so aus als ob du fertig gelesen hast!"
