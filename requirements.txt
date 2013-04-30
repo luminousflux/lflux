@@ -3,7 +3,7 @@ django-reversion==1.6.4
 git+git://github.com/luminousflux/overdiff.git#egg=overdiff
 south
 git+git://github.com/luminousflux/django-taggit.git#egg=django-taggit
-markdown
+Markdown==2.2.1
 -e git+git://github.com/fin/django-pagedown.git#egg=django-pagedown
 Pillow
 -e git+git://github.com/luminousflux/django-userena.git#egg=django-userena
