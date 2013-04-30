@@ -267,7 +267,7 @@ msgstr "Titel"
 #: lstory/models.py:23
 msgid "this reflects our current understanding of the topic"
 msgstr ""
-"reflektiert immer unser aktuelles Verständnis des Themas, darf sich also "
+"zeigt immer unser aktuelles Verständnis des Themas, darf sich also "
 "ändern"
 
 #: lstory/models.py:24 lstory/models.py:177
@@ -414,7 +414,7 @@ msgid ""
 "The main text always represents our current understanding of the situation. "
 "When something happens, we try to update it daily."
 msgstr ""
-"Der Haupttext reflektiert unser aktuelles Verständnis der Situation.Wir "
+"Der Haupttext zeigt unser aktuelles Verständnis der Situation.Wir "
 "versuchen, den Text tagesaktuell zu halten."
 
 #: lstory/templates/lstory/featuretour.inc:6
@@ -422,8 +422,7 @@ msgid ""
 "To make this process transparent, you can browse through all previous "
 "versions here."
 msgstr ""
-"Dieser Prozess ist transparent: du kannst auch alle früheren Versionen "
-"ansehen."
+"Wie hat dieser Artikel vorher ausgesehen? Alle früheren Versionen findest du hier."
 
 #: lstory/templates/lstory/featuretour.inc:10
 msgid ""
@@ -455,8 +454,7 @@ msgid ""
 "Sometimes we interview people or publish background research. You can find "
 "these here."
 msgstr ""
-"Manchmal führen wir interviews oder veröffentlichen "
-"Hintergrundinformationen. Diese findest du hier."
+"Manchmal führen wir Interviews oder veröffentlichen Hintergrundinformationen. Diese findest du hier."
 
 #: lstory/templates/lstory/header.html:8
 msgid "Where"
@@ -548,7 +546,7 @@ msgstr "Abgeschlossene Themen"
 
 #: lstory/templates/lstory/mark_as_read_popup.inc:4
 msgid "Next time you come here, we will highlight what changed since now."
-msgstr "Nächstes Mal werden wir hervorheben, was sich seit jetzt getan hat."
+msgstr "Bei deinem nächsten Besuch werden die Änderungen im Artikel gelb hervorgehoben."
 
 #: lstory/templates/lstory/mark_as_read_popup.inc:7
 msgid "Marking as read"
@@ -576,7 +574,7 @@ msgstr "Haltet mich auf dem Laufenden"
 
 #: lstory/templates/lstory/marked_as_read.inc:2
 msgid "Marked as read."
-msgstr "Als gelesen Markiert."
+msgstr "Als gelesen markiert."
 
 #: lstory/templates/lstory/marked_as_read.inc:3
 msgid "Undo"
