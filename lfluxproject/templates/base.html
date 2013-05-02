@@ -36,6 +36,7 @@
             {% endblock %}
             {% endblock %}
             <section id="footer">
+            {% block footer %}
             {% get_flatpages as flatpages %}
             {% for page in flatpages %}
             {% if not forloop.first %}
@@ -59,6 +60,7 @@
                     <a href="{% url "userena.views.signup" %}">{% trans "Sign Up" %}</a>
                 {% endif %}
             </div>
+            {% endblock %}
             </section>
         </div>
         {% block additional_body %}
