@@ -1,5 +1,6 @@
 {% extends 'lstory/highlight.html' %}
-{% load static i18n %}
+{% load i18n %}
+{% load static from staticfiles %}
 {% block head %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'embed.css' %}" />
