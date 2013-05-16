@@ -1,5 +1,7 @@
 html, body {
     background-color: transparent;
+    background: none;
+    border: none;
 }
 
 #page {
@@ -30,7 +32,7 @@ html, body {
 
 #header #essentials div.essential {
     min-width: 70px;
-    max-width: 70px;
+    max-width: 120px;
 }
 
 #header #essentials #place canvas {
