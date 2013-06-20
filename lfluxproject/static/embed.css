@@ -67,3 +67,10 @@ html, body {
     border-bottom: 1px solid white;
 }
 
+#brand {
+  display: none;
+}
+
+#react {
+  display: none;
+}

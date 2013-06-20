@@ -24,12 +24,5 @@
             {% endspaceless %}
         </div>
     </div>
-    <div id="freshness" class="essential" title="activity over the last month">
-        <h3>{% trans "Active?" %}</h3>
-        <span class="inlinesparkline">{{current.versions.activity|join:','|replace:"None,null"}}</span>
-    </div>
-    <script>
-        $('.inlinesparkline').sparkline('html', {height: '35px', spotColor: false, minSpotColor: false, maxSpotColor: false, disableInteraction: true, lineColor: '#F56', fillColor: '#F4F4F4'});
-    </script>
 </div>
 <h1>{{current.title}}</h1>
