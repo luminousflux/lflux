@@ -104,7 +104,7 @@ blockquote.ins, h1.ins, h2.ins, p.ins , ul.ins, li.ins {
 
 .text .tlImageContainer img {
   width: auto;
-  max-width: auto;
+  max-width: 100%;
   z-index: inherit;
   float: inherit;
   clear: inherit;
