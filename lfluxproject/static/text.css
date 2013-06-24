@@ -113,6 +113,6 @@ blockquote.ins, h1.ins, h2.ins, p.ins , ul.ins, li.ins {
 .text .tlImageContainer {
   position: relative;
   display: block;
-  float: right;
+  float: right !important;
   max-width: 33%;
 }
