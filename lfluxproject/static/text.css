@@ -101,3 +101,11 @@ blockquote.ins, h1.ins, h2.ins, p.ins , ul.ins, li.ins {
     color: inherit;
     border-bottom: 3px solid #ffb;
 }
+
+.text .tlImageContainer img {
+  width: auto;
+  max-width: auto;
+  z-index: inherit;
+  float: inherit;
+  clear: inherit;
+}
