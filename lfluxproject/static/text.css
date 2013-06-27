@@ -32,6 +32,9 @@
     float: right;
     clear: right;
 }
+.text img.alwaysThinglink {
+    max-width: 100%;
+}
 .text img.ins {
     border: 1px solid #ffb;
 }
