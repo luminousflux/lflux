@@ -74,3 +74,7 @@ html, body {
 #react {
   display: none;
 }
+
+#mark_as_read {
+  background-color: rgb(240,240,240);
+}
