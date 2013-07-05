@@ -6,6 +6,7 @@
 </div>
 <div id="index">
     <div class="inner">
+      {% block innercontent %}
         {% for story in stories %}
         <div class="story">
             {% if story.cover_image %}<div class="leadimage"><img src="{{story.cover_image.url}}" /></div>{% endif %}
@@ -19,6 +20,7 @@
             {% endif %}
             {% include 'lstory/_linkto.inc' with h='h4' %}
         {% endfor %}
+      {% endblock %}
     </div>
 </div>
 <div id="react">
