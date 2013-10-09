@@ -23,3 +23,5 @@ django-overextends
 django-celery
 django-celery-email
 html2text
+ipython
+django-autocomplete-light
