@@ -95,6 +95,7 @@ INSTALLED_APPS = (
     'overextends',
 
     'tumblelog',
+    'autocomplete_light',
 )
 
 # A sample logging configuration. The only tangible logging

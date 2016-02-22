@@ -1,4 +1,4 @@
-django==1.4.0
+django==1.4.2
 django-reversion==1.6.4
 git+git://github.com/luminousflux/overdiff.git#egg=overdiff
 south
@@ -7,8 +7,8 @@ Markdown==2.2.1
 -e git+git://github.com/fin/django-pagedown.git#egg=django-pagedown
 Pillow
 -e git+git://github.com/luminousflux/django-userena.git#egg=django-userena
-django-admin-tools
-django-debug-toolbar
+django-admin-tools==0.5.2
+git+https://github.com/django-debug-toolbar/django-debug-toolbar.git@1.0
 django-nose
 -e git+git://github.com/luminousflux/django-luminous-tumblelog.git#egg=django-luminous-tumblelog
 embedly
@@ -24,4 +24,5 @@ django-celery
 django-celery-email
 html2text
 ipython
-django-autocomplete-light
+git+https://github.com/yourlabs/django-autocomplete-light.git@1.2.4
+git+https://github.com/django-guardian/django-guardian.git@v1.1

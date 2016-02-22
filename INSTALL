@@ -12,8 +12,16 @@ Here's what you'll have to do:
 * run the following commands (prepend with "pbundler run" if using pbundler)
 > ./lfluxproject/manage.py collectstatic --noinput
 > ./lfluxproject/manage.py syncdb
+> ./lfluxproject/manage.py migrate lstory 0008
+> ./lfluxproject/manage.py migrate tumblelog
+> ./lfluxproject/manage.py migrate lstory
 > ./lfluxproject/manage.py migrate
 > ./lfluxproject/manage.py compilemessages
+
+Then, create a site via the command line `./lfluxproject/manage.py shell`:
+
+>>> from django.contrib.sites.models import Site
+>>> Site.objects.create(name='example.com', domain='example.com')
 
 Have fun!
 
