@@ -1,0 +1,25 @@
+/* Julia Reda */
+
+#essentials, #author { display: none }
+#nav { opacity: 0 }
+#brand a { color: #fff; font-size:1.8em; margin-top:-.2em; line-height:1.6em }
+#article h2 { font-size: 2.4em; margin-top: 1.5em; margin-bottom: 0; line-height: 1.2em }
+#article .inner h2:first-of-type { margin-top: 0 }
+.text .imdbutton { font-size: 1em; background: #eee }
+#page #header { padding-bottom:0 }
+#page #header:after { content: "Explained in 1 minute:"; font-weight: bold; color: #999; padding: .1em .5em; display: block; float: left; margin-top:.5em; position: relative; }
+#summary { font-size: 1.2em }
+#summary ul li { line-height: 1.4em; padding-bottom:.8em}
+#mark_as_read { background:#b45; color: #fff }
+#mark_as_read .column-left { width: 35%; margin-top:0; opacity: .7 }
+#mark_as_read .column-right { width: 55% }
+#mark_as_read .column-right br { display: none }
+#mark_as_read .column-right a { background: #f56; padding: .4em 1em; border-radius: 2em; margin-bottom: .5em; margin-right: 1em; text-decoration: none; float: left; font-size:1.1em }
+.tumblelog .entry.pinned { background: #b45; color: #fff }
+.tumblelog .entry.pinned.link a { color: #fff !important }
+ul.tabs li.sel.pinned.pinned a { background: #b45; border-bottom-color: #b45; color: #fff !important; /* font-size:0; float: none }
+ul.tabs li.sel.pinned.pinned a:after { content: "Live now"; font-size: 13px */ }
+.tumblelog .entry.link .tumblecontent a { font-size: 1.5em; }
+.tumblelog .entry .meta { opacity: .4 }
+#react .pillbtn { background: #b45  !important; padding: .5em 1.5em !important }
+.tumblelog .entry.pinned .meta .ins { background: #fff; color: #000 }
