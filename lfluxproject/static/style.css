@@ -85,7 +85,7 @@ a.page:hover {
   font-size: .9em;
 }
 
-#header #essentials { 
+#header #essentials {
   overflow: hidden;
   float: right;
   margin-right: 10px;
@@ -201,7 +201,7 @@ a.page:hover {
   letter-spacing: -0.01em;
   margin: .6em 0 .7em 0;
 }
-#bar #nav { 
+#bar #nav {
   font-size: 1.2em;
   font-weight: bold;
   margin: 7px 0 0 -.2em;
@@ -291,7 +291,7 @@ body.en #sidebar h2 {
   float: left;
   position: relative;
 }
-#meta a { 
+#meta a {
   color: #999;
   padding: .1em .7em;
   margin-right: .1em;
@@ -442,7 +442,7 @@ a.with_icon span { text-decoration: underline; padding-left: .3em }
 
 ul.tabs {
   list-style: none;
-  margin: 0; padding: 0;  
+  margin: 0; padding: 0;
   height: 30px;
   border-bottom: 1px solid #ccc;
   background: #fff;
@@ -466,7 +466,7 @@ ul.tabs li {
   float: left;
 }
 ul.tabs li.first a {
-  border-left: 1px solid #ccc;    
+  border-left: 1px solid #ccc;
 }
 ul.tabs li a {
   display: block;
@@ -544,7 +544,7 @@ ul.tabs li.sel a,
 #react .stories .side,
 #react .pillbtn,
 .pillbtn {
-  float: right;    
+  float: right;
   margin: 10px 100px 0 0;
 }
 
@@ -674,7 +674,7 @@ body.question #meta {
 #react {
   clear: both;
   overflow: hidden;
-  background: #ddd; 
+  background: #ddd;
 }
 
 #react #informed {
@@ -1079,3 +1079,35 @@ body.index .story .author {
     padding-right: 20px;
 }
 
+/* stylesheet for mobile devices */
+@media (max-width: 1023px) {
+  #page {
+    width: 100%;
+  }
+  #summary {
+    column-count: 1;
+    -moz-column-count: 1;
+    -webkit-column-count: 1;
+  }
+  #meta {
+    width: 100%;
+    padding: 0;
+  }
+  #history {
+    padding: 0;
+  }
+  #article {
+    width: 100%;
+  }
+  #article #leadimage img {
+    width: 100%;
+    border: 0;
+  }
+  #sidebar {
+    width: 100%;
+    border: 0;
+  }
+  #react .qa .pillbtn {
+    margin: -3em 0 0 0 !important;
+  }
+}
