@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
+from django.views.generic.base import RedirectView
 
 # Uncomment the next two lines to enable the admin:
 from django.conf import settings
@@ -11,7 +12,8 @@ adminadmin.autodiscover()
 urlpatterns = patterns(
     '',
 
-    url('^$', 'lstory.views.index'),
+    #url('^$', 'lstory.views.index'),
+    url('^$', RedirectView.as_view(url='/dieselgate/', permanent=False)),
 
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(adminadmin.site.urls)),
