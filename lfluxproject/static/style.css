@@ -767,7 +767,15 @@ body.question #meta {
   padding-top: 5px;
   padding-bottom: 7px;
 }
+
+#footer:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 #footer a { color: inherit; }
+
 #history input[type=text] {
     cursor: pointer;
     border-bottom: 1px dotted black;
